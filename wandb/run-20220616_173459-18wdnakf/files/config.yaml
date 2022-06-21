@@ -1,0 +1,98 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.12.16
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.7.11
+    start_time: 1655393699
+    t:
+      1:
+      - 1
+      - 41
+      - 55
+      4: 3.7.11
+      5: 0.12.16
+      8:
+      - 5
+batch_size:
+  desc: null
+  value: 1
+convolutional_layer_encoding:
+  desc: null
+  value: xyz
+criterion:
+  desc: null
+  value: l2
+data_folder:
+  desc: null
+  value: /datasets
+dataset:
+  desc: null
+  value: nn
+dilation_rate:
+  desc: null
+  value: 2
+entity:
+  desc: null
+  value: wandbdimar
+epochs:
+  desc: null
+  value: 20
+kitti_crop:
+  desc: null
+  value: eigen_crop
+learning_rate:
+  desc: null
+  value: 1.0e-05
+max_depth_eval:
+  desc: null
+  value: 80.0
+min_depth_eval:
+  desc: null
+  value: 0.1
+mode:
+  desc: null
+  value: train
+network_model:
+  desc: null
+  value: enet2021
+print_freq:
+  desc: null
+  value: 10
+project:
+  desc: null
+  value: depth
+resume:
+  desc: null
+  value: ''
+root_folder:
+  desc: null
+  value: data/kitti_dataset/val_selection_cropped/
+task:
+  desc: null
+  value: decnet-completion
+train_datalist:
+  desc: null
+  value: train_dim_kitti.list
+val_datalist:
+  desc: null
+  value: val_dim_kitti.list
+val_h:
+  desc: null
+  value: 352
+val_w:
+  desc: null
+  value: 608
+wandblogger:
+  desc: null
+  value: false
+weight_decay:
+  desc: null
+  value: 1.0e-06
+workers:
+  desc: null
+  value: 4

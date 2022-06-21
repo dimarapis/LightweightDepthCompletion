@@ -1,0 +1,9 @@
+STEP 2. Loading datasets...
+<torch.utils.data.dataloader.DataLoader object at 0x7fd8d8107c50>
+Loaded 1000 test files
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+Currently on image 0 out of 1000
+Mean values per iter: {'d1': 0.9983936548233032, 'd2': 0.9994803071022034, 'd3': 0.9997637867927551, 'abs_rel': 0.012011617422103882, 'sq_rel': 0.017657756805419922, 'rmse': 0.7395699620246887, 'rmse_log': 0.024964358657598495, 'log10': 0.005166057497262955, 'silog': 0.024963390082120895}
+Currently on image 1 out of 1000

@@ -1,0 +1,90 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  4%|████████▋                                                                                                                                                                                         | 18/400 [00:01<00:21, 17.43it/s]
+Traceback (most recent call last):
+  File "main.py", line 476, in <module>
+    evaluation_block()
+  File "main.py", line 303, in evaluation_block
+    pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)
+  File "/home/dim/depth_2022/features/deprecated_metrics.py", line 93, in cropping_img
+    return pred[valid_mask], gt_depth[valid_mask]
+KeyboardInterrupt
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+)
+torch_minmax sparse (0.0, 253.6750030517578, 2.8915226459503174, 0.0)
+sparse_shape_afta (0.0, 21132.0, 906.6597290039062, 0.0)
+torch_minmax sparse (0.0, 254.5, 3.2433040142059326, 0.0)
+sparse_shape_afta (0.0, 21116.0, 1060.2056884765625, 0.0)
+torch_minmax sparse (0.0, 224.66250610351562, 2.7711451053619385, 0.0)
+sparse_shape_afta (0.0, 19448.0, 1046.1044921875, 0.0)
+torch_minmax sparse (0.0, 251.03750610351562, 3.0828964710235596, 0.0)
+sparse_shape_afta (0.0, 20153.0, 829.4033203125, 0.0)
+torch_minmax sparse (0.0, 250.53750610351562, 2.9711620807647705, 0.0)
+sparse_shape_afta (0.0, 20036.0, 625.9835205078125, 0.0)
+torch_minmax sparse (0.0, 252.9375, 2.574888229370117, 0.0)
+sparse_shape_afta (0.0, 20972.0, 749.4767456054688, 0.0)
+torch_minmax sparse (0.0, 250.10000610351562, 3.1132020950317383, 0.0)
+sparse_shape_afta (0.0, 21178.0, 1212.6317138671875, 0.0)
+torch_minmax sparse (0.0, 254.5625, 2.7416465282440186, 0.0)
+sparse_shape_afta (0.0, 21025.0, 1075.1156005859375, 0.0)
+torch_minmax sparse (0.0, 253.0625, 2.9657554626464844, 0.0)
+sparse_shape_afta (0.0, 20626.0, 1130.71630859375, 0.0)
+torch_minmax sparse (0.0, 251.5, 3.884967088699341, 0.0)
+sparse_shape_afta (0.0, 20695.0, 1348.2603759765625, 0.0)
+torch_minmax sparse (0.0, 242.8625030517578, 2.491494655609131, 0.0)
+sparse_shape_afta (0.0, 21351.0, 1006.4778442382812, 0.0)
+torch_minmax sparse (0.0, 252.875, 2.783684253692627, 0.0)
+sparse_shape_afta (0.0, 20172.0, 784.1741333007812, 0.0)
+torch_minmax sparse (0.0, 247.60000610351562, 2.9094603061676025, 0.0)
+sparse_shape_afta (0.0, 20871.0, 802.4558715820312, 0.0)
+torch_minmax sparse (0.0, 249.6750030517578, 2.7240798473358154, 0.0)
+sparse_shape_afta (0.0, 20626.0, 903.7924194335938, 0.0)
+torch_minmax sparse (0.0, 243.03750610351562, 2.8602960109710693, 0.0)
+sparse_shape_afta (0.0, 21724.0, 1200.484130859375, 0.0)
+torch_minmax sparse (0.0, 251.5124969482422, 2.6312193870544434, 0.0)
+sparse_shape_afta (0.0, 21166.0, 757.1405029296875, 0.0)
+torch_minmax sparse (0.0, 248.41250610351562, 3.11055588722229, 0.0)
+sparse_shape_afta (0.0, 21806.0, 1148.5150146484375, 0.0)
+torch_minmax sparse (0.0, 254.21249389648438, 2.9487531185150146, 0.0)
+sparse_shape_afta (0.0, 21133.0, 809.2638549804688, 0.0)
+torch_minmax sparse (0.0, 234.1374969482422, 2.2219760417938232, 0.0)
+sparse_shape_afta (0.0, 18601.0, 383.4056396484375, 0.0)

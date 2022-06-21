@@ -1,0 +1,134 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  eval
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-05
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  datalist_val_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 1000 val files
+  2%|█▏                                                            | 19/1000 [00:01<00:59, 16.50it/s]
+Traceback (most recent call last):
+  File "main.py", line 352, in <module>
+    evaluation_block()
+  File "main.py", line 182, in evaluation_block
+    inv_pred =  model(image)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/depth_2022/models/guide_depth.py", line 56, in forward
+    y = self.up_3(x, y)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/depth_2022/models/guide_modules.py", line 86, in forward
+    x = self.feature_conv(depth)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/container.py", line 141, in forward
+    input = module(input)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 446, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 443, in _conv_forward
+    self.padding, self.dilation, self.groups)
+KeyboardInterrupt
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+['data/kitti_dataset/val_selection_cropped/image/2011_09_29_drive_0026_sync_image_0000000041_image_03.png']
+(1.3017596006393433, 14.125322341918945, 5.447624206542969, 4.451313018798828)
+(0.0, 14.085282325744629, 1.4902541637420654, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0036_sync_image_0000000512_image_03.png']
+(1.4019343852996826, 14.079474449157715, 5.001307487487793, 3.6856110095977783)
+(0.0, 16.17693519592285, 1.4667304754257202, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000767_image_02.png']
+(1.5335381031036377, 13.476776123046875, 5.145913600921631, 3.3517062664031982)
+(0.0, 14.412384986877441, 1.9424954652786255, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000215_image_02.png']
+(1.6496680974960327, 20.613527297973633, 6.202692031860352, 5.4249587059021)
+(0.0, 17.917760848999023, 1.6200546026229858, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000614_image_03.png']
+(1.6454592943191528, 13.727231979370117, 5.198659420013428, 3.7353951930999756)
+(0.0, 12.681114196777344, 1.4182934761047363, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_30_drive_0016_sync_image_0000000188_image_02.png']
+(1.3574107885360718, 14.12243938446045, 5.266129970550537, 4.25993013381958)
+(0.0, 14.586894989013672, 0.9167976379394531, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0036_sync_image_0000000326_image_03.png']
+(1.5935182571411133, 13.223886489868164, 5.3037285804748535, 4.181304931640625)
+(0.0, 12.359685897827148, 1.3472131490707397, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000251_image_02.png']
+(1.5582612752914429, 21.57756996154785, 6.5667595863342285, 6.027219295501709)
+(0.0, 18.220640182495117, 1.8467379808425903, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_30_drive_0016_sync_image_0000000083_image_02.png']
+(1.39962637424469, 14.07770824432373, 5.175044059753418, 4.180052280426025)
+(0.0, 14.056280136108398, 1.673372507095337, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_29_drive_0026_sync_image_0000000011_image_03.png']
+(1.4489328861236572, 14.268376350402832, 5.342768669128418, 3.837272882461548)
+(0.0, 13.989070892333984, 1.423095941543579, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0023_sync_image_0000000173_image_03.png']
+(1.3841263055801392, 15.019654273986816, 5.184116840362549, 4.105967998504639)
+(0.0, 16.800655364990234, 1.1757367849349976, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0095_sync_image_0000000053_image_03.png']
+(1.5299782752990723, 15.549073219299316, 6.294426441192627, 5.240627288818359)
+(0.0, 16.17693519592285, 1.287603735923767, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0002_sync_image_0000000008_image_03.png']
+(1.3499761819839478, 14.821447372436523, 5.473435878753662, 4.797408580780029)
+(0.0, 13.941457748413086, 1.896389126777649, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_30_drive_0016_sync_image_0000000032_image_03.png']
+(1.3903802633285522, 13.278144836425781, 5.431325912475586, 4.5596513748168945)
+(0.0, 13.617020606994629, 1.5771206617355347, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000233_image_02.png']
+(1.534673810005188, 20.636228561401367, 6.15332555770874, 5.262909412384033)
+(0.0, 18.467086791992188, 1.8340814113616943, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_10_03_drive_0047_sync_image_0000000695_image_02.png']
+(1.4627048969268799, 13.547508239746094, 5.393349647521973, 4.486272811889648)
+(0.0, 13.717347145080566, 1.9126793146133423, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0023_sync_image_0000000041_image_03.png']
+(1.378022313117981, 14.080760955810547, 5.882296562194824, 4.749271392822266)
+(0.0, 13.103007316589355, 0.8944593667984009, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0023_sync_image_0000000455_image_03.png']
+(1.4513078927993774, 13.496362686157227, 5.692414283752441, 4.126522541046143)
+(0.0, 13.43832015991211, 0.938622772693634, 0.0)
+/n
+['data/kitti_dataset/val_selection_cropped/image/2011_09_26_drive_0036_sync_image_0000000092_image_03.png']
+(2.0529491901397705, 14.532172203063965, 5.643874168395996, 3.6210885047912598)
+(0.0, 14.153421401977539, 1.8764822483062744, 0.0)
+/n

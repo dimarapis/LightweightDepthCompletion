@@ -1,0 +1,31 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  eval
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-05
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  datalist_val_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Traceback (most recent call last):
+  File "main_with_many_prints_an_features.py", line 63, in <module>
+    files = DecnetDataloader(decnet_args)
+TypeError: __init__() missing 1 required positional argument: 'datalist'

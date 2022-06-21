@@ -1,0 +1,61 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-09
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  tensorrt
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+STEP 3. Loading model and metrics...
+Traceback (most recent call last):
+  File "/home/dim/depth_2022/main.py", line 115, in <module>
+    trt_module = torch_tensorrt.compile(model,
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch_tensorrt/_compile.py", line 96, in compile
+    ts_mod = torch.jit.script(module)
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch/jit/_script.py", line 1257, in script
+    return torch.jit._recursive.create_script_module(
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch/jit/_recursive.py", line 451, in create_script_module
+    return create_script_module_impl(nn_module, concrete_type, stubs_fn)
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch/jit/_recursive.py", line 517, in create_script_module_impl
+    create_methods_and_properties_from_stubs(concrete_type, method_stubs, property_stubs)
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch/jit/_recursive.py", line 368, in create_methods_and_properties_from_stubs
+    concrete_type._create_methods_and_properties(property_defs, property_rcbs, method_defs, method_rcbs, method_defaults)
+RuntimeError:
+Arguments for call are not valid.
+The following variants are available:
+  interpolate(Tensor input, int? size=None, float[]? scale_factor=None, str mode="nearest", bool? align_corners=None, bool? recompute_scale_factor=None) -> (Tensor):
+  Expected a value of type 'Optional[List[float]]' for argument 'scale_factor' but instead found type 'int'.
+  interpolate(Tensor input, int[]? size=None, float[]? scale_factor=None, str mode="nearest", bool? align_corners=None, bool? recompute_scale_factor=None) -> (Tensor):
+  Expected a value of type 'Optional[List[float]]' for argument 'scale_factor' but instead found type 'int'.
+  interpolate(Tensor input, int? size=None, float? scale_factor=None, str mode="nearest", bool? align_corners=None, bool? recompute_scale_factor=None) -> (Tensor):
+  Expected a value of type 'Optional[float]' for argument 'scale_factor' but instead found type 'int'.
+  interpolate(Tensor input, int[]? size=None, float? scale_factor=None, str mode="nearest", bool? align_corners=None, bool? recompute_scale_factor=None) -> (Tensor):
+  Expected a value of type 'Optional[float]' for argument 'scale_factor' but instead found type 'int'.
+The original call is:
+  File "/home/dim/depth_2022/models/guide_depth.py", line 49
+        x_quarter = F.interpolate(x, scale_factor=.25)
+        y = F.interpolate(y, scale_factor=2, mode='bilinear')#, align_corners=True)
+            ~~~~~~~~~~~~~ <--- HERE
+        y = self.up_1(x_quarter, y)

@@ -1,0 +1,157 @@
+2022-06-17 11:22:51,401 INFO    MainThread:28732 [internal.py:wandb_internal():93] W&B internal server running at pid: 28732, started at: 2022-06-17 11:22:51.401489
+2022-06-17 11:22:51,403 INFO    WriterThread:28732 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/run-225ju0vn.wandb
+2022-06-17 11:22:51,403 DEBUG   SenderThread:28732 [sender.py:send():232] send: header
+2022-06-17 11:22:51,404 DEBUG   SenderThread:28732 [sender.py:send():232] send: run
+2022-06-17 11:22:51,643 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: check_version
+2022-06-17 11:22:51,644 INFO    SenderThread:28732 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files
+2022-06-17 11:22:51,644 INFO    SenderThread:28732 [sender.py:_start_run_threads():814] run started: 225ju0vn with start time 1655457770
+2022-06-17 11:22:51,644 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:51,644 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:51,644 DEBUG   SenderThread:28732 [sender.py:send_request():246] send_request: check_version
+2022-06-17 11:22:51,776 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: run_start
+2022-06-17 11:22:51,778 DEBUG   HandlerThread:28732 [meta.py:__init__():35] meta init
+2022-06-17 11:22:51,778 DEBUG   HandlerThread:28732 [meta.py:__init__():49] meta init done
+2022-06-17 11:22:51,778 DEBUG   HandlerThread:28732 [meta.py:probe():209] probe
+2022-06-17 11:22:51,784 DEBUG   HandlerThread:28732 [git.py:repo():29] git repository is invalid
+2022-06-17 11:22:51,784 DEBUG   HandlerThread:28732 [meta.py:_save_pip():53] save pip
+2022-06-17 11:22:51,784 DEBUG   HandlerThread:28732 [meta.py:_save_pip():67] save pip done
+2022-06-17 11:22:51,784 DEBUG   HandlerThread:28732 [meta.py:_save_conda():74] save conda
+2022-06-17 11:22:52,354 DEBUG   HandlerThread:28732 [meta.py:_save_conda():84] save conda done
+2022-06-17 11:22:52,354 DEBUG   HandlerThread:28732 [meta.py:probe():247] probe done
+2022-06-17 11:22:52,357 DEBUG   SenderThread:28732 [sender.py:send():232] send: files
+2022-06-17 11:22:52,357 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-06-17 11:22:52,361 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 11:22:52,362 DEBUG   SenderThread:28732 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 11:22:52,552 DEBUG   SenderThread:28732 [sender.py:send():232] send: telemetry
+2022-06-17 11:22:52,552 DEBUG   SenderThread:28732 [sender.py:send():232] send: config
+2022-06-17 11:22:52,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:52,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-metadata.json
+2022-06-17 11:22:52,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:22:52,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/conda-environment.yaml
+2022-06-17 11:22:52,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/requirements.txt
+2022-06-17 11:22:52,962 INFO    Thread-11 :28732 [upload_job.py:push():132] Uploaded file /tmp/tmpsfcic_vrwandb/bpgutx7a-wandb-metadata.json
+2022-06-17 11:22:54,518 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:54,519 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:54,519 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:54,520 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:54,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:54,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:22:55,311 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:55,312 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:55,312 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:55,312 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:55,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:56,096 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:56,097 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:56,097 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:56,097 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:56,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:56,645 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:22:56,889 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:56,889 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:56,889 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:56,890 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:57,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:57,703 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:57,703 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:57,703 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:57,704 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:58,523 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:58,523 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:58,523 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:58,524 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:58,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:22:58,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:22:59,329 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:22:59,330 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:22:59,330 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:22:59,330 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:22:59,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:00,145 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:00,145 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:00,145 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:00,146 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:00,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:00,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:00,964 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:00,964 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:00,965 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:00,965 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:01,646 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:01,785 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:01,786 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:01,786 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:01,786 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:02,605 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:02,605 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:02,605 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:02,606 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:02,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:02,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:03,427 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:03,428 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:03,428 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:03,428 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:03,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:04,243 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:04,243 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:04,243 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:04,244 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:04,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:04,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:05,061 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:05,061 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:05,061 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:05,062 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:05,647 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:05,858 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:05,859 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:05,859 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:05,859 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:06,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:06,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:06,662 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:06,663 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:06,663 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:06,663 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:07,477 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:07,477 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:07,477 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:07,478 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:07,553 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 11:23:07,553 DEBUG   SenderThread:28732 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 11:23:07,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:08,285 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:08,285 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:08,285 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:08,286 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:08,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:08,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:09,136 DEBUG   HandlerThread:28732 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 11:23:09,137 DEBUG   SenderThread:28732 [sender.py:send():232] send: history
+2022-06-17 11:23:09,137 DEBUG   SenderThread:28732 [sender.py:send():232] send: summary
+2022-06-17 11:23:09,138 INFO    SenderThread:28732 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 11:23:09,648 INFO    Thread-7  :28732 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:09,871 WARNING MainThread:28732 [internal.py:wandb_internal():153] Internal process interrupt: 1
+2022-06-17 11:23:09,879 DEBUG   SenderThread:28732 [sender.py:send():232] send: telemetry
+2022-06-17 11:23:10,021 WARNING MainThread:28732 [internal.py:wandb_internal():153] Internal process interrupt: 2
+2022-06-17 11:23:10,021 ERROR   MainThread:28732 [internal.py:wandb_internal():156] Internal process interrupted.
+2022-06-17 11:23:10,880 INFO    SenderThread:28732 [sender.py:finish():1110] shutting down sender
+2022-06-17 11:23:10,880 INFO    SenderThread:28732 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-06-17 11:23:10,880 INFO    WriterThread:28732 [datastore.py:close():279] close: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/run-225ju0vn.wandb
+2022-06-17 11:23:10,880 INFO    HandlerThread:28732 [handler.py:finish():806] shutting down handler
+2022-06-17 11:23:11,649 INFO    SenderThread:28732 [dir_watcher.py:finish():342] scan: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files
+2022-06-17 11:23:11,650 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-metadata.json wandb-metadata.json
+2022-06-17 11:23:11,650 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/config.yaml config.yaml
+2022-06-17 11:23:11,650 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/conda-environment.yaml conda-environment.yaml
+2022-06-17 11:23:11,652 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json wandb-summary.json
+2022-06-17 11:23:11,652 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/requirements.txt requirements.txt
+2022-06-17 11:23:11,653 INFO    SenderThread:28732 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log output.log
+2022-06-17 11:23:11,654 INFO    SenderThread:28732 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-17 11:23:11,654 INFO    SenderThread:28732 [file_pusher.py:join():150] waiting for file pusher
+2022-06-17 11:23:12,316 INFO    Thread-12 :28732 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/config.yaml
+2022-06-17 11:23:12,318 INFO    Thread-14 :28732 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/wandb-summary.json
+2022-06-17 11:23:12,320 INFO    Thread-16 :28732 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/output.log
+2022-06-17 11:23:12,322 INFO    Thread-15 :28732 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/requirements.txt
+2022-06-17 11:23:12,341 INFO    Thread-13 :28732 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_112250-225ju0vn/files/conda-environment.yaml
+2022-06-17 11:23:12,828 INFO    MainThread:28732 [internal.py:handle_exit():80] Internal process exited

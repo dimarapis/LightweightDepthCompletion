@@ -1,0 +1,155 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  7%|██████████████                                                                                                                                                                                    | 29/400 [00:01<00:18, 20.05it/s]
+STEP 3. Loading model and metrics...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+)
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+
+
+
+
+
+
+
+
+ 90%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▋                  | 362/400 [00:17<00:01, 21.57it/s]
+400.0
+Results:
+d1  =  0.8627962327003479
+d2  =  0.9612934863567353
+d3  =  0.9886573822796345
+abs_rel  =  0.10718738820403814
+sq_rel  =  0.7758614541776478
+rmse  =  5.2193673402071
+rmse_log  =  0.17142250591889024
+log10  =  0.04784376933705062
+silog  =  0.16539725314825773
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:19<00:00, 20.42it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏       | 72/75 [00:34<00:01,  2.11it/s]
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 5e-07
+    weight_decay: 0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:35<00:00,  2.10it/s]
+
+
+
+
+
+
+
+
+
+ 96%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▎        | 382/400 [00:18<00:00, 19.10it/s]
+400.0
+Results:
+d1  =  0.764085436835885
+d2  =  0.9291434033215046
+d3  =  0.9795778150856495
+abs_rel  =  0.19169244339689612
+sq_rel  =  1.826767567358911
+rmse  =  6.233351833820343
+rmse_log  =  0.22580257687717675
+log10  =  0.06953203366138042
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 400/400 [00:19<00:00, 20.41it/s]
+
+
+
+
+
+
+
+
+ 52%|█████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                                                             | 39/75 [00:18<00:17,  2.06it/s]
+Traceback (most recent call last):
+  File "main.py", line 406, in <module>
+    training_block()
+  File "main.py", line 319, in training_block
+    for i, data in enumerate(tqdm(train_dl)):
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/tqdm/std.py", line 1180, in __iter__
+    for obj in iterable:
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 561, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/depth_2022/features/decnet_dataloaders.py", line 70, in __getitem__
+    rgb = np.array(Image.open(self.files[index]['rgb']))
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 698, in __array__
+    new["data"] = self.tobytes()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 744, in tobytes
+    self.load()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/ImageFile.py", line 255, in load
+    n, err_code = decoder.decode(b)
+KeyboardInterrupt

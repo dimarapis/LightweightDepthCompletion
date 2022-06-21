@@ -1,0 +1,23 @@
+{
+    "os": "Linux-5.4.0-120-generic-x86_64-with-debian-buster-sid",
+    "python": "3.7.11",
+    "heartbeatAt": "2022-06-21T07:05:26.904213",
+    "startedAt": "2022-06-21T07:05:25.795571",
+    "docker": null,
+    "gpu": "NVIDIA GeForce RTX 2070 Super with Max-Q Design",
+    "gpu_count": 1,
+    "cpu_count": 16,
+    "cuda": null,
+    "args": [
+        "--task",
+        "decnet-completion",
+        "--mode",
+        "train"
+    ],
+    "state": "running",
+    "program": "main.py",
+    "codePath": "main.py",
+    "host": "dim-dtu",
+    "username": "dim",
+    "executable": "/home/dim/anaconda3/envs/pytorchenv/bin/python"
+}

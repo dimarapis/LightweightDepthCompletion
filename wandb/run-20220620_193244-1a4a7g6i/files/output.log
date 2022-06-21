@@ -1,0 +1,118 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  0.01
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+STEP 3. Loading model and metrics...
+ 11%|████████████████████▊                                                                                                                                                                             | 43/400 [00:01<00:15, 23.77it/s]
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 0.01
+    lr: 0.01
+    weight_decay: 0
+)
+torch_minmax sparse (0.0, 0.990917980670929, 0.011295010335743427, 0.0)
+torch_minmax sparse (0.0, 0.994140625, 0.012669156305491924, 0.0)
+torch_minmax sparse (0.0, 0.8775879144668579, 0.010824785567820072, 0.0)
+torch_minmax sparse (0.0, 0.9806152582168579, 0.01204256433993578, 0.0)
+torch_minmax sparse (0.0, 0.9786621332168579, 0.011606101877987385, 0.0)
+torch_minmax sparse (0.0, 0.988037109375, 0.01005815714597702, 0.0)
+torch_minmax sparse (0.0, 0.9769531488418579, 0.012160945683717728, 0.0)
+torch_minmax sparse (0.0, 0.994384765625, 0.010709556750953197, 0.0)
+torch_minmax sparse (0.0, 0.988525390625, 0.01158498227596283, 0.0)
+torch_minmax sparse (0.0, 0.982421875, 0.0151756526902318, 0.0)
+torch_minmax sparse (0.0, 0.948681652545929, 0.009732400998473167, 0.0)
+torch_minmax sparse (0.0, 0.98779296875, 0.010873766615986824, 0.0)
+torch_minmax sparse (0.0, 0.9671875238418579, 0.011365079320967197, 0.0)
+torch_minmax sparse (0.0, 0.975292980670929, 0.010640936903655529, 0.0)
+torch_minmax sparse (0.0, 0.9493652582168579, 0.01117303129285574, 0.0)
+torch_minmax sparse (0.0, 0.982470691204071, 0.01027820073068142, 0.0)
+torch_minmax sparse (0.0, 0.9703613519668579, 0.01215060893446207, 0.0)
+torch_minmax sparse (0.0, 0.9930175542831421, 0.011518566869199276, 0.0)
+torch_minmax sparse (0.0, 0.914599597454071, 0.008679593913257122, 0.0)
+torch_minmax sparse (0.0, 0.9798828363418579, 0.010606758296489716, 0.0)
+torch_minmax sparse (0.0, 0.8775390386581421, 0.010071465745568275, 0.0)
+torch_minmax sparse (0.0, 0.9923340082168579, 0.011352542787790298, 0.0)
+torch_minmax sparse (0.0, 0.9671875238418579, 0.009458379819989204, 0.0)
+torch_minmax sparse (0.0, 0.872119128704071, 0.007727967109531164, 0.0)
+torch_minmax sparse (0.0, 0.9947265386581421, 0.01170323509722948, 0.0)
+torch_minmax sparse (0.0, 0.9898926019668579, 0.010978848673403263, 0.0)
+torch_minmax sparse (0.0, 0.990234375, 0.013066666200757027, 0.0)
+torch_minmax sparse (0.0, 0.994189441204071, 0.011779004707932472, 0.0)
+torch_minmax sparse (0.0, 0.9710448980331421, 0.011321593075990677, 0.0)
+torch_minmax sparse (0.0, 0.9775390625, 0.008538543246686459, 0.0)
+torch_minmax sparse (0.0, 0.987744152545929, 0.011988197453320026, 0.0)
+torch_minmax sparse (0.0, 0.9446777105331421, 0.009570370428264141, 0.0)
+torch_minmax sparse (0.0, 0.9764159917831421, 0.013526483438909054, 0.0)
+torch_minmax sparse (0.0, 0.9806152582168579, 0.01143648847937584, 0.0)
+torch_minmax sparse (0.0, 0.996142566204071, 0.009900388307869434, 0.0)
+torch_minmax sparse (0.0, 0.952587902545929, 0.011582807637751102, 0.0)
+torch_minmax sparse (0.0, 0.9949706792831421, 0.012968501076102257, 0.0)
+torch_minmax sparse (0.0, 0.9640136957168579, 0.009371687658131123, 0.0)
+torch_minmax sparse (0.0, 0.9927734136581421, 0.012461588717997074, 0.0)
+torch_minmax sparse (0.0, 0.8163086175918579, 0.011370651423931122, 0.0)
+torch_minmax sparse (0.0, 0.9957031011581421, 0.01076815277338028, 0.0)
+torch_minmax sparse (0.0, 0.9727538824081421, 0.009886717423796654, 0.0)
+torch_minmax sparse (0.0, 0.984326183795929, 0.013376472517848015, 0.0)
+torch_minmax sparse (0.0, 0.8290039300918579, 0.010534078814089298, 0.0)
+torch_minmax sparse (0.0, 0.974169909954071, 0.011755198240280151, 0.0)
+torch_minmax sparse (0.0, 0.956787109375, 0.011951083317399025, 0.0)
+torch_minmax sparse (0.0, 0.99560546875, 0.010805891826748848, 0.0)
+torch_minmax sparse (0.0, 0.9773925542831421, 0.0108571732416749, 0.0)
+torch_minmax sparse (0.0, 0.989013671875, 0.011444163508713245, 0.0)
+ 12%|███████████████████████▊                                                                                                                                                                          | 49/400 [00:02<00:16, 21.80it/s]
+Traceback (most recent call last):
+  File "main.py", line 462, in <module>
+    evaluation_block()
+  File "main.py", line 240, in evaluation_block
+    inv_pred =  model(image)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/depth_2022/models/guide_depth.py", line 56, in forward
+    y = self.up_3(x, y)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/depth_2022/models/guide_modules.py", line 89, in forward
+    y = self.guide_conv(guide)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/container.py", line 141, in forward
+    input = module(input)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 446, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/nn/modules/conv.py", line 443, in _conv_forward
+    self.padding, self.dilation, self.groups)
+KeyboardInterrupt

@@ -1,0 +1,44 @@
+
+  0%|                                                                       | 0/1000 [00:00<?, ?it/s]
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  eval
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  0.001
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+datalist  :  datalist_val_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+<torch.utils.data.dataloader.DataLoader object at 0x7f8656970590>
+Loaded 1000 test files
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+torch.Size([1, 3, 352, 608]) torch.Size([1, 1, 352, 608])
+Results:
+d1  :  0.0
+d2  :  0.0
+d3  :  0.0
+abs_rel  :  0.0
+sq_rel  :  0.0
+rmse  :  0.0
+rmse_log  :  0.0
+log10  :  0.0
+silog  :  0.0

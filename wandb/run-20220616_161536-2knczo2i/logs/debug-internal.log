@@ -1,0 +1,62 @@
+2022-06-16 16:15:37,364 INFO    MainThread:15730 [internal.py:wandb_internal():93] W&B internal server running at pid: 15730, started at: 2022-06-16 16:15:37.364354
+2022-06-16 16:15:37,365 INFO    WriterThread:15730 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/run-2knczo2i.wandb
+2022-06-16 16:15:37,366 DEBUG   SenderThread:15730 [sender.py:send():232] send: header
+2022-06-16 16:15:37,366 DEBUG   SenderThread:15730 [sender.py:send():232] send: run
+2022-06-16 16:15:37,571 DEBUG   HandlerThread:15730 [handler.py:handle_request():141] handle_request: check_version
+2022-06-16 16:15:37,572 INFO    SenderThread:15730 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files
+2022-06-16 16:15:37,572 INFO    SenderThread:15730 [sender.py:_start_run_threads():814] run started: 2knczo2i with start time 1655388936
+2022-06-16 16:15:37,572 DEBUG   SenderThread:15730 [sender.py:send():232] send: summary
+2022-06-16 16:15:37,572 INFO    SenderThread:15730 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-16 16:15:37,572 DEBUG   SenderThread:15730 [sender.py:send_request():246] send_request: check_version
+2022-06-16 16:15:37,644 DEBUG   HandlerThread:15730 [handler.py:handle_request():141] handle_request: run_start
+2022-06-16 16:15:37,646 DEBUG   HandlerThread:15730 [meta.py:__init__():35] meta init
+2022-06-16 16:15:37,646 DEBUG   HandlerThread:15730 [meta.py:__init__():49] meta init done
+2022-06-16 16:15:37,646 DEBUG   HandlerThread:15730 [meta.py:probe():209] probe
+2022-06-16 16:15:37,651 DEBUG   HandlerThread:15730 [git.py:repo():29] git repository is invalid
+2022-06-16 16:15:37,652 DEBUG   HandlerThread:15730 [meta.py:_save_pip():53] save pip
+2022-06-16 16:15:37,652 DEBUG   HandlerThread:15730 [meta.py:_save_pip():67] save pip done
+2022-06-16 16:15:37,652 DEBUG   HandlerThread:15730 [meta.py:_save_conda():74] save conda
+2022-06-16 16:15:38,167 DEBUG   HandlerThread:15730 [meta.py:_save_conda():84] save conda done
+2022-06-16 16:15:38,168 DEBUG   HandlerThread:15730 [meta.py:probe():247] probe done
+2022-06-16 16:15:38,170 DEBUG   SenderThread:15730 [sender.py:send():232] send: files
+2022-06-16 16:15:38,170 INFO    SenderThread:15730 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-06-16 16:15:38,173 DEBUG   HandlerThread:15730 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-16 16:15:38,173 DEBUG   SenderThread:15730 [sender.py:send_request():246] send_request: stop_status
+2022-06-16 16:15:38,355 DEBUG   SenderThread:15730 [sender.py:send():232] send: telemetry
+2022-06-16 16:15:38,355 DEBUG   SenderThread:15730 [sender.py:send():232] send: config
+2022-06-16 16:15:38,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:38,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/wandb-summary.json
+2022-06-16 16:15:38,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/wandb-metadata.json
+2022-06-16 16:15:38,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/conda-environment.yaml
+2022-06-16 16:15:38,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/requirements.txt
+2022-06-16 16:15:38,748 INFO    Thread-11 :15730 [upload_job.py:push():132] Uploaded file /tmp/tmp3booaye6wandb/1axjkjem-wandb-metadata.json
+2022-06-16 16:15:40,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:42,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:44,573 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:46,574 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:48,574 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:50,575 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:52,575 INFO    Thread-7  :15730 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:52,821 WARNING MainThread:15730 [internal.py:wandb_internal():153] Internal process interrupt: 1
+2022-06-16 16:15:52,824 DEBUG   SenderThread:15730 [sender.py:send():232] send: telemetry
+2022-06-16 16:15:53,000 WARNING MainThread:15730 [internal.py:wandb_internal():153] Internal process interrupt: 2
+2022-06-16 16:15:53,000 ERROR   MainThread:15730 [internal.py:wandb_internal():156] Internal process interrupted.
+2022-06-16 16:15:53,824 INFO    SenderThread:15730 [sender.py:finish():1110] shutting down sender
+2022-06-16 16:15:53,824 INFO    WriterThread:15730 [datastore.py:close():279] close: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/run-2knczo2i.wandb
+2022-06-16 16:15:53,824 INFO    SenderThread:15730 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-06-16 16:15:53,825 INFO    HandlerThread:15730 [handler.py:finish():806] shutting down handler
+2022-06-16 16:15:54,576 INFO    SenderThread:15730 [dir_watcher.py:finish():342] scan: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/wandb-metadata.json wandb-metadata.json
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/config.yaml config.yaml
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/conda-environment.yaml conda-environment.yaml
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/wandb-summary.json wandb-summary.json
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/requirements.txt requirements.txt
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log output.log
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-16 16:15:54,577 INFO    SenderThread:15730 [file_pusher.py:join():150] waiting for file pusher
+2022-06-16 16:15:55,194 INFO    Thread-13 :15730 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/conda-environment.yaml
+2022-06-16 16:15:55,197 INFO    Thread-12 :15730 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/config.yaml
+2022-06-16 16:15:55,206 INFO    Thread-14 :15730 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/wandb-summary.json
+2022-06-16 16:15:55,217 INFO    Thread-16 :15730 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/output.log
+2022-06-16 16:15:55,270 INFO    Thread-15 :15730 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_161536-2knczo2i/files/requirements.txt
+2022-06-16 16:21:37,410 INFO    MainThread:15730 [internal.py:handle_exit():80] Internal process exited

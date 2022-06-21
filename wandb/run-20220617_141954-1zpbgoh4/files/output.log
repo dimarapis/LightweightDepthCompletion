@@ -1,0 +1,56 @@
+WARNING: [Torch-TensorRT] - Cannot infer input type from calcuations in graph for input input.1. Assuming it is Float32. If not, specify input type explicity
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 3: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67):kernel weights has count 500 but 1500 was expected
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): count of 500 weights in kernel, but kernel dimensions (5,5) with 3 input channels, 20 output channels and 1 groups were specified. Expected Weights count is 3 * 5*5 * 20 / 1 = 1500
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: [convolutionNode.cpp::computeOutputExtents::43] Error Code 4: Internal Error (%69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): number of kernel weights does not match tensor dimensions)
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 3: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67):kernel weights has count 500 but 1500 was expected
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): count of 500 weights in kernel, but kernel dimensions (5,5) with 3 input channels, 20 output channels and 1 groups were specified. Expected Weights count is 3 * 5*5 * 20 / 1 = 1500
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: [convolutionNode.cpp::computeOutputExtents::43] Error Code 4: Internal Error (%69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): number of kernel weights does not match tensor dimensions)
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 3: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67):kernel weights has count 500 but 1500 was expected
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): count of 500 weights in kernel, but kernel dimensions (5,5) with 3 input channels, 20 output channels and 1 groups were specified. Expected Weights count is 3 * 5*5 * 20 / 1 = 1500
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: [convolutionNode.cpp::computeOutputExtents::43] Error Code 4: Internal Error (%69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): number of kernel weights does not match tensor dimensions)
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-09
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  tensorrt
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+STEP 3. Loading model and metrics...
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 3: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67):kernel weights has count 500 but 1500 was expected
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): count of 500 weights in kernel, but kernel dimensions (5,5) with 3 input channels, 20 output channels and 1 groups were specified. Expected Weights count is 3 * 5*5 * 20 / 1 = 1500
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: [convolutionNode.cpp::computeOutputExtents::43] Error Code 4: Internal Error (%69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): number of kernel weights does not match tensor dimensions)
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 3: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67):kernel weights has count 500 but 1500 was expected
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: %69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): count of 500 weights in kernel, but kernel dimensions (5,5) with 3 input channels, 20 output channels and 1 groups were specified. Expected Weights count is 3 * 5*5 * 20 / 1 = 1500
+ERROR: [Torch-TensorRT TorchScript Conversion Context] - 4: [convolutionNode.cpp::computeOutputExtents::43] Error Code 4: Internal Error (%69 : Tensor = aten::_convolution(%input.1, %18, %17, %3, %2, %3, %67, %68, %4, %67, %67, %67, %67): number of kernel weights does not match tensor dimensions)
+Traceback (most recent call last):
+  File "/home/dim/depth_2022/main.py", line 121, in <module>
+    trt_module = torch_tensorrt.compile(model,
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch_tensorrt/_compile.py", line 97, in compile
+    return torch_tensorrt.ts.compile(ts_mod, inputs=inputs, enabled_precisions=enabled_precisions, **kwargs)
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch_tensorrt/ts/_compiler.py", line 119, in compile
+    compiled_cpp_mod = _C.compile_graph(module._c, _parse_compile_spec(spec))
+RuntimeError: [Error thrown at core/conversion/converters/impl/conv_deconv.cpp:115] Expected orig_dims.nbDims > 2 to be true but got false
+Unable to create convolution layer from node: %72 : Tensor = aten::_convolution(%input.9, %16, %15, %3, %2, %3, %70, %71, %4, %70, %70, %70, %70)

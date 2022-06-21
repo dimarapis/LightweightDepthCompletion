@@ -1,0 +1,43 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  eval
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  0.001
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+(0.0, 255.0, 106.76228332519531, 73.0)
+  0%|                                                                        | 0/400 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "main.py", line 293, in <module>
+    evaluation_block()
+  File "main.py", line 165, in evaluation_block
+    print(torch_min_max(image.shape))
+  File "/home/dim/depth_2022/features/decnet_sanity.py", line 6, in torch_min_max
+    minmax = (torch.min(data.float()).item(),torch.max(data.float()).item(),torch.mean(data.float()).item(),torch.median(data.float()).item())
+AttributeError: 'torch.Size' object has no attribute 'float'

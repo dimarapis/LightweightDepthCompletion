@@ -1,0 +1,130 @@
+2022-06-16 16:06:00,274 INFO    MainThread:14227 [internal.py:wandb_internal():93] W&B internal server running at pid: 14227, started at: 2022-06-16 16:06:00.274469
+2022-06-16 16:06:00,275 INFO    WriterThread:14227 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/run-ba6arb94.wandb
+2022-06-16 16:06:00,276 DEBUG   SenderThread:14227 [sender.py:send():232] send: header
+2022-06-16 16:06:00,276 DEBUG   SenderThread:14227 [sender.py:send():232] send: run
+2022-06-16 16:06:00,487 INFO    SenderThread:14227 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files
+2022-06-16 16:06:00,487 INFO    SenderThread:14227 [sender.py:_start_run_threads():814] run started: ba6arb94 with start time 1655388359
+2022-06-16 16:06:00,487 DEBUG   SenderThread:14227 [sender.py:send():232] send: summary
+2022-06-16 16:06:00,487 INFO    SenderThread:14227 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-16 16:06:00,488 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: check_version
+2022-06-16 16:06:00,488 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: check_version
+2022-06-16 16:06:00,560 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: run_start
+2022-06-16 16:06:00,562 DEBUG   HandlerThread:14227 [meta.py:__init__():35] meta init
+2022-06-16 16:06:00,562 DEBUG   HandlerThread:14227 [meta.py:__init__():49] meta init done
+2022-06-16 16:06:00,562 DEBUG   HandlerThread:14227 [meta.py:probe():209] probe
+2022-06-16 16:06:00,568 DEBUG   HandlerThread:14227 [git.py:repo():29] git repository is invalid
+2022-06-16 16:06:00,568 DEBUG   HandlerThread:14227 [meta.py:_save_pip():53] save pip
+2022-06-16 16:06:00,568 DEBUG   HandlerThread:14227 [meta.py:_save_pip():67] save pip done
+2022-06-16 16:06:00,568 DEBUG   HandlerThread:14227 [meta.py:_save_conda():74] save conda
+2022-06-16 16:06:01,125 DEBUG   HandlerThread:14227 [meta.py:_save_conda():84] save conda done
+2022-06-16 16:06:01,126 DEBUG   HandlerThread:14227 [meta.py:probe():247] probe done
+2022-06-16 16:06:01,128 DEBUG   SenderThread:14227 [sender.py:send():232] send: files
+2022-06-16 16:06:01,128 INFO    SenderThread:14227 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-06-16 16:06:01,131 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-16 16:06:01,131 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: stop_status
+2022-06-16 16:06:01,313 DEBUG   SenderThread:14227 [sender.py:send():232] send: telemetry
+2022-06-16 16:06:01,314 DEBUG   SenderThread:14227 [sender.py:send():232] send: config
+2022-06-16 16:06:01,489 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:01,489 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/requirements.txt
+2022-06-16 16:06:01,489 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/conda-environment.yaml
+2022-06-16 16:06:01,489 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-metadata.json
+2022-06-16 16:06:01,490 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-summary.json
+2022-06-16 16:06:01,705 INFO    Thread-11 :14227 [upload_job.py:push():132] Uploaded file /tmp/tmp_vyhb05vwandb/2840c3t1-wandb-metadata.json
+2022-06-16 16:06:02,899 DEBUG   SenderThread:14227 [sender.py:send():232] send: telemetry
+2022-06-16 16:06:03,488 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:04,489 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:05,490 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:05,650 DEBUG   SenderThread:14227 [sender.py:send():232] send: exit
+2022-06-16 16:06:05,651 INFO    SenderThread:14227 [sender.py:send_exit():368] handling exit code: 0
+2022-06-16 16:06:05,651 INFO    SenderThread:14227 [sender.py:send_exit():370] handling runtime: 5
+2022-06-16 16:06:05,652 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-16 16:06:05,657 INFO    SenderThread:14227 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-16 16:06:05,657 INFO    SenderThread:14227 [sender.py:send_exit():376] send defer
+2022-06-16 16:06:05,657 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: poll_exit
+2022-06-16 16:06:05,658 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,658 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 0
+2022-06-16 16:06:05,658 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,658 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 0
+2022-06-16 16:06:05,658 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 1
+2022-06-16 16:06:05,658 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,658 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 1
+2022-06-16 16:06:05,759 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,759 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 1
+2022-06-16 16:06:05,759 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 2
+2022-06-16 16:06:05,761 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-16 16:06:05,762 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,762 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 2
+2022-06-16 16:06:05,762 DEBUG   SenderThread:14227 [sender.py:send():232] send: stats
+2022-06-16 16:06:05,763 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: poll_exit
+2022-06-16 16:06:05,764 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,764 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 2
+2022-06-16 16:06:05,764 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 3
+2022-06-16 16:06:05,765 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,765 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 3
+2022-06-16 16:06:05,766 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,766 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 3
+2022-06-16 16:06:05,766 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 4
+2022-06-16 16:06:05,767 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,767 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 4
+2022-06-16 16:06:05,768 DEBUG   SenderThread:14227 [sender.py:send():232] send: summary
+2022-06-16 16:06:05,769 INFO    SenderThread:14227 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-16 16:06:05,769 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,769 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 4
+2022-06-16 16:06:05,770 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 5
+2022-06-16 16:06:05,770 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:05,771 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 5
+2022-06-16 16:06:05,771 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:05,771 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 5
+2022-06-16 16:06:05,823 WARNING MainThread:14227 [internal.py:wandb_internal():153] Internal process interrupt: 1
+2022-06-16 16:06:06,031 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 6
+2022-06-16 16:06:06,032 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:06,032 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 6
+2022-06-16 16:06:06,033 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:06,033 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 6
+2022-06-16 16:06:06,033 INFO    SenderThread:14227 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-06-16 16:06:06,490 INFO    Thread-7  :14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:06,492 INFO    SenderThread:14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-summary.json
+2022-06-16 16:06:06,492 INFO    SenderThread:14227 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/config.yaml
+2022-06-16 16:06:06,493 INFO    SenderThread:14227 [dir_watcher.py:finish():342] scan: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files
+2022-06-16 16:06:06,493 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-metadata.json wandb-metadata.json
+2022-06-16 16:06:06,493 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/config.yaml config.yaml
+2022-06-16 16:06:06,494 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/conda-environment.yaml conda-environment.yaml
+2022-06-16 16:06:06,501 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-summary.json wandb-summary.json
+2022-06-16 16:06:06,501 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/requirements.txt requirements.txt
+2022-06-16 16:06:06,503 INFO    SenderThread:14227 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log output.log
+2022-06-16 16:06:06,505 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 7
+2022-06-16 16:06:06,508 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:06,508 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 7
+2022-06-16 16:06:06,508 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:06,508 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 7
+2022-06-16 16:06:06,508 INFO    SenderThread:14227 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-16 16:06:07,101 INFO    Thread-13 :14227 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/conda-environment.yaml
+2022-06-16 16:06:07,106 INFO    Thread-14 :14227 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/wandb-summary.json
+2022-06-16 16:06:07,111 INFO    Thread-15 :14227 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/requirements.txt
+2022-06-16 16:06:07,115 INFO    Thread-12 :14227 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/config.yaml
+2022-06-16 16:06:07,216 INFO    Thread-16 :14227 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/files/output.log
+2022-06-16 16:06:07,417 INFO    Thread-6  :14227 [sender.py:transition_state():389] send defer: 8
+2022-06-16 16:06:07,418 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:07,418 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 8
+2022-06-16 16:06:07,419 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:07,419 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 8
+2022-06-16 16:06:07,965 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 9
+2022-06-16 16:06:07,966 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:07,966 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 9
+2022-06-16 16:06:07,966 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:07,967 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 9
+2022-06-16 16:06:07,967 INFO    SenderThread:14227 [sender.py:transition_state():389] send defer: 10
+2022-06-16 16:06:07,968 DEBUG   SenderThread:14227 [sender.py:send():232] send: final
+2022-06-16 16:06:07,969 DEBUG   HandlerThread:14227 [handler.py:handle_request():141] handle_request: defer
+2022-06-16 16:06:07,970 INFO    HandlerThread:14227 [handler.py:handle_request_defer():164] handle defer: 10
+2022-06-16 16:06:07,970 DEBUG   SenderThread:14227 [sender.py:send():232] send: footer
+2022-06-16 16:06:07,970 DEBUG   SenderThread:14227 [sender.py:send_request():246] send_request: defer
+2022-06-16 16:06:07,971 INFO    SenderThread:14227 [sender.py:send_request_defer():385] handle sender defer: 10
+2022-06-16 16:06:09,828 WARNING MainThread:14227 [internal.py:is_dead():388] Internal process exiting, parent pid 14194 disappeared
+2022-06-16 16:06:09,829 ERROR   MainThread:14227 [internal.py:wandb_internal():149] Internal process shutdown.
+2022-06-16 16:06:09,971 INFO    WriterThread:14227 [datastore.py:close():279] close: /home/dim/depth_2022/wandb/run-20220616_160559-ba6arb94/run-ba6arb94.wandb
+2022-06-16 16:06:09,971 INFO    SenderThread:14227 [sender.py:finish():1110] shutting down sender
+2022-06-16 16:06:09,972 INFO    SenderThread:14227 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-16 16:06:09,972 INFO    SenderThread:14227 [file_pusher.py:join():150] waiting for file pusher
+2022-06-16 16:06:09,972 INFO    HandlerThread:14227 [handler.py:finish():806] shutting down handler
+2022-06-16 16:06:09,976 INFO    MainThread:14227 [internal.py:handle_exit():80] Internal process exited

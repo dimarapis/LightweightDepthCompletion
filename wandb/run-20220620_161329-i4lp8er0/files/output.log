@@ -1,0 +1,42 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  4%|███████▊                                                                                                                                                                                            | 3/75 [00:01<00:35,  2.04it/s]
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Training block...
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])

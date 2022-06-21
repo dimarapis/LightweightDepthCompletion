@@ -1,0 +1,16 @@
+STEP 2. Loading datasets...
+<torch.utils.data.dataloader.DataLoader object at 0x7f892864ced0>
+Loaded 1000 test files
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+Traceback (most recent call last):
+  File "main.py", line 144, in <module>
+    data = to_tensor(packed_data)
+  File "/home/dim/depth_2022/features/custom_transforms.py", line 89, in __call__
+    image, depth = transformation(image), transformation(depth)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torchvision/transforms/transforms.py", line 98, in __call__
+    return F.to_tensor(pic)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torchvision/transforms/functional.py", line 117, in to_tensor
+    raise ValueError('pic should be 2/3 dimensional. Got {} dimensions.'.format(pic.ndim))
+ValueError: pic should be 2/3 dimensional. Got 4 dimensions.

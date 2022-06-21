@@ -1,0 +1,359 @@
+STEP 2. Loading datasets...
+<torch.utils.data.dataloader.DataLoader object at 0x7f1c053b1c90>
+Loaded 1000 test files
+STEP 3. Loading model and metrics...
+Traceback (most recent call last):
+  File "main.py", line 129, in <module>
+    print(f'Currently on image {i} out of {samples_no}')
+KeyboardInterrupt
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+Currently on image 0 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 1 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 2 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 3 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 4 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 5 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 6 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 7 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 8 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 9 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 10 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 11 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 12 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 13 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 14 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 15 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 16 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 17 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 18 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 19 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 20 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 21 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 22 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 23 out of 1000
+imageshape torch.Size([1, 3, 370, 1224])
+Currently on image 24 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 25 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 26 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 27 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 28 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 29 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 30 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 31 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 32 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 33 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 34 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 35 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 36 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 37 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 38 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 39 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 40 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 41 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 42 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 43 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 44 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 45 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 46 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 47 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 48 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 49 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 50 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 51 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 52 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 53 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 54 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 55 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 56 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 57 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 58 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 59 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 60 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 61 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 62 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 63 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 64 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 65 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 66 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 67 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 68 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 69 out of 1000
+imageshape torch.Size([1, 3, 370, 1224])
+Currently on image 70 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 71 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 72 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 73 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 74 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 75 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 76 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 77 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 78 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 79 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 80 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 81 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 82 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 83 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 84 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 85 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 86 out of 1000
+imageshape torch.Size([1, 3, 370, 1224])
+Currently on image 87 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 88 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 89 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 90 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 91 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 92 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 93 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 94 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 95 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 96 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 97 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 98 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 99 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 100 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 101 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 102 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 103 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 104 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 105 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 106 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 107 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 108 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 109 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 110 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 111 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 112 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 113 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 114 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 115 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 116 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 117 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 118 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 119 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 120 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 121 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 122 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 123 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 124 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 125 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 126 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 127 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 128 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 129 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 130 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 131 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 132 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 133 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 134 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 135 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 136 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 137 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 138 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 139 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 140 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 141 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 142 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 143 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 144 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 145 out of 1000
+imageshape torch.Size([1, 3, 374, 1238])
+Currently on image 146 out of 1000
+imageshape torch.Size([1, 3, 370, 1224])
+Currently on image 147 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 148 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 149 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 150 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 151 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 152 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 153 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 154 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 155 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 156 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 157 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 158 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 159 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 160 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 161 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 162 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 163 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 164 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 165 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 166 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 167 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 168 out of 1000
+imageshape torch.Size([1, 3, 370, 1226])
+Currently on image 169 out of 1000
+imageshape torch.Size([1, 3, 376, 1241])
+Currently on image 170 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 171 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 172 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 173 out of 1000
+imageshape torch.Size([1, 3, 375, 1242])
+Currently on image 174 out of 1000

@@ -1,0 +1,41 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-09
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  tensorrt
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+Traceback (most recent call last):
+  File "/home/dim/depth_2022/main.py", line 115, in <module>
+    trt_module = torch_tensorrt.compile(model,
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch_tensorrt/_compile.py", line 97, in compile
+    return torch_tensorrt.ts.compile(ts_mod, inputs=inputs, enabled_precisions=enabled_precisions, **kwargs)
+  File "/home/dim/anaconda3/envs/tensorenv/lib/python3.9/site-packages/torch_tensorrt/ts/_compiler.py", line 119, in compile
+    compiled_cpp_mod = _C.compile_graph(module._c, _parse_compile_spec(spec))
+RuntimeError:
+temporary: the only valid use of a module is looking up an attribute but found  = prim::SetAttr[name="num_batches_tracked"](%_4, %2356)
+:
+STEP 3. Loading model and metrics...

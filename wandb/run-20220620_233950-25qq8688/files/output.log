@@ -1,0 +1,156 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  9%|█████████████████▉                                                                                                                                                                                | 37/400 [00:01<00:16, 22.59it/s]
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+)
+torch_minmax sparse (0.0, 79.2734375, 0.9036009311676025, 0.0)
+sparse_shape_afta (0.0, 82.546875, 3.541639566421509, 0.0)
+torch_minmax sparse (0.0, 79.53125, 1.0135325193405151, 0.0)
+sparse_shape_afta (0.0, 82.484375, 4.141428470611572, 0.0)
+torch_minmax sparse (0.0, 70.20703125, 0.8659828901290894, 0.0)
+sparse_shape_afta (0.0, 75.96875, 4.086345672607422, 0.0)
+torch_minmax sparse (0.0, 78.44921875, 0.9634051322937012, 0.0)
+sparse_shape_afta (0.0, 78.72265625, 3.239856719970703, 0.0)
+torch_minmax sparse (0.0, 78.29296875, 0.9284881353378296, 0.0)
+sparse_shape_afta (0.0, 78.265625, 2.4452481269836426, 0.0)
+torch_minmax sparse (0.0, 79.04296875, 0.8046525716781616, 0.0)
+sparse_shape_afta (0.0, 81.921875, 2.9276435375213623, 0.0)
+torch_minmax sparse (0.0, 78.15625, 0.9728755354881287, 0.0)
+sparse_shape_afta (0.0, 82.7265625, 4.736842632293701, 0.0)
+torch_minmax sparse (0.0, 79.55078125, 0.8567646145820618, 0.0)
+sparse_shape_afta (0.0, 82.12890625, 4.199670314788818, 0.0)
+torch_minmax sparse (0.0, 79.08203125, 0.9267985224723816, 0.0)
+sparse_shape_afta (0.0, 80.5703125, 4.416860580444336, 0.0)
+torch_minmax sparse (0.0, 78.59375, 1.2140522003173828, 0.0)
+sparse_shape_afta (0.0, 80.83984375, 5.266642093658447, 0.0)
+torch_minmax sparse (0.0, 75.89453125, 0.778592050075531, 0.0)
+sparse_shape_afta (0.0, 83.40234375, 3.931554079055786, 0.0)
+torch_minmax sparse (0.0, 79.0234375, 0.8699014186859131, 0.0)
+sparse_shape_afta (0.0, 78.796875, 3.0631802082061768, 0.0)
+torch_minmax sparse (0.0, 77.375, 0.909206211566925, 0.0)
+sparse_shape_afta (0.0, 81.52734375, 3.1345932483673096, 0.0)
+torch_minmax sparse (0.0, 78.0234375, 0.8512747883796692, 0.0)
+sparse_shape_afta (0.0, 80.5703125, 3.5304391384124756, 0.0)
+torch_minmax sparse (0.0, 75.94921875, 0.8938424587249756, 0.0)
+sparse_shape_afta (0.0, 84.859375, 4.689391136169434, 0.0)
+torch_minmax sparse (0.0, 78.59765625, 0.8222560882568359, 0.0)
+sparse_shape_afta (0.0, 82.6796875, 2.957580089569092, 0.0)
+torch_minmax sparse (0.0, 77.62890625, 0.9720486402511597, 0.0)
+sparse_shape_afta (0.0, 85.1796875, 4.486386775970459, 0.0)
+torch_minmax sparse (0.0, 79.44140625, 0.9214852452278137, 0.0)
+sparse_shape_afta (0.0, 82.55078125, 3.161186933517456, 0.0)
+torch_minmax sparse (0.0, 73.16796875, 0.694367527961731, 0.0)
+sparse_shape_afta (0.0, 72.66015625, 1.497678279876709, 0.0)
+torch_minmax sparse (0.0, 78.390625, 0.848540723323822, 0.0)
+sparse_shape_afta (0.0, 79.16796875, 3.1640069484710693, 0.0)
+torch_minmax sparse (0.0, 70.203125, 0.8057173490524292, 0.0)
+sparse_shape_afta (0.0, 71.2421875, 2.3518521785736084, 0.0)
+torch_minmax sparse (0.0, 79.38671875, 0.9082035422325134, 0.0)
+sparse_shape_afta (0.0, 82.26953125, 3.157594919204712, 0.0)
+torch_minmax sparse (0.0, 77.375, 0.7566704154014587, 0.0)
+sparse_shape_afta (0.0, 83.04296875, 3.1362011432647705, 0.0)
+torch_minmax sparse (0.0, 69.76953125, 0.6182374358177185, 0.0)
+sparse_shape_afta (0.0, 69.26953125, 1.3346781730651855, 0.0)
+torch_minmax sparse (0.0, 79.578125, 0.9362587928771973, 0.0)
+sparse_shape_afta (0.0, 80.5078125, 3.1203441619873047, 0.0)
+torch_minmax sparse (0.0, 79.19140625, 0.8783079385757446, 0.0)
+sparse_shape_afta (0.0, 80.88671875, 3.9305551052093506, 0.0)
+torch_minmax sparse (0.0, 79.21875, 1.0453332662582397, 0.0)
+sparse_shape_afta (0.0, 85.39453125, 3.8843886852264404, 0.0)
+torch_minmax sparse (0.0, 79.53515625, 0.9423203468322754, 0.0)
+sparse_shape_afta (0.0, 81.81640625, 3.6856892108917236, 0.0)
+torch_minmax sparse (0.0, 77.68359375, 0.9057275056838989, 0.0)
+sparse_shape_afta (0.0, 77.92578125, 3.935231924057007, 0.0)
+torch_minmax sparse (0.0, 78.203125, 0.6830835342407227, 0.0)
+sparse_shape_afta (0.0, 78.08203125, 3.1605305671691895, 0.0)
+torch_minmax sparse (0.0, 79.01953125, 0.9590559005737305, 0.0)
+sparse_shape_afta (0.0, 82.56640625, 3.332319974899292, 0.0)
+torch_minmax sparse (0.0, 75.57421875, 0.7656295895576477, 0.0)
+sparse_shape_afta (0.0, 81.203125, 3.2467408180236816, 0.0)
+torch_minmax sparse (0.0, 78.11328125, 1.0821186304092407, 0.0)
+sparse_shape_afta (0.0, 83.6484375, 5.594851493835449, 0.0)
+torch_minmax sparse (0.0, 78.44921875, 0.9149190187454224, 0.0)
+sparse_shape_afta (0.0, 81.05078125, 3.0611374378204346, 0.0)
+torch_minmax sparse (0.0, 79.69140625, 0.7920309901237488, 0.0)
+sparse_shape_afta (0.0, 82.9609375, 2.4726359844207764, 0.0)
+torch_minmax sparse (0.0, 76.20703125, 0.926624596118927, 0.0)
+sparse_shape_afta (0.0, 78.99609375, 3.1659903526306152, 0.0)
+torch_minmax sparse (0.0, 79.59765625, 1.037480115890503, 0.0)
+sparse_shape_afta (0.0, 80.05859375, 4.925283432006836, 0.0)
+torch_minmax sparse (0.0, 77.12109375, 0.7497349977493286, 0.0)
+sparse_shape_afta (0.0, 82.0234375, 3.401230573654175, 0.0)
+torch_minmax sparse (0.0, 79.421875, 0.99692702293396, 0.0)
+sparse_shape_afta (0.0, 80.60546875, 4.229017734527588, 0.0)
+torch_minmax sparse (0.0, 65.3046875, 0.9096521735191345, 0.0)
+sparse_shape_afta (0.0, 64.35546875, 3.4267220497131348, 0.0)
+torch_minmax sparse (0.0, 79.65625, 0.8614522218704224, 0.0)
+sparse_shape_afta (0.0, 83.89453125, 4.021848201751709, 0.0)
+torch_minmax sparse (0.0, 77.8203125, 0.7909373044967651, 0.0)
+sparse_shape_afta (0.0, 77.828125, 2.3402328491210938, 0.0)
+torch_minmax sparse (0.0, 78.74609375, 1.0701179504394531, 0.0)
+sparse_shape_afta (0.0, 83.9375, 4.475252151489258, 0.0)
+torch_minmax sparse (0.0, 66.3203125, 0.8427262306213379, 0.0)
+ 11%|█████████████████████▎                                                                                                                                                                            | 44/400 [00:02<00:17, 20.76it/s]
+Traceback (most recent call last):
+  File "main.py", line 476, in <module>
+    evaluation_block()
+  File "main.py", line 191, in evaluation_block
+    for i, data in enumerate(tqdm(test_dl)):
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/tqdm/std.py", line 1180, in __iter__
+    for obj in iterable:
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 561, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/depth_2022/features/decnet_dataloaders.py", line 80, in __getitem__
+    gt = np.array(Image.open(self.files[index]['gt']))
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 698, in __array__
+    new["data"] = self.tobytes()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 744, in tobytes
+    self.load()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/ImageFile.py", line 255, in load
+    n, err_code = decoder.decode(b)
+KeyboardInterrupt

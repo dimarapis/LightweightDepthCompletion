@@ -1,0 +1,988 @@
+2022-06-17 12:21:12,186 INFO    MainThread:748 [internal.py:wandb_internal():93] W&B internal server running at pid: 748, started at: 2022-06-17 12:21:12.186452
+2022-06-17 12:21:12,188 INFO    WriterThread:748 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/run-2xu6eyjw.wandb
+2022-06-17 12:21:12,188 DEBUG   SenderThread:748 [sender.py:send():232] send: header
+2022-06-17 12:21:12,189 DEBUG   SenderThread:748 [sender.py:send():232] send: run
+2022-06-17 12:21:12,415 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: check_version
+2022-06-17 12:21:12,415 INFO    SenderThread:748 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files
+2022-06-17 12:21:12,415 INFO    SenderThread:748 [sender.py:_start_run_threads():814] run started: 2xu6eyjw with start time 1655461271
+2022-06-17 12:21:12,415 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:21:12,416 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:21:12,416 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: check_version
+2022-06-17 12:21:12,591 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: run_start
+2022-06-17 12:21:12,593 DEBUG   HandlerThread:748 [meta.py:__init__():35] meta init
+2022-06-17 12:21:12,593 DEBUG   HandlerThread:748 [meta.py:__init__():49] meta init done
+2022-06-17 12:21:12,593 DEBUG   HandlerThread:748 [meta.py:probe():209] probe
+2022-06-17 12:21:12,598 DEBUG   HandlerThread:748 [git.py:repo():29] git repository is invalid
+2022-06-17 12:21:12,599 DEBUG   HandlerThread:748 [meta.py:_save_pip():53] save pip
+2022-06-17 12:21:12,599 DEBUG   HandlerThread:748 [meta.py:_save_pip():67] save pip done
+2022-06-17 12:21:12,599 DEBUG   HandlerThread:748 [meta.py:_save_conda():74] save conda
+2022-06-17 12:21:13,205 DEBUG   HandlerThread:748 [meta.py:_save_conda():84] save conda done
+2022-06-17 12:21:13,205 DEBUG   HandlerThread:748 [meta.py:probe():247] probe done
+2022-06-17 12:21:13,208 DEBUG   SenderThread:748 [sender.py:send():232] send: files
+2022-06-17 12:21:13,208 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-06-17 12:21:13,211 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:21:13,212 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:21:13,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-metadata.json
+2022-06-17 12:21:13,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:21:13,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/conda-environment.yaml
+2022-06-17 12:21:13,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/requirements.txt
+2022-06-17 12:21:13,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:13,418 DEBUG   SenderThread:748 [sender.py:send():232] send: telemetry
+2022-06-17 12:21:13,418 DEBUG   SenderThread:748 [sender.py:send():232] send: config
+2022-06-17 12:21:13,928 INFO    Thread-11 :748 [upload_job.py:push():132] Uploaded file /tmp/tmphjb1_b44wandb/2v0ujfmg-wandb-metadata.json
+2022-06-17 12:21:15,416 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:17,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:19,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:21,417 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:23,418 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:25,418 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:27,419 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:28,419 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:21:28,419 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:21:29,419 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:31,420 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:33,420 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:34,054 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:21:34,055 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:21:34,055 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:21:34,055 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:21:34,421 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:21:35,421 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:37,421 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:39,422 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:40,808 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:21:41,422 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:43,423 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/config.yaml
+2022-06-17 12:21:43,423 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:43,711 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:21:43,712 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:21:45,423 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:47,423 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:49,424 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:51,424 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:53,425 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:55,425 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:57,426 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:21:58,903 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:21:58,903 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:21:59,426 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:01,427 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:03,427 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:05,428 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:07,428 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:09,429 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:11,006 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:22:11,429 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:13,430 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:14,094 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:22:14,094 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:22:15,430 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:17,430 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:19,431 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:21,432 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:23,432 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:25,433 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:27,433 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:27,441 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:22:27,442 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:22:27,442 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:22:27,442 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:22:28,433 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:22:29,299 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:22:29,299 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:22:29,433 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:31,434 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:33,434 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:35,435 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:37,435 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:39,436 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:41,214 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:22:41,436 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:43,437 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:44,494 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:22:44,494 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:22:45,437 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:47,437 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:49,438 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:51,438 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:53,439 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:55,439 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:57,440 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:59,440 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:22:59,684 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:22:59,684 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:23:01,441 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:03,441 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:05,442 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:07,442 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:09,443 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:11,418 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:23:11,443 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:13,444 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:14,881 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:23:14,881 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:23:15,444 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:17,445 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:19,445 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:21,446 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:21,962 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:23:21,963 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:23:21,971 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:23:21,971 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:23:22,446 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:23:23,446 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:25,447 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:27,447 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:29,448 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:30,139 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:23:30,139 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:23:31,448 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:33,449 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:35,449 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:37,450 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:39,450 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:41,451 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:41,617 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:23:43,451 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:45,360 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:23:45,360 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:23:45,452 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:47,452 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:49,453 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:51,453 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:53,453 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:55,454 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:57,454 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:23:59,455 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:00,555 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:24:00,555 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:24:01,455 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:03,456 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:05,456 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:07,457 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:09,457 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:11,458 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:11,808 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:24:13,458 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:15,459 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:15,758 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:24:15,759 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:24:16,865 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:24:16,866 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:24:16,866 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:24:16,866 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:24:17,459 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:24:17,459 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:19,460 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:21,460 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:23,460 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:25,461 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:27,462 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:29,462 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:30,962 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:24:30,962 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:24:31,462 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:33,463 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:35,463 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:37,464 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:39,464 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:41,465 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:41,999 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:24:43,465 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:45,466 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:46,181 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:24:46,181 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:24:47,466 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:49,467 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:51,467 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:53,468 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:55,468 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:57,469 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:24:59,469 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:01,370 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:25:01,370 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:25:01,470 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:03,470 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:05,470 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:07,471 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:09,471 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:11,449 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:25:11,450 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:25:11,451 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:25:11,451 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:25:11,472 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:25:11,472 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:12,198 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:25:13,472 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:14,472 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:16,473 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:16,566 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:25:16,566 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:25:18,474 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:20,474 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:22,474 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:24,475 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:26,475 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:28,476 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:30,476 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:31,772 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:25:31,772 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:25:32,477 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:34,477 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:36,478 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:38,478 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:40,479 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:42,400 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:25:42,479 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:44,480 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:46,480 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:46,977 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:25:46,977 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:25:48,481 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:49,481 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:50,481 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:52,481 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:54,482 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:56,482 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:25:58,483 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:00,483 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:02,182 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:26:02,182 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:26:02,484 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:04,484 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:06,485 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:07,661 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:26:07,661 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:26:07,661 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:26:07,662 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:26:08,485 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:26:08,486 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:10,486 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:12,486 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:12,612 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:26:14,487 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:16,487 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:17,373 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:26:17,373 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:26:18,488 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:20,488 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:22,489 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:24,489 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:26,490 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:28,490 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:30,490 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:32,491 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:32,563 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:26:32,563 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:26:34,492 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:36,492 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:38,493 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:40,493 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:42,494 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:42,811 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:26:44,494 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:46,494 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:47,758 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:26:47,759 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:26:48,495 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:50,496 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:52,496 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:54,497 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:56,497 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:26:58,497 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:00,498 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:01,617 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:27:01,617 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:27:01,618 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:27:01,618 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:27:02,498 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:27:02,499 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:02,957 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:27:02,958 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:27:04,499 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:06,499 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:08,500 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:10,500 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:12,501 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:13,027 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:27:14,501 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:16,502 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:18,158 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:27:18,158 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:27:18,502 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:20,503 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:22,503 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:24,504 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:26,504 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:28,505 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:30,505 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:32,506 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:33,350 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:27:33,350 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:27:34,506 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:36,507 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:38,507 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:40,508 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:42,508 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:43,222 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:27:44,508 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:46,509 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:48,509 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:48,539 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:27:48,539 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:27:50,510 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:52,510 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:54,511 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:55,058 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:27:55,059 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:27:55,059 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:27:55,060 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:27:55,511 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:27:56,511 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:27:58,512 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:00,512 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:02,513 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:03,733 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:28:03,733 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:28:04,513 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:06,514 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:08,514 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:10,519 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:12,520 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:13,441 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:28:14,520 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:16,521 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:18,521 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:18,931 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:28:18,931 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:28:20,522 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:22,522 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:24,523 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:26,523 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:28,524 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:30,524 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:32,525 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:34,122 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:28:34,122 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:28:34,525 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:36,526 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:38,526 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:40,527 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:42,527 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:43,647 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:28:44,528 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:46,528 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:48,529 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:49,316 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:28:49,316 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:28:50,529 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:50,862 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:28:50,863 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:28:50,863 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:28:50,863 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:28:51,530 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:28:52,530 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:54,530 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:56,531 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:28:58,531 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:00,532 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:02,532 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:04,517 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:29:04,518 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:29:04,533 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:06,533 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:08,534 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:10,534 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:12,535 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:13,868 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:29:14,535 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:16,536 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:18,536 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:19,707 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:29:19,707 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:29:20,537 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:22,537 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:24,538 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:26,538 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:28,539 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:30,539 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:32,540 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:34,540 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:34,896 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:29:34,896 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:29:36,541 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:38,541 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:40,542 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:42,542 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:44,070 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:29:44,543 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:46,543 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:47,173 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:29:47,173 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:29:47,173 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:29:47,174 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:29:47,543 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:29:48,543 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:50,165 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:29:50,165 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:29:50,544 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:52,544 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:54,545 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:56,545 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:29:58,546 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:00,546 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:02,546 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:04,547 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:05,359 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:30:05,359 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:30:06,547 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:08,548 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:10,548 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:12,549 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:14,269 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:30:14,549 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:16,550 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:18,550 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:20,551 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:20,555 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:30:20,555 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:30:22,551 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:24,552 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:26,552 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:28,552 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:30,553 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:32,553 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:34,554 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:36,060 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:30:36,060 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:30:36,554 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:38,555 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:40,555 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:41,055 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:30:41,055 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:30:41,055 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:30:41,056 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:30:41,556 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:30:42,556 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:44,484 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:30:44,556 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:46,557 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:48,557 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:50,558 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:51,255 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:30:51,255 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:30:52,558 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:54,558 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:56,559 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:30:58,559 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:00,560 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:02,560 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:04,561 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:06,455 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:31:06,455 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:31:06,561 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:08,562 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:10,562 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:12,563 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:14,564 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:14,685 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:31:16,564 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:18,565 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:20,565 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:21,645 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:31:21,645 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:31:22,566 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:24,566 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:26,567 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:28,567 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:30,568 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:32,568 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:34,569 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:35,616 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:31:35,616 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:31:35,616 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:31:35,617 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:31:36,569 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:31:36,569 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:36,844 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:31:36,844 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:31:38,569 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:40,570 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:42,570 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:44,571 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:44,881 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:31:46,571 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:48,572 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:50,572 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:52,038 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:31:52,038 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:31:52,573 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:54,573 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:56,574 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:31:58,574 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:00,575 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:02,575 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:04,576 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:06,576 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:07,231 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:32:07,231 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:32:08,577 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:10,577 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:12,578 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:14,578 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:15,076 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:32:16,579 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:18,579 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:20,580 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:22,436 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:32:22,436 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:32:22,580 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:24,581 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:26,581 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:28,581 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:28,960 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:32:28,961 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:32:28,961 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:32:28,961 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:32:29,582 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:32:30,582 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:32,582 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:34,583 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:36,583 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:37,634 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:32:37,634 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:32:38,584 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:40,584 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:42,584 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:44,585 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:45,271 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:32:46,585 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:48,586 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:50,586 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:52,587 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:53,374 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:32:53,374 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:32:54,587 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:56,588 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:32:58,588 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:00,589 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:02,589 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:04,589 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:06,590 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:08,562 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:33:08,562 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:33:08,590 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:10,591 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:12,591 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:14,592 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:15,466 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:33:16,592 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:18,593 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:20,593 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:21,787 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:33:21,787 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:33:21,787 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:33:21,788 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:33:22,594 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:33:22,594 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:23,801 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:33:23,801 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:33:24,594 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:26,595 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:28,595 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:30,596 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:32,596 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:34,597 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:36,597 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:38,597 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:39,001 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:33:39,001 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:33:40,598 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:42,598 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:44,599 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:45,671 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:33:46,599 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:48,600 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:50,600 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:52,600 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:54,198 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:33:54,199 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:33:54,601 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:56,602 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:33:58,602 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:00,604 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:02,604 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:04,605 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:06,605 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:08,606 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:09,393 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:34:09,393 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:34:10,606 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:12,607 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:12,942 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:34:12,942 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:34:12,942 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:34:12,943 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:34:13,607 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:34:14,607 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:15,870 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:34:16,607 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:18,608 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:20,609 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:22,609 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:24,597 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:34:24,597 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:34:24,610 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:26,610 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:28,611 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:30,611 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:32,612 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:34,612 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:36,613 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:38,613 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:39,792 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:34:39,792 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:34:40,614 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:42,614 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:44,614 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:46,070 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:34:46,615 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:48,615 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:50,616 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:52,616 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:54,617 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:55,005 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:34:55,005 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:34:56,617 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:34:58,618 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:00,618 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:02,619 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:04,619 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:05,271 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:35:05,272 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:35:05,272 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:35:05,272 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:35:05,620 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:35:06,620 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:08,620 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:10,198 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:35:10,198 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:35:10,621 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:12,621 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:14,622 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:16,275 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:35:16,623 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:18,623 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:20,624 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:22,624 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:24,625 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:25,746 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:35:25,746 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:35:26,625 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:28,626 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:30,626 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:32,627 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:34,627 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:36,628 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:38,628 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:40,629 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:40,944 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:35:40,945 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:35:42,629 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:44,630 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:46,478 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:35:46,630 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:48,631 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:50,631 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:52,632 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:54,632 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:56,172 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:35:56,172 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:35:56,633 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:58,633 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:35:58,983 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:35:58,984 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:35:58,984 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:35:58,984 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:35:59,634 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:36:00,634 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:02,634 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:04,635 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:06,635 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:08,636 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:10,636 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:11,375 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:36:11,375 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:36:12,636 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:14,637 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:16,637 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:16,671 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:36:18,638 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:20,638 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:22,639 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:24,639 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:26,608 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:36:26,608 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:36:26,639 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:28,640 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:30,640 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:32,641 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:34,641 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:36,642 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:38,642 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:40,643 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:42,137 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:36:42,137 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:36:42,643 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:44,644 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:46,644 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:46,876 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:36:48,645 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:50,645 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:51,748 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:36:51,749 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:36:51,749 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:36:51,749 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:36:52,646 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:36:52,646 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:54,646 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:56,647 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:36:57,326 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:36:57,326 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:36:58,647 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:00,647 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:02,648 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:04,648 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:06,649 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:08,649 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:10,650 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:12,520 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:37:12,520 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:37:12,650 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:14,651 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:16,651 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:17,089 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:37:18,652 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:20,652 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:22,653 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:24,653 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:26,654 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:27,713 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:37:27,713 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:37:28,654 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:30,655 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:32,655 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:34,655 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:36,656 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:38,656 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:40,657 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:42,657 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:42,908 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:37:42,908 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:37:44,658 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:44,688 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:37:44,689 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:37:44,689 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:37:44,689 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:37:45,658 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:37:46,658 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:47,298 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:37:48,659 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:50,659 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:52,660 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:54,661 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:56,661 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:37:58,102 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:37:58,102 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:37:58,661 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:00,662 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:02,662 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:04,663 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:06,664 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:08,664 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:10,664 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:12,665 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:13,328 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:38:13,328 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:38:14,665 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:16,666 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:17,496 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:38:18,666 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:20,667 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:22,667 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:24,668 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:26,668 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:28,529 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:38:28,530 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:38:28,669 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:30,669 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:32,670 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:34,670 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:36,671 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:38,672 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:39,578 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:38:39,579 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:38:39,579 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:38:39,579 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:38:39,672 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:38:40,672 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:42,673 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:43,728 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:38:43,728 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:38:44,673 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:46,673 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:47,700 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:38:48,674 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:50,674 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:52,675 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:54,675 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:56,676 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:58,676 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:38:58,925 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:38:58,925 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:39:00,677 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:02,677 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:04,678 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:06,678 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:08,679 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:10,679 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:12,680 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:14,117 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:39:14,117 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:39:14,680 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:16,681 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:17,905 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:39:18,681 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:20,682 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:22,682 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:24,683 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:26,683 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:28,684 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:29,326 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-17 12:39:29,326 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: stop_status
+2022-06-17 12:39:30,684 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:32,684 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:33,613 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: partial_history
+2022-06-17 12:39:33,613 DEBUG   SenderThread:748 [sender.py:send():232] send: history
+2022-06-17 12:39:33,614 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:39:33,614 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:39:33,614 DEBUG   SenderThread:748 [sender.py:send():232] send: telemetry
+2022-06-17 12:39:33,685 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:39:34,685 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:36,166 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,166 DEBUG   SenderThread:748 [sender.py:send():232] send: exit
+2022-06-17 12:39:36,166 INFO    SenderThread:748 [sender.py:send_exit():368] handling exit code: 0
+2022-06-17 12:39:36,166 INFO    SenderThread:748 [sender.py:send_exit():370] handling runtime: 1103
+2022-06-17 12:39:36,166 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:39:36,166 INFO    SenderThread:748 [sender.py:send_exit():376] send defer
+2022-06-17 12:39:36,166 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:36,167 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,167 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 0
+2022-06-17 12:39:36,167 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,167 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 0
+2022-06-17 12:39:36,167 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 1
+2022-06-17 12:39:36,167 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,167 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 1
+2022-06-17 12:39:36,244 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,245 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 1
+2022-06-17 12:39:36,245 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 2
+2022-06-17 12:39:36,245 DEBUG   SenderThread:748 [sender.py:send():232] send: stats
+2022-06-17 12:39:36,245 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,245 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 2
+2022-06-17 12:39:36,245 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,245 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 2
+2022-06-17 12:39:36,245 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 3
+2022-06-17 12:39:36,246 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,246 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 3
+2022-06-17 12:39:36,246 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,246 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 3
+2022-06-17 12:39:36,246 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 4
+2022-06-17 12:39:36,246 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,246 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 4
+2022-06-17 12:39:36,246 DEBUG   SenderThread:748 [sender.py:send():232] send: summary
+2022-06-17 12:39:36,246 INFO    SenderThread:748 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-17 12:39:36,246 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,246 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 4
+2022-06-17 12:39:36,247 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 5
+2022-06-17 12:39:36,247 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,247 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 5
+2022-06-17 12:39:36,247 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,247 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 5
+2022-06-17 12:39:36,267 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,478 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 6
+2022-06-17 12:39:36,478 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:36,479 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,479 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 6
+2022-06-17 12:39:36,479 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,479 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 6
+2022-06-17 12:39:36,479 INFO    SenderThread:748 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-06-17 12:39:36,579 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,686 INFO    Thread-7  :748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/config.yaml
+2022-06-17 12:39:36,686 INFO    SenderThread:748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:39:36,686 INFO    SenderThread:748 [dir_watcher.py:_on_file_modified():257] file/dir modified: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:36,686 INFO    SenderThread:748 [dir_watcher.py:finish():342] scan: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files
+2022-06-17 12:39:36,686 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-metadata.json wandb-metadata.json
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/config.yaml config.yaml
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/conda-environment.yaml conda-environment.yaml
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json wandb-summary.json
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/requirements.txt requirements.txt
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log output.log
+2022-06-17 12:39:36,687 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 7
+2022-06-17 12:39:36,687 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:36,688 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:36,688 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 7
+2022-06-17 12:39:36,688 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:36,688 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 7
+2022-06-17 12:39:36,690 INFO    SenderThread:748 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-17 12:39:36,788 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,789 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:36,889 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,890 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:36,991 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:36,991 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,092 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:37,092 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,193 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:37,193 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,294 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:37,294 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,313 INFO    Thread-14 :748 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/wandb-summary.json
+2022-06-17 12:39:37,332 INFO    Thread-15 :748 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/requirements.txt
+2022-06-17 12:39:37,333 INFO    Thread-12 :748 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/config.yaml
+2022-06-17 12:39:37,354 INFO    Thread-16 :748 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/output.log
+2022-06-17 12:39:37,365 INFO    Thread-13 :748 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/files/conda-environment.yaml
+2022-06-17 12:39:37,395 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:37,395 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,496 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:37,497 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:37,566 INFO    Thread-6  :748 [sender.py:transition_state():389] send defer: 8
+2022-06-17 12:39:37,566 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:37,566 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 8
+2022-06-17 12:39:37,566 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:37,566 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 8
+2022-06-17 12:39:37,597 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:38,115 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 9
+2022-06-17 12:39:38,115 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:38,116 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:38,116 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 9
+2022-06-17 12:39:38,116 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:38,116 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 9
+2022-06-17 12:39:38,116 INFO    SenderThread:748 [sender.py:transition_state():389] send defer: 10
+2022-06-17 12:39:38,116 DEBUG   SenderThread:748 [sender.py:send():232] send: final
+2022-06-17 12:39:38,116 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: defer
+2022-06-17 12:39:38,117 DEBUG   SenderThread:748 [sender.py:send():232] send: footer
+2022-06-17 12:39:38,117 INFO    HandlerThread:748 [handler.py:handle_request_defer():164] handle defer: 10
+2022-06-17 12:39:38,117 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: defer
+2022-06-17 12:39:38,117 INFO    SenderThread:748 [sender.py:send_request_defer():385] handle sender defer: 10
+2022-06-17 12:39:38,217 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: poll_exit
+2022-06-17 12:39:38,217 DEBUG   SenderThread:748 [sender.py:send_request():246] send_request: poll_exit
+2022-06-17 12:39:38,217 INFO    SenderThread:748 [file_pusher.py:join():150] waiting for file pusher
+2022-06-17 12:39:38,696 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: sampled_history
+2022-06-17 12:39:38,697 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: get_summary
+2022-06-17 12:39:38,697 DEBUG   HandlerThread:748 [handler.py:handle_request():141] handle_request: shutdown
+2022-06-17 12:39:38,697 INFO    HandlerThread:748 [handler.py:finish():806] shutting down handler
+2022-06-17 12:39:39,117 INFO    WriterThread:748 [datastore.py:close():279] close: /home/dim/depth_2022/wandb/run-20220617_122111-2xu6eyjw/run-2xu6eyjw.wandb
+2022-06-17 12:39:39,595 INFO    SenderThread:748 [sender.py:finish():1110] shutting down sender
+2022-06-17 12:39:39,595 INFO    SenderThread:748 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-17 12:39:39,595 INFO    SenderThread:748 [file_pusher.py:join():150] waiting for file pusher
+2022-06-17 12:39:39,596 INFO    MainThread:748 [internal.py:handle_exit():80] Internal process exited

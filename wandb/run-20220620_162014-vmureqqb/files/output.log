@@ -1,0 +1,265 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  4%|███████▊                                                                                                                                                                                            | 3/75 [00:01<00:35,  2.01it/s]
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Training block...
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+  9%|██████████████████▎                                                                                                                                                                                 | 7/75 [00:03<00:31,  2.14it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 16%|███████████████████████████████▏                                                                                                                                                                   | 12/75 [00:05<00:28,  2.19it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 21%|█████████████████████████████████████████▌                                                                                                                                                         | 16/75 [00:07<00:26,  2.19it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 28%|██████████████████████████████████████████████████████▌                                                                                                                                            | 21/75 [00:09<00:24,  2.18it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 33%|█████████████████████████████████████████████████████████████████                                                                                                                                  | 25/75 [00:11<00:23,  2.17it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 39%|███████████████████████████████████████████████████████████████████████████▍                                                                                                                       | 29/75 [00:13<00:21,  2.18it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 45%|████████████████████████████████████████████████████████████████████████████████████████▍                                                                                                          | 34/75 [00:15<00:18,  2.17it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 51%|██████████████████████████████████████████████████████████████████████████████████████████████████▊                                                                                                | 38/75 [00:17<00:16,  2.18it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 56%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                                     | 42/75 [00:19<00:15,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 63%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                        | 47/75 [00:21<00:13,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 68%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                              | 51/75 [00:23<00:11,  2.14it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 73%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                                    | 55/75 [00:25<00:09,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 79%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                         | 59/75 [00:27<00:07,  2.14it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 85%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                            | 64/75 [00:29<00:05,  2.12it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 91%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                  | 68/75 [00:31<00:03,  2.12it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 96%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏       | 72/75 [00:33<00:01,  2.16it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:34<00:00,  2.14it/s]
+  3%|█████▏                                                                                                                                                                                              | 2/75 [00:00<00:33,  2.16it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+  8%|███████████████▋                                                                                                                                                                                    | 6/75 [00:02<00:31,  2.21it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 13%|██████████████████████████                                                                                                                                                                         | 10/75 [00:04<00:29,  2.23it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 20%|███████████████████████████████████████                                                                                                                                                            | 15/75 [00:06<00:26,  2.23it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 25%|█████████████████████████████████████████████████▍                                                                                                                                                 | 19/75 [00:08<00:25,  2.22it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 32%|██████████████████████████████████████████████████████████████▍                                                                                                                                    | 24/75 [00:10<00:23,  2.16it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 37%|████████████████████████████████████████████████████████████████████████▊                                                                                                                          | 28/75 [00:12<00:21,  2.17it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 43%|███████████████████████████████████████████████████████████████████████████████████▏                                                                                                               | 32/75 [00:14<00:19,  2.20it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 49%|████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                                                  | 37/75 [00:16<00:17,  2.22it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 55%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                                        | 41/75 [00:18<00:15,  2.21it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 61%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                           | 46/75 [00:20<00:13,  2.18it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 67%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                                                 | 50/75 [00:22<00:11,  2.17it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 72%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                      | 54/75 [00:24<00:09,  2.12it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 79%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                         | 59/75 [00:27<00:07,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 84%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                               | 63/75 [00:28<00:05,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 89%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                    | 67/75 [00:30<00:03,  2.11it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 95%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌          | 71/75 [00:32<00:01,  2.06it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:34<00:00,  2.17it/s]
+  0%|                                                                                                                                                                                                            | 0/75 [00:00<?, ?it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+  7%|█████████████                                                                                                                                                                                       | 5/75 [00:02<00:32,  2.13it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 12%|███████████████████████▌                                                                                                                                                                            | 9/75 [00:04<00:30,  2.15it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 17%|█████████████████████████████████▊                                                                                                                                                                 | 13/75 [00:06<00:29,  2.11it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 24%|██████████████████████████████████████████████▊                                                                                                                                                    | 18/75 [00:08<00:26,  2.15it/s]
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+
+ 32%|██████████████████████████████████████████████████████████████▍                                                                                                                                    | 24/75 [00:11<00:25,  2.04it/s]
+Traceback (most recent call last):
+  File "main.py", line 432, in <module>
+    training_block()
+  File "main.py", line 395, in training_block
+    optimizer.step()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/optim/lr_scheduler.py", line 65, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/optim/optimizer.py", line 88, in wrapper
+    return func(*args, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/autograd/grad_mode.py", line 28, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/optim/adam.py", line 144, in step
+    eps=group['eps'])
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/optim/_functional.py", line 86, in adam
+    exp_avg.mul_(beta1).add_(grad, alpha=1 - beta1)
+KeyboardInterrupt
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])
+sparse_shape_before torch.Size([8, 1, 352, 608])

@@ -1,0 +1,184 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  8%|██████▏                                                                  | 34/400 [00:01<00:16, 21.79it/s]
+STEP 3. Loading model and metrics...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+)
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+
+
+
+
+
+
+
+
+ 96%|████████████████████████████████████████████████████████████████████▊   | 382/400 [00:17<00:00, 21.52it/s]
+400.0
+Results:
+d1  =  0.8627962327003479
+d2  =  0.9612934863567353
+d3  =  0.9886573822796345
+abs_rel  =  0.10718738820403814
+sq_rel  =  0.7758614541776478
+rmse  =  5.2193673402071
+rmse_log  =  0.17142250591889024
+log10  =  0.04784376933705062
+silog  =  0.16539725314825773
+100%|████████████████████████████████████████████████████████████████████████| 400/400 [00:18<00:00, 21.45it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 97%|████████████████████████████████████████████████████████████████████████  | 73/75 [00:33<00:00,  2.27it/s]
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+100%|██████████████████████████████████████████████████████████████████████████| 75/75 [00:33<00:00,  2.21it/s]
+
+
+
+
+
+
+
+
+ 90%|█████████████████████████████████████████████████████████████████▏      | 362/400 [00:17<00:01, 20.62it/s]
+400.0
+Results:
+d1  =  0.7640897263586521
+d2  =  0.9291466683149338
+d3  =  0.9795787972211838
+abs_rel  =  0.1916888089850545
+sq_rel  =  1.826714388281107
+rmse  =  6.233281328082085
+rmse_log  =  0.22579948589205742
+log10  =  0.06953091974370182
+100%|████████████████████████████████████████████████████████████████████████| 400/400 [00:19<00:00, 20.87it/s]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 99%|█████████████████████████████████████████████████████████████████████████ | 74/75 [00:35<00:00,  2.05it/s]
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+100%|██████████████████████████████████████████████████████████████████████████| 75/75 [00:36<00:00,  2.06it/s]
+
+
+
+
+
+
+
+
+100%|████████████████████████████████████████████████████████████████████████| 400/400 [00:19<00:00, 20.09it/s]
+  0%|                                                                                   | 0/75 [00:00<?, ?it/s]
+400.0
+Results:
+d1  =  0.8170895113050938
+d2  =  0.9498228877782822
+d3  =  0.9869028055667877
+abs_rel  =  0.1340894553810358
+sq_rel  =  0.9868795520067215
+rmse  =  6.196396774053573
+rmse_log  =  0.1991863963752985
+log10  =  0.0627119102422148
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

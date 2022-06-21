@@ -1,0 +1,35 @@
+2022-06-20 17:34:51,820 INFO    MainThread:21083 [internal.py:wandb_internal():93] W&B internal server running at pid: 21083, started at: 2022-06-20 17:34:51.820670
+2022-06-20 17:34:51,822 INFO    WriterThread:21083 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/run-2mcj4sio.wandb
+2022-06-20 17:34:51,823 DEBUG   SenderThread:21083 [sender.py:send():232] send: header
+2022-06-20 17:34:51,823 DEBUG   SenderThread:21083 [sender.py:send():232] send: run
+2022-06-20 17:34:52,066 DEBUG   HandlerThread:21083 [handler.py:handle_request():141] handle_request: check_version
+2022-06-20 17:34:52,066 INFO    SenderThread:21083 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files
+2022-06-20 17:34:52,067 INFO    SenderThread:21083 [sender.py:_start_run_threads():814] run started: 2mcj4sio with start time 1655739291
+2022-06-20 17:34:52,067 DEBUG   SenderThread:21083 [sender.py:send():232] send: summary
+2022-06-20 17:34:52,067 INFO    SenderThread:21083 [sender.py:_save_file():948] saving file wandb-summary.json with policy end
+2022-06-20 17:34:52,067 DEBUG   SenderThread:21083 [sender.py:send_request():246] send_request: check_version
+2022-06-20 17:34:52,132 DEBUG   HandlerThread:21083 [handler.py:handle_request():141] handle_request: run_start
+2022-06-20 17:34:52,134 DEBUG   HandlerThread:21083 [meta.py:__init__():35] meta init
+2022-06-20 17:34:52,134 DEBUG   HandlerThread:21083 [meta.py:__init__():49] meta init done
+2022-06-20 17:34:52,134 DEBUG   HandlerThread:21083 [meta.py:probe():209] probe
+2022-06-20 17:34:52,139 DEBUG   HandlerThread:21083 [git.py:repo():29] git repository is invalid
+2022-06-20 17:34:52,139 DEBUG   HandlerThread:21083 [meta.py:_save_pip():53] save pip
+2022-06-20 17:34:52,140 DEBUG   HandlerThread:21083 [meta.py:_save_pip():67] save pip done
+2022-06-20 17:34:52,140 DEBUG   HandlerThread:21083 [meta.py:_save_conda():74] save conda
+2022-06-20 17:34:52,661 DEBUG   HandlerThread:21083 [meta.py:_save_conda():84] save conda done
+2022-06-20 17:34:52,662 DEBUG   HandlerThread:21083 [meta.py:probe():247] probe done
+2022-06-20 17:34:52,664 DEBUG   SenderThread:21083 [sender.py:send():232] send: files
+2022-06-20 17:34:52,664 INFO    SenderThread:21083 [sender.py:_save_file():948] saving file wandb-metadata.json with policy now
+2022-06-20 17:34:52,667 DEBUG   HandlerThread:21083 [handler.py:handle_request():141] handle_request: stop_status
+2022-06-20 17:34:52,667 DEBUG   SenderThread:21083 [sender.py:send_request():246] send_request: stop_status
+2022-06-20 17:34:52,908 WARNING MainThread:21083 [internal.py:wandb_internal():153] Internal process interrupt: 1
+2022-06-20 17:34:52,985 DEBUG   SenderThread:21083 [sender.py:send():232] send: telemetry
+2022-06-20 17:34:52,986 DEBUG   SenderThread:21083 [sender.py:send():232] send: config
+2022-06-20 17:34:53,068 INFO    Thread-7  :21083 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files/conda-environment.yaml
+2022-06-20 17:34:53,068 INFO    Thread-7  :21083 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files/wandb-summary.json
+2022-06-20 17:34:53,068 INFO    Thread-7  :21083 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files/output.log
+2022-06-20 17:34:53,068 INFO    Thread-7  :21083 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files/requirements.txt
+2022-06-20 17:34:53,068 INFO    Thread-7  :21083 [dir_watcher.py:_on_file_created():244] file/dir created: /home/dim/depth_2022/wandb/run-20220620_173451-2mcj4sio/files/wandb-metadata.json
+2022-06-20 17:34:53,083 WARNING MainThread:21083 [internal.py:wandb_internal():153] Internal process interrupt: 2
+2022-06-20 17:34:53,083 ERROR   MainThread:21083 [internal.py:wandb_internal():156] Internal process interrupted.
+2022-06-20 17:34:53,380 INFO    MainThread:21083 [internal.py:handle_exit():80] Internal process exited

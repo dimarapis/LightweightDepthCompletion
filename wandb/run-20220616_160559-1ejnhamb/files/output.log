@@ -1,0 +1,75 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  eval
+dataset  :  nn
+workers  :  4
+epochs  :  20
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-05
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  datalist_val_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 1000 val files
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+{'image': tensor([[[1.0000, 1.0000, 1.0000,  ..., 0.0745, 0.0706, 0.0667],
+         [1.0000, 1.0000, 1.0000,  ..., 0.0667, 0.0627, 0.0941],
+         [1.0000, 1.0000, 1.0000,  ..., 0.0667, 0.0627, 0.1020],
+         ...,
+         [0.6549, 0.7294, 0.7098,  ..., 0.2392, 0.2353, 0.2314],
+         [0.6667, 0.7216, 0.7020,  ..., 0.2314, 0.2353, 0.2314],
+         [0.7059, 0.6902, 0.6902,  ..., 0.2392, 0.2392, 0.2392]],
+        [[1.0000, 1.0000, 1.0000,  ..., 0.1020, 0.0745, 0.0745],
+         [1.0000, 1.0000, 1.0000,  ..., 0.0745, 0.0902, 0.1098],
+         [1.0000, 1.0000, 1.0000,  ..., 0.1020, 0.1373, 0.1490],
+         ...,
+         [0.6627, 0.6863, 0.7137,  ..., 0.2431, 0.2353, 0.2275],
+         [0.6980, 0.7098, 0.7294,  ..., 0.2353, 0.2353, 0.2353],
+         [0.7020, 0.7098, 0.7059,  ..., 0.2431, 0.2392, 0.2510]],
+        [[1.0000, 1.0000, 1.0000,  ..., 0.0902, 0.0941, 0.0863],
+         [1.0000, 1.0000, 1.0000,  ..., 0.1216, 0.0667, 0.0588],
+         [1.0000, 1.0000, 1.0000,  ..., 0.0392, 0.1176, 0.1255],
+         ...,
+         [0.6941, 0.7137, 0.8000,  ..., 0.2471, 0.2588, 0.2588],
+         [0.7529, 0.7529, 0.7216,  ..., 0.2431, 0.2510, 0.2510],
+         [0.7451, 0.7451, 0.7373,  ..., 0.2314, 0.2510, 0.2431]]]), 'depth': tensor([[[0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         ...,
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.],
+         [0., 0., 0.,  ..., 0., 0., 0.]]])}
+(0.0, 79.70703125, 2.763728141784668, 0.0)
+here2
+['data/kitti_dataset/val_selection_cropped/image/2011_09_29_drive_0026_sync_image_0000000041_image_03.png']
+dict_keys(['image', 'depth'])
+torch.Size([1, 352, 608])
+1.0
+Results:
+d1  =  0.0
+d2  =  0.0
+d3  =  0.0
+abs_rel  =  0.0
+sq_rel  =  0.0
+rmse  =  0.0
+rmse_log  =  0.0
+log10  =  0.0

@@ -1,0 +1,112 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+  0%|▍                                                                                                                                                                                                  | 1/400 [00:00<01:12,  5.52it/s]
+STEP 3. Loading model and metrics...
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Testing block...
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 1e-06
+    lr: 1e-06
+    weight_decay: 0
+)
+torch_minmax sparse (0.0, 0.012386474758386612, 0.00014118764374870807, 0.0)
+sparse_shape_afta (0.0, 82.546875, 3.541639566421509, 0.0)
+torch_minmax sparse (0.0, 0.01242675818502903, 0.00015836447710171342, 0.0)
+sparse_shape_afta (0.0, 82.484375, 4.141428470611572, 0.0)
+torch_minmax sparse (0.0, 0.010969849303364754, 0.0001353098195977509, 0.0)
+sparse_shape_afta (0.0, 75.96875, 4.086345672607422, 0.0)
+torch_minmax sparse (0.0, 0.012257690541446209, 0.00015053205424919724, 0.0)
+sparse_shape_afta (0.0, 78.72265625, 3.239856719970703, 0.0)
+torch_minmax sparse (0.0, 0.012233276851475239, 0.0001450762792956084, 0.0)
+sparse_shape_afta (0.0, 78.265625, 2.4452481269836426, 0.0)
+torch_minmax sparse (0.0, 0.01235046423971653, 0.00012572697596624494, 0.0)
+sparse_shape_afta (0.0, 81.921875, 2.9276435375213623, 0.0)
+torch_minmax sparse (0.0, 0.012211914174258709, 0.00015201182395685464, 0.0)
+sparse_shape_afta (0.0, 82.7265625, 4.736842632293701, 0.0)
+torch_minmax sparse (0.0, 0.01242980919778347, 0.00013386948558036238, 0.0)
+sparse_shape_afta (0.0, 82.12890625, 4.199670314788818, 0.0)
+torch_minmax sparse (0.0, 0.012356567196547985, 0.00014481227844953537, 0.0)
+sparse_shape_afta (0.0, 80.5703125, 4.416860580444336, 0.0)
+torch_minmax sparse (0.0, 0.012280273251235485, 0.00018969566735904664, 0.0)
+sparse_shape_afta (0.0, 80.83984375, 5.266642093658447, 0.0)
+torch_minmax sparse (0.0, 0.011858521029353142, 0.00012165501539129764, 0.0)
+sparse_shape_afta (0.0, 83.40234375, 3.931554079055786, 0.0)
+torch_minmax sparse (0.0, 0.012347412295639515, 0.00013592210598289967, 0.0)
+sparse_shape_afta (0.0, 78.796875, 3.0631802082061768, 0.0)
+torch_minmax sparse (0.0, 0.012089843861758709, 0.000142063494422473, 0.0)
+sparse_shape_afta (0.0, 81.52734375, 3.1345932483673096, 0.0)
+torch_minmax sparse (0.0, 0.012191162444651127, 0.00013301170838531107, 0.0)
+sparse_shape_afta (0.0, 80.5703125, 3.5304391384124756, 0.0)
+torch_minmax sparse (0.0, 0.011867065913975239, 0.00013966287951916456, 0.0)
+sparse_shape_afta (0.0, 84.859375, 4.689391136169434, 0.0)
+torch_minmax sparse (0.0, 0.012280883267521858, 0.00012847752077504992, 0.0)
+sparse_shape_afta (0.0, 82.6796875, 2.957580089569092, 0.0)
+torch_minmax sparse (0.0, 0.012129517272114754, 0.00015188261750154197, 0.0)
+sparse_shape_afta (0.0, 85.1796875, 4.486386775970459, 0.0)
+torch_minmax sparse (0.0, 0.01241272035986185, 0.0001439820771338418, 0.0)
+sparse_shape_afta (0.0, 82.55078125, 3.161186933517456, 0.0)
+torch_minmax sparse (0.0, 0.011432494968175888, 0.00010849492537090555, 0.0)
+sparse_shape_afta (0.0, 72.66015625, 1.497678279876709, 0.0)
+torch_minmax sparse (0.0, 0.012248535640537739, 0.00013258447870612144, 0.0)
+sparse_shape_afta (0.0, 79.16796875, 3.1640069484710693, 0.0)
+torch_minmax sparse (0.0, 0.010969238355755806, 0.00012589333346113563, 0.0)
+sparse_shape_afta (0.0, 71.2421875, 2.3518521785736084, 0.0)
+torch_minmax sparse (0.0, 0.012404175475239754, 0.0001419068139512092, 0.0)
+  6%|██████████▋                                                                                                                                                                                       | 22/400 [00:01<00:19, 19.05it/s]
+Traceback (most recent call last):
+  File "main.py", line 476, in <module>
+    evaluation_block()
+  File "main.py", line 191, in evaluation_block
+    for i, data in enumerate(tqdm(test_dl)):
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/tqdm/std.py", line 1180, in __iter__
+    for obj in iterable:
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 521, in __next__
+    data = self._next_data()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 561, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 49, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/home/dim/depth_2022/features/decnet_dataloaders.py", line 78, in __getitem__
+    rgb = np.array(Image.open(self.files[index]['rgb']))
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 698, in __array__
+    new["data"] = self.tobytes()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/Image.py", line 744, in tobytes
+    self.load()
+  File "/home/dim/anaconda3/envs/pytorchenv/lib/python3.7/site-packages/PIL/ImageFile.py", line 255, in load
+    n, err_code = decoder.decode(b)
+KeyboardInterrupt

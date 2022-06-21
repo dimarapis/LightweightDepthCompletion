@@ -1,0 +1,639 @@
+task  :  decnet-completion
+network_model  :  enet2021
+mode  :  train
+dataset  :  nn
+workers  :  4
+epochs  :  100
+criterion  :  l2
+batch_size  :  1
+learning_rate  :  1e-06
+weight_decay  :  1e-06
+print_freq  :  10
+resume  :
+data_folder  :  /datasets
+convolutional_layer_encoding  :  xyz
+dilation_rate  :  2
+val_h  :  352
+val_w  :  608
+min_depth_eval  :  0.1
+max_depth_eval  :  80.0
+kitti_crop  :  eigen_crop
+train_datalist  :  train_dim_kitti.list
+val_datalist  :  val_dim_kitti.list
+root_folder  :  data/kitti_dataset/val_selection_cropped/
+torch_mode  :  pytorch
+wandblogger  :  False
+project  :  depth
+entity  :  wandbdimar
+STEP 2. Loading datasets...
+Loaded 600 training files
+Loaded 400 val files
+STEP 3. Loading model and metrics...
+
+  5%|██████████▍                                                                                                                                                                                         | 4/75 [00:01<00:33,  2.14it/s]
+Loaded model enet2021 for decnet-completion
+STEP 4. Training or eval stage...
+STEP. Training block...
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 11%|████████████████████▉                                                                                                                                                                               | 8/75 [00:03<00:29,  2.25it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 17%|█████████████████████████████████▊                                                                                                                                                                 | 13/75 [00:05<00:27,  2.28it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 24%|██████████████████████████████████████████████▊                                                                                                                                                    | 18/75 [00:08<00:25,  2.20it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 29%|█████████████████████████████████████████████████████████▏                                                                                                                                         | 22/75 [00:10<00:24,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 35%|███████████████████████████████████████████████████████████████████▌                                                                                                                               | 26/75 [00:11<00:23,  2.08it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 40%|██████████████████████████████████████████████████████████████████████████████                                                                                                                     | 30/75 [00:13<00:20,  2.22it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 45%|████████████████████████████████████████████████████████████████████████████████████████▍                                                                                                          | 34/75 [00:15<00:18,  2.18it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 52%|█████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                                                             | 39/75 [00:17<00:16,  2.20it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 57%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                                                   | 43/75 [00:19<00:14,  2.21it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 64%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                                      | 48/75 [00:21<00:12,  2.16it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 69%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                           | 52/75 [00:23<00:10,  2.11it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 75%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                 | 56/75 [00:25<00:08,  2.19it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 81%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                    | 61/75 [00:27<00:06,  2.22it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 87%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                          | 65/75 [00:29<00:04,  2.29it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 93%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████             | 70/75 [00:31<00:02,  2.30it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 99%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍  | 74/75 [00:33<00:00,  2.25it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:34<00:00,  2.20it/s]
+  5%|██████████▍                                                                                                                                                                                         | 4/75 [00:01<00:31,  2.23it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 11%|████████████████████▉                                                                                                                                                                               | 8/75 [00:03<00:29,  2.23it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 17%|█████████████████████████████████▊                                                                                                                                                                 | 13/75 [00:05<00:28,  2.21it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 23%|████████████████████████████████████████████▏                                                                                                                                                      | 17/75 [00:07<00:26,  2.18it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 28%|██████████████████████████████████████████████████████▌                                                                                                                                            | 21/75 [00:09<00:25,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 35%|███████████████████████████████████████████████████████████████████▌                                                                                                                               | 26/75 [00:11<00:22,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 40%|██████████████████████████████████████████████████████████████████████████████                                                                                                                     | 30/75 [00:13<00:20,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 45%|████████████████████████████████████████████████████████████████████████████████████████▍                                                                                                          | 34/75 [00:15<00:18,  2.16it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 52%|█████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                                                             | 39/75 [00:17<00:16,  2.24it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 57%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                                                   | 43/75 [00:19<00:14,  2.19it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 63%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                        | 47/75 [00:21<00:12,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 69%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                                           | 52/75 [00:23<00:10,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 75%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                 | 56/75 [00:25<00:08,  2.13it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 80%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                       | 60/75 [00:27<00:07,  2.11it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 85%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                            | 64/75 [00:29<00:05,  2.10it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 92%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍               | 69/75 [00:31<00:02,  2.09it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 97%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊     | 73/75 [00:33<00:00,  2.10it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:34<00:00,  2.15it/s]
+  3%|█████▏                                                                                                                                                                                              | 2/75 [00:00<00:33,  2.16it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+  8%|███████████████▋                                                                                                                                                                                    | 6/75 [00:02<00:33,  2.08it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 15%|████████████████████████████▌                                                                                                                                                                      | 11/75 [00:05<00:29,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 20%|███████████████████████████████████████                                                                                                                                                            | 15/75 [00:07<00:28,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 25%|█████████████████████████████████████████████████▍                                                                                                                                                 | 19/75 [00:08<00:26,  2.12it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 31%|███████████████████████████████████████████████████████████▊                                                                                                                                       | 23/75 [00:10<00:24,  2.11it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 37%|████████████████████████████████████████████████████████████████████████▊                                                                                                                          | 28/75 [00:13<00:21,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 43%|███████████████████████████████████████████████████████████████████████████████████▏                                                                                                               | 32/75 [00:14<00:20,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 48%|█████████████████████████████████████████████████████████████████████████████████████████████▌                                                                                                     | 36/75 [00:16<00:18,  2.11it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 53%|████████████████████████████████████████████████████████████████████████████████████████████████████████                                                                                           | 40/75 [00:18<00:16,  2.09it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 60%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████                                                                              | 45/75 [00:21<00:14,  2.13it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 65%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍                                                                   | 49/75 [00:23<00:12,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 71%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                                                         | 53/75 [00:24<00:10,  2.08it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 76%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                              | 57/75 [00:26<00:08,  2.13it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 83%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▏                                 | 62/75 [00:29<00:06,  2.13it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 88%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌                       | 66/75 [00:31<00:04,  2.11it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 93%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████             | 70/75 [00:32<00:02,  2.09it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 99%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍  | 74/75 [00:34<00:00,  2.12it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 75/75 [00:35<00:00,  2.12it/s]
+  5%|██████████▍                                                                                                                                                                                         | 4/75 [00:01<00:34,  2.06it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 11%|████████████████████▉                                                                                                                                                                               | 8/75 [00:03<00:33,  2.03it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 16%|███████████████████████████████▏                                                                                                                                                                   | 12/75 [00:05<00:30,  2.09it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 21%|█████████████████████████████████████████▌                                                                                                                                                         | 16/75 [00:07<00:27,  2.12it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 27%|████████████████████████████████████████████████████                                                                                                                                               | 20/75 [00:09<00:26,  2.10it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 32%|██████████████████████████████████████████████████████████████▍                                                                                                                                    | 24/75 [00:11<00:24,  2.05it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 39%|███████████████████████████████████████████████████████████████████████████▍                                                                                                                       | 29/75 [00:13<00:21,  2.15it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 44%|█████████████████████████████████████████████████████████████████████████████████████▊                                                                                                             | 33/75 [00:15<00:19,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 49%|████████████████████████████████████████████████████████████████████████████████████████████████▏                                                                                                  | 37/75 [00:17<00:17,  2.14it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+
+ 55%|██████████████████████████████████████████████████████████████████████████████████████████████████████████▌                                                                                        | 41/75 [00:19<00:16,  2.04it/s]
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+gt_shape torch.Size([8, 1, 352, 608])
+inv_pred_shape torch.Size([8, 1, 352, 608])
+

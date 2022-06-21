@@ -1,0 +1,19 @@
+2022-06-13 14:30:39,409 INFO    MainThread:20838 [internal.py:wandb_internal():93] W&B internal server running at pid: 20838, started at: 2022-06-13 14:30:39.409034
+2022-06-13 14:30:39,411 INFO    WriterThread:20838 [datastore.py:open_for_write():75] open: /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/run-3riuc01h.wandb
+2022-06-13 14:30:39,411 DEBUG   SenderThread:20838 [sender.py:send():232] send: header
+2022-06-13 14:30:39,411 DEBUG   SenderThread:20838 [sender.py:send():232] send: run
+2022-06-13 14:30:39,578 WARNING MainThread:20838 [internal.py:wandb_internal():153] Internal process interrupt: 1
+2022-06-13 14:30:39,697 INFO    SenderThread:20838 [dir_watcher.py:__init__():197] watching files in: /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/files
+2022-06-13 14:30:39,698 INFO    SenderThread:20838 [sender.py:_start_run_threads():814] run started: 3riuc01h with start time 1655123438
+2022-06-13 14:30:39,778 WARNING MainThread:20838 [internal.py:wandb_internal():153] Internal process interrupt: 2
+2022-06-13 14:30:39,778 ERROR   MainThread:20838 [internal.py:wandb_internal():156] Internal process interrupted.
+2022-06-13 14:30:40,410 INFO    HandlerThread:20838 [handler.py:finish():806] shutting down handler
+2022-06-13 14:30:40,411 INFO    WriterThread:20838 [datastore.py:close():279] close: /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/run-3riuc01h.wandb
+2022-06-13 14:30:40,698 INFO    SenderThread:20838 [sender.py:finish():1110] shutting down sender
+2022-06-13 14:30:40,698 INFO    SenderThread:20838 [dir_watcher.py:finish():312] shutting down directory watcher
+2022-06-13 14:30:41,698 INFO    SenderThread:20838 [dir_watcher.py:finish():342] scan: /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/files
+2022-06-13 14:30:41,698 INFO    SenderThread:20838 [dir_watcher.py:finish():356] scan save: /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/files/config.yaml config.yaml
+2022-06-13 14:30:41,698 INFO    SenderThread:20838 [file_pusher.py:finish():145] shutting down file pusher
+2022-06-13 14:30:41,698 INFO    SenderThread:20838 [file_pusher.py:join():150] waiting for file pusher
+2022-06-13 14:30:42,456 INFO    Thread-9  :20838 [upload_job.py:push():132] Uploaded file /home/dim/depth_2022/wandb/run-20220613_143038-3riuc01h/files/config.yaml
+2022-06-13 14:30:42,911 INFO    MainThread:20838 [internal.py:handle_exit():80] Internal process exited
