@@ -87,16 +87,17 @@ class SparseAndRGBGuidedDepth(nn.Module):
                                    out_features=1,
                                    kernel_size=3,
                                    channel_attention=True,
-                                   guide_features=3,
+                                   guide_features=4,
                                    guidance_type="full")
 
 
     def forward(self, rgb, depth):
         y = self.feature_extractor(rgb)
-        print('tara')
+        #print('tara')
+        rgbd = torch.cat((rgb,depth),1)
 
-        x_half = F.interpolate(depth, scale_factor=.5)
-        x_quarter = F.interpolate(depth, scale_factor=.25)
+        x_half = F.interpolate(rgbd, scale_factor=.5)
+        x_quarter = F.interpolate(rgbd, scale_factor=.25)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
         y = self.up_1(x_quarter, y)
@@ -105,5 +106,5 @@ class SparseAndRGBGuidedDepth(nn.Module):
         y = self.up_2(x_half, y)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
-        y = self.up_3(rgb, y)
+        y = self.up_3(rgbd, y)
         return y

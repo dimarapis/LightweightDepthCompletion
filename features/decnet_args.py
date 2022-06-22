@@ -15,6 +15,10 @@ def decnet_args_parser():
                         choices=["penet2021", "enet2021", "decnet-completion", "decnet-estimation"],
                         help='choose a model: penet2021, enet2021, decnet-completion, decnet-estimation'
                         )
+    parser.add_argument('-m','--message',
+                        default="",
+                        help='optional message for details on training or eval'
+                        )
     parser.add_argument('--mode',
                         type=str,
                         default="train",
@@ -91,6 +95,16 @@ def decnet_args_parser():
                         type=int,
                         #metavar='N',
                         help='width of validation image - centercropped (default: 608)')     
+    parser.add_argument('--train_height',
+                        default=352,
+                        type=int,
+                        #metavar='N',
+                        help='height of training image')
+    parser.add_argument('--train_width',
+                        default=608,
+                        type=int,
+                        #metavar='N',
+                        help='width of training image')     
     parser.add_argument('--min_depth_eval',
                         default=0.1,
                         type=float,

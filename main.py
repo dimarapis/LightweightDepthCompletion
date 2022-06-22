@@ -1,4 +1,3 @@
-from cv2 import transform
 import torch
 import wandb
 import random
@@ -10,23 +9,26 @@ import torch.optim as optim
 import features.CoordConv as CoordConv
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
-
-import features.kitti_loader as guided_depth_kitti_loader
 import features.custom_transforms as custom_transforms
-
-from models.enet_pro import ENet
-from models.guide_depth import GuideDepth
-from models.sparse_guided_depth import SparseGuidedDepth
+import features.kitti_loader as guided_depth_kitti_loader
 
 from tqdm import tqdm
 from torchvision import transforms
 from matplotlib import pyplot as plt
+from thop import profile,clever_format
 from torch.utils.data import DataLoader
+
+from models.enet_pro import ENet
+from models.guide_depth import GuideDepth
 from features.decnet_sanity import torch_min_max
-from features.decnet_sanity import inverse_depth_norm
 from features.decnet_args import decnet_args_parser
+from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss
 from features.decnet_dataloaders import DecnetDataloader
+from models.sparse_guided_depth import SparseGuidedDepth
+from models.sparse_guided_depth import SparseAndRGBGuidedDepth
+
+
 
 
 
@@ -106,17 +108,30 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-model = GuideDepth(True)
-#model = SparseGuidedDepth(True)
+#model = GuideDepth(False)
+#model = SparseGuidedDepth(False)#
+model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
 #          torch.nn.Conv2d(1,20,5),
 #          torch.nn.ReLU(),
 #          torch.nn.Conv2d(20,64,5),
 #          torch.nn.ReLU()
 #        )
-state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-model.load_state_dict(state_dict, strict=False)
+#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
+#model.load_state_dict(state_dict, strict=False)
 model.to(device)
+
+rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)
+d_shape = torch.randn(1, 1, decnet_args.train_height, decnet_args.train_width).to(device)
+
+macs, params = profile(model, inputs=(rgb_shape, d_shape))
+macs, params = clever_format([macs, params], "%.3f")
+print(f'model macs: {macs} and params: {params}')
+
+
+wandb.config.update({"macs": macs, "params": params})
+
+
 
 if decnet_args.torch_mode == 'tensorrt':
     from torch2trt import torch2trt
@@ -141,15 +156,6 @@ lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
 
 depth_criterion = MaskedMSELoss()
 print(f"Loaded model {converted_args_dict['network_model']} for {converted_args_dict['task']}")
-
-
-test_loader = guided_depth_kitti_loader.get_dataloader('kitti',
-                                            path='data_guidedepth',
-                                            split='test',
-                                            batch_size=1,
-                                            augmentation='alhashim',
-                                            resolution='full',
-                                            workers=4)
 
 to_tensor_test = custom_transforms.ToTensor(test=True, maxDepth=80.0)
 to_tensor = custom_transforms.ToTensor(test=False, maxDepth=80.0)
@@ -236,9 +242,9 @@ def evaluation_block():
         #inv_pred =  model(image)#image.permute(0,2,3,1))
         #MYMODEL
         #print(image.shape)
-        #inv_pred = model(image,sparse)
+        inv_pred = model(image,sparse)
         
-        inv_pred = model(image)
+        #inv_pred = model(image)
         
 
         
@@ -247,9 +253,7 @@ def evaluation_block():
         #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
 
         pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-        #print(f'PRED_torch_min_max {torch_min_max(pred)}')
-        #print(f"DATA_GT {torch_min_max(gt)}")
-        
+
     
         
         upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
@@ -397,8 +401,8 @@ def training_block():
             #print(f'rgbshape {image.shape}')
             #sparse = sparse.unsqueeze(0)
             #print(f'sparse_shape_afta {sparse.shape}')
-            inv_pred = model(image)
-            #inv_pred = model(image,sparse)
+            #inv_pred = model(image)
+            inv_pred = model(image,sparse)
             
             #print(f'inv_pred_shape {inv_pred.shape}')
             #print(f'gt_shape {gt.shape}')
@@ -431,10 +435,13 @@ def training_block():
             
             #loss.backward()
             #self.optimizer.step()
+            
+            
             a = list(model.parameters())[0].clone()
             loss.backward()
             optimizer.step()
             b = list(model.parameters())[0].clone()
+            
             #print(torch.equal(a.data, b.data))
           
             #loss.backward()
