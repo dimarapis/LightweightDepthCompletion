@@ -20,7 +20,7 @@ from torch.utils.data import DataLoader
 
 from models.enet_pro import ENet
 from models.guide_depth import GuideDepth
-from features.decnet_sanity import torch_min_max
+from features.decnet_sanity import np_min_max, torch_min_max
 from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss
@@ -31,7 +31,7 @@ from models.sparse_guided_depth import SparseAndRGBGuidedDepth
 
 
 
-
+epoch = 0
 #Remove warning for visualization purposes (mostly due to behaviour oif upsample block)
 warnings.filterwarnings("ignore")
 
@@ -108,23 +108,25 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-#model = GuideDepth(False)
+model = GuideDepth(True)
 #model = SparseGuidedDepth(False)#
-model = SparseAndRGBGuidedDepth(False)
+#model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
 #          torch.nn.Conv2d(1,20,5),
 #          torch.nn.ReLU(),
 #          torch.nn.Conv2d(20,64,5),
 #          torch.nn.ReLU()
 #        )
-#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-#model.load_state_dict(state_dict, strict=False)
+state_dict = torch.load('./weights/guide.pth', map_location='cpu')
+model.load_state_dict(state_dict, strict=False)
 model.to(device)
 
 rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)
 d_shape = torch.randn(1, 1, decnet_args.train_height, decnet_args.train_width).to(device)
 
-macs, params = profile(model, inputs=(rgb_shape, d_shape))
+#macs, params = profile(model, inputs=(rgb_shape, d_shape))
+macs, params = profile(model, inputs=(rgb_shape, ))
+
 macs, params = clever_format([macs, params], "%.3f")
 print(f'model macs: {macs} and params: {params}')
 
@@ -183,7 +185,7 @@ def unpack_and_move(data):
 #Iterate images  
 print("\nSTEP 4. Training or eval stage...")
 
-def evaluation_block():
+def evaluation_block(epoch):
     print("\nSTEP. Testing block...")
     print(optimizer)
     
@@ -242,9 +244,9 @@ def evaluation_block():
         #inv_pred =  model(image)#image.permute(0,2,3,1))
         #MYMODEL
         #print(image.shape)
-        inv_pred = model(image,sparse)
+        #inv_pred = model(image,sparse)
         
-        #inv_pred = model(image)
+        inv_pred = model(image)
         
 
         
@@ -334,6 +336,8 @@ def evaluation_block():
         #Showing plots, results original image, etc
         #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
     
+
+    
     #calculating total metrics by averaging  
     for metric in metric_name:
         result_metrics[metric] = result_metrics[metric] / float((i+1))
@@ -343,7 +347,26 @@ def evaluation_block():
     for key in result_metrics:
         print(key, ' = ', result_metrics[key])
     
-    wandb.log(result_metrics)
+    print(epoch)
+    wandb.log(result_metrics, step = epoch)
+    
+    #Wandb save sample image
+    wandb_image, wandb_depth_colorized = visualizer.wandb_image_prep(image,pred) 
+    #print(np.min(wandb_image))
+    #print(np.max(wandb_image))
+    wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Colorized depth prediction")]},step = epoch)
+
+
+    #images = wandb.Image(wandb_image, caption="Image_sample")
+
+    #images = wandb.Image(wandb_image.squeeze().to)
+    
+    #print(pred_crop.shape)
+    #print(image.shape)
+    #print(sparse.shape)
+    #print(gt.shape)
+    #print('\n\n\n')
+
 
 
 def training_block():
@@ -401,8 +424,8 @@ def training_block():
             #print(f'rgbshape {image.shape}')
             #sparse = sparse.unsqueeze(0)
             #print(f'sparse_shape_afta {sparse.shape}')
-            #inv_pred = model(image)
-            inv_pred = model(image,sparse)
+            inv_pred = model(image)
+            #inv_pred = model(image,sparse)
             
             #print(f'inv_pred_shape {inv_pred.shape}')
             #print(f'gt_shape {gt.shape}')
@@ -451,7 +474,7 @@ def training_block():
             
             #print(loss)
 
-            #pred_d, depth_gt, = prediction.squeeze(),gt.squeeze()
+            pred_d, depth_gt, sparse_depth = pred.squeeze(),gt.squeeze(), sparse.squeeze()
 
             
             #pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)
@@ -474,15 +497,15 @@ def training_block():
             #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
         
         lr_scheduler.step()
-        evaluation_block()
+        evaluation_block(epoch)
 
 
     
 if converted_args_dict['mode'] == 'eval':
     #pass
-    evaluation_block()
+    evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
-    evaluation_block()
+    evaluation_block(epoch)
     training_block()
     #evaluation_block()
     

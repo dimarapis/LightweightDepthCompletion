@@ -85,7 +85,7 @@ class ToTensor(object):
             """
             If test, move image to [0,1] and depth to [0, 1]
             """
-            image = np.array(image).astype(np.float32) / 255.0
+            image = np.array(image).astype(np.float32)# / 255.0
             gt = np.array(gt).astype(np.float32) #/ self.maxDepth #Why / maxDepth?
             sparse = np.array(sparse).astype(np.float32)# / self.maxDepth #Why / maxDepth?
             image, gt, sparse = transformation(image), transformation(gt), transformation(sparse)

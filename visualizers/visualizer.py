@@ -133,6 +133,20 @@ def save_depth_as_uint8colored(img, filename):
     img = depth_colorize(img)
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     cv2.imwrite(filename, img)
+    
+def wandb_image_prep(image, pred):
+
+    depth = np.squeeze(pred.cpu().detach().numpy())
+    depth = depth_colorize(depth)
+    depth = cv2.cvtColor(depth, cv2.COLOR_RGB2BGR)
+    
+    rgb = np.squeeze(image.cpu().detach().numpy())
+    rgb = np.transpose(rgb, (1, 2, 0))
+    #rgb = rgb.astype('uint8')
+    
+    return rgb,depth
+    #cv2.imwrite(filename, img)
+    #wandb_image_prep(image,pred) 
 
 def save_mask_as_uint8colored(img, filename, colored=True, normalized=True):
     img = validcrop(img)

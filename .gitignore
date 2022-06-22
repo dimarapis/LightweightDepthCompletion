@@ -1,4 +1,4 @@
-wandb/*
+wandb/
 weights/
 data/
 test_rgb_image.png
