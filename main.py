@@ -33,7 +33,7 @@ from models.sparse_guided_depth import SparseAndRGBGuidedDepth
 
 epoch = 0
 #Remove warning for visualization purposes (mostly due to behaviour oif upsample block)
-warnings.filterwarnings("ignore")
+#warnings.filterwarnings("ignore")
 
 #Loading arguments and model options
 print("\nSTEP 1. Loading arguments and parameters...")
@@ -152,7 +152,7 @@ if decnet_args.torch_mode == 'tensorrt':
     #model = trt_module.to(device)
     
 
-optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate)
+optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate) 
 lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
 #print(optimizer)
 
@@ -404,7 +404,7 @@ def training_block():
             #print(torch_min_max(image))  
             #print(image.shape)     
             
-            image = image / 255.
+            #image = image / 255.
             
             #print(f'torchminmax image {torch_min_max(image)}')
             #print(f'torchminmax gt {torch_min_max(gt)}')
