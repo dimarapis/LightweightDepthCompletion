@@ -498,6 +498,7 @@ def training_block():
         
         lr_scheduler.step()
         evaluation_block(epoch)
+        #asdd
 
 
     
