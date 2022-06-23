@@ -25,7 +25,7 @@ def depth_colorize_np(depth):
 
 def depth_colorize(depth):
     depth = (depth - np.min(depth)) / (np.max(depth) - np.min(depth))
-    print(np.min(depth),np.max(depth))
+    #print(np.min(depth),np.max(depth))
     depth = 255 * cmap3(depth)[:, :, :3]  # H, W, C
     return depth.astype('uint8')
 

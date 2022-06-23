@@ -109,7 +109,7 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-model = GuideDepth(True)
+model = GuideDepth(False)
 #model = SparseGuidedDepth(False)#
 #model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
@@ -359,7 +359,7 @@ def evaluation_block(epoch):
     for key in result_metrics:
         print(key, ' = ', result_metrics[key])
     
-    print(epoch)
+    #print(epoch)
     wandb.log(result_metrics, step = epoch)
     
     #Wandb save sample image

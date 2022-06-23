@@ -5,6 +5,8 @@ import torch.nn.functional as F
 from models.guide_ddrnet import DualResNet_Backbone
 from models.guide_modules import Guided_Upsampling_Block
 
+from models.enet_basic import weights_init
+
 
 class GuideDepth(nn.Module):
     def __init__(self, 
@@ -38,7 +40,9 @@ class GuideDepth(nn.Module):
                                    channel_attention=True,
                                    guide_features=3,
                                    guidance_type="full")
+        weights_init(self)
 
+    
 
     def forward(self, x):
         y = self.feature_extractor(x)
