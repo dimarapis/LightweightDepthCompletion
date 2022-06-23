@@ -1,3 +1,4 @@
+from sympy import Gt
 import torch
 import wandb
 import random
@@ -108,7 +109,7 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-model = GuideDepth(True)
+model = GuideDepth(False)
 #model = SparseGuidedDepth(False)#
 #model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
@@ -117,8 +118,8 @@ model = GuideDepth(True)
 #          torch.nn.Conv2d(20,64,5),
 #          torch.nn.ReLU()
 #        )
-state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-model.load_state_dict(state_dict, strict=False)
+#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
+#model.load_state_dict(state_dict, strict=False)
 model.to(device)
 
 rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)
@@ -164,6 +165,16 @@ to_tensor = custom_transforms.ToTensor(test=False, maxDepth=80.0)
 
 downscale_image = transforms.Resize((384,1280)) #To Model resolution
 
+
+def print_torch_min_max_rgbpredgt(rgb,pred,gt):
+    print('\n')
+    print(f'torch_min_max rgb {torch_min_max(rgb)}')
+    print(f'torch_min_max pred {torch_min_max(pred)}')
+    print(f'torch_min_max gt {torch_min_max(gt)}')
+    print('\n')
+    
+    
+    
 
 def unpack_and_move(data):
     if isinstance(data, (tuple, list)):
@@ -234,6 +245,7 @@ def evaluation_block(epoch):
         gt = gt.unsqueeze(0)
         #print(f'sparse_shape_before {sparse.shape}')
         sparse = sparse.unsqueeze(0)
+        
         #print(f'torch_minmax sparse {torch_min_max(sparse)}')
         #print(f'sparse_shape_afta {torch_min_max(gt)}')
         #image = downscale_image(image)#.permute(0,2,3,1))
@@ -255,7 +267,7 @@ def evaluation_block(epoch):
         #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
 
         pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-
+        print_torch_min_max_rgbpredgt(image,pred,gt)
     
         
         upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
@@ -435,6 +447,8 @@ def training_block():
             #print(f'torchminmax gtbef {torch_min_max(gt)}')
             
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
+            print_torch_min_max_rgbpredgt(image,pred,gt)
+            
             #print(f'torchminmax pred {torch_min_max(pred)}')
             #print(f'torchminmax gt {torch_min_max(gt)}')
             
