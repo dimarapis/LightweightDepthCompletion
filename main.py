@@ -109,7 +109,7 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-model = GuideDepth(True)
+model = GuideDepth(False)
 #model = SparseGuidedDepth(False)#
 #model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
