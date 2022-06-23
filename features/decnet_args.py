@@ -86,22 +86,22 @@ def decnet_args_parser():
 
     #my args
     parser.add_argument('--val_h',
-                        default=352,
+                        default=360,
                         type=int,
                         #metavar='N',
                         help='height of validation image - centercropped (default: 352)')
     parser.add_argument('--val_w',
-                        default=608,
+                        default=640,
                         type=int,
                         #metavar='N',
                         help='width of validation image - centercropped (default: 608)')     
     parser.add_argument('--train_height',
-                        default=352,
+                        default=360,
                         type=int,
                         #metavar='N',
                         help='height of training image')
     parser.add_argument('--train_width',
-                        default=608,
+                        default=640,
                         type=int,
                         #metavar='N',
                         help='width of training image')     
@@ -123,20 +123,21 @@ def decnet_args_parser():
                         #metavar='N',
                         help='which crop to follow for validationmetrics')
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='train_dim_kitti.list',
+                        default='datalist_train_nn.list',
+                        #default='train_dim_kitti.list',
                         #default='8batch_dim_kitti.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
+                        default='datalist_test_nn.list',
+                        #default='val_dim_kitti.list',
                         #default='8batch_dim_kitti.list',
-                        default='val_dim_kitti.list',
-                        #default='datalist_val_kitti.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--root_folder', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='data/kitti_dataset/val_selection_cropped/',
+                        default='data/nn_dataset/',
                         type=str,
                         #required=True,
                         help='Root folder where the list and data is located')

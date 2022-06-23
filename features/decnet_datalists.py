@@ -15,21 +15,22 @@ def make_dataset_list_nn_or_kitti(file_name,root_folder,rgb_path,depth_path,gt_p
     
     
 #Datalist maker for nn data
-make_dataset_list_nn_or_kitti(file_name='datalist_test_nn.list',
-                              root_folder='data/nn_dataset/test',
+make_dataset_list_nn_or_kitti(file_name='datalist_train_nn.list',
+                              root_folder='data/nn_dataset/train',
                               rgb_path='rgb_cropped',
                               depth_path='depth_cm_cropped',
                               gt_path='pcl_cm_cropped')
 
 
 #Datalist maker for kitti data
+'''
 make_dataset_list_nn_or_kitti(file_name='datalist_val_kitti.list',
                               root_folder='data/kitti_dataset/val_selection_cropped',
                               rgb_path='image',
                               depth_path='velodyne_raw',
                               gt_path='groundtruth_depth')
 
-
+'''
 '''NEED TO FIX THIS
 def make_dataset_list_sim_warehouse(file_name,root_folder,rgb_path,depth_path,gt_path):
     rgb_files_1 = glob.glob(os.path.join(root_folder,rgb_path,'*'))

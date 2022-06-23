@@ -109,7 +109,7 @@ checkpoint = torch.load('weights/e.pth.tar', map_location=device)
 model.load_state_dict(checkpoint['model'], strict=False)
 '''
 #GUIDEDEPTH_MODEL
-model = GuideDepth(False)
+model = GuideDepth(True)
 #model = SparseGuidedDepth(False)#
 #model = SparseAndRGBGuidedDepth(False)
 #model = torch.nn.Sequential(
@@ -118,8 +118,8 @@ model = GuideDepth(False)
 #          torch.nn.Conv2d(20,64,5),
 #          torch.nn.ReLU()
 #        )
-#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-#model.load_state_dict(state_dict, strict=False)
+state_dict = torch.load('./weights/guide.pth', map_location='cpu')
+model.load_state_dict(state_dict, strict=False)
 model.to(device)
 
 rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)

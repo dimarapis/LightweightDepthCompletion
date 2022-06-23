@@ -66,9 +66,9 @@ class DecnetDataloader(Dataset):
         
         
         transformed_rgb = transform(rgb).to('cuda') / 255.
-        transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor) / 256.
+        transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/ 100.# / 256.
         transformed_sparse_again = self.completion_transform(transformed_sparse)
-        transformed_gt = transform(gt).type(torch.cuda.FloatTensor) / 256.
+        transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/100.# / 256.
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse_again, transformed_gt)
         
