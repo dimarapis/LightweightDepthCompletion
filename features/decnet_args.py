@@ -37,7 +37,7 @@ def decnet_args_parser():
                         metavar='N',
                         help='number of data loading workers (default: 4)')
     parser.add_argument('--epochs',
-                        default=20,
+                        default=100,
                         type=int,
                         metavar='N',
                         help='number of total epochs to run (default: 100)')
@@ -48,7 +48,7 @@ def decnet_args_parser():
                         #help='loss function: | '.join(criteria.loss_names) +
                         #' (default: l2)')
     parser.add_argument('--batch-size',
-                        default=1,
+                        default=2,
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
@@ -57,7 +57,7 @@ def decnet_args_parser():
                         metavar='LR',
                         help='initial learning rate (default 1e-5)')
     parser.add_argument('--weight-decay',
-                        default=1e-6,
+                        default=0,
                         type=float,
                         metavar='W',
                         help='weight decay (default: 0)')

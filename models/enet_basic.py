@@ -43,10 +43,16 @@ for i in range(gks3):
 def weights_init(m):
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
+        #m.weight = nn.Parameter(custom_weight_fn(m.weight.shape))
+        #m.bias = nn.Parameter(custom_weight_fn(m.bias.shape))
+
         torch.nn.init.normal_(m.weight, 0.0, 0.02)
     elif classname.find('BatchNorm') != -1:
         torch.nn.init.normal_(m.weight, 1.0, 0.02)
         torch.nn.init.zeros_(m.bias)
+
+def custom_weight_fn(shape):
+    return torch.randn(shape)   
 
 def convbnrelu(in_channels, out_channels, kernel_size=3,stride=1, padding=1):
     return nn.Sequential(
