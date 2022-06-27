@@ -8,6 +8,7 @@ import numpy as np
 import torch.optim as optim
 
 import features.CoordConv as CoordConv
+from models.enet_basic import weights_init
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
 import features.custom_transforms as custom_transforms
@@ -118,8 +119,15 @@ model = GuideDepth(False)
 #          torch.nn.Conv2d(20,64,5),
 #          torch.nn.ReLU()
 #        )
-#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-#model.load_state_dict(state_dict, strict=False)
+state_dict = torch.load('./weights/guide.pth', map_location='cpu')
+model.load_state_dict(state_dict, strict=False)
+
+model.up_1.apply(weights_init)
+model.up_2.apply(weights_init)
+#model.up_3.apply(weights_init)
+
+
+
 model.to(device)
 
 rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)
@@ -154,7 +162,7 @@ if decnet_args.torch_mode == 'tensorrt':
     
 
 optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate) 
-lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.1)
+lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
 #print(optimizer)
 
 depth_criterion = MaskedMSELoss()

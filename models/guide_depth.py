@@ -40,6 +40,9 @@ class GuideDepth(nn.Module):
                                    channel_attention=True,
                                    guide_features=3,
                                    guidance_type="full")
+        
+        #self.apply(weights_init)
+
         #weights_init(self)
 
     

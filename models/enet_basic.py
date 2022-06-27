@@ -39,21 +39,14 @@ for i in range(gks3):
         right = gks3-1-j
         pad3[i*gks3 + j] = torch.nn.ZeroPad2d((left, right, top, bottom))
 
+# custom weights initialization called on netG and netD
 def weights_init(m):
-    # Initialize filters with Gaussian random weights
-    if isinstance(m, nn.Conv2d):
-        n = m.kernel_size[0] * m.kernel_size[1] * m.out_channels
-        m.weight.data.normal_(0, math.sqrt(2. / n))
-        if m.bias is not None:
-            m.bias.data.zero_()
-    elif isinstance(m, nn.ConvTranspose2d):
-        n = m.kernel_size[0] * m.kernel_size[1] * m.in_channels
-        m.weight.data.normal_(0, math.sqrt(2. / n))
-        if m.bias is not None:
-            m.bias.data.zero_()
-    elif isinstance(m, nn.BatchNorm2d):
-        m.weight.data.fill_(1)
-        m.bias.data.zero_()
+    classname = m.__class__.__name__
+    if classname.find('Conv') != -1:
+        torch.nn.init.normal_(m.weight, 0.0, 0.02)
+    elif classname.find('BatchNorm') != -1:
+        torch.nn.init.normal_(m.weight, 1.0, 0.02)
+        torch.nn.init.zeros_(m.bias)
 
 def convbnrelu(in_channels, out_channels, kernel_size=3,stride=1, padding=1):
     return nn.Sequential(

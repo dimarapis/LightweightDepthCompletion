@@ -37,7 +37,7 @@ def decnet_args_parser():
                         metavar='N',
                         help='number of data loading workers (default: 4)')
     parser.add_argument('--epochs',
-                        default=100,
+                        default=20,
                         type=int,
                         metavar='N',
                         help='number of total epochs to run (default: 100)')
