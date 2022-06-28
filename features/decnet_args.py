@@ -3,17 +3,22 @@ import argparse
 def decnet_args_parser():
     #parser adapted from Sparse-to-Dense: Depth Prediction from Sparse Depth Samples and a Single Image (https://github.com/fangchangma/sparse-to-dense)
     parser = argparse.ArgumentParser(description='Decnet-argument-parser')
-    parser.add_argument('--task',
-                        type=str,
-                        default="decnet-completion",
-                        choices=["decnet-completion", "decnet-estimation"],
-                        help='choose a task: decnet-completion or decnet-estimation'
-                        )
+    #parser.add_argument('--task',
+    #                    type=str,
+    #                    default="depth-estimation",
+    #                    choices=["decnet-completion", "decnet-estimation"],
+    #                    help='choose a task: decnet-completion or decnet-estimation'
+    #                    )
     parser.add_argument('--network-model',
                         type=str,
-                        default="enet2021",
-                        choices=["penet2021", "enet2021", "decnet-completion", "decnet-estimation"],
-                        help='choose a model: penet2021, enet2021, decnet-completion, decnet-estimation'
+                        default="GuideDepth",
+                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "ENET2021"],
+                        help='choose a model'
+                        )
+    parser.add_argument('--pretrained',
+                        type=bool,
+                        default=False,
+                        help='Choose between loading a pretrained model or training from scratch'
                         )
     parser.add_argument('-m','--message',
                         default="",
@@ -48,14 +53,14 @@ def decnet_args_parser():
                         #help='loss function: | '.join(criteria.loss_names) +
                         #' (default: l2)')
     parser.add_argument('--batch-size',
-                        default=2,
+                        default=8,
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-5,
+                        default=1e-4,
                         type=float,
                         metavar='LR',
-                        help='initial learning rate (default 1e-5)')
+                        help='initial learning rate (default 1e-5 in PENET 1e-4 in guided)')
     parser.add_argument('--weight-decay',
                         default=0,
                         type=float,

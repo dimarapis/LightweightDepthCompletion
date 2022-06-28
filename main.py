@@ -1,3 +1,4 @@
+from os import device_encoding
 from sympy import Gt
 import torch
 import wandb
@@ -34,27 +35,25 @@ from models.sparse_guided_depth import SparseAndRGBGuidedDepth
 
 
 
-epoch = 0
-#Remove warning for visualization purposes (mostly due to behaviour oif upsample block)
-#warnings.filterwarnings("ignore")
+
+#Remove warning for visualization purposes (mostly due to behaviour of upsample block)
+warnings.filterwarnings("ignore")
 
 #Loading arguments and model options
 print("\nSTEP 1. Loading arguments and parameters...")
 decnet_args = decnet_args_parser()
 
-
 #Print arguments and model options
 converted_args_dict = vars(decnet_args)
 print('\nParameters list: (Some may be redundant depending on the task, dataset and model chosen)')
-
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 #Defining metrics and loggers
 metric_name = ['d1', 'd2', 'd3', 'abs_rel', 'sq_rel', 'rmse', 'rmse_log', 'log10', 'silog']
 
 #Initialize weights and biases logger
-wandb.init(project=str(decnet_args.project),entity=str(decnet_args.entity))#)="decnet-project", entity="wandbdimar")
-wandb.config.update(decnet_args)
+if decnet_args.wandblogger == True:
+    wandb.init(project=str(decnet_args.project),entity=str(decnet_args.entity))#)="decnet-project", entity="wandbdimar")
+    wandb.config.update(decnet_args)
 
 #Printing args for checking
 for key in converted_args_dict:
@@ -68,21 +67,12 @@ random.seed(seed)
 
 #Loading datasets
 print("\nSTEP 2. Loading datasets...")
+train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist),batch_size=decnet_args.batch_size)
+test_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist),batch_size=1)
+print(f'Loaded {len(DecnetDataloader(decnet_args,decnet_args.train_datalist))} training files')
+print(f'Loaded {len(DecnetDataloader(decnet_args,decnet_args.val_datalist))} val files')
 
-test_files = DecnetDataloader(decnet_args,decnet_args.val_datalist)
-test_samples_no = len(test_files)
-test_dl = DataLoader(test_files,batch_size=1)
-
-train_files = DecnetDataloader(decnet_args,decnet_args.train_datalist)
-train_samples_no = len(train_files)
-train_dl = DataLoader(train_files,batch_size=decnet_args.batch_size)
-
-
-
-#print(test_dl)
-print(f'Loaded {train_samples_no} training files')
-print(f'Loaded {test_samples_no} val files')
-
+'''
 #FIX - Need to load intrinsics in data loaders
 #Constructing CoordConv and K matrix if needed for the model
 transform_to_tensor = transforms.ToTensor()
@@ -99,80 +89,67 @@ position = CoordConv.AddCoordsNp(decnet_args.val_h, decnet_args.val_w)
 position = position.call()
 position = transform_to_tensor(position).unsqueeze(0).to(device)
 #print(position.shape)
-
+'''
 
 #Loading model
 print("\nSTEP 3. Loading model and metrics...")
 
-#ENET_MODEL
-'''
-model = ENet(decnet_args).to(device)
-checkpoint = torch.load('weights/e.pth.tar', map_location=device)
-model.load_state_dict(checkpoint['model'], strict=False)
-'''
-#GUIDEDEPTH_MODEL
-#model = GuideDepth(True)
-#model = SparseGuidedDepth(False)#
-#model = SparseAndRGBGuidedDepth(False)
-model = torch.nn.Sequential(
-            torch.nn.Conv2d(3,20,5),
-            torch.nn.ReLU(),
-            torch.nn.Conv2d(20,64,5),
-            torch.nn.ReLU(),
-            torch.nn.Conv2d(64, 1, kernel_size=3)
-)
-#state_dict = torch.load('./weights/guide.pth', map_location='cpu')
-#model.load_state_dict(state_dict, strict=False)
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-#model.up_1.apply(weights_init)
-#model.up_2.apply(weights_init)
-#model.apply(weights_init)
-
-
+if decnet_args.network_model == "GuideDepth":
+    model = GuideDepth(False)
+    #print(decnet_args.pretrained)
+    if decnet_args.pretrained == True:
+        model.load_state_dict(torch.load('./weights/GuideDepth.pth', map_location='cpu'))        
+elif decnet_args.network_model == "SparseGuidedDepth":
+    model = SparseGuidedDepth(False)
+    #if decnet_args.pretrained
+        #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
+elif decnet_args.network_model == "SparseAndRGBGuidedDepth":
+    model = SparseAndRGBGuidedDepth(False)
+    #if decnet_args.pretrained
+        #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
+elif decnet_args.network_model == "ENET2021":
+    model = ENet(decnet_args)
+else:
+    print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
 
 model.to(device)
-print(model.parameters)
 
+'''
+# Calculating macs and parameters of model to assess how heavy the model is
 rgb_shape = torch.randn(1, 3, decnet_args.train_height, decnet_args.train_width).to(device)
 d_shape = torch.randn(1, 1, decnet_args.train_height, decnet_args.train_width).to(device)
-
-#macs, params = profile(model, inputs=(rgb_shape, d_shape))
 macs, params = profile(model, inputs=(rgb_shape, ))
-
 macs, params = clever_format([macs, params], "%.3f")
 print(f'model macs: {macs} and params: {params}')
+if decnet_args.wandblogger == True:
+    wandb.config.update({"macs": macs,  "params": params})
+'''
 
 
-wandb.config.update({"macs": macs, "params": params})
-
-
-
+'''
+#Convering model to tensorrt
 if decnet_args.torch_mode == 'tensorrt':
     from torch2trt import torch2trt
-
-    #import tensorrt
-    #import torch_tensorrt
     model.eval()
     x = torch.ones((1, 3, 384, 1280)).cuda()
     model_trt = torch2trt(model, [x])
     model = model_trt
-    #trt_module = torch_tensorrt.compile(model,
-    ##inputs = [torch_tensorrt.Input((1, 1, 384, 1280))], # input shape   
-    #enabled_precisions = {torch_tensorrt.dtype.half} # Run with FP16
-    #)# save the TensorRT embedded Torchscript
-    #torch.jit.save(trt_module, "trt_torchscript_module.ts")
-    #model = trt_module.to(device)
-    
-
-optimizer = optim.SGD(model.parameters(), lr=decnet_args.learning_rate, momentum=0.9) 
-lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
-#print(optimizer)
+'''
 
 
-depth_criterion = MaskedMSELoss()
+optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate)#, momentum=0.9) 
+lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer,milestones=[30,50,75,90], gamma=0.1)
+#lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30,80], gamma=0.1)
+
+#depth_criterion = MaskedMSELoss()
 depth_criterion = SiLogLoss()
 
-print(f"Loaded model {converted_args_dict['network_model']} for {converted_args_dict['task']}")
+#defining index (epoch)
+epoch = 0
+prev_loss = 0.0
+#print(f"Loaded model {converted_args_dict['network_model']}'# for {converted_args_dict['task']}")
 
 to_tensor_test = custom_transforms.ToTensor(test=True, maxDepth=80.0)
 to_tensor = custom_transforms.ToTensor(test=False, maxDepth=80.0)
@@ -186,8 +163,6 @@ def print_torch_min_max_rgbpredgt(rgb,pred,gt):
     print(f'torch_min_max pred {torch_min_max(pred)}')
     print(f'torch_min_max gt {torch_min_max(gt)}')
     print('\n')
-    
-    
     
 
 def unpack_and_move(data):
@@ -216,8 +191,6 @@ def metric_block(pred,gt,metric_name,decnet_args):
     for metric in metric_name:
         result_metrics[metric] = 0.0
 
-    for i in range(decnet_args.batch_size):
-
         pred_d, depth_gt, = pred[i].squeeze(), gt[i].squeeze()#, data['d'].squeeze()# / 1000.0
         pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)
         computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
@@ -236,8 +209,8 @@ def metric_block(pred,gt,metric_name,decnet_args):
 
 
 def evaluation_block(epoch):
-    print("\nSTEP. Testing block...")
-    print(optimizer)
+    print(f"\nSTEP. Testing block... Epoch no: {epoch}")
+    #print(optimizer)
     
  
     #with torch.no_grad():
@@ -246,341 +219,106 @@ def evaluation_block(epoch):
     for metric in metric_name:
         result_metrics[metric] = 0.0
 
+    #for i, data in enumerate(tqdm(test_dl)):
+    #data = next(iter(test_dl))
+    #i = 0
     for i, data in enumerate(tqdm(test_dl)):
-        #print(data.keys())
-        
-        #print(f'Currently on image {i} out of {samples_no}')
-
-        
-        #ENET_MODEL
-        #_, _, pred =  model(data)
-        
-        #GUIDEDEPTH_MODEL
-        #image, gt = data
-        #packed_data = {'image': image[0], 'depth':gt[0]}
-        
-        
-        #MY DATA
+        model.eval()
         image_filename = data['file']
-        
-        #image, gt = data['rgb'].permute(0,2,3,1), data['gt'][0] 
-        image, gt, sparse = data['rgb'].permute(0,2,3,1), data['gt'][0], data['d'][0] 
-        #packed_data = {'image': image[0].to('cpu'), 'depth': gt[0].to('cpu')}
-        packed_data = {'image': image[0].to('cpu'), 'gt': gt[0].to('cpu'), 'sparse' : sparse[0].to('cpu')}
-        
-        #image,gt = data['rgb'], data['gt']
+        #print(image_filename)
+        image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
 
-        
-        data = to_tensor_test(packed_data)
-
-        
-        image, gt, sparse  = unpack_and_move(data)
-        #mage = data['image'].to(device)#, non_blocking=True)
-        #gt = data['depth'].to(device)#, non_blocking=True)
-    
-        image = image.unsqueeze(0)
-        #print(f'imageshape {image.shape}')
-        #continue
-        gt = gt.unsqueeze(0)
-        #print(f'sparse_shape_before {sparse.shape}')
-        sparse = sparse.unsqueeze(0)
-        
-        #print(f'torch_minmax sparse {torch_min_max(sparse)}')
-        #print(f'sparse_shape_afta {torch_min_max(gt)}')
-        #image = downscale_image(image)#.permute(0,2,3,1))
-        #rint(f'rgbshape {image.shape}')
-        
-        
-        #GUIDEDEPTH
-        #inv_pred =  model(image)#image.permute(0,2,3,1))
-        #MYMODEL
-        #print(image.shape)
-        #inv_pred = model(image,sparse)
-        print(image.shape)
         inv_pred = model(image)
         
-
-        
-
+        #inv_pred = model(image,sparse)
+        #inv_pred = model(image)
         
         #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
-
         pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-        print_torch_min_max_rgbpredgt(image,pred,gt)
-    
         
-        upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
-        #print('notupscaled', pred.shape)
-        #print(prediction.shape)
-        prediction = upscale_depth(pred)
+        #upscaling depth to compare (if needed)
+        #upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
+        #prediction = upscale_depth(pred)
 
-        #print('upscaled', prediction.shape)
-        #print(f'torchminmax pred {torch_min_max(pred)}')
-        #print(f'torchminmax gt {torch_min_max(gt)}')
-        #gt_height, gt_width = gt.shape[-2:] 
-
-        #crop = np.array([0.3324324 * gt_height,  0.91351351 * gt_height,
-        #                        0.0359477 * gt_width,   0.96405229 * gt_width]).astype(np.int32)
-        #gt = gt[:,:, crop[0]:crop[1], crop[2]:crop[3]]
-        #prediction = prediction[:,:, crop[0]:crop[1], crop[2]:crop[3]]
-        #print(f'torchminmax pred cropped{torch_min_max(prediction)}')
-        #print(f'torchminmax gt cropped{torch_min_max(gt)}')
-        
-        #print(f'image {torch_min_max(image)}')
-        #print(f'predictiopn {torch_min_max(prediction)}')
-        #print(f'gt {torch_min_max(gt)}')
-        
-        #prediction_flip = upscale_depth(prediction_flip)
-
-        #print(torch_min_max(pred))
-        #print(torch_min_max(gt))
-        #loss = depth_criterion(pred, gt)
-        #print(loss)
-        '''
-        #print(type(data['rgb']))
-        #print(torch_min_max(data['rgb']))
-        #print(torch_min_max(rgb_input))
-        #print(rgb_input.shape)
-        #transformed_input = transform_to_tensor(rgb_input)
-        #print(transformed_input)
-        '''
-        
-        #pred =  model(rgb_input)
-        #print(prediction.shape, gt.shape)
-        #print(f' torchminmax prediction {torch_min_max(prediction)}')
-        #print(f' torchminmax gt {torch_min_max(gt)}')
-        
-        #depth_loss = depth_criterion(prediction, gt)
-        #print(depth_loss)
-        
         pred_d, depth_gt, = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
-        
-        #print(pred_d.shape, depth_gt.shape)
-        
-        pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)
-        #print(pred_crop.shape, gt_crop.shape)
-        #print(torch_min_max(pred_crop), torch_min_max(gt_crop))
-        
-        
+
+        pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
         computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
-        #print(computer_result)
-        #print(f'predctop and gtcrop shapes {pred_crop.shape} asd {gt_crop.shape}')
+
         for metric in metric_name:
             result_metrics[metric] += computed_result[metric]
         
-        #if i == 10: 
-        #    break
-        
-        # print(result_metrics)
-    
-        # Using dictionary comprehension + keys()
-        # Dictionary Values Division
-        res = {metric: result_metrics[metric] / float(i+1)
-                                for metric in result_metrics.keys()}
-        
-        #VISUALIZE BLOCK
-        #print(res)
-        #Saving depth prediciton data along with original image
-        #visualizer.save_depth_prediction(prediction,data['rgb']*255)
+    #VISUALIZE BLOCK
+    #Saving depth prediciton data along with original image
+    #visualizer.save_depth_prediction(prediction,data['rgb']*255)
 
+    #Showing plots, results original image, etc
+    #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
         
-        #Showing plots, results original image, etc
-        #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
-    
-
-    
     #calculating total metrics by averaging  
     for metric in metric_name:
         result_metrics[metric] = result_metrics[metric] / float((i+1))
-    print(float(i+1))
+    #print(float(i+1))
+    
     # printing result 
     print("Results:")
     for key in result_metrics:
         print(key, ' = ', result_metrics[key])
     
-    #print(epoch)
-    wandb.log(result_metrics, step = epoch)
-    
-    #Wandb save sample image
-    wandb_image, wandb_depth_colorized = visualizer.wandb_image_prep(image,pred) 
-    #print(np.min(wandb_image))
-    #print(np.max(wandb_image))
-    wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Colorized depth prediction")]},step = epoch)
+    if decnet_args.wandblogger == True:
+        wandb.log(result_metrics, step = epoch)
+        #Wandb save sample image
+        wandb_image, wandb_depth_colorized = visualizer.wandb_image_prep(image,pred) 
+        wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Colorized depth prediction")]},step = epoch)
+    model.train()
 
-
-    #images = wandb.Image(wandb_image, caption="Image_sample")
-
-    #images = wandb.Image(wandb_image.squeeze().to)
-    
-    #print(pred_crop.shape)
-    #print(image.shape)
-    #print(sparse.shape)
-    #print(gt.shape)
-    #print('\n\n\n')
 
 
 
 def training_block():
-    praraimage = torch.rand(1,3,352,608).to(device)
-    torch.manual_seed = 3310
-    praragt = torch.rand(1,1,352,608).to(device)
-
+    
     print("\nSTEP. Training block...")
     data = next(iter(train_dl))
-    print(data.keys())
-    for epoch in enumerate(tqdm(range(1,decnet_args.epochs))):
-        #model.train()
-        #model.eval()
+    for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
+        for i, data in enumerate(tqdm(train_dl)):
+                
+            image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
 
-        
-        #for i, data in enumerate(tqdm(train_dl)):
+            inv_pred = model(image)
+            #inv_pred = model(image,sparse)
+            
+            pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
+            
+            pred = F.interpolate(pred,size=(352,608),mode='bilinear')
 
-        #print(data.keys())
-        #image, gt = data['rgb'].permute(to(dtype=torch.float32), data['gt'].to(dtype=torch.float32)
-        #packed_data = {'image': image[0].to('cpu'), 'depth': gt[0].to('cpu')}        
-        #data_step = to_tensor(packed_data)
-        #image, gt = unpack_and_move(data_step)
-        #image = image.unsqueeze(0)
-        #gt = gt.unsqueeze(0)
-        #image = downscale_image(image)
-        
-
-        #packed_data = {'image': image[0].to('cpu'), 'depth': gt[0].to('cpu')}        
-        #data['K'] = new_K
-        #data['position'] = position
-        
-        image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
-
-        #print(image.shape)
-        
-        #image = np.array(image).astype(np.float32) / 255.0
-        #gt = np.array(gt).astype(np.float32) #/ self.maxDepth #Why / maxDepth?
-        #sparse = np.array(sparse).astype(np.float32)# / decnet_args.max_depth_eval #Why / maxDepth?
-        #print(image.shape)     
-
-        #image, gt, sparse = transform_to_tensor(image), transform_to_tensor(gt), transform_to_tensor(sparse)
-        #image.permute(0,3,1,2)
-        
-
-        #print("???")
-        #print(torch_min_max(image))  
-        #print(image.shape)     
-        
-        #image = image / 255.
-        
-        #print(f'torchminmax image {torch_min_max(image)}')
-        #print(f'torchminmax gt {torch_min_max(gt)}')
-        #print(f'torchminmax sparse {torch_min_max(sparse)}')
-        
-        #print(torch_min_max(image))
-        #packed_data = {'image': image.to('cpu'), 'depth': gt.to('cpu')}    
-
-        #data_step = to_tensor(packed_data)
-        #image, gt = unpack_and_move(data_step)
-        
-        #print(torch_min_max(image))
-        #image = image.permute(0,3,1,2)     
-        #inv_pred =  model(image)
-        
-        #print(f'sparse_shape_before {sparse.shape}')
-        #print(f'rgbshape {image.shape}')
-        #sparse = sparse.unsqueeze(0)
-        #print(f'sparse_shape_afta {sparse.shape}')
-        #image = torch.rand(1,3,352,608).to(device)
-        #torch.manual_seed = 3310
-        #gt = torch.rand(1,1,352,608).to(device)
-        inv_pred = model(image)
-        #inv_pred = model(image,sparse)
-        #gt = praragt
-        #print(f'inv_pred_shape {inv_pred.shape}')
-        #print(f'gt_shape {gt.shape}')
-        
-        #print(gt.shape)
-        #print(f'torchminmax predbef {torch_min_max(inv_pred)}')
-        #print(f'torchminmax gtbef {torch_min_max(gt)}')
-        
-        pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-        
-        #print(f'torchminmax pred {torch_min_max(pred)}')
-        #print(f'torchminmax gt {torch_min_max(gt)}')
-        
-        #upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
-        #prediction = upscale_depth(pred)
-        
-        #gt_height, gt_width = gt.shape[-2:] 
-
-        #crop = np.array([0.3324324 * gt_height,  0.91351351 * gt_height,
-        #               0.0359477 * gt_width,   0.96405229 * gt_width]).astype(np.int32)
-        
-        #gt = gt[:,:, crop[0]:crop[1], crop[2]:crop[3]]
-        #prediction = prediction[:,:, crop[0]:crop[1], crop[2]:crop[3]]
-        #print(torch_min_max(pred))
-        #print(torch_min_max(gt))
-        pred = F.interpolate(pred,size=(352,608),mode='bilinear')
-        #print_torch_min_max_rgbpredgt(image,pred,gt)
-
-        loss = depth_criterion(pred, gt)
-        print(loss)
-        #print(loss)
-        #print(loss)
-        #a = list(model.parameters())
-        #print(a)
-        
-        #loss.backward()
-        #self.optimizer.step()
+            loss = depth_criterion(pred, gt)
+            
+            a = list(model.parameters())[0].clone()
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            b = list(model.parameters())[0].clone()
+            
+            lr_scheduler.step()
         
         
-        a = list(model.parameters())
-        #print(list(model.parameters()))
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        b = list(model.parameters())#.clone()
+        evaluation_block(epoch)
         
-        print(f'Are any of the network parameters getting updated? {not(a==b)}')
-        #print(f'are any of the network parameters getting updated?{not(torch.equal(a.data, b.data))}')
-        
-        #loss.backward()
-        
-        #optimizer.step()
-        
-        
-        #print(loss)
-
-        pred_d, depth_gt, sparse_depth = pred.squeeze(),gt.squeeze(), sparse.squeeze()
-
-        
-        #pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)
-        #computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
-        #for metric in metric_name:
-        #    result_metrics[metric] += computed_result[metric]
-    
-        # Using dictionary comprehension + keys()
-        # Dictionary Values Division
-        #res = {metric: result_metrics[metric] / float(i+1)
-        #                        for metric in result_metrics.keys()}
-        
-        #VISUALIZE BLOCK
-
-        #Saving depth prediciton data along with original image
-        #visualizer.save_depth_prediction(prediction,data['rgb']*255)
-
-        
-        #Showing plots, results original image, etc
-        #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
-        
-        lr_scheduler.step()
-
-        #evaluation_block(epoch)
-        #asdd
-
-
+        if epoch[1] == 1:
+            print(f'\nStarting loss {loss.item()}')
+        elif epoch[1] == decnet_args.epochs:
+            path = f"weights/{decnet_args.network_model}.pth"
+            torch.save(model.state_dict(), path)
+            print(f"\nSaved model in {path} with last loss {loss.item()}")
+        else:
+            print(f"Current loss: {loss.item()}")
+            
     
 if converted_args_dict['mode'] == 'eval':
     #pass
     evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
-    #evaluation_block(epoch)
+    evaluation_block(epoch)
     training_block()
     #evaluation_block()
     
