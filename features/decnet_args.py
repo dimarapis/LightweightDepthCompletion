@@ -57,7 +57,7 @@ def decnet_args_parser():
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-4,
+                        default=1e-3,
                         type=float,
                         metavar='LR',
                         help='initial learning rate (default 1e-5 in PENET 1e-4 in guided)')

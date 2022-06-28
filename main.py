@@ -143,8 +143,8 @@ optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate)#, momen
 lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer,milestones=[30,50,75,90], gamma=0.1)
 #lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30,80], gamma=0.1)
 
-#depth_criterion = MaskedMSELoss()
-depth_criterion = SiLogLoss()
+depth_criterion = MaskedMSELoss()
+#depth_criterion = SiLogLoss()
 
 #defining index (epoch)
 epoch = 0
@@ -184,7 +184,7 @@ def unpack_and_move(data):
 
 #Iterate images  
 print("\nSTEP 4. Training or eval stage...")
-
+'''
 def metric_block(pred,gt,metric_name,decnet_args):
     model.eval()
     result_metrics = {}
@@ -206,13 +206,11 @@ def metric_block(pred,gt,metric_name,decnet_args):
     print("Results:")
     for key in result_metrics:
         print(key, ' = ', result_metrics[key])
-
+'''
 
 def evaluation_block(epoch):
     print(f"\nSTEP. Testing block... Epoch no: {epoch}")
     #print(optimizer)
-    
- 
     #with torch.no_grad():
     model.eval()
     result_metrics = {}
@@ -266,6 +264,8 @@ def evaluation_block(epoch):
         print(key, ' = ', result_metrics[key])
     
     if decnet_args.wandblogger == True:
+        if epoch != 0:
+            epoch = epoch[1]
         wandb.log(result_metrics, step = epoch)
         #Wandb save sample image
         wandb_image, wandb_depth_colorized = visualizer.wandb_image_prep(image,pred) 
@@ -275,7 +275,7 @@ def evaluation_block(epoch):
 
 
 
-def training_block():
+def training_block(model):
     
     print("\nSTEP. Training block...")
     data = next(iter(train_dl))
@@ -302,7 +302,6 @@ def training_block():
             lr_scheduler.step()
         
         
-        evaluation_block(epoch)
         
         if epoch[1] == 1:
             print(f'\nStarting loss {loss.item()}')
@@ -312,13 +311,19 @@ def training_block():
             print(f"\nSaved model in {path} with last loss {loss.item()}")
         else:
             print(f"Current loss: {loss.item()}")
+
+        if np.isnan(loss.item()):
+            print("ton ipiame")
+            x = list(model.parameters())[0].clone()
+            print(x)#print(model.params())
             
-    
+        evaluation_block(epoch)
+        
 if converted_args_dict['mode'] == 'eval':
     #pass
     evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
     evaluation_block(epoch)
-    training_block()
+    training_block(model)
     #evaluation_block()
     
