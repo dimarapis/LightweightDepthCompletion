@@ -100,7 +100,7 @@ if decnet_args.network_model == "GuideDepth":
     model = GuideDepth(False)
     #print(decnet_args.pretrained)
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/GuideDepth.pth', map_location='cpu'))        
+        model.load_state_dict(torch.load('./weights/GuideDepth.pth', map_location='cuda'))        
 elif decnet_args.network_model == "SparseGuidedDepth":
     model = SparseGuidedDepth(False)
     #if decnet_args.pretrained
@@ -132,9 +132,7 @@ if decnet_args.wandblogger == True:
 #Convering model to tensorrt
 if decnet_args.torch_mode == 'tensorrt':
     from torch2trt import torch2trt
-    model.eval()
-    x = torch.ones((1, 3, 384, 1280)).cuda()
-    model_trt = torch2trt(model, [x])
+    model.eval()GuideDepth
     model = model_trt
 '''
 
@@ -212,7 +210,7 @@ def evaluation_block(epoch):
     print(f"\nSTEP. Testing block... Epoch no: {epoch}")
     #print(optimizer)
     #with torch.no_grad():
-    model.eval()
+    #model.eval()
     result_metrics = {}
     for metric in metric_name:
         result_metrics[metric] = 0.0
@@ -221,6 +219,7 @@ def evaluation_block(epoch):
     #data = next(iter(test_dl))
     #i = 0
     for i, data in enumerate(tqdm(test_dl)):
+        
         model.eval()
         image_filename = data['file']
         #print(image_filename)
@@ -279,9 +278,9 @@ def evaluation_block(epoch):
 def training_block(model):
     
     print("\nSTEP. Training block...")
-    data = next(iter(train_dl))
     for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
         for i, data in enumerate(tqdm(train_dl)):
+        #data = next(iter(train_dl))
                 
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
 
@@ -308,6 +307,7 @@ def training_block(model):
             print(f'\nStarting loss {loss.item()}')
         elif epoch[1] == decnet_args.epochs:
             path = f"weights/{decnet_args.network_model}.pth"
+            #model.to('cpu')
             torch.save(model.state_dict(), path)
             print(f"\nSaved model in {path} with last loss {loss.item()}")
         else:
@@ -318,6 +318,7 @@ def training_block(model):
             x = list(model.parameters())[0].clone()
             print(x)#print(model.params())
             
+        
         evaluation_block(epoch)
         
 if converted_args_dict['mode'] == 'eval':
