@@ -233,7 +233,8 @@ def evaluation_block(epoch):
         
         #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
         pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-        
+        #print_torch_min_max_rgbpredgt(image,pred,gt)            
+
         #upscaling depth to compare (if needed)
         #upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
         #prediction = upscale_depth(pred)
@@ -288,11 +289,11 @@ def training_block(model):
             #inv_pred = model(image,sparse)
             
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
+            #print_torch_min_max_rgbpredgt(image,pred,gt)            
             
-            pred = F.interpolate(pred,size=(352,608),mode='bilinear')
+            #pred = F.interpolate(pred,size=(352,608),mode='bilinear')
 
             loss = depth_criterion(pred, gt)
-            
             a = list(model.parameters())[0].clone()
             optimizer.zero_grad()
             loss.backward()

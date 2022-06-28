@@ -57,12 +57,12 @@ def decnet_args_parser():
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-3,
+                        default=1e-06,
                         type=float,
                         metavar='LR',
-                        help='initial learning rate (default 1e-5 in PENET 1e-4 in guided)')
+                        help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
     parser.add_argument('--weight-decay',
-                        default=0,
+                        default=1e-05,
                         type=float,
                         metavar='W',
                         help='weight decay (default: 0)')
