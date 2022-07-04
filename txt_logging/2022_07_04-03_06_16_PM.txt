@@ -1,0 +1,230 @@
+| network_model                | AuxSparseGuidedDepth                  |
+| pretrained                   | True                                  |
+| message                      | Testing consistency with simple model |
+| mode                         | train                                 |
+| dataset                      | nn                                    |
+| workers                      | 4                                     |
+| epochs                       | 100                                   |
+| criterion                    | l2                                    |
+| batch_size                   | 8                                     |
+| learning_rate                | 0.001                                 |
+| weight_decay                 | 0                                     |
+| print_freq                   | 10                                    |
+| resume                       |                                       |
+| data_folder                  | /datasets                             |
+| convolutional_layer_encoding | xyz                                   |
+| dilation_rate                | 2                                     |
+| val_h                        | 352                                   |
+| val_w                        | 608                                   |
+| train_height                 | 352                                   |
+| train_width                  | 608                                   |
+| min_depth_eval               | 0.1                                   |
+| max_depth_eval               | 80.0                                  |
+| kitti_crop                   | eigen_crop                            |
+| train_datalist               | datalist_train_nn.list                |
+| val_datalist                 | datalist_test_nn.list                 |
+| root_folder                  | data/nn_dataset/                      |
+| torch_mode                   | pytorch                               |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth     |
+| wandblogger                  | True                                  |
+| project                      | depthcompletionpaper                  |
+| entity                       | wandbdimar                            |
+| wandbrunname                 | deletetest                            |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.0628934 |
+| d2       | 0.147176  |
+| d3       | 0.254518  |
+| abs_rel  | 2.17488   |
+| sq_rel   | 4.55621   |
+| rmse     | 1.78303   |
+| rmse_log | 1.06153   |
+| log10    | 0.438165  |
+| silog    | 0.793331  |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.120466 |
+| d2       | 0.232378 |
+| d3       | 0.396057 |
+| abs_rel  | 1.65293  |
+| sq_rel   | 2.83843  |
+| rmse     | 1.44709  |
+| rmse_log | 0.907621 |
+| log10    | 0.365581 |
+| silog    | 0.69633  |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.185137 |
+| d2       | 0.348228 |
+| d3       | 0.577997 |
+| abs_rel  | 1.2271   |
+| sq_rel   | 1.58351  |
+| rmse     | 1.04356  |
+| rmse_log | 0.737912 |
+| log10    | 0.295564 |
+| silog    | 0.572841 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.213218 |
+| d2       | 0.47574  |
+| d3       | 0.664727 |
+| abs_rel  | 1.01959  |
+| sq_rel   | 1.11737  |
+| rmse     | 0.885379 |
+| rmse_log | 0.649847 |
+| log10    | 0.258373 |
+| silog    | 0.507542 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_5.pth 
+| d1       | 0.278237 |
+| d2       | 0.570212 |
+| d3       | 0.711849 |
+| abs_rel  | 0.86491  |
+| sq_rel   | 0.841537 |
+| rmse     | 0.772506 |
+| rmse_log | 0.577377 |
+| log10    | 0.226984 |
+| silog    | 0.457508 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_6.pth 
+| d1       | 0.360319 |
+| d2       | 0.619258 |
+| d3       | 0.736087 |
+| abs_rel  | 0.77079  |
+| sq_rel   | 0.706715 |
+| rmse     | 0.714251 |
+| rmse_log | 0.53261  |
+| log10    | 0.206539 |
+| silog    | 0.427854 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_7.pth 
+| d1       | 0.429518 |
+| d2       | 0.655245 |
+| d3       | 0.752401 |
+| abs_rel  | 0.702821 |
+| sq_rel   | 0.623687 |
+| rmse     | 0.65508  |
+| rmse_log | 0.498783 |
+| log10    | 0.190066 |
+| silog    | 0.404263 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_9.pth 
+| d1       | 0.455169 |
+| d2       | 0.661806 |
+| d3       | 0.763922 |
+| abs_rel  | 0.662639 |
+| sq_rel   | 0.568251 |
+| rmse     | 0.644717 |
+| rmse_log | 0.482651 |
+| log10    | 0.18133  |
+| silog    | 0.390809 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_10.pth 
+| d1       | 0.470771 |
+| d2       | 0.66674  |
+| d3       | 0.772694 |
+| abs_rel  | 0.642025 |
+| sq_rel   | 0.549619 |
+| rmse     | 0.633758 |
+| rmse_log | 0.472328 |
+| log10    | 0.175956 |
+| silog    | 0.384047 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_11.pth 
+| d1       | 0.497055 |
+| d2       | 0.68257  |
+| d3       | 0.785414 |
+| abs_rel  | 0.606934 |
+| sq_rel   | 0.513382 |
+| rmse     | 0.615608 |
+| rmse_log | 0.455463 |
+| log10    | 0.167322 |
+| silog    | 0.373923 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_12.pth 
+| d1       | 0.513249 |
+| d2       | 0.696766 |
+| d3       | 0.79902  |
+| abs_rel  | 0.572193 |
+| sq_rel   | 0.468184 |
+| rmse     | 0.593421 |
+| rmse_log | 0.439055 |
+| log10    | 0.159684 |
+| silog    | 0.362947 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_13.pth 
+| d1       | 0.527615 |
+| d2       | 0.705247 |
+| d3       | 0.804903 |
+| abs_rel  | 0.55896  |
+| sq_rel   | 0.466058 |
+| rmse     | 0.593061 |
+| rmse_log | 0.432615 |
+| log10    | 0.156463 |
+| silog    | 0.360135 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_16.pth 
+| d1       | 0.546419 |
+| d2       | 0.72315  |
+| d3       | 0.820773 |
+| abs_rel  | 0.521312 |
+| sq_rel   | 0.402537 |
+| rmse     | 0.561358 |
+| rmse_log | 0.408099 |
+| log10    | 0.147966 |
+| silog    | 0.339474 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_17.pth 
+| d1       | 0.562919 |
+| d2       | 0.728715 |
+| d3       | 0.825026 |
+| abs_rel  | 0.503098 |
+| sq_rel   | 0.378721 |
+| rmse     | 0.549956 |
+| rmse_log | 0.399466 |
+| log10    | 0.143695 |
+| silog    | 0.33467  |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_18.pth 
+| d1       | 0.578165 |
+| d2       | 0.739803 |
+| d3       | 0.830474 |
+| abs_rel  | 0.494638 |
+| sq_rel   | 0.376184 |
+| rmse     | 0.541246 |
+| rmse_log | 0.3926   |
+| log10    | 0.140941 |
+| silog    | 0.330592 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_26.pth 
+| d1       | 0.555343 |
+| d2       | 0.743507 |
+| d3       | 0.839251 |
+| abs_rel  | 0.491642 |
+| sq_rel   | 0.389436 |
+| rmse     | 0.534759 |
+| rmse_log | 0.390595 |
+| log10    | 0.14032  |
+| silog    | 0.327893 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_29.pth 
+| d1       | 0.568451 |
+| d2       | 0.751009 |
+| d3       | 0.842228 |
+| abs_rel  | 0.475613 |
+| sq_rel   | 0.362169 |
+| rmse     | 0.529094 |
+| rmse_log | 0.382751 |
+| log10    | 0.136977 |
+| silog    | 0.322345 |
+
+New model saved: weights/2022_07_04-03_06_16_PM/AuxSparseGuidedDepth_30.pth 
+| d1       | 0.5785   |
+| d2       | 0.754735 |
+| d3       | 0.845437 |
+| abs_rel  | 0.466594 |
+| sq_rel   | 0.357363 |
+| rmse     | 0.523864 |
+| rmse_log | 0.378832 |
+| log10    | 0.134248 |
+| silog    | 0.321187 |

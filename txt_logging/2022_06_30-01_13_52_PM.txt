@@ -1,0 +1,77 @@
+| network_model                | SparseAndRGBGuidedDepth                   |
+| pretrained                   | False                                     |
+| message                      | testtorchminmax                           |
+| mode                         | train                                     |
+| dataset                      | nn                                        |
+| workers                      | 4                                         |
+| epochs                       | 100                                       |
+| criterion                    | l2                                        |
+| batch_size                   | 8                                         |
+| learning_rate                | 0.0001                                    |
+| weight_decay                 | 0                                         |
+| print_freq                   | 10                                        |
+| resume                       |                                           |
+| data_folder                  | /datasets                                 |
+| convolutional_layer_encoding | xyz                                       |
+| dilation_rate                | 2                                         |
+| val_h                        | 352                                       |
+| val_w                        | 608                                       |
+| train_height                 | 352                                       |
+| train_width                  | 608                                       |
+| min_depth_eval               | 0.1                                       |
+| max_depth_eval               | 80.0                                      |
+| kitti_crop                   | eigen_crop                                |
+| train_datalist               | train_dim_kitti.list                      |
+| val_datalist                 | val_dim_kitti.list                        |
+| root_folder                  | data/kitti_dataset/val_selection_cropped/ |
+| torch_mode                   | pytorch                                   |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth         |
+| wandblogger                  | True                                      |
+| project                      | depthcompletionpaper                      |
+| entity                       | wandbdimar                                |
+| wandbrunname                 | testpronttorchminmax                      |
+Scheduler settings: {'milestones': Counter({30: 1, 50: 1, 75: 1, 90: 1}), 'gamma': 0.1, 'base_lrs': [0.0001], 'last_epoch': 0, '_step_count': 1, 'verbose': False, '_get_lr_called_within_step': False, '_last_lr': [0.0001]}
+
+New model saved: weights/2022_06_30-01_13_52_PM/SparseAndRGBGuidedDepth_1.pth 
+| d1       |  0.134558 |
+| d2       |  0.27814  |
+| d3       |  0.432194 |
+| abs_rel  |  1.27992  |
+| sq_rel   | 23.8697   |
+| rmse     | 17.3354   |
+| rmse_log |  1.0909   |
+| log10    |  0.366797 |
+| silog    |  1.00279  |
+
+New model saved: weights/2022_06_30-01_13_52_PM/SparseAndRGBGuidedDepth_2.pth 
+| d1       |  0.261697 |
+| d2       |  0.501172 |
+| d3       |  0.706985 |
+| abs_rel  |  0.708086 |
+| sq_rel   |  7.85166  |
+| rmse     | 10.361    |
+| rmse_log |  0.691339 |
+| log10    |  0.223385 |
+| silog    |  0.624325 |
+
+New model saved: weights/2022_06_30-01_13_52_PM/SparseAndRGBGuidedDepth_3.pth 
+| d1       | 0.381564 |
+| d2       | 0.657976 |
+| d3       | 0.855128 |
+| abs_rel  | 0.488875 |
+| sq_rel   | 4.17576  |
+| rmse     | 7.95881  |
+| rmse_log | 0.535216 |
+| log10    | 0.16543  |
+| silog    | 0.488118 |
+
+New model saved: weights/2022_06_30-01_13_52_PM/SparseAndRGBGuidedDepth_4.pth 
+| d1       | 0.475957 |
+| d2       | 0.763245 |
+| d3       | 0.927998 |
+| abs_rel  | 0.376256 |
+| sq_rel   | 2.70045  |
+| rmse     | 6.66736  |
+| rmse_log | 0.439131 |
+| log10    | 0.132814 |
+| silog    | 0.403067 |

@@ -1,0 +1,76 @@
+| network_model                | AuxSparseGuidedDepth                  |
+| pretrained                   | True                                  |
+| message                      | Testing consistency with simple model |
+| mode                         | train                                 |
+| dataset                      | nn                                    |
+| workers                      | 4                                     |
+| epochs                       | 100                                   |
+| criterion                    | l2                                    |
+| batch_size                   | 8                                     |
+| learning_rate                | 0.001                                 |
+| weight_decay                 | 0                                     |
+| print_freq                   | 10                                    |
+| resume                       |                                       |
+| data_folder                  | /datasets                             |
+| convolutional_layer_encoding | xyz                                   |
+| dilation_rate                | 2                                     |
+| val_h                        | 352                                   |
+| val_w                        | 608                                   |
+| train_height                 | 352                                   |
+| train_width                  | 608                                   |
+| min_depth_eval               | 0.1                                   |
+| max_depth_eval               | 80.0                                  |
+| kitti_crop                   | eigen_crop                            |
+| train_datalist               | datalist_train_nn.list                |
+| val_datalist                 | datalist_test_nn.list                 |
+| root_folder                  | data/nn_dataset/                      |
+| torch_mode                   | pytorch                               |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth     |
+| wandblogger                  | True                                  |
+| project                      | depthcompletionpaper                  |
+| entity                       | wandbdimar                            |
+| wandbrunname                 | deletetest                            |
+
+New model saved: weights/2022_07_04-03_31_56_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.0628317 |
+| d2       | 0.147201  |
+| d3       | 0.254632  |
+| abs_rel  | 2.17348   |
+| sq_rel   | 4.54947   |
+| rmse     | 1.78161   |
+| rmse_log | 1.06115   |
+| log10    | 0.438012  |
+| silog    | 0.79304   |
+
+New model saved: weights/2022_07_04-03_31_56_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.111844 |
+| d2       | 0.218031 |
+| d3       | 0.39554  |
+| abs_rel  | 1.67175  |
+| sq_rel   | 2.86035  |
+| rmse     | 1.45936  |
+| rmse_log | 0.910864 |
+| log10    | 0.369267 |
+| silog    | 0.690081 |
+
+New model saved: weights/2022_07_04-03_31_56_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.17938  |
+| d2       | 0.386161 |
+| d3       | 0.622139 |
+| abs_rel  | 1.15551  |
+| sq_rel   | 1.39522  |
+| rmse     | 0.982467 |
+| rmse_log | 0.707077 |
+| log10    | 0.283634 |
+| silog    | 0.547137 |
+
+New model saved: weights/2022_07_04-03_31_56_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.223006 |
+| d2       | 0.503693 |
+| d3       | 0.688077 |
+| abs_rel  | 0.96191  |
+| sq_rel   | 0.994008 |
+| rmse     | 0.825413 |
+| rmse_log | 0.623511 |
+| log10    | 0.247757 |
+| silog    | 0.488225 |

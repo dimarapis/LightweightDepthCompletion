@@ -1,0 +1,154 @@
+| network_model                | SparseAndRGBGuidedDepth                               |
+| pretrained                   | False                                                 |
+| message                      | KITTI 600/400 dataset - RGBD input- encoderpretrained |
+| mode                         | train                                                 |
+| dataset                      | nn                                                    |
+| workers                      | 4                                                     |
+| epochs                       | 100                                                   |
+| criterion                    | l2                                                    |
+| batch_size                   | 8                                                     |
+| learning_rate                | 0.0001                                                |
+| weight_decay                 | 0                                                     |
+| print_freq                   | 10                                                    |
+| resume                       |                                                       |
+| data_folder                  | /datasets                                             |
+| convolutional_layer_encoding | xyz                                                   |
+| dilation_rate                | 2                                                     |
+| val_h                        | 352                                                   |
+| val_w                        | 608                                                   |
+| train_height                 | 352                                                   |
+| train_width                  | 608                                                   |
+| min_depth_eval               | 0.1                                                   |
+| max_depth_eval               | 80.0                                                  |
+| kitti_crop                   | eigen_crop                                            |
+| train_datalist               | train_dim_kitti.list                                  |
+| val_datalist                 | val_dim_kitti.list                                    |
+| root_folder                  | data/kitti_dataset/val_selection_cropped/             |
+| torch_mode                   | pytorch                                               |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                     |
+| wandblogger                  | True                                                  |
+| project                      | depthcompletionpaper                                  |
+| entity                       | wandbdimar                                            |
+| wandbrunname                 | KITTI-RGBD-encoderpretrained-2                        |
+Scheduler settings: {'milestones': Counter({30: 1, 50: 1, 75: 1, 90: 1}), 'gamma': 0.1, 'base_lrs': [0.0001], 'last_epoch': 0, '_step_count': 1, 'verbose': False, '_get_lr_called_within_step': False, '_last_lr': [0.0001]}
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_1.pth 
+| d1       |  0.133695 |
+| d2       |  0.276914 |
+| d3       |  0.433232 |
+| abs_rel  |  1.27411  |
+| sq_rel   | 23.696    |
+| rmse     | 17.3698   |
+| rmse_log |  1.10304  |
+| log10    |  0.368802 |
+| silog    |  1.01902  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_2.pth 
+| d1       |  0.271231 |
+| d2       |  0.511411 |
+| d3       |  0.717881 |
+| abs_rel  |  0.691224 |
+| sq_rel   |  7.52675  |
+| rmse     | 10.1041   |
+| rmse_log |  0.674437 |
+| log10    |  0.218277 |
+| silog    |  0.608736 |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_3.pth 
+| d1       | 0.36855  |
+| d2       | 0.648519 |
+| d3       | 0.84843  |
+| abs_rel  | 0.500932 |
+| sq_rel   | 4.35774  |
+| rmse     | 8.16754  |
+| rmse_log | 0.549802 |
+| log10    | 0.169488 |
+| silog    | 0.50155  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_4.pth 
+| d1       | 0.47873  |
+| d2       | 0.762657 |
+| d3       | 0.927153 |
+| abs_rel  | 0.375678 |
+| sq_rel   | 2.70907  |
+| rmse     | 6.70786  |
+| rmse_log | 0.443407 |
+| log10    | 0.132937 |
+| silog    | 0.408276 |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_5.pth 
+| d1       | 0.56999  |
+| d2       | 0.851144 |
+| d3       | 0.960224 |
+| abs_rel  | 0.293812 |
+| sq_rel   | 1.84438  |
+| rmse     | 5.74752  |
+| rmse_log | 0.364348 |
+| log10    | 0.107503 |
+| silog    | 0.338396 |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_6.pth 
+| d1       | 0.647729  |
+| d2       | 0.905849  |
+| d3       | 0.974511  |
+| abs_rel  | 0.239569  |
+| sq_rel   | 1.36791   |
+| rmse     | 5.13747   |
+| rmse_log | 0.310488  |
+| log10    | 0.0901487 |
+| silog    | 0.291595  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_7.pth 
+| d1       | 0.722725  |
+| d2       | 0.936754  |
+| d3       | 0.982965  |
+| abs_rel  | 0.198339  |
+| sq_rel   | 1.05406   |
+| rmse     | 4.65389   |
+| rmse_log | 0.265668  |
+| log10    | 0.0765468 |
+| silog    | 0.253051  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_8.pth 
+| d1       | 0.778198  |
+| d2       | 0.952305  |
+| d3       | 0.987554  |
+| abs_rel  | 0.17099   |
+| sq_rel   | 0.851927  |
+| rmse     | 4.27968   |
+| rmse_log | 0.232984  |
+| log10    | 0.0674279 |
+| silog    | 0.224675  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_11.pth 
+| d1       | 0.803938  |
+| d2       | 0.959746  |
+| d3       | 0.990193  |
+| abs_rel  | 0.165079  |
+| sq_rel   | 0.746956  |
+| rmse     | 3.94649   |
+| rmse_log | 0.208055  |
+| log10    | 0.0646476 |
+| silog    | 0.196067  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_12.pth 
+| d1       | 0.822579  |
+| d2       | 0.961385  |
+| d3       | 0.990123  |
+| abs_rel  | 0.158822  |
+| sq_rel   | 0.750642  |
+| rmse     | 3.84223   |
+| rmse_log | 0.196529  |
+| log10    | 0.0613966 |
+| silog    | 0.182739  |
+
+New model saved: weights/2022_06_30-01_08_02_PM/SparseAndRGBGuidedDepth_13.pth 
+| d1       | 0.864684  |
+| d2       | 0.972255  |
+| d3       | 0.993343  |
+| abs_rel  | 0.129358  |
+| sq_rel   | 0.577169  |
+| rmse     | 3.5846    |
+| rmse_log | 0.172462  |
+| log10    | 0.0516008 |
+| silog    | 0.165291  |

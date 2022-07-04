@@ -1,0 +1,65 @@
+| network_model                | AuxGuideDepth                     |
+| pretrained                   | True                              |
+| message                      | zzzzz                             |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | frozenwholenewtork                |
+
+New model saved: weights/2022_06_30-06_24_05_PM/AuxGuideDepth_1.pth 
+| d1       |  0.0045344 |
+| d2       |  0.0108755 |
+| d3       |  0.0180781 |
+| abs_rel  |  6.32507   |
+| sq_rel   | 34.8555    |
+| rmse     |  5.28706   |
+| rmse_log |  1.88397   |
+| log10    |  0.805155  |
+| silog    |  1.35403   |
+
+New model saved: weights/2022_06_30-06_24_05_PM/AuxGuideDepth_2.pth 
+| d1       |  0.00687094 |
+| d2       |  0.0155056  |
+| d3       |  0.0385746  |
+| abs_rel  |  4.87436    |
+| sq_rel   | 20.7417     |
+| rmse     |  3.97912    |
+| rmse_log |  1.66062    |
+| log10    |  0.707084   |
+| silog    |  1.19862    |
+
+New model saved: weights/2022_06_30-06_24_05_PM/AuxGuideDepth_3.pth 
+| d1       |  0.00839228 |
+| d2       |  0.0230942  |
+| d3       |  0.0560364  |
+| abs_rel  |  4.04974    |
+| sq_rel   | 14.4068     |
+| rmse     |  3.27626    |
+| rmse_log |  1.51198    |
+| log10    |  0.64203    |
+| silog    |  1.09429    |

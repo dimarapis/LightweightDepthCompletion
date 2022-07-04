@@ -31,7 +31,13 @@ module load numpy/1.21.1-python-3.8.11-openblas-0.3.17
 module load cuda/10.2
 alias python="python3"
 
-python main.py -m "RGBD, untrained encoder, no custom init, train KITTI_600, test_KITTI_400"
+#python main.py --network-model SparseGuidedDepth -m "BATCHOVERFIT - NN - RGB input - encoderpretrained" --wandblogger WANDBLOGGER --wandbrunname "BATCHOVERFIT-NN-RGB-untrained" 
+#python main.py --network-model SparseAndRGBGuidedDepth -m "visualize kitti GT" --wandblogger WANDBLOGGER --wandbrunname "visualizekittiGT"
+#python main.py --network-model SparseAndRGBGuidedDepth -m "NN 500/100 dataset - RGBD input - encoderpretrained" --wandblogger WANDBLOGGER --wandbrunname "NN-RGBD-encoderpretrained-2"
+#python main.py --network-model SparseGuidedDepth -m "NN 500/100 dataset - D input - encoderpretrained" --wandblogger WANDBLOGGER --wandbrunname "NN-D-encoder-pretrained-7"
+#python main.py --network-model AuxSparseGuidedDepth -m "DepthCorrectionRefinement" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname DepthCorrectionRefineme
+#python main.py --network-model AuxSparseGuidedDepth -m DepthCorrectionRefinement --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname DepthCorrectionRefinementlrscheduler 
 
-
+#python main.py --network-model AuxSparseGuidedDepth -m "Testing consistency with simple model" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname Test_2 
+python main.py --network-model AuxSparseGuidedDepth -m "Testing consistency with simple model" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname deletetest
 ## submit by using: bsub < job_run.sh

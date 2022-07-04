@@ -1,0 +1,121 @@
+| network_model                | SparseAndRGBGuidedDepth                    |
+| pretrained                   | False                                      |
+| message                      | BATCHOVERFIT - NN - RGBD input - untrained |
+| mode                         | train                                      |
+| dataset                      | nn                                         |
+| workers                      | 4                                          |
+| epochs                       | 100                                        |
+| criterion                    | l2                                         |
+| batch_size                   | 8                                          |
+| learning_rate                | 0.0001                                     |
+| weight_decay                 | 0                                          |
+| print_freq                   | 10                                         |
+| resume                       |                                            |
+| data_folder                  | /datasets                                  |
+| convolutional_layer_encoding | xyz                                        |
+| dilation_rate                | 2                                          |
+| val_h                        | 352                                        |
+| val_w                        | 608                                        |
+| train_height                 | 352                                        |
+| train_width                  | 608                                        |
+| min_depth_eval               | 0.1                                        |
+| max_depth_eval               | 80.0                                       |
+| kitti_crop                   | eigen_crop                                 |
+| train_datalist               | 8batch_overfit_nn.list                     |
+| val_datalist                 | 8batch_overfit_nn.list                     |
+| root_folder                  | data/nn_dataset/                           |
+| torch_mode                   | pytorch                                    |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth          |
+| wandblogger                  | True                                       |
+| project                      | depthcompletionpaper                       |
+| entity                       | wandbdimar                                 |
+| wandbrunname                 | BATCHOVERFIT-NN-RGBD-untrained             |
+Scheduler settings: {'milestones': Counter({30: 1, 50: 1, 75: 1, 90: 1}), 'gamma': 0.1, 'base_lrs': [0.0001], 'last_epoch': 0, '_step_count': 1, 'verbose': False, '_get_lr_called_within_step': False, '_last_lr': [0.0001]}
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_1.pth 
+| d1       |    0           |
+| d2       |    0           |
+| d3       |    7.12088e-05 |
+| abs_rel  |   59.9928      |
+| sq_rel   | 4721.58        |
+| rmse     |   77.8882      |
+| rmse_log |    3.97488     |
+| log10    |    1.70148     |
+| silog    |    2.85044     |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_19.pth 
+| d1       |    3.32703e-06 |
+| d2       |    6.73321e-06 |
+| d3       |    0.000380687 |
+| abs_rel  |   59.9671      |
+| sq_rel   | 4719.54        |
+| rmse     |   77.8671      |
+| rmse_log |    3.9739      |
+| log10    |    1.70074     |
+| silog    |    2.85077     |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_20.pth 
+| d1       |    0.0114028 |
+| d2       |    0.0473344 |
+| d3       |    0.0894395 |
+| abs_rel  |   51.4758    |
+| sq_rel   | 4046.98      |
+| rmse     |   71.0686    |
+| rmse_log |    3.65514   |
+| log10    |    1.47427   |
+| silog    |    2.88173   |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_21.pth 
+| d1       |    0.139879 |
+| d2       |    0.25953  |
+| d3       |    0.358618 |
+| abs_rel  |   22.1134   |
+| sq_rel   | 1719.19     |
+| rmse     |   44.7596   |
+| rmse_log |    2.45325  |
+| log10    |    0.796528 |
+| silog    |    2.36916  |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_22.pth 
+| d1       |   0.186297 |
+| d2       |   0.342588 |
+| d3       |   0.468461 |
+| abs_rel  |  10.8169   |
+| sq_rel   | 823.624    |
+| rmse     |  29.077    |
+| rmse_log |   1.80241  |
+| log10    |   0.540766 |
+| silog    |   1.78837  |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_23.pth 
+| d1       |   0.214432 |
+| d2       |   0.381003 |
+| d3       |   0.512894 |
+| abs_rel  |   5.9501   |
+| sq_rel   | 437.662    |
+| rmse     |  19.7163   |
+| rmse_log |   1.44358  |
+| log10    |   0.436864 |
+| silog    |   1.39733  |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_24.pth 
+| d1       |   0.223569 |
+| d2       |   0.392636 |
+| d3       |   0.526812 |
+| abs_rel  |   4.39857  |
+| sq_rel   | 313.185    |
+| rmse     |  15.3157   |
+| rmse_log |   1.30565  |
+| log10    |   0.406879 |
+| silog    |   1.23147  |
+
+New model saved: weights/2022_06_30-01_49_22_PM/SparseAndRGBGuidedDepth_25.pth 
+| d1       |   0.221145 |
+| d2       |   0.390056 |
+| d3       |   0.524127 |
+| abs_rel  |   4.3801   |
+| sq_rel   | 299.81     |
+| rmse     |  14.4689   |
+| rmse_log |   1.30423  |
+| log10    |   0.411374 |
+| silog    |   1.22416  |

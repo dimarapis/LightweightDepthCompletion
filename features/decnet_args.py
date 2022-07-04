@@ -12,7 +12,7 @@ def decnet_args_parser():
     parser.add_argument('--network-model',
                         type=str,
                         default="GuideDepth",
-                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "ENET2021"],
+                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth"],
                         help='choose a model'
                         )
     parser.add_argument('--pretrained',
@@ -57,7 +57,7 @@ def decnet_args_parser():
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-04,
+                        default=1e-3,
                         type=float,
                         metavar='LR',
                         help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
@@ -128,22 +128,24 @@ def decnet_args_parser():
                         #metavar='N',
                         help='which crop to follow for validationmetrics')
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='datalist_train_nn.list',
+                        default='datalist_train_nn.list',
                         #default='train_dim_kitti.list',
-                        default='8batch_dim_kitti.list',
+                        #default='8batch_dim_kitti.list',
+                        #default='8batch_overfit_nn.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='datalist_test_nn.list',
+                        default='datalist_test_nn.list',
                         #default='val_dim_kitti.list',
-                        default='8batch_dim_kitti.list',
+                        #default='8batch_dim_kitti.list',
+                        #default='8batch_overfit_nn.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--root_folder', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='data/nn_dataset/',
-                        default='data/kitti_dataset/val_selection_cropped/',
+                        default='data/nn_dataset/',
+                        #default='data/kitti_dataset/val_selection_cropped/',
                         type=str,
                         #required=True,
                         help='Root folder where the list and data is located')
@@ -153,6 +155,11 @@ def decnet_args_parser():
                         type=str,
                         #required=True,
                         help='Decide if you run with pytorch or tensorrt')
+
+    parser.add_argument('--saved_weights',
+                        default='weights/KITTI_Full_GuideDepth.pth',
+                        type=str,
+                        help='Location of saved weights')
     
     #WANDB args
     parser.add_argument('--wandblogger', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
@@ -161,7 +168,7 @@ def decnet_args_parser():
                         help='Parameter to decide if we store wandb or not')
     
     parser.add_argument('--project', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='depth',
+                        default='depthcompletionpaper',
                         type=str,
                         #metavar='N',
                         help='Project name when saving in wandb')
@@ -170,6 +177,11 @@ def decnet_args_parser():
                         type=str,
                         #required=True,
                         help='Entity name when saving in wandb')
+    parser.add_argument('--wandbrunname', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
+                        default='',
+                        type=str,
+                        #required=True,
+                        help='Run name when saving in wandb')
     
     
     #args parser

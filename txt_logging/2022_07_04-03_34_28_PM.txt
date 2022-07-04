@@ -1,0 +1,98 @@
+| network_model                | AuxSparseGuidedDepth                  |
+| pretrained                   | True                                  |
+| message                      | Testing consistency with simple model |
+| mode                         | train                                 |
+| dataset                      | nn                                    |
+| workers                      | 4                                     |
+| epochs                       | 100                                   |
+| criterion                    | l2                                    |
+| batch_size                   | 8                                     |
+| learning_rate                | 0.001                                 |
+| weight_decay                 | 0                                     |
+| print_freq                   | 10                                    |
+| resume                       |                                       |
+| data_folder                  | /datasets                             |
+| convolutional_layer_encoding | xyz                                   |
+| dilation_rate                | 2                                     |
+| val_h                        | 352                                   |
+| val_w                        | 608                                   |
+| train_height                 | 352                                   |
+| train_width                  | 608                                   |
+| min_depth_eval               | 0.1                                   |
+| max_depth_eval               | 80.0                                  |
+| kitti_crop                   | eigen_crop                            |
+| train_datalist               | datalist_train_nn.list                |
+| val_datalist                 | datalist_test_nn.list                 |
+| root_folder                  | data/nn_dataset/                      |
+| torch_mode                   | pytorch                               |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth     |
+| wandblogger                  | True                                  |
+| project                      | depthcompletionpaper                  |
+| entity                       | wandbdimar                            |
+| wandbrunname                 | deletetest                            |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.0627413 |
+| d2       | 0.147073  |
+| d3       | 0.25448   |
+| abs_rel  | 2.17363   |
+| sq_rel   | 4.54856   |
+| rmse     | 1.78183   |
+| rmse_log | 1.06127   |
+| log10    | 0.438086  |
+| silog    | 0.793094  |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.111782 |
+| d2       | 0.217014 |
+| d3       | 0.39062  |
+| abs_rel  | 1.6786   |
+| sq_rel   | 2.9127   |
+| rmse     | 1.48285  |
+| rmse_log | 0.917568 |
+| log10    | 0.370526 |
+| silog    | 0.699227 |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.18171  |
+| d2       | 0.35666  |
+| d3       | 0.582972 |
+| abs_rel  | 1.21854  |
+| sq_rel   | 1.55187  |
+| rmse     | 1.04149  |
+| rmse_log | 0.734216 |
+| log10    | 0.294425 |
+| silog    | 0.569814 |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.208213 |
+| d2       | 0.469922 |
+| d3       | 0.663945 |
+| abs_rel  | 0.999767 |
+| sq_rel   | 1.06915  |
+| rmse     | 0.880293 |
+| rmse_log | 0.648787 |
+| log10    | 0.256646 |
+| silog    | 0.505841 |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_5.pth 
+| d1       | 0.265039 |
+| d2       | 0.549572 |
+| d3       | 0.696339 |
+| abs_rel  | 0.882219 |
+| sq_rel   | 0.881225 |
+| rmse     | 0.809571 |
+| rmse_log | 0.595104 |
+| log10    | 0.231844 |
+| silog    | 0.470672 |
+
+New model saved: weights/2022_07_04-03_34_28_PM/AuxSparseGuidedDepth_6.pth 
+| d1       | 0.316539 |
+| d2       | 0.580752 |
+| d3       | 0.711862 |
+| abs_rel  | 0.811626 |
+| sq_rel   | 0.795218 |
+| rmse     | 0.794375 |
+| rmse_log | 0.56885  |
+| log10    | 0.216916 |
+| silog    | 0.454537 |
