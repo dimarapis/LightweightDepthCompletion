@@ -1,0 +1,175 @@
+| network_model                | AuxSparseGuidedDepth              |
+| pretrained                   | True                              |
+| message                      | Testing PENET refinement          |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 4                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | deletetest                        |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.589802 |
+| d2       | 0.750873 |
+| d3       | 0.844298 |
+| abs_rel  | 0.447669 |
+| sq_rel   | 0.313273 |
+| rmse     | 0.51289  |
+| rmse_log | 0.37316  |
+| log10    | 0.131858 |
+| silog    | 0.316288 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.594929 |
+| d2       | 0.756724 |
+| d3       | 0.849639 |
+| abs_rel  | 0.432385 |
+| sq_rel   | 0.292345 |
+| rmse     | 0.502563 |
+| rmse_log | 0.36555  |
+| log10    | 0.128941 |
+| silog    | 0.311254 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.59827  |
+| d2       | 0.761709 |
+| d3       | 0.854342 |
+| abs_rel  | 0.419622 |
+| sq_rel   | 0.275022 |
+| rmse     | 0.49406  |
+| rmse_log | 0.35917  |
+| log10    | 0.126599 |
+| silog    | 0.30703  |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.600635 |
+| d2       | 0.766186 |
+| d3       | 0.85845  |
+| abs_rel  | 0.40916  |
+| sq_rel   | 0.261    |
+| rmse     | 0.487261 |
+| rmse_log | 0.353926 |
+| log10    | 0.124757 |
+| silog    | 0.303565 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_5.pth 
+| d1       | 0.602774 |
+| d2       | 0.770004 |
+| d3       | 0.861964 |
+| abs_rel  | 0.400661 |
+| sq_rel   | 0.249749 |
+| rmse     | 0.481888 |
+| rmse_log | 0.349687 |
+| log10    | 0.123328 |
+| silog    | 0.300786 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_6.pth 
+| d1       | 0.604457 |
+| d2       | 0.773309 |
+| d3       | 0.86508  |
+| abs_rel  | 0.393591 |
+| sq_rel   | 0.240456 |
+| rmse     | 0.477609 |
+| rmse_log | 0.346226 |
+| log10    | 0.122202 |
+| silog    | 0.298536 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_7.pth 
+| d1       | 0.605247 |
+| d2       | 0.776055 |
+| d3       | 0.86764  |
+| abs_rel  | 0.387594 |
+| sq_rel   | 0.232682 |
+| rmse     | 0.474303 |
+| rmse_log | 0.343403 |
+| log10    | 0.121303 |
+| silog    | 0.296738 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_8.pth 
+| d1       | 0.605729 |
+| d2       | 0.77833  |
+| d3       | 0.869733 |
+| abs_rel  | 0.382532 |
+| sq_rel   | 0.226232 |
+| rmse     | 0.471838 |
+| rmse_log | 0.341133 |
+| log10    | 0.120593 |
+| silog    | 0.295328 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_9.pth 
+| d1       | 0.605888 |
+| d2       | 0.780127 |
+| d3       | 0.871458 |
+| abs_rel  | 0.378248 |
+| sq_rel   | 0.220847 |
+| rmse     | 0.470033 |
+| rmse_log | 0.339314 |
+| log10    | 0.12004  |
+| silog    | 0.294226 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_10.pth 
+| d1       | 0.605626 |
+| d2       | 0.78178  |
+| d3       | 0.872963 |
+| abs_rel  | 0.374576 |
+| sq_rel   | 0.216291 |
+| rmse     | 0.468734 |
+| rmse_log | 0.337851 |
+| log10    | 0.119605 |
+| silog    | 0.293361 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_11.pth 
+| d1       | 0.605097 |
+| d2       | 0.783193 |
+| d3       | 0.874231 |
+| abs_rel  | 0.371435 |
+| sq_rel   | 0.212413 |
+| rmse     | 0.467865 |
+| rmse_log | 0.336692 |
+| log10    | 0.119274 |
+| silog    | 0.292697 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_12.pth 
+| d1       | 0.604282 |
+| d2       | 0.784249 |
+| d3       | 0.87534  |
+| abs_rel  | 0.368761 |
+| sq_rel   | 0.209133 |
+| rmse     | 0.467377 |
+| rmse_log | 0.335799 |
+| log10    | 0.119033 |
+| silog    | 0.292205 |
+
+New model saved: weights/2022_07_05-01_09_56_PM/AuxSparseGuidedDepth_13.pth 
+| d1       | 0.603221 |
+| d2       | 0.784939 |
+| d3       | 0.876148 |
+| abs_rel  | 0.366505 |
+| sq_rel   | 0.206386 |
+| rmse     | 0.467197 |
+| rmse_log | 0.335133 |
+| log10    | 0.118869 |
+| silog    | 0.291862 |

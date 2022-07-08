@@ -1,0 +1,54 @@
+| network_model                | AuxSparseGuidedDepth                                                    |
+| pretrained                   | True                                                                    |
+| message                      | basemodel trained on kitti, full model finetuned on NN - initiallr 1-e5 |
+| mode                         | train                                                                   |
+| dataset                      | nn                                                                      |
+| workers                      | 4                                                                       |
+| epochs                       | 100                                                                     |
+| criterion                    | l2                                                                      |
+| batch_size                   | 4                                                                       |
+| learning_rate                | 1e-05                                                                   |
+| weight_decay                 | 0                                                                       |
+| print_freq                   | 10                                                                      |
+| resume                       |                                                                         |
+| data_folder                  | /datasets                                                               |
+| convolutional_layer_encoding | xyz                                                                     |
+| dilation_rate                | 2                                                                       |
+| val_h                        | 352                                                                     |
+| val_w                        | 608                                                                     |
+| train_height                 | 352                                                                     |
+| train_width                  | 608                                                                     |
+| min_depth_eval               | 0.1                                                                     |
+| max_depth_eval               | 80.0                                                                    |
+| kitti_crop                   | eigen_crop                                                              |
+| train_datalist               | datalist_train_nn.list                                                  |
+| val_datalist                 | datalist_test_nn.list                                                   |
+| root_folder                  | data/nn_dataset/                                                        |
+| torch_mode                   | pytorch                                                                 |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                                       |
+| wandblogger                  | True                                                                    |
+| project                      | depthcompletionpaper                                                    |
+| entity                       | wandbdimar                                                              |
+| wandbrunname                 | test_wandbsavesecondimage                                               |
+
+New model saved: weights/2022_07_06-11_50_53_AM/AuxSparseGuidedDepth_1.pth 
+| d1       |  0.0429294 |
+| d2       |  0.11386   |
+| d3       |  0.21129   |
+| abs_rel  |  2.55155   |
+| sq_rel   | 15.954     |
+| rmse     |  5.0852    |
+| rmse_log |  1.14187   |
+| log10    |  0.476751  |
+| silog    |  0.846459  |
+
+New model saved: weights/2022_07_06-11_50_53_AM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.048513 |
+| d2       | 0.167973 |
+| d3       | 0.302813 |
+| abs_rel  | 1.89003  |
+| sq_rel   | 8.5627   |
+| rmse     | 3.85063  |
+| rmse_log | 0.97381  |
+| log10    | 0.404429 |
+| silog    | 0.721153 |

@@ -1,0 +1,76 @@
+| network_model                | AuxSparseGuidedDepth              |
+| pretrained                   | True                              |
+| message                      | Testing PENET refinement          |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 2                                 |
+| learning_rate                | 1e-06                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | deletetest                        |
+
+New model saved: weights/2022_07_05-02_13_49_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.589541 |
+| d2       | 0.750853 |
+| d3       | 0.845255 |
+| abs_rel  | 0.446569 |
+| sq_rel   | 0.313235 |
+| rmse     | 0.514021 |
+| rmse_log | 0.373196 |
+| log10    | 0.131735 |
+| silog    | 0.316537 |
+
+New model saved: weights/2022_07_05-02_13_49_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.593828 |
+| d2       | 0.756756 |
+| d3       | 0.851758 |
+| abs_rel  | 0.429903 |
+| sq_rel   | 0.291306 |
+| rmse     | 0.50468  |
+| rmse_log | 0.365528 |
+| log10    | 0.128713 |
+| silog    | 0.311699 |
+
+New model saved: weights/2022_07_05-02_13_49_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.595434 |
+| d2       | 0.762336 |
+| d3       | 0.857487 |
+| abs_rel  | 0.415792 |
+| sq_rel   | 0.272555 |
+| rmse     | 0.497455 |
+| rmse_log | 0.359213 |
+| log10    | 0.126378 |
+| silog    | 0.307803 |
+
+New model saved: weights/2022_07_05-02_13_49_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.596134 |
+| d2       | 0.766948 |
+| d3       | 0.862612 |
+| abs_rel  | 0.404164 |
+| sq_rel   | 0.257132 |
+| rmse     | 0.492605 |
+| rmse_log | 0.354346 |
+| log10    | 0.124685 |
+| silog    | 0.304963 |

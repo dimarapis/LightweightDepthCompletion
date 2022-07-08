@@ -1,0 +1,76 @@
+| network_model                | AuxSparseGuidedDepth                                    |
+| pretrained                   | True                                                    |
+| message                      | Corrected division in nn dataset, retraining base model |
+| mode                         | train                                                   |
+| dataset                      | nn                                                      |
+| workers                      | 4                                                       |
+| epochs                       | 100                                                     |
+| criterion                    | l2                                                      |
+| batch_size                   | 4                                                       |
+| learning_rate                | 0.001                                                   |
+| weight_decay                 | 0                                                       |
+| print_freq                   | 10                                                      |
+| resume                       |                                                         |
+| data_folder                  | /datasets                                               |
+| convolutional_layer_encoding | xyz                                                     |
+| dilation_rate                | 2                                                       |
+| val_h                        | 352                                                     |
+| val_w                        | 608                                                     |
+| train_height                 | 352                                                     |
+| train_width                  | 608                                                     |
+| min_depth_eval               | 0.1                                                     |
+| max_depth_eval               | 80.0                                                    |
+| kitti_crop                   | eigen_crop                                              |
+| train_datalist               | datalist_train_nn.list                                  |
+| val_datalist                 | datalist_test_nn.list                                   |
+| root_folder                  | data/nn_dataset/                                        |
+| torch_mode                   | pytorch                                                 |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                       |
+| wandblogger                  | True                                                    |
+| project                      | depthcompletionpaper                                    |
+| entity                       | wandbdimar                                              |
+| wandbrunname                 | trainbasemodel                                          |
+
+New model saved: weights/2022_07_05-06_35_51_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.06428  |
+| d2       | 0.123114 |
+| d3       | 0.230353 |
+| abs_rel  | 0.637171 |
+| sq_rel   | 1.80776  |
+| rmse     | 2.88639  |
+| rmse_log | 1.2126   |
+| log10    | 0.496726 |
+| silog    | 0.909885 |
+
+New model saved: weights/2022_07_05-06_35_51_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.145315 |
+| d2       | 0.314573 |
+| d3       | 0.490116 |
+| abs_rel  | 0.511312 |
+| sq_rel   | 1.40457  |
+| rmse     | 2.57104  |
+| rmse_log | 0.926014 |
+| log10    | 0.362304 |
+| silog    | 0.729843 |
+
+New model saved: weights/2022_07_05-06_35_51_PM/AuxSparseGuidedDepth_5.pth 
+| d1       | 0.11499  |
+| d2       | 0.241411 |
+| d3       | 0.377615 |
+| abs_rel  | 0.519624 |
+| sq_rel   | 1.31412  |
+| rmse     | 2.52422  |
+| rmse_log | 0.866754 |
+| log10    | 0.345871 |
+| silog    | 0.673475 |
+
+New model saved: weights/2022_07_05-06_35_51_PM/AuxSparseGuidedDepth_6.pth 
+| d1       | 0.241342 |
+| d2       | 0.515801 |
+| d3       | 0.724815 |
+| abs_rel  | 0.433802 |
+| sq_rel   | 1.01728  |
+| rmse     | 2.27178  |
+| rmse_log | 0.659406 |
+| log10    | 0.233635 |
+| silog    | 0.570351 |

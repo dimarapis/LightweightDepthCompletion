@@ -11,7 +11,7 @@
 ### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
 #BSUB -W 24:00
 # request GB of system-memory
-#BSUB -R "rusage[mem=8GB]"
+#BSUB -R "rusage[mem=16GB]"
 ### -- set the email address --
 # please uncomment the following line and put in your e-mail address,
 # if you want to receive e-mail notifications on a non-default address
@@ -39,5 +39,9 @@ alias python="python3"
 #python main.py --network-model AuxSparseGuidedDepth -m DepthCorrectionRefinement --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname DepthCorrectionRefinementlrscheduler 
 
 #python main.py --network-model AuxSparseGuidedDepth -m "Testing consistency with simple model" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname Test_2 
-python main.py --network-model AuxSparseGuidedDepth -m "Testing consistency with simple model" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname deletetest
+#python main.py --network-model AuxSparseGuidedDepth -m "Testing consistency with simple model" --pretrained PRETRAINED --wandblogger WANDBLOGGER --wandbrunname deletetest
 ## submit by using: bsub < job_run.sh
+
+#python main.py --network-model AuxSparseGuidedDepth -m "Testing PENETC2 efficacy on KITTI" --wandblogger WANDBLOGGER --wandbrunname "KITTI_dilatedCSPNRefinement" --pretrained PRETRAINED --dataset kitti
+#python main.py --network-model AuxSparseGuidedDepth -m "basemodel trained on kitti, finetuned on NN - initiallr 1-e5" --wandblogger WANDBLOGGER --wandbrunname NN_basemodel_finetune_lr1e-5 --pretrained PRETRAINED --dataset nn
+python main.py --network-model AuxSparseGuidedDepth -m "basemodel trained on kitti, finetuned on NN - initiallr 1-e5" --wandblogger WANDBLOGGER --wandbrunname NN_basemodel_finetune_lr1e-5 --pretrained PRETRAINED --dataset nn

@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import MinkowskiEngine as ME
+#import MinkowskiEngine as ME
 
 class SELayer(nn.Module):
     """

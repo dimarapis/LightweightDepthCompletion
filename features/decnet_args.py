@@ -53,11 +53,11 @@ def decnet_args_parser():
                         #help='loss function: | '.join(criteria.loss_names) +
                         #' (default: l2)')
     parser.add_argument('--batch-size',
-                        default=8,
+                        default=4,
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-3,
+                        default=1e-5,
                         type=float,
                         metavar='LR',
                         help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
@@ -130,7 +130,7 @@ def decnet_args_parser():
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         default='datalist_train_nn.list',
                         #default='train_dim_kitti.list',
-                        #default='8batch_dim_kitti.list',
+                        #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
                         type=str,
                         #required=True,
@@ -138,7 +138,7 @@ def decnet_args_parser():
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         default='datalist_test_nn.list',
                         #default='val_dim_kitti.list',
-                        #default='8batch_dim_kitti.list',
+                        #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
                         type=str,
                         #required=True,

@@ -1,0 +1,43 @@
+| network_model                | AuxSparseGuidedDepth              |
+| pretrained                   | True                              |
+| message                      | Testing PENET refinement          |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 4                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | deletetest                        |
+
+New model saved: weights/2022_07_05-05_23_36_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.582946 |
+| d2       | 0.744189 |
+| d3       | 0.838404 |
+| abs_rel  | 0.465991 |
+| sq_rel   | 0.338734 |
+| rmse     | 0.525354 |
+| rmse_log | 0.382206 |
+| log10    | 0.135463 |
+| silog    | 0.322286 |

@@ -1,8 +1,0 @@
-
-STEP 2. Loading datasets...
-Traceback (most recent call last):
-  File "main.py", line 52, in <module>
-    files = DecnetDataloader(decnet_args)
-  File "/home/dim/depth_2022/features/decnet_dataloaders.py", line 18, in __init__
-    with open(os.path.join(self.root, self.data_file), 'r') as f:
-FileNotFoundError: [Errno 2] No such file or directory: 'data/kitti_dataset/val_selection_cropped/datalist_val_kitti.list'

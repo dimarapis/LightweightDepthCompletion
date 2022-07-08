@@ -1,0 +1,54 @@
+| network_model                | AuxSparseGuidedDepth                                       |
+| pretrained                   | True                                                       |
+| message                      | Last test solo base model with added refinement but unused |
+| mode                         | train                                                      |
+| dataset                      | nn                                                         |
+| workers                      | 4                                                          |
+| epochs                       | 100                                                        |
+| criterion                    | l2                                                         |
+| batch_size                   | 4                                                          |
+| learning_rate                | 0.001                                                      |
+| weight_decay                 | 0                                                          |
+| print_freq                   | 10                                                         |
+| resume                       |                                                            |
+| data_folder                  | /datasets                                                  |
+| convolutional_layer_encoding | xyz                                                        |
+| dilation_rate                | 2                                                          |
+| val_h                        | 352                                                        |
+| val_w                        | 608                                                        |
+| train_height                 | 352                                                        |
+| train_width                  | 608                                                        |
+| min_depth_eval               | 0.1                                                        |
+| max_depth_eval               | 80.0                                                       |
+| kitti_crop                   | eigen_crop                                                 |
+| train_datalist               | datalist_train_nn.list                                     |
+| val_datalist                 | datalist_test_nn.list                                      |
+| root_folder                  | data/nn_dataset/                                           |
+| torch_mode                   | pytorch                                                    |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                          |
+| wandblogger                  | True                                                       |
+| project                      | depthcompletionpaper                                       |
+| entity                       | wandbdimar                                                 |
+| wandbrunname                 | deletetest                                                 |
+
+New model saved: weights/2022_07_05-12_43_21_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.57921  |
+| d2       | 0.742534 |
+| d3       | 0.830054 |
+| abs_rel  | 0.466533 |
+| sq_rel   | 0.333362 |
+| rmse     | 0.515202 |
+| rmse_log | 0.38056  |
+| log10    | 0.136532 |
+| silog    | 0.323418 |
+
+New model saved: weights/2022_07_05-12_43_21_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.588212 |
+| d2       | 0.752834 |
+| d3       | 0.846118 |
+| abs_rel  | 0.440657 |
+| sq_rel   | 0.30029  |
+| rmse     | 0.497468 |
+| rmse_log | 0.367504 |
+| log10    | 0.131303 |
+| silog    | 0.313585 |

@@ -1,0 +1,43 @@
+| network_model                | AuxSparseGuidedDepth                                    |
+| pretrained                   | True                                                    |
+| message                      | Corrected division in nn dataset, retraining base model |
+| mode                         | train                                                   |
+| dataset                      | nn                                                      |
+| workers                      | 4                                                       |
+| epochs                       | 100                                                     |
+| criterion                    | l2                                                      |
+| batch_size                   | 4                                                       |
+| learning_rate                | 0.001                                                   |
+| weight_decay                 | 0                                                       |
+| print_freq                   | 10                                                      |
+| resume                       |                                                         |
+| data_folder                  | /datasets                                               |
+| convolutional_layer_encoding | xyz                                                     |
+| dilation_rate                | 2                                                       |
+| val_h                        | 352                                                     |
+| val_w                        | 608                                                     |
+| train_height                 | 352                                                     |
+| train_width                  | 608                                                     |
+| min_depth_eval               | 0.1                                                     |
+| max_depth_eval               | 80.0                                                    |
+| kitti_crop                   | eigen_crop                                              |
+| train_datalist               | datalist_train_nn.list                                  |
+| val_datalist                 | datalist_test_nn.list                                   |
+| root_folder                  | data/nn_dataset/                                        |
+| torch_mode                   | pytorch                                                 |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                       |
+| wandblogger                  | True                                                    |
+| project                      | depthcompletionpaper                                    |
+| entity                       | wandbdimar                                              |
+| wandbrunname                 | trainbasemodel                                          |
+
+New model saved: weights/2022_07_05-06_29_37_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.0602296 |
+| d2       | 0.113577  |
+| d3       | 0.221957  |
+| abs_rel  | 0.632546  |
+| sq_rel   | 1.82053   |
+| rmse     | 2.90365   |
+| rmse_log | 1.22765   |
+| log10    | 0.505961  |
+| silog    | 0.9082    |

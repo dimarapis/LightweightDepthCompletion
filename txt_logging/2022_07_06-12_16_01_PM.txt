@@ -1,0 +1,76 @@
+| network_model                | AuxSparseGuidedDepth                                         |
+| pretrained                   | True                                                         |
+| message                      | basemodel trained on kitti, finetuned on NN - initiallr 1-e5 |
+| mode                         | train                                                        |
+| dataset                      | nn                                                           |
+| workers                      | 4                                                            |
+| epochs                       | 100                                                          |
+| criterion                    | l2                                                           |
+| batch_size                   | 4                                                            |
+| learning_rate                | 1e-05                                                        |
+| weight_decay                 | 0                                                            |
+| print_freq                   | 10                                                           |
+| resume                       |                                                              |
+| data_folder                  | /datasets                                                    |
+| convolutional_layer_encoding | xyz                                                          |
+| dilation_rate                | 2                                                            |
+| val_h                        | 352                                                          |
+| val_w                        | 608                                                          |
+| train_height                 | 352                                                          |
+| train_width                  | 608                                                          |
+| min_depth_eval               | 0.1                                                          |
+| max_depth_eval               | 80.0                                                         |
+| kitti_crop                   | eigen_crop                                                   |
+| train_datalist               | datalist_train_nn.list                                       |
+| val_datalist                 | datalist_test_nn.list                                        |
+| root_folder                  | data/nn_dataset/                                             |
+| torch_mode                   | pytorch                                                      |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                            |
+| wandblogger                  | True                                                         |
+| project                      | depthcompletionpaper                                         |
+| entity                       | wandbdimar                                                   |
+| wandbrunname                 | NN_basemodel_finetune_lr1e-5                                 |
+
+New model saved: weights/2022_07_06-12_16_01_PM/AuxSparseGuidedDepth_1.pth 
+| d1       |  0.256738 |
+| d2       |  0.394468 |
+| d3       |  0.511162 |
+| abs_rel  |  1.70548  |
+| sq_rel   | 10.3347   |
+| rmse     |  4.46275  |
+| rmse_log |  0.912112 |
+| log10    |  0.339539 |
+| silog    |  0.74632  |
+
+New model saved: weights/2022_07_06-12_16_01_PM/AuxSparseGuidedDepth_2.pth 
+| d1       | 0.0515167 |
+| d2       | 0.182361  |
+| d3       | 0.426867  |
+| abs_rel  | 1.51388   |
+| sq_rel   | 5.77234   |
+| rmse     | 3.57887   |
+| rmse_log | 0.862246  |
+| log10    | 0.357522  |
+| silog    | 0.639573  |
+
+New model saved: weights/2022_07_06-12_16_01_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.445049 |
+| d2       | 0.659276 |
+| d3       | 0.773115 |
+| abs_rel  | 0.615222 |
+| sq_rel   | 1.31568  |
+| rmse     | 1.84087  |
+| rmse_log | 0.481395 |
+| log10    | 0.17711  |
+| silog    | 0.404923 |
+
+New model saved: weights/2022_07_06-12_16_01_PM/AuxSparseGuidedDepth_6.pth 
+| d1       | 0.429717 |
+| d2       | 0.732902 |
+| d3       | 0.837495 |
+| abs_rel  | 0.454057 |
+| sq_rel   | 0.716579 |
+| rmse     | 1.44272  |
+| rmse_log | 0.411091 |
+| log10    | 0.15385  |
+| silog    | 0.347514 |

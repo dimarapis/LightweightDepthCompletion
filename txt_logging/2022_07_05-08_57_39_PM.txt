@@ -1,0 +1,54 @@
+| network_model                | AuxSparseGuidedDepth                                                                |
+| pretrained                   | True                                                                                |
+| message                      | runnin on kitti wrong division as I trained it like thatn. Testing PENETC2 efficacy |
+| mode                         | train                                                                               |
+| dataset                      | kitti                                                                               |
+| workers                      | 4                                                                                   |
+| epochs                       | 100                                                                                 |
+| criterion                    | l2                                                                                  |
+| batch_size                   | 4                                                                                   |
+| learning_rate                | 0.0001                                                                              |
+| weight_decay                 | 0                                                                                   |
+| print_freq                   | 10                                                                                  |
+| resume                       |                                                                                     |
+| data_folder                  | /datasets                                                                           |
+| convolutional_layer_encoding | xyz                                                                                 |
+| dilation_rate                | 2                                                                                   |
+| val_h                        | 352                                                                                 |
+| val_w                        | 608                                                                                 |
+| train_height                 | 352                                                                                 |
+| train_width                  | 608                                                                                 |
+| min_depth_eval               | 0.1                                                                                 |
+| max_depth_eval               | 80.0                                                                                |
+| kitti_crop                   | eigen_crop                                                                          |
+| train_datalist               | datalist_train_nn.list                                                              |
+| val_datalist                 | datalist_test_nn.list                                                               |
+| root_folder                  | data/nn_dataset/                                                                    |
+| torch_mode                   | pytorch                                                                             |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                                                   |
+| wandblogger                  | True                                                                                |
+| project                      | depthcompletionpaper                                                                |
+| entity                       | wandbdimar                                                                          |
+| wandbrunname                 | dilatedCSPNRefinement                                                               |
+
+New model saved: weights/2022_07_05-08_57_39_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.653781 |
+| d2       | 0.787421 |
+| d3       | 0.862423 |
+| abs_rel  | 0.402723 |
+| sq_rel   | 0.249275 |
+| rmse     | 0.316806 |
+| rmse_log | 0.319832 |
+| log10    | 0.117146 |
+| silog    | 0.2646   |
+
+New model saved: weights/2022_07_05-08_57_39_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.653781 |
+| d2       | 0.787421 |
+| d3       | 0.862423 |
+| abs_rel  | 0.402723 |
+| sq_rel   | 0.249275 |
+| rmse     | 0.316806 |
+| rmse_log | 0.319832 |
+| log10    | 0.117146 |
+| silog    | 0.2646   |

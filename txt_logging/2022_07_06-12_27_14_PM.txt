@@ -1,0 +1,54 @@
+| network_model                | AuxSparseGuidedDepth                                                   |
+| pretrained                   | True                                                                   |
+| message                      | basemodel trained on kitti, fullmodel finetuned on NN - initiallr 1-e4 |
+| mode                         | train                                                                  |
+| dataset                      | nn                                                                     |
+| workers                      | 4                                                                      |
+| epochs                       | 100                                                                    |
+| criterion                    | l2                                                                     |
+| batch_size                   | 4                                                                      |
+| learning_rate                | 0.0001                                                                 |
+| weight_decay                 | 0                                                                      |
+| print_freq                   | 10                                                                     |
+| resume                       |                                                                        |
+| data_folder                  | /datasets                                                              |
+| convolutional_layer_encoding | xyz                                                                    |
+| dilation_rate                | 2                                                                      |
+| val_h                        | 352                                                                    |
+| val_w                        | 608                                                                    |
+| train_height                 | 352                                                                    |
+| train_width                  | 608                                                                    |
+| min_depth_eval               | 0.1                                                                    |
+| max_depth_eval               | 80.0                                                                   |
+| kitti_crop                   | eigen_crop                                                             |
+| train_datalist               | datalist_train_nn.list                                                 |
+| val_datalist                 | datalist_test_nn.list                                                  |
+| root_folder                  | data/nn_dataset/                                                       |
+| torch_mode                   | pytorch                                                                |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                                      |
+| wandblogger                  | True                                                                   |
+| project                      | depthcompletionpaper                                                   |
+| entity                       | wandbdimar                                                             |
+| wandbrunname                 | NN_full_model_finetune_lr1e-4                                          |
+
+New model saved: weights/2022_07_06-12_27_14_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.0602299 |
+| d2       | 0.113584  |
+| d3       | 0.221967  |
+| abs_rel  | 0.632526  |
+| sq_rel   | 1.82044   |
+| rmse     | 2.9036    |
+| rmse_log | 1.22758   |
+| log10    | 0.50593   |
+| silog    | 0.908156  |
+
+New model saved: weights/2022_07_06-12_27_14_PM/AuxSparseGuidedDepth_4.pth 
+| d1       | 0.143359 |
+| d2       | 0.497029 |
+| d3       | 0.666759 |
+| abs_rel  | 0.936389 |
+| sq_rel   | 2.48974  |
+| rmse     | 2.56837  |
+| rmse_log | 0.671741 |
+| log10    | 0.26112  |
+| silog    | 0.555265 |

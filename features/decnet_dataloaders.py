@@ -14,6 +14,7 @@ class DecnetDataloader(Dataset):
         self.root = args.root_folder
         self.crop_w = args.val_w
         self.crop_h = args.val_h
+        self.dataset_type = args.dataset
         
         with open(os.path.join(self.root, self.data_file), 'r') as f:
             data_list = f.read().split('\n')
@@ -64,13 +65,20 @@ class DecnetDataloader(Dataset):
         ])
         
         
+        if self.dataset_type == 'nn':
+            transformed_rgb = transform(rgb).to('cuda') / 255.
+            transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
+            transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
+            #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
+        elif self.dataset_type == 'kitti':
+            transformed_rgb = transform(rgb).to('cuda') / 255.
+            transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
+            transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
+            #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
+
+
         
-        transformed_rgb = transform(rgb).to('cuda') / 255.
-        transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
-        transformed_sparse_again = self.completion_transform(transformed_sparse)
-        transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
-        
-        return self.data_sample(file_id, transformed_rgb, transformed_sparse_again, transformed_gt)
+        return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
         
 
     def __getitem__(self, index):

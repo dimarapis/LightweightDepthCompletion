@@ -1,0 +1,142 @@
+| network_model                | AuxSparseGuidedDepth                        |
+| pretrained                   | True                                        |
+| message                      | basemodel finetuned on NN. Further training |
+| mode                         | train                                       |
+| dataset                      | nn                                          |
+| workers                      | 4                                           |
+| epochs                       | 100                                         |
+| criterion                    | l2                                          |
+| batch_size                   | 4                                           |
+| learning_rate                | 1e-05                                       |
+| weight_decay                 | 0                                           |
+| print_freq                   | 10                                          |
+| resume                       |                                             |
+| data_folder                  | /datasets                                   |
+| convolutional_layer_encoding | xyz                                         |
+| dilation_rate                | 2                                           |
+| val_h                        | 352                                         |
+| val_w                        | 608                                         |
+| train_height                 | 352                                         |
+| train_width                  | 608                                         |
+| min_depth_eval               | 0.1                                         |
+| max_depth_eval               | 80.0                                        |
+| kitti_crop                   | eigen_crop                                  |
+| train_datalist               | datalist_train_nn.list                      |
+| val_datalist                 | datalist_test_nn.list                       |
+| root_folder                  | data/nn_dataset/                            |
+| torch_mode                   | pytorch                                     |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth           |
+| wandblogger                  | True                                        |
+| project                      | depthcompletionpaper                        |
+| entity                       | wandbdimar                                  |
+| wandbrunname                 | NN_basemodel_finetune_further               |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.206938 |
+| d2       | 0.453262 |
+| d3       | 0.593701 |
+| abs_rel  | 1.25684  |
+| sq_rel   | 5.08376  |
+| rmse     | 2.92928  |
+| rmse_log | 0.726792 |
+| log10    | 0.288959 |
+| silog    | 0.559449 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_3.pth 
+| d1       | 0.364849 |
+| d2       | 0.514229 |
+| d3       | 0.624849 |
+| abs_rel  | 1.13896  |
+| sq_rel   | 4.74899  |
+| rmse     | 2.74678  |
+| rmse_log | 0.681723 |
+| log10    | 0.256165 |
+| silog    | 0.547467 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_5.pth 
+| d1       | 0.426632 |
+| d2       | 0.613865 |
+| d3       | 0.729197 |
+| abs_rel  | 0.83618  |
+| sq_rel   | 2.43723  |
+| rmse     | 1.98773  |
+| rmse_log | 0.555173 |
+| log10    | 0.207963 |
+| silog    | 0.447506 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_7.pth 
+| d1       | 0.517092 |
+| d2       | 0.717243 |
+| d3       | 0.821244 |
+| abs_rel  | 0.529729 |
+| sq_rel   | 1.05608  |
+| rmse     | 1.4817   |
+| rmse_log | 0.427919 |
+| log10    | 0.156012 |
+| silog    | 0.367947 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_9.pth 
+| d1       | 0.491869 |
+| d2       | 0.778681 |
+| d3       | 0.860777 |
+| abs_rel  | 0.436515 |
+| sq_rel   | 0.70554  |
+| rmse     | 1.3408   |
+| rmse_log | 0.386332 |
+| log10    | 0.143115 |
+| silog    | 0.330982 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_35.pth 
+| d1       | 0.5173   |
+| d2       | 0.768434 |
+| d3       | 0.866771 |
+| abs_rel  | 0.422304 |
+| sq_rel   | 0.684044 |
+| rmse     | 1.32298  |
+| rmse_log | 0.376751 |
+| log10    | 0.138693 |
+| silog    | 0.333387 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_37.pth 
+| d1       | 0.517783 |
+| d2       | 0.775624 |
+| d3       | 0.868667 |
+| abs_rel  | 0.422752 |
+| sq_rel   | 0.674141 |
+| rmse     | 1.27808  |
+| rmse_log | 0.374421 |
+| log10    | 0.138413 |
+| silog    | 0.330483 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_47.pth 
+| d1       | 0.573012 |
+| d2       | 0.786726 |
+| d3       | 0.871003 |
+| abs_rel  | 0.408876 |
+| sq_rel   | 0.711756 |
+| rmse     | 1.26755  |
+| rmse_log | 0.357674 |
+| log10    | 0.129765 |
+| silog    | 0.314776 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_72.pth 
+| d1       | 0.615375 |
+| d2       | 0.761128 |
+| d3       | 0.85533  |
+| abs_rel  | 0.416204 |
+| sq_rel   | 0.733267 |
+| rmse     | 1.25625  |
+| rmse_log | 0.353963 |
+| log10    | 0.12531  |
+| silog    | 0.306952 |
+
+New model saved: weights/2022_07_06-01_58_48_PM/AuxSparseGuidedDepth_92.pth 
+| d1       | 0.611677 |
+| d2       | 0.768761 |
+| d3       | 0.862222 |
+| abs_rel  | 0.40111  |
+| sq_rel   | 0.685045 |
+| rmse     | 1.2458   |
+| rmse_log | 0.346822 |
+| log10    | 0.123243 |
+| silog    | 0.303096 |

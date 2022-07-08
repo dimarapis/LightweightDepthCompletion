@@ -1,5 +1,0 @@
-name: pytorchenv
-channels:
-  - conda-forge
-  - defaults
-prefix: /home/dim/anaconda3/envs/pytorchenv/envs/pytorchenv
