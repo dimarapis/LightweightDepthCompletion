@@ -9,8 +9,14 @@ def eval_depth(pred, target):
     d1 = torch.sum(thresh < 1.25).float() / len(thresh)
     d2 = torch.sum(thresh < 1.25 ** 2).float() / len(thresh)
     d3 = torch.sum(thresh < 1.25 ** 3).float() / len(thresh)
-
     diff = pred - target
+
+    #if d1 == 0:
+    print(thresh)
+    ##    print(pred)
+    #   print(target)
+    #    print(diff)
+    
     diff_log = torch.log(pred) - torch.log(target)
 
     abs_rel = torch.mean(torch.abs(diff) / target)

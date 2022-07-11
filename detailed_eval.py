@@ -21,6 +21,7 @@ from datetime import datetime
 from tabulate import tabulate
 from os import device_encoding
 from torchvision import transforms
+from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
 from thop import profile,clever_format
 from torch.utils.data import DataLoader
@@ -38,6 +39,7 @@ from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
+
 
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
 warnings.filterwarnings("ignore")
@@ -99,62 +101,57 @@ for metric in metric_name:
     result_metrics[metric] = 0.0
     refined_result_metrics[metric] = 0.0
 
-def gt_and_pred_info(model, datatype, data):
-    mask02 = torch.where((data>0.) & (data<=2.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
-    mask25 = torch.where((data>2.) & (data<=5.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
-    mask510 = torch.where((data>5.) & (data<=10.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
-    mask1020 = torch.where((data>10.) & (data<=20.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
-    mask20full = torch.where(data>20., torch.full_like(data, 1.0), torch.full_like(data, 0.0))
+def gt_and_pred_info(gt, pred, sparse, refined_pred):
 
-    data02 = torch.mul(data,mask02)
-    data25 = torch.mul(data,mask25)
-    data510 = torch.mul(data,mask510)
-    data1020 = torch.mul(data,mask1020)
-    data20full = torch.mul(data,mask20full)
-    #print(len(data))
-    resolution = torch.numel(data)
-    #print(resolution)
-    '''
-    print(f'model: {model}')
-    print(f'datatype: {datatype}')
-    print(f'min: {torch.min(data.float())}')
-    print(f'median: {torch.median(data.float())}')
-    print(f'mean: {torch.mean(data.float())}')
-    print(f'max: {torch.max(data.float())}')    
-    print(f'total_valid_%: {len(torch.nonzero(data))/(resolution/100)}')
-    print(f'valid_%_in_range_0-2: {len(torch.nonzero(data02))/(len(torch.nonzero(data))/100)}')#(resolution/100)}')
-    print(f'valid_%_in_range_2-5: {len(torch.nonzero(data25))/(len(torch.nonzero(data))/100)}')#(resolution/100)}')
-    print(f'valid_%_in_range_5-10: {len(torch.nonzero(data510))/(len(torch.nonzero(data))/100)}')#(resolution/100)}')
-    print(f'valid_%_in_range_10-20: {len(torch.nonzero(data1020))/(len(torch.nonzero(data))/100)}')#(resolution/100)}')
-    print(f'valid_%_in_range_20-inf: {len(torch.nonzero(data20full))/(len(torch.nonzero(data))/100)}')#(resolution/100)}')
-    '''
     sanity_dict = {}
-    sanity_dict['datatype'] = datatype
-    sanity_dict['min'] = torch.round(torch.min(data.float()),decimals=3)
-    sanity_dict['median'] = torch.round(torch.median(data.float()),decimals=3)
-    sanity_dict['mean'] = torch.round(torch.mean(data.float()),decimals=3)
-    sanity_dict['max'] = torch.round(torch.max(data.float()), decimals = 3)
-    sanity_dict['%_range_0-2'] = np.round(len(torch.nonzero(data02))/(len(torch.nonzero(data))/100),decimals=3)
-    sanity_dict['%_range_2-5'] = np.round(len(torch.nonzero(data25))/(len(torch.nonzero(data))/100),decimals=3)
-    sanity_dict['%_range_5-10'] = np.round(len(torch.nonzero(data510))/(len(torch.nonzero(data))/100),decimals=3)
-    sanity_dict['%_range_10-20'] = np.round(len(torch.nonzero(data1020))/(len(torch.nonzero(data))/100),decimals=3)
-    sanity_dict['%_range_20-inf'] = np.round(len(torch.nonzero(data20full))/(len(torch.nonzero(data))/100),decimals=3)
+    datatypes = [gt,pred,sparse,refined_pred]
+    min_list, median_list,mean_list,max_list, total_valid_list =[],[],[],[],[]
+    range02_list,range25_list, range510_list,range1020_list,range20inf_list = [],[],[],[],[]
+    
+    for data in datatypes:
+        mask02 = torch.where((data>0.) & (data<=2.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
+        mask25 = torch.where((data>2.) & (data<=5.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
+        mask510 = torch.where((data>5.) & (data<=10.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
+        mask1020 = torch.where((data>10.) & (data<=20.), torch.full_like(data, 1.0), torch.full_like(data, 0.0))
+        mask20full = torch.where(data>20., torch.full_like(data, 1.0), torch.full_like(data, 0.0))
 
+        data02 = torch.mul(data,mask02)
+        data25 = torch.mul(data,mask25)
+        data510 = torch.mul(data,mask510)
+        data1020 = torch.mul(data,mask1020)
+        data20full = torch.mul(data,mask20full)
+        resolution = torch.numel(data)
+        min_list.append(torch.min(data.float()).item())
+        median_list.append(torch.median(data.float()).item())
+        mean_list.append(torch.mean(data.float()).item())
+        max_list.append(torch.max(data.float()).item())
+        total_valid_list.append(len(torch.nonzero(data))/(resolution/100))#len(torch.nonzero(data))/(resolution/100)
+        if len(torch.nonzero(data)) != 0:
     
+            range02_list.append(np.round(len(torch.nonzero(data02))/(len(torch.nonzero(data))/100),decimals=3))
+            range25_list.append(np.round(len(torch.nonzero(data25))/(len(torch.nonzero(data))/100),decimals=3))
+            range510_list.append(np.round(len(torch.nonzero(data510))/(len(torch.nonzero(data))/100),decimals=3))
+            range1020_list.append(np.round(len(torch.nonzero(data1020))/(len(torch.nonzero(data))/100),decimals=3))
+            range20inf_list.append(np.round(len(torch.nonzero(data20full))/(len(torch.nonzero(data))/100),decimals=3))
+
+    sanity_dict['min'] = min_list
+    sanity_dict['median'] = median_list
+    sanity_dict['mean'] = mean_list
+    sanity_dict['max'] = max_list
+    sanity_dict['total_valid'] = total_valid_list
+    sanity_dict['%_range_0-2'] = range02_list
+    sanity_dict['%_range_2-5'] = range25_list
+    sanity_dict['%_range_5-10'] = range510_list
+    sanity_dict['%_range_10-20'] = range1020_list
+    sanity_dict['%_range_20-inf'] = range20inf_list
     
-    #sanity_dict['datatype'] = datatype
-    #sanity_dict['datatype'] = datatype
     return sanity_dict
 
-    
-
-    #print(f'datatype: {datatype}')
-    
 
 def visualize_results(model, rgb, pred, refined_pred, sparse):
     img_list = []
 
-    rgb = np.squeeze(image.cpu().detach().numpy())
+    rgb = np.squeeze(rgb.cpu().detach().numpy())
     rgb = np.transpose(rgb, (1, 2, 0))
     rgb = rgb*255
     rgb = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
@@ -182,29 +179,30 @@ def visualize_results(model, rgb, pred, refined_pred, sparse):
     #print(img_merge)
     #cv2.waitKey()
 
-with torch.no_grad():
-    t0 = time.time()
-    #data = next(iter(eval_dl))
-    tabulator = []
-    for i, data in enumerate(tqdm(eval_dl)):
-        if i == 1:
-            image_filename = data['file']
+
+
+def image_level():
+    with torch.no_grad():
+        t0 = time.time()
+        #data = next(iter(eval_dl))
+        headers = ["Statistics", "GT", "Base", "Sparse", "Refined"]
+
+        rmse_list_sing, d1_list_sing, sparse_pts_list_sing = [],[],[]
+        
+        for i, data in enumerate(tqdm(eval_dl)):
+
+            image_filename = data['file'][0].split('/')[-1].rstrip('.png')
             image, gt, sparse = data['rgb'], data['gt'], data['d']
+            
             rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
 
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             
-            sanity_dict = gt_and_pred_info('basemodel', 'gt', gt)
-            for key in sanity_dict:
-                tabulator.append([key, sanity_dict[key]])
+            
             #gt_and_pred_info('basemodel', 'pred', pred)
             #visualize_results('basemodel',image,pred,sparse)
 
             refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
-
-            #gt_and_pred_info('basemodel', 'gt', gt)
-            #gt_and_pred_info('refine_model', 'refined_pred', refined_pred)
-            visualize_results('basemodel',image,pred,refined_pred,sparse)
 
             pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
             pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
@@ -218,6 +216,165 @@ with torch.no_grad():
             for metric in metric_name:
                 result_metrics[metric] += computed_result[metric]
                 refined_result_metrics[metric] += refined_computed_result[metric]
-    
-    print(tabulate(tabulator, tablefmt='orgtbl'))
-    
+                
+            sanity_dict = gt_and_pred_info(gt, pred, sparse, refined_pred)
+
+                
+            d = sanity_dict
+            d['---------'] = ['------------','------------','------------','------------']
+            d[f'split_{i-1}'] = [image_filename]
+            d['rmse'] = ['-', computed_result['rmse'], '-', refined_computed_result['rmse']]
+            d['d1'] = ['-', computed_result['d1'], '-', refined_computed_result['d1']]
+            d['----------'] = ['------------','------------','------------','------------']
+            d['Improvement'] = ['RMSE', computed_result['rmse']-refined_computed_result['rmse'], 'D1', refined_computed_result['d1']-computed_result['d1']]
+            
+            rmse_list_sing.append(refined_computed_result['rmse']-computed_result['rmse'])
+            d1_list_sing.append(refined_computed_result['d1']-computed_result['d1'])
+            sparse_pts_list_sing.append(sanity_dict['total_valid'][2])
+            
+            print('\n\n')
+            print(tabulate([[k,] + v for k,v in d.items()], headers = headers, tablefmt='github', numalign='right'))  
+            print('\n')
+            
+        fig,ax = plt.subplots()
+        #ax.scatter(rmse_list, sparse_pts_list, color="red", marker="*")
+        ax.scatter(rmse_list_sing, sparse_pts_list_sing, color="red", marker="*")
+        ax.set_ylabel("% points of sparse input")
+        ax.set_xlabel("ReD: RMSE difference of refined vs basemodel (+ for better refined)")
+        #ax.scatter(rmse_list, trendline, marker="*")
+        ax2=ax.twiny()
+        #ax2.scatter(d1_list, sparse_pts_list, color="green", marker="*")
+        ax2.scatter(d1_list_sing, sparse_pts_list_sing, color="green", marker="*")
+        ax2.set_xlabel("GreeN: D1 difference of refined vs basemodel (+ for better refined)")
+        plt.show()
+
+def grid_level():
+    with torch.no_grad():
+        t0 = time.time()
+        #data = next(iter(eval_dl))
+        headers = ["Statistics", "GT", "Base", "Sparse", "Refined"]
+
+        
+        for i, data in enumerate(tqdm(eval_dl)):
+            tabulator,rmse_list,d1_list,sparse_pts_list= [],[],[],[]
+            rmse_list_sing, d1_list_sing, sparse_pts_list_sing = [],[],[]
+            
+        #while True:
+            #if i == 1:
+            #    break
+            
+            image_filename = data['file'][0].split('/')[-1].rstrip('.png')
+            image, gt, sparse = data['rgb'], data['gt'], data['d']
+            
+            rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+
+            pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
+            
+            
+            #gt_and_pred_info('basemodel', 'pred', pred)
+            #visualize_results('basemodel',image,pred,sparse)
+
+            refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+
+
+            image_np = torch.squeeze(image)
+            image_np = torch.permute(image_np, (1, 2, 0))
+            M = image_np.shape[0]//4
+            N = image_np.shape[1]//4
+            
+            
+            gt_np = torch.squeeze(gt,dim=0)
+            gt_np = torch.permute(gt_np, (1, 2, 0))
+
+            sparse_np = torch.squeeze(sparse,dim=0)
+            sparse_np = torch.permute(sparse_np, (1, 2, 0))
+            
+            pred_np = torch.squeeze(pred,dim=0)
+            pred_np = torch.permute(pred_np, (1, 2, 0))
+            
+            refined_pred_np = torch.squeeze(refined_pred,dim=0)
+            refined_pred_np = torch.permute(refined_pred_np, (1, 2, 0))
+            
+            image_tiles = [image_np[x:x+M,y:y+N] for x in range(0,image_np.shape[0],M) for y in range(0,image_np.shape[1],N)]
+            gt_tiles = [gt_np[x:x+M,y:y+N] for x in range(0,gt_np.shape[0],M) for y in range(0,gt_np.shape[1],N)]
+            sparse_tiles = [sparse_np[x:x+M,y:y+N] for x in range(0,sparse_np.shape[0],M) for y in range(0,sparse_np.shape[1],N)]
+            pred_tiles = [pred_np[x:x+M,y:y+N] for x in range(0,pred_np.shape[0],M) for y in range(0,pred_np.shape[1],N)]
+            refined_pred_tiles = [refined_pred_np[x:x+M,y:y+N] for x in range(0,refined_pred_np.shape[0],M) for y in range(0,refined_pred_np.shape[1],N)]
+
+            for i in range(len(image_tiles)+1):
+                if i == 0:
+                    pass
+                else: 
+                    #print(i)
+                    image = image_tiles[i-1]
+                    gt = gt_tiles[i-1]
+                    sparse = sparse_tiles[i-1]
+                    pred = pred_tiles[i-1]
+                    refined_pred = refined_pred_tiles[i-1]
+
+                pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
+                pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
+                computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
+
+
+                refined_pred_d, refined_depth_gt = refined_pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
+                refined_pred_crop, refined_gt_crop = custom_metrics.cropping_img(decnet_args, refined_pred_d, refined_depth_gt)    
+                refined_computed_result = custom_metrics.eval_depth(refined_pred_crop, refined_gt_crop)
+
+                for metric in metric_name:
+                    result_metrics[metric] += computed_result[metric]
+                    refined_result_metrics[metric] += refined_computed_result[metric]
+                    
+                sanity_dict = gt_and_pred_info(gt, pred, sparse, refined_pred)
+
+                if i == 0:
+                    d = sanity_dict
+                    d['---------'] = ['------------','------------','------------','------------']
+                    d[f'split_{i-1}'] = [image_filename]
+                    d['rmse'] = ['-', computed_result['rmse'], '-', refined_computed_result['rmse']]
+                    d['d1'] = ['-', computed_result['d1'], '-', refined_computed_result['d1']]
+                    d['----------'] = ['------------','------------','------------','------------']
+                    d['Improvement'] = ['RMSE', computed_result['rmse']-refined_computed_result['rmse'], 'D1', refined_computed_result['d1']-computed_result['d1']]
+                    
+                    rmse_list_sing.append(refined_computed_result['rmse']-computed_result['rmse'])
+                    d1_list_sing.append(refined_computed_result['d1']-computed_result['d1'])
+                    sparse_pts_list_sing.append(sanity_dict['total_valid'][2])
+                    
+                    print('\n\n')
+                    print(tabulate([[k,] + v for k,v in d.items()], headers = headers, tablefmt='github', numalign='right'))  
+                    print('\n')
+                    
+                else: 
+                #for key in sanity_dict:
+                #    tabulator.append([key, sanity_dict[key]])
+                    d = sanity_dict
+                    d['---------'] = ['------------','------------','------------','------------']
+                    d[f'split_{i-1}'] = [image_filename]
+                    d['rmse'] = ['-', computed_result['rmse'], '-', refined_computed_result['rmse']]
+                    d['d1'] = ['-', computed_result['d1'], '-', refined_computed_result['d1']]
+                    d['----------'] = ['------------','------------','------------','------------']
+                    d['Improvement'] = ['RMSE', computed_result['rmse']-refined_computed_result['rmse'], 'D1', refined_computed_result['d1']-computed_result['d1']]
+                    
+                    rmse_list.append(refined_computed_result['rmse']-computed_result['rmse'])
+                    d1_list.append(refined_computed_result['d1']-computed_result['d1'])
+                    sparse_pts_list.append(sanity_dict['total_valid'][2])
+                
+                    print('\n\n')
+                    print(tabulate([[k,] + v for k,v in d.items()], headers = headers, tablefmt='github', numalign='right'))  
+                    print('\n')
+                
+            fig,ax = plt.subplots()
+            ax.scatter(rmse_list, sparse_pts_list, color="red", marker="o")
+            ax.scatter(rmse_list_sing, sparse_pts_list_sing, color="red", marker="*")
+            ax.set_ylabel("% points of sparse input")
+            ax.set_xlabel("ReD: RMSE difference of refined vs basemodel (+ for better refined)")
+            #ax.scatter(rmse_list, trendline, marker="*")
+            ax2=ax.twiny()
+            ax2.scatter(d1_list, sparse_pts_list, color="green", marker="^")
+            ax2.scatter(d1_list_sing, sparse_pts_list_sing, color="green", marker="*")
+            ax2.set_xlabel("GreeN: D1 difference of refined vs basemodel (+ for better refined)")
+            plt.show()
+
+
+image_level()
+grid_level()
