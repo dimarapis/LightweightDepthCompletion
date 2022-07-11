@@ -30,6 +30,12 @@ class DecnetDataloader(Dataset):
                         "d": data_columns[1],
                         "gt": data_columns[2]
                         })
+
+                elif len(data_columns) == 2:
+                    self.files.append({
+                        "rgb": data_columns[0],
+                        "d": data_columns[2]
+                    })
                     
                 ''' # silencio
                 else:
@@ -75,12 +81,38 @@ class DecnetDataloader(Dataset):
             transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
             transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
             #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
+        elif self.dataset_type == 'nyuv2':
+            transformed_rgb = transform(rgb).to('cuda') / 255.
+            transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
+            transformed_sparse = self.get_sparse_depth(transformed_gt, 500)
 
+            #output = {'rgb': rgb, 'dep': dep_sp, 'gt': dep, 'K': K}
+
+            #return output
 
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
         
 
+    def get_sparse_depth(self, dep, num_sample):
+        channel, height, width = dep.shape
+
+        assert channel == 1
+
+        idx_nnz = torch.nonzero(dep.view(-1) > 0.0001, as_tuple=False)
+
+        num_idx = len(idx_nnz)
+        idx_sample = torch.randperm(num_idx)[:num_sample]
+
+        idx_nnz = idx_nnz[idx_sample[:]]
+
+        mask = torch.zeros((channel*height*width))
+        mask[idx_nnz] = 1.0
+        mask = mask.view((channel, height, width))
+
+        dep_sp = dep * mask.type_as(dep)
+
+        return dep_sp
     def __getitem__(self, index):
         # Creates one sample of data 
         rgb = np.array(Image.open(self.files[index]['rgb']))

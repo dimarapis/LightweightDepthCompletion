@@ -276,28 +276,21 @@ class RgbGuideDepth(nn.Module):
 
         y_quarter = F.interpolate(y_eighth, scale_factor=2., mode='bilinear')#, align_corners=True)
         y_quarter = self.up_1(rgb_quarter, y_quarter)
-        #print('self.up_1.shape', y.shape) #[B , 64, 88, 152]
 
 
         y_half_for_cspn = F.interpolate(y_quarter, scale_factor=2., mode='bilinear')#,align_corners=True)
-        
-        #rgb_cspn_half = self.rgb_cspn_input_half_reso(rgb_half_for_cspn, y_half_for_cspn)
-        #sparse_cspn_half = self.sparse_cspn_input_half_reso(sparse_half, y_half_for_cspn)
+
         
         y_half = self.up_2(rgb_half_for_cspn, y_half_for_cspn)
-        #print('self.up_2.shape', y.shape) #[B , 32, 176, 304]
+
 
         y_for_cspn = F.interpolate(y_half, scale_factor=2., mode='bilinear')#, align_corners=True)
-        #print('self.up_3.shape', y.shape) #[B , 16, 352, 608]
-        #rgb_cspn = self.rgb_cspn_input(rgb, y_for_cspn)
-        #sparse_cspn = self.sparse_cspn_input(sparse, y_for_cspn)
+
 
         pred = self.up_3(rgb, y_for_cspn)
-        #print(rgb_cspn.shape)
-        #y = self.up_4(x,y) 
+
         return rgb_half_for_cspn, y_half_for_cspn, sparse_half, y_for_cspn, pred
-        #return torch.cat((rgb_cspn, sparse_cspn), 1), torch.cat((rgb_cspn_half, sparse_cspn_half),1), pred
-        #return pred
+
 
 #Mods
 class DepthRefinement(nn.Module):

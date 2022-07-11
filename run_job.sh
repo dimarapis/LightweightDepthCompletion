@@ -1,7 +1,7 @@
 #!/bin/sh
 ### General options
 ### –- specify queue --
-#BSUB -q gpuv100
+#BSUB -q gpua100
 ### -- set the job Name --
 #BSUB -J auto_lambda
 ### -- ask for number of cores (default: 1) --
@@ -44,4 +44,4 @@ alias python="python3"
 
 #python main.py --network-model AuxSparseGuidedDepth -m "Testing PENETC2 efficacy on KITTI" --wandblogger WANDBLOGGER --wandbrunname "KITTI_dilatedCSPNRefinement" --pretrained PRETRAINED --dataset kitti
 #python main.py --network-model AuxSparseGuidedDepth -m "basemodel trained on kitti, finetuned on NN - initiallr 1-e5" --wandblogger WANDBLOGGER --wandbrunname NN_basemodel_finetune_lr1e-5 --pretrained PRETRAINED --dataset nn
-python main.py --network-model AuxSparseGuidedDepth -m "basemodel trained on kitti, finetuned on NN - initiallr 1-e5" --wandblogger WANDBLOGGER --wandbrunname NN_basemodel_finetune_lr1e-5 --pretrained PRETRAINED --dataset nn
+python main_ref.py --network-model AuxSparseGuidedDepth -m "basemodel finetuned alone, training only refinement lr 1-e6" --wandblogger WANDBLOGGER --wandbrunname kitti_encoder_finetuned_training_ref --pretrained PRETRAINED --dataset kitti

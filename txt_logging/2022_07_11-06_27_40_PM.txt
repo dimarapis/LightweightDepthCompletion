@@ -1,0 +1,65 @@
+| network_model                | AuxSparseGuidedDepth                                                       |
+| pretrained                   | True                                                                       |
+| message                      | basemodel trained on kitti, finetuned on my kitti further - initiallr 1-e5 |
+| mode                         | train                                                                      |
+| dataset                      | kitti                                                                      |
+| workers                      | 4                                                                          |
+| epochs                       | 100                                                                        |
+| criterion                    | l2                                                                         |
+| batch_size                   | 8                                                                          |
+| learning_rate                | 1e-06                                                                      |
+| weight_decay                 | 0                                                                          |
+| print_freq                   | 10                                                                         |
+| resume                       |                                                                            |
+| data_folder                  | /datasets                                                                  |
+| convolutional_layer_encoding | xyz                                                                        |
+| dilation_rate                | 2                                                                          |
+| val_h                        | 352                                                                        |
+| val_w                        | 608                                                                        |
+| train_height                 | 352                                                                        |
+| train_width                  | 608                                                                        |
+| min_depth_eval               | 0.1                                                                        |
+| max_depth_eval               | 80.0                                                                       |
+| kitti_crop                   | eigen_crop                                                                 |
+| train_datalist               | train_dim_kitti.list                                                       |
+| val_datalist                 | val_dim_kitti.list                                                         |
+| root_folder                  | data/kitti_dataset/val_selection_cropped/                                  |
+| torch_mode                   | pytorch                                                                    |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                                          |
+| wandblogger                  | True                                                                       |
+| project                      | depthcompletionpaper                                                       |
+| entity                       | wandbdimar                                                                 |
+| wandbrunname                 | kitti_basemodel_finetune                                                   |
+
+New model saved: weights/2022_07_11-06_27_40_PM/AuxSparseGuidedDepth_1.pth 
+| d1       |  0.160449 |
+| d2       |  0.355837 |
+| d3       |  0.535449 |
+| abs_rel  |  0.459882 |
+| sq_rel   |  7.18526  |
+| rmse     | 15.9062   |
+| rmse_log |  0.867729 |
+| log10    |  0.313274 |
+| silog    |  0.706958 |
+
+New model saved: weights/2022_07_11-06_27_40_PM/AuxSparseGuidedDepth_2.pth 
+| d1       |  0.401892 |
+| d2       |  0.694611 |
+| d3       |  0.83085  |
+| abs_rel  |  0.327818 |
+| sq_rel   |  4.0142   |
+| rmse     | 12.2361   |
+| rmse_log |  0.499126 |
+| log10    |  0.164842 |
+| silog    |  0.479731 |
+
+New model saved: weights/2022_07_11-06_27_40_PM/AuxSparseGuidedDepth_3.pth 
+| d1       |  0.200267 |
+| d2       |  0.517256 |
+| d3       |  0.837342 |
+| abs_rel  |  0.596967 |
+| sq_rel   |  7.04808  |
+| rmse     | 10.7955   |
+| rmse_log |  0.510078 |
+| log10    |  0.195276 |
+| silog    |  0.444147 |

@@ -81,12 +81,12 @@ print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = RgbGuideDepth(True)
-model.load_state_dict(torch.load('./weights/AuxSparseGuidedDepth_26.pth', map_location=device))
+model.load_state_dict(torch.load('./weights/basemodel.pth', map_location=device))
 model.to(device)
 model.eval()
 
 refinement_model = DepthRefinement()
-refinement_model.load_state_dict(torch.load('./weights/AuxSparseGuidedDepth_26_ref.pth', map_location=device))
+refinement_model.load_state_dict(torch.load('./weights/refinedmodel.pth', map_location=device))
 refinement_model.to(device)
 refinement_model.eval()
 

@@ -111,9 +111,9 @@ elif decnet_args.network_model == "AuxSparseGuidedDepth":
     #refinement_model = RefinementModule()
     #refinement_model = Scaler()
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
+        model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
         #model.load_state_dict(torch.load('./weights/2022_07_06-10_06_37_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
-        #refinement_model.load_state_dict(torch.load('./weights/2022_07_06-10_16_42_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
+        refinement_model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26_ref.pth', map_location='cuda'))
         
 
 else:

@@ -12,7 +12,7 @@ def eval_depth(pred, target):
     diff = pred - target
 
     #if d1 == 0:
-    print(thresh)
+    #print(thresh)
     ##    print(pred)
     #   print(target)
     #    print(diff)

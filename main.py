@@ -36,7 +36,7 @@ from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
-from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, PENet_C2, Scaler
+from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 
 #Saving weights and log files locally
 grabtime = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
@@ -106,12 +106,14 @@ elif decnet_args.network_model == "ENET2021":
     model = ENet(decnet_args)
 
 elif decnet_args.network_model == "AuxSparseGuidedDepth":
-    model = RgbGuideDepth(True)
-    refinement_model = PENet_C2()
+    model = RgbGuideDepth(False)
+    refinement_model = DepthRefinement()
     #refinement_model = RefinementModule()
     #refinement_model = Scaler()
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/2022_07_06-01_06_39_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
+        model.load_state_dict(torch.load('./weights/GuideDepth_original_kitti.pth', map_location='cpu'))  
+
+        #model.load_state_dict(torch.load('./weights/2022_07_06-01_06_39_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
         #model.load_state_dict(torch.load('./weights/2022_07_06-10_06_37_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
         #refinement_model.load_state_dict(torch.load('./weights/2022_07_06-10_16_42_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
         
