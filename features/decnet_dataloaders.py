@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from torchvision import transforms
 from torch.utils.data import Dataset
+from features.decnet_sanity import torch_min_max
 
 
 class DecnetDataloader(Dataset):
@@ -34,7 +35,7 @@ class DecnetDataloader(Dataset):
                 elif len(data_columns) == 2:
                     self.files.append({
                         "rgb": data_columns[0],
-                        "d": data_columns[2]
+                        "gt": data_columns[1]
                     })
                     
                 ''' # silencio
@@ -83,9 +84,13 @@ class DecnetDataloader(Dataset):
             #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
         elif self.dataset_type == 'nyuv2':
             transformed_rgb = transform(rgb).to('cuda') / 255.
-            transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
+            transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/1000.#/256.# 100. #256.#/100.# / 256.
             transformed_sparse = self.get_sparse_depth(transformed_gt, 500)
-
+            print(torch_min_max(transformed_rgb))
+            print(torch_min_max(transformed_gt))
+            print(torch_min_max(transformed_sparse))
+            print(len(torch.nonzero(transformed_sparse)))
+            
             #output = {'rgb': rgb, 'dep': dep_sp, 'gt': dep, 'K': K}
 
             #return output
@@ -113,11 +118,15 @@ class DecnetDataloader(Dataset):
         dep_sp = dep * mask.type_as(dep)
 
         return dep_sp
+    
+    
     def __getitem__(self, index):
         # Creates one sample of data 
         rgb = np.array(Image.open(self.files[index]['rgb']))
-        sparse = np.array(Image.open(self.files[index]['d']))
         gt = np.array(Image.open(self.files[index]['gt']))
+        
+        sparse = np.array(Image.open(self.files[index]['gt']))
+  
         file_id = self.files[index]['rgb']
         transformed_data_sample = self.data_transform(file_id, rgb, sparse, gt)
         return transformed_data_sample

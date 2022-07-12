@@ -129,23 +129,26 @@ def decnet_args_parser():
                         help='which crop to follow for validationmetrics')
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         #default='datalist_train_nn.list',
-                        default='train_dim_kitti.list',
+                        #default='train_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
+                        default='nyu_train.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         #default='datalist_test_nn.list',
-                        default='val_dim_kitti.list',
+                        #default='val_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
+                        default='nyu_test.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--root_folder', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         #default='data/nn_dataset/',
-                        default='data/kitti_dataset/val_selection_cropped/',
+                        default='data/nyuv2_dataset/',
+                        #default='data/kitti_dataset/val_selection_cropped/',
                         type=str,
                         #required=True,
                         help='Root folder where the list and data is located')
