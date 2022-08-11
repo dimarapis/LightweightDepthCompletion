@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import math
+from features.decnet_sanity import torch_min_max
+
 
 gks = 5
 pad = [i for i in range(gks*gks)]
@@ -223,19 +225,31 @@ class CSPNGenerateAccelerate(nn.Module):
         self.generate = convbn(in_channels, self.kernel_size * self.kernel_size - 1, kernel_size=3, stride=1, padding=1)
 
     def forward(self, feature):
-
+        #12print(f'feature {torch_min_max(feature)} {feature.shape}')
         guide = self.generate(feature)
+        #12print(f'guide {torch_min_max(guide)} {guide.shape}')
 
         #normalization in standard CSPN
         #'''
         guide_sum = torch.sum(guide.abs(), dim=1).unsqueeze(1)
+        #12print(f'guide_sum {torch_min_max(guide_sum)} {guide_sum.shape}')
+        
         guide = torch.div(guide, guide_sum)
+        #12print(f'guide {torch_min_max(guide)} {guide.shape}')
+        
         guide_mid = (1 - torch.sum(guide, dim=1)).unsqueeze(1)
+        #12print(f'guide_mid {torch_min_max(guide_mid)} {guide_mid.shape}')
+        
         #'''
         #weight_pad = [i for i in range(self.kernel_size * self.kernel_size)]
 
         half1, half2 = torch.chunk(guide, 2, dim=1)
+        #12print(f'half1 {torch_min_max(half1)} {half1.shape}')
+        #12print(f'half2 {torch_min_max(half2)} {half2.shape}')
+        
         output =  torch.cat((half1, guide_mid, half2), dim=1)
+        #12print(f'guide_mid {torch_min_max(output)} {output.shape}')
+        
         return output
 
 def kernel_trans(kernel, weight):

@@ -8,6 +8,7 @@ import numpy as np
 import torch.optim as optim
 import torch.nn.functional as F
 import features.CoordConv as CoordConv
+from torch.utils.data import Subset
 
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
@@ -79,6 +80,30 @@ print("\nSTEP 2. Loading datasets...")
 train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist),batch_size=decnet_args.batch_size)
 eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist),batch_size=1)
 
+#if decnet_args.training_subset != 0:
+    #train1_dl = DecnetDataloader(decnet_args,decnet_args.train_datalist)
+    #test_mask = np.random.choice(len(train1_dl), decnet_args.training_subset, replace=False)
+    #train2_dl = train1_dl[test_mask]
+    #train3_dl = DataLoader(train2_dl,batch_size=decnet_args.batch_size)
+    #train_dl = train3_dl
+
+    #indices = np.arange(len(DecnetDataloader(decnet_args,decnet_args.train_datalist)))
+    #print(indices)
+    #np.random.shuffle(indices)
+    #print(indices)
+    #print(np.shuff)
+    #train_indices = indices[:decnet_args.training_subset]
+    #print(len(train_indices))
+    ## Warp into Subsets and DataLoaders
+    #train_dataset = Subset(train_dl, train_indices)
+    ##print(train_dl.dataset)
+    ##test_dataset = Subset(dataset, test_indices)
+
+    #print(f'Loaded {len(train_dataset.dataset)} training files')
+
+    #train_dl = DataLoader(train_dataset,batch_size=decnet_args.batch_size)
+
+
 print(f'Loaded {len(train_dl.dataset)} training files')
 print(f'Loaded {len(eval_dl.dataset)} val files')
 
@@ -111,9 +136,10 @@ elif decnet_args.network_model == "AuxSparseGuidedDepth":
     #refinement_model = RefinementModule()
     #refinement_model = Scaler()
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
+        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepth.pth', map_location='cpu'))
+        #model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
         #model.load_state_dict(torch.load('./weights/2022_07_06-10_06_37_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
-        refinement_model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26_ref.pth', map_location='cuda'))
+        #refinement_model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26_ref.pth', map_location='cuda'))
         
 
 else:
@@ -472,7 +498,7 @@ def training_block(model):
 
             
             refined_epoch_loss += refined_loss.item()
-            
+            print(f'refined_loss',refined_loss)
             refined_loss.backward()
             refinement_optimizer.step()
 

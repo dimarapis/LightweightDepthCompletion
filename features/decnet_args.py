@@ -57,7 +57,7 @@ def decnet_args_parser():
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-6,
+                        default=1e-7,
                         type=float,
                         metavar='LR',
                         help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
@@ -120,7 +120,11 @@ def decnet_args_parser():
                         type=float,
                         #metavar='N',
                         help='maximum depth to count for when validation (default: 70.0 meters)')
-    
+    parser.add_argument('--training_subset',
+                        default=0,
+                        type=int,
+                        #metavar='N',
+                        help='How many minibatches to use for training (depends on batch size)')
     #base args
     parser.add_argument('--kitti_crop', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         default='eigen_crop',
@@ -132,7 +136,8 @@ def decnet_args_parser():
                         #default='train_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
-                        default='nyu_train.list',
+                        default='4batch_overfit_nn_train.list',
+                        #default='nyu_train.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
@@ -141,13 +146,14 @@ def decnet_args_parser():
                         #default='val_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
-                        default='nyu_test.list',
+                        default='4batch_overfit_nn_test.list',
+                        #default='nyu_test.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--root_folder', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='data/nn_dataset/',
-                        default='data/nyuv2_dataset/',
+                        default='data/nn_dataset/',
+                        #default='data/nyuv2_dataset/',
                         #default='data/kitti_dataset/val_selection_cropped/',
                         type=str,
                         #required=True,

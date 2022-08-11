@@ -29,6 +29,12 @@ def depth_colorize(depth):
     depth = 255 * cmap3(depth)[:, :, :3]  # H, W, C
     return depth.astype('uint8')
 
+def depth_colorize_fixed_ranges(depth,min_depth,max_depth):
+    depth = (depth - min_depth) / (max_depth - min_depth)
+    #print(np.min(depth),np.max(depth))
+    depth = 255 * cmap3(depth)[:, :, :3]  # H, W, C
+    return depth.astype('uint8')
+
 def rgb_visualizer(image):
     rgb = np.squeeze(image[0, ...].data.cpu().numpy())
     #print(rgb.size())

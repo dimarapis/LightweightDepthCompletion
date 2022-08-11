@@ -76,7 +76,7 @@ class DecnetDataloader(Dataset):
             transformed_rgb = transform(rgb).to('cuda') / 255.
             transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
             transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
-            #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
+            mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
         elif self.dataset_type == 'kitti':
             transformed_rgb = transform(rgb).to('cuda') / 255.
             transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
@@ -86,10 +86,10 @@ class DecnetDataloader(Dataset):
             transformed_rgb = transform(rgb).to('cuda') / 255.
             transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/1000.#/256.# 100. #256.#/100.# / 256.
             transformed_sparse = self.get_sparse_depth(transformed_gt, 500)
-            print(torch_min_max(transformed_rgb))
-            print(torch_min_max(transformed_gt))
-            print(torch_min_max(transformed_sparse))
-            print(len(torch.nonzero(transformed_sparse)))
+            #print(torch_min_max(transformed_rgb))
+            #print(torch_min_max(transformed_gt))
+            #print(torch_min_max(transformed_sparse))
+            #print(len(torch.nonzero(transformed_sparse)))
             
             #output = {'rgb': rgb, 'dep': dep_sp, 'gt': dep, 'K': K}
 
@@ -124,9 +124,11 @@ class DecnetDataloader(Dataset):
         # Creates one sample of data 
         rgb = np.array(Image.open(self.files[index]['rgb']))
         gt = np.array(Image.open(self.files[index]['gt']))
-        
-        sparse = np.array(Image.open(self.files[index]['gt']))
-  
+        if self.dataset_type == 'nn':
+            sparse = np.array(Image.open(self.files[index]['d']))
+        elif self.dataset_type == 'nyud2':
+            sparse = np.array(Image.open(self.files[index]['gt']))
+            
         file_id = self.files[index]['rgb']
         transformed_data_sample = self.data_transform(file_id, rgb, sparse, gt)
         return transformed_data_sample

@@ -8,6 +8,7 @@ import numpy as np
 import torch.optim as optim
 import torch.nn.functional as F
 import features.CoordConv as CoordConv
+from torch.utils.data import Subset
 
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
@@ -111,7 +112,7 @@ elif decnet_args.network_model == "AuxSparseGuidedDepth":
     #refinement_model = RefinementModule()
     #refinement_model = Scaler()
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/GuideDepth_original_kitti.pth', map_location='cpu'))  
+        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepth.pth', map_location='cpu'))  
 
         #model.load_state_dict(torch.load('./weights/2022_07_06-01_06_39_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
         #model.load_state_dict(torch.load('./weights/2022_07_06-10_06_37_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
@@ -248,6 +249,9 @@ def evaluation_block(epoch):
 
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
             refined_pred = pred
+            #print_torch_min_max_rgbpredgt(refined_pred,pred,gt,sparse,)            
+            #print(torch_min_max(inv_pred))
+
             
             loss = depth_criterion(pred, gt)
             eval_loss += loss.item()

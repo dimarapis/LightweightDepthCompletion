@@ -81,12 +81,12 @@ print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = RgbGuideDepth(True)
-model.load_state_dict(torch.load('./weights/basemodel.pth', map_location=device))
+model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
 model.to(device)
 model.eval()
 
 refinement_model = DepthRefinement()
-refinement_model.load_state_dict(torch.load('./weights/refinedmodel.pth', map_location=device))
+refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
 refinement_model.to(device)
 refinement_model.eval()
 
@@ -148,7 +148,7 @@ def gt_and_pred_info(gt, pred, sparse, refined_pred):
     return sanity_dict
 
 
-def visualize_results(model, rgb, pred, refined_pred, sparse):
+def visualize_results(image, rgb, pred, refined_pred, sparse, gt):
     img_list = []
 
     rgb = np.squeeze(rgb.cpu().detach().numpy())
@@ -157,25 +157,34 @@ def visualize_results(model, rgb, pred, refined_pred, sparse):
     rgb = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
     img_list.append(rgb)
 
-    sparse_vis = np.squeeze(sparse.cpu().detach().numpy())
-    sparse_vis = visualizer.depth_colorize(sparse_vis)
-    sparse_vis = cv2.cvtColor(sparse_vis, cv2.COLOR_RGB2BGR)
-    img_list.append(sparse_vis)
+
     
     depth = np.squeeze(pred.cpu().detach().numpy())
-    depth = visualizer.depth_colorize(depth)
+    depth_colorize_min_depth = 0
+    depth_colorize_max_depth = np.max(depth) * 1.2 
+    depth = visualizer.depth_colorize_fixed_ranges(depth,depth_colorize_min_depth,depth_colorize_max_depth)
     depth = cv2.cvtColor(depth, cv2.COLOR_RGB2BGR)
     img_list.append(depth)
     
+    sparse_vis = np.squeeze(sparse.cpu().detach().numpy())
+    sparse_vis = visualizer.depth_colorize_fixed_ranges(sparse_vis,depth_colorize_min_depth,depth_colorize_max_depth)
+    sparse_vis = cv2.cvtColor(sparse_vis, cv2.COLOR_RGB2BGR)
+    img_list.append(sparse_vis)
+    
+    gt_vis = np.squeeze(gt.cpu().detach().numpy())
+    gt_vis = visualizer.depth_colorize_fixed_ranges(gt_vis,depth_colorize_min_depth,depth_colorize_max_depth)
+    gt_vis = cv2.cvtColor(gt_vis, cv2.COLOR_RGB2BGR)
+    img_list.append(gt_vis)
+    
     refined_depth = np.squeeze(refined_pred.cpu().detach().numpy())
-    refined_depth = visualizer.depth_colorize(refined_depth)
+    refined_depth = visualizer.depth_colorize_fixed_ranges(refined_depth,depth_colorize_min_depth,depth_colorize_max_depth)
     refined_depth = cv2.cvtColor(refined_depth, cv2.COLOR_RGB2BGR)
     img_list.append(refined_depth)
     
     
     img_merge = np.hstack(img_list)
     #cv2.imshow('queens', )
-    cv2.imwrite(f'{model}.jpg',img_merge.astype('uint8'))
+    cv2.imwrite(f'results/{image}.jpg',img_merge.astype('uint8'))
     #print(img_merge)
     #cv2.waitKey()
 
@@ -218,6 +227,8 @@ def image_level():
                 refined_result_metrics[metric] += refined_computed_result[metric]
                 
             sanity_dict = gt_and_pred_info(gt, pred, sparse, refined_pred)
+            visualize_results(image_filename,image,pred,refined_pred,sparse,gt)
+
 
                 
             d = sanity_dict
@@ -235,6 +246,7 @@ def image_level():
             print('\n\n')
             print(tabulate([[k,] + v for k,v in d.items()], headers = headers, tablefmt='github', numalign='right'))  
             print('\n')
+            break
             
         fig,ax = plt.subplots()
         #ax.scatter(rmse_list, sparse_pts_list, color="red", marker="*")
@@ -272,7 +284,6 @@ def grid_level():
             
             
             #gt_and_pred_info('basemodel', 'pred', pred)
-            #visualize_results('basemodel',image,pred,sparse)
 
             refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
 
