@@ -120,11 +120,26 @@ def decnet_args_parser():
                         type=float,
                         #metavar='N',
                         help='maximum depth to count for when validation (default: 70.0 meters)')
+    parser.add_argument('--error_vis_min',
+                        default=-5,
+                        type=float,
+                        #metavar='W',
+                        help='error visualize minimum value (default: -5 meters)')
+    parser.add_argument('--error_vis_max',
+                        default=5,
+                        type=float,
+                        #metavar='W',
+                        help='error visualize maximum value (default: 5 meters)')
     parser.add_argument('--training_subset',
                         default=0,
                         type=int,
                         #metavar='N',
                         help='How many minibatches to use for training (depends on batch size)')
+    parser.add_argument('--show_sensor_error', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
+                        default=False,
+                        type=bool,
+                        help='Choose if showing sensor error or present sparse error')
+    
     #base args
     parser.add_argument('--kitti_crop', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         default='eigen_crop',
@@ -164,12 +179,10 @@ def decnet_args_parser():
                         type=str,
                         #required=True,
                         help='Decide if you run with pytorch or tensorrt')
-
     parser.add_argument('--saved_weights',
                         default='weights/KITTI_Full_GuideDepth.pth',
                         type=str,
                         help='Location of saved weights')
-    
     #WANDB args
     parser.add_argument('--wandblogger', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
                         default=False,

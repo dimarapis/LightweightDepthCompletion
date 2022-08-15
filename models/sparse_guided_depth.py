@@ -268,7 +268,7 @@ class RgbGuideDepth(nn.Module):
         
     def forward(self, rgb, sparse):
         y_eighth = self.feature_extractor(rgb)
-        #print('y.shape', y.shape) # [B, 64, 44, 76]
+        print('y.shape', y_eighth.shape) # [B, 64, 44, 76]
 
         rgb_half_for_cspn = F.interpolate(rgb, scale_factor=.5)
         rgb_quarter = F.interpolate(rgb, scale_factor=.25)
@@ -279,6 +279,7 @@ class RgbGuideDepth(nn.Module):
 
         y_quarter = F.interpolate(y_eighth, scale_factor=2., mode='bilinear')#, align_corners=True)
         y_quarter = self.up_1(rgb_quarter, y_quarter)
+        print('y_quarter.shape', y_quarter.shape) # [B, 32, 88, 152]
 
 
         y_half_for_cspn = F.interpolate(y_quarter, scale_factor=2., mode='bilinear')#,align_corners=True)
@@ -286,13 +287,17 @@ class RgbGuideDepth(nn.Module):
 
         
         y_half = self.up_2(rgb_half_for_cspn, y_half_for_cspn)
+        print('y_half.shape', y_half.shape) # [B, 16, 176, 304]
 
 
         y_for_cspn = F.interpolate(y_half, scale_factor=2., mode='bilinear')#, align_corners=True)
         #print(f'y_for_cspn {y_for_cspn.shape}')
+        print('y_for_cspn.shape', y_for_cspn.shape) # [B, 16, 352, 608]
 
 
         pred = self.up_3(rgb, y_for_cspn)
+        print('pred.shape', pred.shape) # [B, 1, 352, 608]
+        
 
         return rgb_half_for_cspn, y_half_for_cspn, sparse_half, y_for_cspn, pred
 

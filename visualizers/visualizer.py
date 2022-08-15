@@ -6,10 +6,13 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 import cv2
+from matplotlib.colors import BoundaryNorm
+
 
 cmap = plt.cm.jet
 cmap2 = plt.cm.nipy_spectral
 cmap3 = plt.cm.turbo
+cmap4 = plt.cm.PiYG
 
 def validcrop(img):
     ratio = 256/1216
@@ -33,6 +36,54 @@ def depth_colorize_fixed_ranges(depth,min_depth,max_depth):
     depth = (depth - min_depth) / (max_depth - min_depth)
     #print(np.min(depth),np.max(depth))
     depth = 255 * cmap3(depth)[:, :, :3]  # H, W, C
+    return depth.astype('uint8')
+
+def error_map_colorizer(depth,min_depth,max_depth):
+    '''
+    #shape_a, shape_b = depth.shape
+    ls = []
+    #print(depth.shape[0],depth.shape[1])
+    print(depth[depth>0].shape) 
+    
+    for row in depth:
+        for pixel in row:
+            #print(pixel)
+            if pixel < 0:
+                new_pixel = -(pixel/min_depth)
+                ls.append(new_pixel)
+            elif pixel == 0:
+                ls.append(pixel)
+            else:
+                new_pixel = (pixel/max_depth)
+                ls.append(new_pixel)
+            array_list = np.asarray(ls)     
+    array_list.reshape((depth.shape[0],depth.shape[1]))
+    print((np.min(array_list),np.max(array_list),np.mean(array_list)))
+    print(array_list.shape)
+    #bounds = np.arange(np.min(depth),np.max(depth),.5)
+    #idx=np.searchsorted(bounds,0)
+    #bounds=np.insert(bounds,idx,0)
+    #norm = BoundaryNorm(bounds, cmap.N)
+
+    #plt.imshow(depth,interpolation='none',norm=norm,cmap=cmap4)
+    #plt.colorbar()
+    #plt.show()
+    '''
+    #print(np.min(depth),np.max(depth))
+    depth_positive = np.where(depth>0, depth/ max_depth, 0)   
+    depth_negative = np.where(depth<0, - (depth / min_depth), 0)
+
+    #print(depth_positive.shape,np.min(depth_positive),np.max(depth_positive))
+    #print(depth_negative.shape,np.min(depth_negative),np.max(depth_negative))
+    
+    #depth_final = np.where(depth>0, depth_positive, 0)
+    depth_final = np.where(depth<=0, depth_negative, depth_positive )
+    #print(depth_final.shape,np.min(depth_final),np.max(depth_final))
+    
+    #depth = (depth - min_depth) / (max_depth - min_depth)
+    #print(np.min(depth),np.max(depth))
+    depth_final = (depth_final + 1.0) / 2.0
+    depth = 255 * cmap4(depth_final)[:, :, :3]  # H, W, C
     return depth.astype('uint8')
 
 def rgb_visualizer(image):

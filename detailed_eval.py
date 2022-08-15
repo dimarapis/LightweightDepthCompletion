@@ -149,40 +149,133 @@ def gt_and_pred_info(gt, pred, sparse, refined_pred):
 
 
 def visualize_results(image, rgb, pred, refined_pred, sparse, gt):
-    img_list = []
-
+    img_list_row_1 = []
+    img_list_row_2 = []
+    img_list_row_3 = []
+    
     rgb = np.squeeze(rgb.cpu().detach().numpy())
     rgb = np.transpose(rgb, (1, 2, 0))
     rgb = rgb*255
     rgb = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
-    img_list.append(rgb)
-
-
+    img_list_row_1.append(rgb)
     
     depth = np.squeeze(pred.cpu().detach().numpy())
     depth_colorize_min_depth = 0
-    depth_colorize_max_depth = np.max(depth) * 1.2 
-    depth = visualizer.depth_colorize_fixed_ranges(depth,depth_colorize_min_depth,depth_colorize_max_depth)
-    depth = cv2.cvtColor(depth, cv2.COLOR_RGB2BGR)
-    img_list.append(depth)
+    depth_colorize_max_depth = np.max(depth) * 1.2
+    depth_2 = visualizer.depth_colorize_fixed_ranges(depth,depth_colorize_min_depth,depth_colorize_max_depth)
+    depth_2 = cv2.cvtColor(depth_2, cv2.COLOR_RGB2BGR)
     
     sparse_vis = np.squeeze(sparse.cpu().detach().numpy())
-    sparse_vis = visualizer.depth_colorize_fixed_ranges(sparse_vis,depth_colorize_min_depth,depth_colorize_max_depth)
-    sparse_vis = cv2.cvtColor(sparse_vis, cv2.COLOR_RGB2BGR)
-    img_list.append(sparse_vis)
+    sparse_vis_2 = visualizer.depth_colorize_fixed_ranges(sparse_vis,depth_colorize_min_depth,depth_colorize_max_depth)
+    sparse_vis_2 = cv2.cvtColor(sparse_vis_2, cv2.COLOR_RGB2BGR)
+    img_list_row_1.append(sparse_vis_2)  
     
     gt_vis = np.squeeze(gt.cpu().detach().numpy())
-    gt_vis = visualizer.depth_colorize_fixed_ranges(gt_vis,depth_colorize_min_depth,depth_colorize_max_depth)
-    gt_vis = cv2.cvtColor(gt_vis, cv2.COLOR_RGB2BGR)
-    img_list.append(gt_vis)
+    gt_vis_2 = visualizer.depth_colorize_fixed_ranges(gt_vis,depth_colorize_min_depth,depth_colorize_max_depth)
+    gt_vis_2 = cv2.cvtColor(gt_vis_2, cv2.COLOR_RGB2BGR)
+    img_list_row_1.append(gt_vis_2)
+    img_list_row_2.append(depth_2)
     
     refined_depth = np.squeeze(refined_pred.cpu().detach().numpy())
-    refined_depth = visualizer.depth_colorize_fixed_ranges(refined_depth,depth_colorize_min_depth,depth_colorize_max_depth)
-    refined_depth = cv2.cvtColor(refined_depth, cv2.COLOR_RGB2BGR)
-    img_list.append(refined_depth)
+    refined_depth_2 = visualizer.depth_colorize_fixed_ranges(refined_depth,depth_colorize_min_depth,depth_colorize_max_depth)
+    refined_depth_2 = cv2.cvtColor(refined_depth_2, cv2.COLOR_RGB2BGR)
+    img_list_row_2.append(refined_depth_2)
+    #img_list_row_2.append(np.zeros(refined_depth_2.shape))
+    
+    gt_vis = np.squeeze(gt.cpu().detach().numpy())
+    error_map_total_basemodel = np.where(gt_vis, gt_vis-depth, gt_vis)
+    error_map_total_refined = np.where(gt_vis, gt_vis-refined_depth, gt_vis)#np.where(refined_depth, refined_depth-depth, refined_depth)# / np.where(gt_vis, gt_vis-refined_depth, gt_vis)
+    error_map_sparse_present = np.where(np.logical_and(gt_vis > 0,sparse_vis > 0), gt_vis-refined_depth, 0)#np.where(refined_depth, refined_depth-depth, refined_depth)# / np.where(gt_vis, gt_vis-refined_depth, gt_vis)
+    error_map_sparse_absent = np.where(np.logical_and(gt_vis > 0,sparse_vis == 0), gt_vis-refined_depth, 0)#np.where(refined_depth, refined_depth-depth, refined_depth)# / np.where(gt_vis, gt_vis-refined_depth, gt_vis)
+    sensor_error = np.where(np.logical_and(gt_vis > 0,sparse_vis > 0), gt_vis-sparse_vis, 0)#np.where(refined_depth, refined_depth-depth, refined_depth)# / np.where(gt_vis, gt_vis-refined_depth, gt_vis)
+    if decnet_args.show_sensor_error == True:
+        error_map_sparse_present = sensor_error
+        #print(f'error between sensors valid datapoints!  np.min: {np.min(sensor_error[np.nonzero(sensor_error)])}, np.max: {np.max(sensor_error[np.nonzero(sensor_error)])}, np.mean: {np.mean(sensor_error[np.nonzero(sensor_error)])} and np.median: {np.median(sensor_error[np.nonzero(sensor_error)])} ')
+        
+    #print(f'gt_vis {np.min(gt_vis)} and {np.max(gt_vis)}')
+    #print(f'gt_vis {np.min(sparse_vis)} and {np.max(sparse_vis)}')
+    #print(f'gt_vis {np.min(gt_vis)} and {np.max(gt_vis)}')
     
     
-    img_merge = np.hstack(img_list)
+    
+    #print(f'test_error_map_absent {np.min(error_map_sparse_absent)} and {np.max(error_map_sparse_absent)}')
+
+    #print(error_map)
+    
+    error_colorize_min = np.min(error_map_total_basemodel)
+    error_colorize_max = np.max(error_map_total_basemodel)
+    #print(error_colorize_min, error_colorize_max)
+
+    if error_colorize_min < decnet_args.error_vis_min:
+        error_colorize_min = decnet_args.error_vis_min
+        filtered_error_map_total_basemodel = np.where(error_map_total_basemodel < decnet_args.error_vis_min, decnet_args.error_vis_min, error_map_total_basemodel)
+        filtered_error_map_total_refined = np.where(error_map_total_refined < decnet_args.error_vis_min, decnet_args.error_vis_min, error_map_total_refined)
+        filtered_error_map_sparse_present = np.where(error_map_sparse_present < decnet_args.error_vis_min, decnet_args.error_vis_min, error_map_sparse_present)
+        filtered_error_map_sparse_absent = np.where(error_map_sparse_absent < decnet_args.error_vis_min, decnet_args.error_vis_min, error_map_sparse_absent)
+        
+        #print(f'test1 {np.min(filtered_error_map_sparse_absent)} and {np.max(filtered_error_map_total_basemodel)}')
+        #error_colorize_min = -8.0
+        
+    else: 
+        filtered_error_map_total_basemodel = error_map_total_basemodel
+        filtered_error_map_total_refined = error_map_total_refined
+        filtered_error_map_sparse_present = error_map_sparse_present
+        filtered_error_map_sparse_absent = error_map_sparse_absent
+    
+    if error_colorize_max > decnet_args.error_vis_max:
+        filtered_error_map_total_basemodel = np.where(filtered_error_map_total_basemodel > decnet_args.error_vis_max, decnet_args.error_vis_max, filtered_error_map_total_basemodel)
+        filtered_error_map_total_refined = np.where(filtered_error_map_total_refined > decnet_args.error_vis_max, decnet_args.error_vis_max, filtered_error_map_total_refined)
+        filtered_error_map_sparse_present = np.where(filtered_error_map_sparse_present > decnet_args.error_vis_max, decnet_args.error_vis_max, filtered_error_map_sparse_present)
+        filtered_error_map_sparse_absent = np.where(filtered_error_map_sparse_absent > decnet_args.error_vis_max, decnet_args.error_vis_max, filtered_error_map_sparse_absent)
+        
+        
+        error_colorize_max = decnet_args.error_vis_max
+    
+    #if decnet_args.show_sensor_error == True:
+        #print(filtered_error_map_sparse_present.shape)
+        #error_map_sparse_present = sensor_error
+    #    print(f'error between sensors valid datapoints!  np.min: {np.min(filtered_error_map_sparse_present[np.nonzero(filtered_error_map_sparse_present)])}, np.max: {np.max(filtered_error_map_sparse_present[np.nonzero(filtered_error_map_sparse_present)])}, np.mean: {np.mean(filtered_error_map_sparse_present[np.nonzero(filtered_error_map_sparse_present)])} and np.median: {np.median(filtered_error_map_sparse_present[np.nonzero(filtered_error_map_sparse_present)])} ')
+    #error_colorize_mean = np.mean(error_map)
+    #print(f'basemodel min: {np.min(filtered_error_map_total_basemodel)}, basemodel max: {np.max(filtered_error_map_total_basemodel)}')
+    #print(f'refined min: {np.min(filtered_error_map_total_refined)}, refined max: {np.max(filtered_error_map_total_refined)}')
+    #print(f'sparse_present min: {np.min(filtered_error_map_sparse_present)}, sparse_present max: {np.max(filtered_error_map_sparse_present)}')
+    #print(f'sparse_absent min: {np.min(filtered_error_map_sparse_absent)}, sparse_absent max: {np.max(filtered_error_map_sparse_absent)}')
+    
+    #print(np.min(filtered_error_map_total_refined), np.max(filtered_error_map_total_refined))
+    
+    #print(error_colorize_max)
+    error_map_col_basemodel = visualizer.error_map_colorizer(filtered_error_map_total_basemodel,error_colorize_min,error_colorize_max)
+    error_map_col_basemodel = cv2.cvtColor(error_map_col_basemodel, cv2.COLOR_RGB2BGR)
+    img_list_row_3.append(error_map_col_basemodel)
+    #img_list_row_3.append(np.where(error_map_col_basemodel==246, 0, error_map_col_basemodel))
+    #print(np.mean(error_map_col_basemodel))
+    
+    error_map_col_refined = visualizer.error_map_colorizer(filtered_error_map_total_refined,error_colorize_min,error_colorize_max)
+    error_map_col_refined = cv2.cvtColor(error_map_col_refined, cv2.COLOR_RGB2BGR)
+    img_list_row_3.append(error_map_col_refined)
+    #img_list_row_3.append(np.where(error_map_col_refined==246, 0, error_map_col_refined))
+    
+    error_map_col_sparse_present = visualizer.error_map_colorizer(filtered_error_map_sparse_present,error_colorize_min,error_colorize_max)
+    error_map_col_sparse_present = cv2.cvtColor(error_map_col_sparse_present, cv2.COLOR_RGB2BGR)
+    img_list_row_2.append(error_map_col_sparse_present)
+    #img_list_row_3.append(np.zeros(error_map_col_refined.shape))
+    #print(np.mean(error_map_col_refined))
+
+
+    error_map_col_sparse_absent = visualizer.error_map_colorizer(filtered_error_map_sparse_absent,error_colorize_min,error_colorize_max)
+    error_map_col_sparse_absent = cv2.cvtColor(error_map_col_sparse_absent, cv2.COLOR_RGB2BGR)
+    img_list_row_3.append(error_map_col_sparse_absent)
+    #img_list_row_3.append(np.zeros(error_map_col_refined.shape))
+    #print(np.mean(error_map_col_refined))
+
+    #print(refined_depth.shape)
+    #print(error_map.shape)
+    img_merge_row_1 = np.hstack(img_list_row_1)
+    img_merge_row_2 = np.hstack(img_list_row_2)
+    img_merge_row_3 = np.hstack(img_list_row_3)
+    
+    
+    img_merge = np.vstack((img_merge_row_1,img_merge_row_2,img_merge_row_3))
     #cv2.imshow('queens', )
     cv2.imwrite(f'results/{image}.jpg',img_merge.astype('uint8'))
     #print(img_merge)
@@ -246,7 +339,7 @@ def image_level():
             print('\n\n')
             print(tabulate([[k,] + v for k,v in d.items()], headers = headers, tablefmt='github', numalign='right'))  
             print('\n')
-            break
+            #break
             
         fig,ax = plt.subplots()
         #ax.scatter(rmse_list, sparse_pts_list, color="red", marker="*")

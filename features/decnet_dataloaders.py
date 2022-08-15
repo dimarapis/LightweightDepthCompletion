@@ -126,7 +126,7 @@ class DecnetDataloader(Dataset):
         gt = np.array(Image.open(self.files[index]['gt']))
         if self.dataset_type == 'nn':
             sparse = np.array(Image.open(self.files[index]['d']))
-        elif self.dataset_type == 'nyud2':
+        elif self.dataset_type == 'nyuv2':
             sparse = np.array(Image.open(self.files[index]['gt']))
             
         file_id = self.files[index]['rgb']
