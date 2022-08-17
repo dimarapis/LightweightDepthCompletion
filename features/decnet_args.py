@@ -12,7 +12,7 @@ def decnet_args_parser():
     parser.add_argument('--network-model',
                         type=str,
                         default="GuideDepth",
-                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth"],
+                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule"],
                         help='choose a model'
                         )
     parser.add_argument('--pretrained',

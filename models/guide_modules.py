@@ -207,7 +207,90 @@ class AuxSparseUpsamplingBlock(nn.Module):
         residual = self.comb_conv(xy)
         return self.reduce(residual + pred)
 
+class Decnet_Guided_Upsampling_Block(nn.Module):
+    def __init__(self, in_features, expand_features, out_features,
+                 kernel_size=3, channel_attention=True,
+                 guidance_type='full', rgb_guide_features=3, sparse_guide_features=1):
+        super(Decnet_Guided_Upsampling_Block, self).__init__()
 
+        self.channel_attention = channel_attention
+        self.guidance_type = guidance_type
+        self.rgb_guide_features = rgb_guide_features
+        self.in_features = in_features
+        self.sparse_guide_features = sparse_guide_features
+
+        padding = kernel_size // 2
+
+        self.feature_conv = nn.Sequential(
+            nn.Conv2d(in_features, expand_features,
+                      kernel_size=kernel_size, padding=padding),
+            nn.BatchNorm2d(expand_features),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(expand_features, expand_features // 2, kernel_size=1),
+            nn.BatchNorm2d(expand_features // 2),  
+            nn.ReLU(inplace=True))
+
+        if self.guidance_type == 'full':
+            self.guide_conv = nn.Sequential(
+                nn.Conv2d(self.rgb_guide_features, expand_features,
+                          kernel_size=kernel_size, padding=padding),
+                nn.BatchNorm2d(expand_features),
+                nn.ReLU(inplace=True),
+                nn.Conv2d(expand_features, expand_features // 2, kernel_size=1),
+                nn.BatchNorm2d(expand_features // 2),
+                nn.ReLU(inplace=True))
+        
+            self.sparse_conv = nn.Sequential(
+                    nn.Conv2d(self.sparse_guide_features, 2*expand_features,
+                            kernel_size=kernel_size, padding=padding),
+                    nn.BatchNorm2d(2*expand_features),
+                    nn.ReLU(inplace=True),
+                    nn.Conv2d(2*expand_features, 2*expand_features // 2, kernel_size=1),
+                    nn.BatchNorm2d(2*expand_features // 2),
+                    nn.ReLU(inplace=True))
+
+            comb_features = (expand_features // 2) * 2
+
+        self.comb_conv = nn.Sequential(
+            nn.Conv2d(comb_features, expand_features,
+                      kernel_size=kernel_size, padding=padding),
+            nn.BatchNorm2d(expand_features),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(expand_features, in_features, kernel_size=1),
+            nn.BatchNorm2d(in_features),
+            nn.ReLU(inplace=True))
+
+        self.reduce = nn.Conv2d(in_features,
+                                out_features,
+                                kernel_size=1)
+        
+        self.reduce_sparse = nn.Conv2d(2*in_features,
+                                in_features,
+                                kernel_size=1)
+
+        if self.channel_attention:
+            self.SE_block = SELayer(comb_features,
+                                    reduction=1)
+            
+
+    def forward(self, rgb_guide, sparse_guide, pred):
+        x = self.feature_conv(pred)
+
+        if self.guidance_type == 'full':
+            rgb_guided = self.guide_conv(rgb_guide)
+            sparse_guided = self.sparse_conv(sparse_guide)
+            all_channels = torch.cat([x, rgb_guided,sparse_guided], dim=1)
+
+        if self.channel_attention:
+            #print(xy.shape)
+            #print(z.shape)
+            #xy = torch.cat([xy,z], dim=1)
+            #xy = self.reduce_sparse(torch.cat([xy,z], dim=1))
+            #print(xy.shape)
+            xy = self.SE_block(xy)
+
+        residual = self.comb_conv(xy)
+        return self.reduce(residual + pred)
 
 
 

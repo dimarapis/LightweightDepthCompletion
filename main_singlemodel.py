@@ -34,7 +34,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
+from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule
 
 #Saving weights and log files locally
@@ -123,10 +123,10 @@ elif decnet_args.network_model == "SparseAndRGBGuidedDepth":
 elif decnet_args.network_model == "ENET2021":
     model = ENet(decnet_args)
 
-elif decnet_args.network_model == "AuxGuideDepth":
-    model = AuxGuidedDepth(True)
-    if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
+elif decnet_args.network_model == "DecnetModule":
+    model = DecnetModule(True)
+    #if decnet_args.pretrained == True:
+    #    model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
 
 elif decnet_args.network_model == "AuxSparseGuidedDepth":
     model = GuideDepth(True)

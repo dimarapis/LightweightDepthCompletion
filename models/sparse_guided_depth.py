@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from transformers import TensorFlowBenchmarkArguments
 
 from models.guide_ddrnet import DualResNet_Backbone
-from models.guide_modules import Guided_Upsampling_Block, AuxUpsamplingBlock, AuxSparseUpsamplingBlock, DepthCorrector
+from models.guide_modules import Decnet_Guided_Upsampling_Block, Guided_Upsampling_Block,AuxUpsamplingBlock, AuxSparseUpsamplingBlock, DepthCorrector
 from models.guide_modules import MinkoEncoder
 
 from models.enet_basic import *
@@ -1377,26 +1377,29 @@ class DecnetModule(nn.Module):
                 pretrained=pretrained, 
                 features=up_features[0])
 
-        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+        self.up_1 = Decnet_Guided_Upsampling_Block(in_features=up_features[0],
                                    expand_features=inner_features[0],
                                    out_features=up_features[1],
                                    kernel_size=3,
                                    channel_attention=True,
-                                   guide_features=4,
+                                   rgb_guide_features=3,
+                                   sparse_guide_features=1,
                                    guidance_type="full")
-        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+        self.up_2 = Decnet_Guided_Upsampling_Block(in_features=up_features[1],
                                    expand_features=inner_features[1],
                                    out_features=up_features[2],
                                    kernel_size=3,
                                    channel_attention=True,
-                                   guide_features=4,
+                                   rgb_guide_features=3,
+                                   sparse_guide_features=1,
                                    guidance_type="full")
-        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+        self.up_3 = Decnet_Guided_Upsampling_Block(in_features=up_features[2],
                                    expand_features=inner_features[2],
                                    out_features=1,
                                    kernel_size=3,
                                    channel_attention=True,
-                                   guide_features=4,
+                                   rgb_guide_features=3,
+                                   sparse_guide_features=1,
                                    guidance_type="full")
 
 
