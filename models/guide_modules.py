@@ -279,6 +279,10 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
         if self.guidance_type == 'full':
             rgb_guided = self.guide_conv(rgb_guide)
             sparse_guided = self.sparse_conv(sparse_guide)
+            print(x.shape)
+            print(rgb_guided.shape)
+            print(sparse_guided.shape)
+
             all_channels = torch.cat([x, rgb_guided,sparse_guided], dim=1)
 
         if self.channel_attention:
@@ -287,7 +291,7 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
             #xy = torch.cat([xy,z], dim=1)
             #xy = self.reduce_sparse(torch.cat([xy,z], dim=1))
             #print(xy.shape)
-            xy = self.SE_block(xy)
+            xy = self.SE_block(all_channels)
 
         residual = self.comb_conv(xy)
         return self.reduce(residual + pred)

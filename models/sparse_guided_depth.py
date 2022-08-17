@@ -1403,7 +1403,7 @@ class DecnetModule(nn.Module):
                                    guidance_type="full")
 
 
-    def forward(self, rgb, depth):
+    def forward(self, rgb, sparse):
         y = self.feature_extractor(rgb)
         #print('tara')
         
@@ -1411,13 +1411,16 @@ class DecnetModule(nn.Module):
 
         x_half = F.interpolate(rgb, scale_factor=.5)
         x_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        sparse_half = F.interpolate(sparse, scale_factor=.5)
+        sparse_quarter = F.interpolate(sparse, scale_factor=.25)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
-        y = self.up_1(x_quarter, y)
+        y = self.up_1(x_quarter,sparse_quarter, y)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#,align_corners=True)
-        y = self.up_2(x_half, y)
+        y = self.up_2(x_half,sparse_half, y)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
-        y = self.up_3(rgb, y)
+        y = self.up_3(rgb, sparse, y)
         return y
