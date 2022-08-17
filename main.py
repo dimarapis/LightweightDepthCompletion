@@ -100,7 +100,8 @@ elif decnet_args.network_model == "SparseGuidedDepth":
     #if decnet_args.pretrained
         #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
 elif decnet_args.network_model == "SparseAndRGBGuidedDepth":
-    model = SparseAndRGBGuidedDepth(False)
+    model = SparseAndRGBGuidedDepth(True)
+    refinement_model = SparseAndRGBGuidedDepth(False)
     #if decnet_args.pretrained
         #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
 elif decnet_args.network_model == "ENET2021":
@@ -126,6 +127,7 @@ else:
 #refinement_model = torch.nn.DataParallel(refinement_model)
 
 model.to(device)
+
 refinement_model.to(device)
 
 
@@ -240,7 +242,8 @@ def evaluation_block(epoch):
             #print(image_filename)
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
             #feat1, feat2, inv_pred = model(image, sparse)
-            rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            #020901rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            inv_pred = model(image,sparse)
 
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
@@ -438,7 +441,8 @@ def training_block(model):
 
             #feat1, feat2, inv_pred = model(image, sparse)
             #inv_pred = model(image)
-            rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            #020901rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            inv_pred = model(image,sparse)
 
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)

@@ -147,21 +147,21 @@ def decnet_args_parser():
                         #metavar='N',
                         help='which crop to follow for validationmetrics')
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='datalist_train_nn.list',
+                        default='datalist_train_nn.list',
                         #default='train_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
-                        default='4batch_overfit_nn_train.list',
+                        #default='4batch_overfit_nn_train.list',
                         #default='nyu_train.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        #default='datalist_test_nn.list',
+                        default='datalist_test_nn.list',
                         #default='val_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
-                        default='4batch_overfit_nn_test.list',
+                        #default='4batch_overfit_nn_test.list',
                         #default='nyu_test.list',
                         type=str,
                         #required=True,

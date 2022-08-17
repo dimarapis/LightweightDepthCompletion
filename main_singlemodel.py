@@ -34,7 +34,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, AuxGuidedDepth
+from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule
 
 #Saving weights and log files locally
@@ -268,7 +268,7 @@ def evaluation_block(epoch):
             image_filename = data['file']
             #print(image_filename)
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
-            inv_pred = model(image)#,sparse)
+            inv_pred = model(image,sparse)
             #inv_pred = model(image)
 
 
@@ -411,8 +411,8 @@ def training_block(model):
                 
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
 
-            inv_pred = model(image)
-            #inv_pred = model(image,sparse)
+            #inv_pred = model(image)
+            inv_pred = model(image,sparse)
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)            
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)            

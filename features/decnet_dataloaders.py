@@ -76,7 +76,7 @@ class DecnetDataloader(Dataset):
             transformed_rgb = transform(rgb).to('cuda') / 255.
             transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
             transformed_gt = transform(gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
-            mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
+            #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
         elif self.dataset_type == 'kitti':
             transformed_rgb = transform(rgb).to('cuda') / 255.
             transformed_sparse = transform(sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.

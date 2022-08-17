@@ -101,6 +101,9 @@ for metric in metric_name:
     result_metrics[metric] = 0.0
     refined_result_metrics[metric] = 0.0
 
+print("\nSTEP 4. Test time...\n")
+
+
 def gt_and_pred_info(gt, pred, sparse, refined_pred):
 
     sanity_dict = {}
@@ -480,5 +483,70 @@ def grid_level():
             plt.show()
 
 
+def gpu_timings(models):
+    model = RgbGuideDepth(True)
+    model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
+    model.to(device)
+    model.eval()
+
+    refinement_model = DepthRefinement()
+    refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
+    refinement_model.to(device)
+    refinement_model.eval()
+    
+    for modelo in models:
+        print("Calculating inference for models...")
+        starter, ender = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
+        repetitions = 100
+        timings = np.zeros((repetitions, 1))
+
+        # GPU warm-up
+        for _ in range(20):
+            test_data_rgb = torch.randint(0, 256, (1, 3, 352, 608)).to(device)
+            test_data_sparse = torch.randint(0, 256, (1, 1, 352, 608)).to(device)
+            test_data_rgb = test_data_rgb.to(torch.float32)
+            test_data_sparse = test_data_sparse.to(torch.float32)
+
+            rgb_half, y_half, sparse_half, y, inv_pred = model(test_data_rgb,test_data_sparse)
+                
+            pred = inverse_depth_norm(80.0,inv_pred)
+                
+            if modelo == 'refinement':
+                    
+                refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+
+        # Measure performance 
+        with torch.no_grad():
+            for rep in range(repetitions):
+                
+                test_data_rgb = torch.randint(0, 256, (1, 3, 352, 608)).to(device)
+                test_data_sparse = torch.randint(0, 256, (1, 1, 352, 608)).to(device)
+                test_data_rgb = test_data_rgb.to(torch.float32)
+                test_data_sparse = test_data_sparse.to(torch.float32)
+                
+                starter.record()
+                rgb_half, y_half, sparse_half, y, inv_pred = model(test_data_rgb,test_data_sparse)
+                
+                pred = inverse_depth_norm(80.0,inv_pred)
+                
+                if modelo == 'Refinement':
+                    
+                    refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+
+                ender.record()
+
+                # Wait for GPU to sync
+                torch.cuda.synchronize()
+                curr_time = starter.elapsed_time(ender)
+                timings[rep] = curr_time
+
+        # Calculate mean and std
+        mean_time = np.sum(timings) / repetitions
+        std_time = np.std(timings)
+        #print(f'{modelo} model timings calculation...\n')
+        
+        print(f'{modelo} model timings calculation\nMean time to process {repetitions} frames: {mean_time}, with std_deviation of: {std_time}')
+
+gpu_timings(['Basemodel','Refinement'])
 image_level()
 grid_level()

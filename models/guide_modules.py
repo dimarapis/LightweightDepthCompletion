@@ -116,13 +116,14 @@ class Guided_Upsampling_Block(nn.Module):
 class AuxSparseUpsamplingBlock(nn.Module):
     def __init__(self, in_features, expand_features, out_features,
                  kernel_size=3, channel_attention=True,
-                 guidance_type='full', guide_features=3):
+                 guidance_type='full', guide_features=3, refinement_features=1):
         super(AuxSparseUpsamplingBlock, self).__init__()
 
         self.channel_attention = channel_attention
         self.guidance_type = guidance_type
         self.guide_features = guide_features
         self.in_features = in_features
+        self.ref_features = refinement_features
 
         padding = kernel_size // 2
 
@@ -146,7 +147,7 @@ class AuxSparseUpsamplingBlock(nn.Module):
                 nn.ReLU(inplace=True))
         
             self.sparse_conv = nn.Sequential(
-                    nn.Conv2d(1, 2*expand_features,
+                    nn.Conv2d(self.ref_features, 2*expand_features,
                             kernel_size=kernel_size, padding=padding),
                     nn.BatchNorm2d(2*expand_features),
                     nn.ReLU(inplace=True),
@@ -180,17 +181,6 @@ class AuxSparseUpsamplingBlock(nn.Module):
             self.SE_block = SELayer(comb_features,
                                     reduction=1)
             
-            
-        #self.initialize()
-
-    #def initialize(self):
-    #   for m in self.modules():
-    #        if isinstance(m, nn.Conv2d):
-    #            nn.init.kaiming_normal_(m.weight)
-    #        elif isinstance(m, nn.BatchNorm2d):
-    #            nn.init.constant_(m.weight, 1)
-    #            nn.init.constant_(m.bias, 0)
-        
 
     def forward(self, guide, pred):
         x = self.feature_conv(pred)
