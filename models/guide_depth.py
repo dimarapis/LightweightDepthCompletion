@@ -47,24 +47,24 @@ class GuideDepth(nn.Module):
 
     
 
-    def forward(self, x):
+    def forward(self, x, sparse):
         y = self.feature_extractor(x)
-        print('y.shape', y.shape)
+        #print('y.shape', y.shape)
 
         x_half = F.interpolate(x, scale_factor=.5)
         x_quarter = F.interpolate(x, scale_factor=.25)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
         y = self.up_1(x_quarter, y)
-        print('self.up_1.shape', y.shape)
+        #print('self.up_1.shape', y.shape)
 
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#,align_corners=True)
         y = self.up_2(x_half, y)
-        print('self.up_2.shape', y.shape)
+        #print('self.up_2.shape', y.shape)
 
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
         y = self.up_3(x, y)
-        print('self.up_3.shape', y.shape)
+        #print('self.up_3.shape', y.shape)
 
         return y

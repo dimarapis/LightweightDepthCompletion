@@ -1,0 +1,43 @@
+| network_model                | AuxSparseGuidedDepth                                      |
+| pretrained                   | True                                                      |
+| message                      | basemodel NYU pretrained Michael finetuning on refinenemt |
+| mode                         | train                                                     |
+| dataset                      | nyuv2                                                     |
+| workers                      | 4                                                         |
+| epochs                       | 100                                                       |
+| criterion                    | l2                                                        |
+| batch_size                   | 8                                                         |
+| learning_rate                | 1e-06                                                     |
+| weight_decay                 | 0                                                         |
+| print_freq                   | 10                                                        |
+| resume                       |                                                           |
+| data_folder                  | /datasets                                                 |
+| convolutional_layer_encoding | xyz                                                       |
+| dilation_rate                | 2                                                         |
+| val_h                        | 352                                                       |
+| val_w                        | 608                                                       |
+| train_height                 | 352                                                       |
+| train_width                  | 608                                                       |
+| min_depth_eval               | 0.1                                                       |
+| max_depth_eval               | 10.0                                                      |
+| kitti_crop                   | eigen_crop                                                |
+| train_datalist               | nyu_train.list                                            |
+| val_datalist                 | nyu_test.list                                             |
+| root_folder                  | data/nyuv2_dataset/                                       |
+| torch_mode                   | pytorch                                                   |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                         |
+| wandblogger                  | True                                                      |
+| project                      | depthcompletionpaper                                      |
+| entity                       | wandbdimar                                                |
+| wandbrunname                 | NYU_basemodel_pretrained_finetuning_refinement            |
+
+New model saved: weights/2022_07_12-09_33_37_AM/AuxSparseGuidedDepth_1.pth 
+| d1       | 0.760776  |
+| d2       | 0.947712  |
+| d3       | 0.986279  |
+| abs_rel  | 0.155292  |
+| sq_rel   | 0.122598  |
+| rmse     | 0.581903  |
+| rmse_log | 0.202295  |
+| log10    | 0.0693637 |
+| silog    | 0.183826  |
