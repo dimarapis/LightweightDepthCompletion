@@ -241,15 +241,15 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
                 nn.ReLU(inplace=True))
         
             self.sparse_conv = nn.Sequential(
-                    nn.Conv2d(self.sparse_guide_features, 2*expand_features,
+                    nn.Conv2d(self.sparse_guide_features, expand_features,
                             kernel_size=kernel_size, padding=padding),
-                    nn.BatchNorm2d(2*expand_features),
+                    nn.BatchNorm2d(expand_features),
                     nn.ReLU(inplace=True),
-                    nn.Conv2d(2*expand_features, 2*expand_features // 2, kernel_size=1),
-                    nn.BatchNorm2d(2*expand_features // 2),
+                    nn.Conv2d(expand_features, expand_features // 2, kernel_size=1),
+                    nn.BatchNorm2d(expand_features // 2),
                     nn.ReLU(inplace=True))
 
-            comb_features = (expand_features // 2) * 2
+            comb_features = (expand_features // 2) * 3
 
         self.comb_conv = nn.Sequential(
             nn.Conv2d(comb_features, expand_features,
@@ -279,12 +279,14 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
         if self.guidance_type == 'full':
             rgb_guided = self.guide_conv(rgb_guide)
             sparse_guided = self.sparse_conv(sparse_guide)
-            print(x.shape)
-            print(rgb_guided.shape)
-            print(sparse_guided.shape)
+            #p#rint(x.shape)
+            #print(rgb_guided.shape)
+            #print(sparse_guided.shape)
 
-            all_channels = torch.cat([x, rgb_guided,sparse_guided], dim=1)
-
+            all_channels = torch.cat([x, rgb_guided, sparse_guided], dim=1)
+            #all_channels = torch.cat([x, rgb_guided], dim=1)
+            
+            #print(all_channels.shape)
         if self.channel_attention:
             #print(xy.shape)
             #print(z.shape)
