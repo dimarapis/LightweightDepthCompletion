@@ -219,7 +219,7 @@ class segmenthead(nn.Module):
         return out
 
 class DualResNet(nn.Module):
-    def __init__(self, block, layers, out_features=19, planes=64, spp_planes=128, head_planes=128, augment=False, skip_out=False):
+    def __init__(self, block, layers, in_features = 3, out_features=19, planes=64, spp_planes=128, head_planes=128, augment=False, skip_out=False):
         super(DualResNet, self).__init__()
 
         highres_planes = planes * 2
@@ -227,7 +227,7 @@ class DualResNet(nn.Module):
         self.skip_out = skip_out
 
         self.conv1 =  nn.Sequential(
-                          nn.Conv2d(3,planes,kernel_size=3, stride=2, padding=1),
+                          nn.Conv2d(in_features,planes,kernel_size=3, stride=2, padding=1),
                           BatchNorm2d(planes, momentum=bn_mom),
                           nn.ReLU(inplace=True),
                           nn.Conv2d(planes,planes,kernel_size=3, stride=2, padding=1),
@@ -347,10 +347,11 @@ class DualResNet(nn.Module):
         return x_
 
 
-def DualResNet_Backbone(pretrained=False, features=64):
-    model = DualResNet(BasicBlock, [2, 2, 2, 2], out_features=features,
+def DualResNet_Backbone(pretrained=False, features_n=3, features=64):
+    model = DualResNet(BasicBlock, [2, 2, 2, 2], in_features = features_n, out_features=features,
                        planes=32, spp_planes=128, head_planes=64, augment=False)
     if pretrained:
+        #print('pretrained')
         checkpoint = torch.load('./weights/' + "DDRNet23s_imagenet.pth",
                                 map_location='cpu')
 

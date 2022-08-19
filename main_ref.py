@@ -36,7 +36,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
+from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 
 #Saving weights and log files locally
@@ -140,7 +140,13 @@ elif decnet_args.network_model == "AuxSparseGuidedDepth":
         #model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26.pth', map_location='cuda'))
         #model.load_state_dict(torch.load('./weights/2022_07_06-10_06_37_AM/AuxSparseGuidedDepth_99.pth', map_location='cuda'), strict=False)
         #refinement_model.load_state_dict(torch.load('./weights/2022_07_11-11_31_51_PM/AuxSparseGuidedDepth_26_ref.pth', map_location='cuda'))
-        
+
+elif decnet_args.network_model == "DecnetModule":
+    model = RgbGuideDepth(True)
+    model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
+
+    refinement_model = DecnetDepthRefinement()
+
 
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
@@ -274,7 +280,10 @@ def evaluation_block(epoch):
             #print(sparse_half.shape)
             #print(y.shape)
 
-            refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+            #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+            refined_pred = refinement_model(pred, sparse)
+            
+            
             #refined_pred = pred
             #refined_pred = refinement_model(pred,sparse)
 
@@ -492,7 +501,8 @@ def training_block(model):
             #refined_pred = pred
             #refined_pred = refinement_model(pred,sparse)
 
-            refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+            #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+            refined_pred = refinement_model(pred, sparse)
 
             refined_loss = depth_criterion(refined_pred,gt)
 

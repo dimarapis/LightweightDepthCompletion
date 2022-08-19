@@ -1,0 +1,48 @@
+| network_model                | DecnetModule                      |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      | printstuff                        |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | 4batch_overfit_nn_train.list      |
+| val_datalist                 | 4batch_overfit_nn_test.list       |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_19-11_13_53_AM/DecnetModule_1.pth 
+| d1       |    3.92917e-05 |
+| d2       |    0.000561774 |
+| d3       |    0.000984093 |
+| abs_rel  |   59.974       |
+| sq_rel   | 4721.78        |
+| rmse     |   76.2396      |
+| rmse_log |    3.6091      |
+| log10    |    1.50588     |
+| silog    |    2.64829     |

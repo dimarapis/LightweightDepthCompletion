@@ -270,11 +270,14 @@ def evaluation_block(epoch):
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
             inv_pred = model(image,sparse)
             #inv_pred = model(image)
-
+            #print(f'inv_pred {torch_min_max(inv_pred)}')
 
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-
+            #print(f'pred {torch_min_max(pred)}')
+            
+            #print(torch_min_max(pred))
+            #pred = 
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)   
 
@@ -416,7 +419,11 @@ def training_block(model):
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)            
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)            
+            #print(f'inv_pred {torch_min_max(inv_pred)}')
 
+            #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
+            #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
+            #print(f'pred {torch_min_max(pred)}')
 
             #print_torch_min_max_rgbpredgt(image,pred,gt)            
             

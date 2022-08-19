@@ -20,6 +20,11 @@ def decnet_args_parser():
                         default=False,
                         help='Choose between loading a pretrained model or training from scratch'
                         )
+    parser.add_argument('--augment',
+                        type=bool,
+                        default=False,
+                        help='Choose if you want to augment the data during trianing or no'
+                        )
     parser.add_argument('-m','--message',
                         default="",
                         help='optional message for details on training or eval'
@@ -57,7 +62,7 @@ def decnet_args_parser():
                         type=int,
                         help='mini-batch size (default: 1)')
     parser.add_argument('--learning-rate',
-                        default=1e-4,
+                        default=1e-5,
                         type=float,
                         metavar='LR',
                         help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
@@ -151,6 +156,7 @@ def decnet_args_parser():
                         #default='train_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
+                        #default='4batch_overfit_nn_test.list',
                         #default='4batch_overfit_nn_train.list',
                         #default='nyu_train.list',
                         type=str,

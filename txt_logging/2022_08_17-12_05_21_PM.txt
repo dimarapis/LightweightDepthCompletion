@@ -1,0 +1,69 @@
+| network_model                | DecnetModule                      |
+| pretrained                   | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_17-12_05_21_PM/DecnetModule_1.pth 
+| d1       | 0.0602202 |
+| d2       | 0.113525  |
+| d3       | 0.221879  |
+| abs_rel  | 0.643017  |
+| sq_rel   | 2.64979   |
+| rmse     | 3.30415   |
+| rmse_log | 1.22971   |
+| log10    | 0.506254  |
+| silog    | 0.911599  |
+
+New model saved: weights/2022_08_17-12_05_21_PM/DecnetModule_2.pth 
+| d1       | 0.0602187 |
+| d2       | 0.113548  |
+| d3       | 0.221911  |
+| abs_rel  | 0.641616  |
+| sq_rel   | 2.53894   |
+| rmse     | 3.28088   |
+| rmse_log | 1.2293    |
+| log10    | 0.506222  |
+| silog    | 0.911118  |
+
+New model saved: weights/2022_08_17-12_05_21_PM/DecnetModule_3.pth 
+| d1       | 0.0602187 |
+| d2       | 0.113548  |
+| d3       | 0.221911  |
+| abs_rel  | 0.641605  |
+| sq_rel   | 2.53805   |
+| rmse     | 3.28026   |
+| rmse_log | 1.2293    |
+| log10    | 0.506221  |
+| silog    | 0.911115  |

@@ -1424,3 +1424,88 @@ class DecnetModule(nn.Module):
         y = F.interpolate(y, scale_factor=2., mode='bilinear')#, align_corners=True)
         y = self.up_3(rgb, sparse, y)
         return y
+
+
+class DecnetDepthRefinement(nn.Module):
+    def __init__(self, 
+            pretrained=False,
+            up_features=[64, 32, 16], 
+            inner_features=[64, 32, 16]):
+        super(DecnetDepthRefinement, self).__init__()
+
+        #self.conv1 = dilated_conv3x3bn(1,16)
+        
+        #self.conv2 = dilated_conv3x3bn(16,32)
+        
+        #self.conv3 = convbnrelu(32,64)
+        
+        self.feature_extractor = DualResNet_Backbone(
+                pretrained=pretrained,
+                features_n = 1, 
+                features=up_features[0])
+
+
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                   expand_features=inner_features[0],
+                                   out_features=up_features[1],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=1,
+                                   guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=1,
+                                   guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                   expand_features=inner_features[2],
+                                   out_features=1,
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=1,
+                                   guidance_type="full")
+        
+    
+
+    def forward(self, basepred, sparse):
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        y = self.feature_extractor(sparse)
+        y2 = F.interpolate(y, scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        pred_half = F.interpolate(basepred, scale_factor=.5)
+        pred_quarter = F.interpolate(basepred, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        
+        y3 = self.up_1(pred_quarter, y2)
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        y4 = F.interpolate(y3, scale_factor=2., mode='bilinear')
+        y5 = self.up_2(pred_half, y4)
+        
+        
+        y6 = F.interpolate(y5, scale_factor=2., mode='bilinear')
+        y5 = self.up_3(basepred, y6)
+
+        return y5

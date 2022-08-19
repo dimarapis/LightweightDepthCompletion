@@ -37,7 +37,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth
+from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 
 
@@ -85,8 +85,14 @@ model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=dev
 model.to(device)
 model.eval()
 
-refinement_model = DepthRefinement()
-refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
+#refinement_model = DepthRefinement()
+#refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
+#refinement_model.to(device)
+#refinement_model.eval()
+
+
+refinement_model = DecnetDepthRefinement()
+refinement_model.load_state_dict(torch.load('./weights/2022_08_19-03_03_48_PM/DecnetModule_99_ref.pth', map_location=device))
 refinement_model.to(device)
 refinement_model.eval()
 
@@ -306,8 +312,9 @@ def image_level():
             
             #gt_and_pred_info('basemodel', 'pred', pred)
             #visualize_results('basemodel',image,pred,sparse)
-
-            refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
+            
+            refined_pred = refinement_model(pred,sparse)
+            #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
 
             pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
             pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
@@ -489,8 +496,8 @@ def gpu_timings(models):
     model.to(device)
     model.eval()
 
-    refinement_model = DepthRefinement()
-    refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
+    refinement_model = DecnetDepthRefinement()
+    #refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
     refinement_model.to(device)
     refinement_model.eval()
     
@@ -513,7 +520,8 @@ def gpu_timings(models):
                 
             if modelo == 'refinement':
                     
-                refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+                #refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+                refined_pred = refinement_model(pred,test_data_sparse)
 
         # Measure performance 
         with torch.no_grad():
@@ -531,7 +539,8 @@ def gpu_timings(models):
                 
                 if modelo == 'Refinement':
                     
-                    refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+                    #refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
+                    refined_pred = refinement_model(pred,test_data_sparse)
 
                 ender.record()
 
@@ -549,4 +558,4 @@ def gpu_timings(models):
 
 gpu_timings(['Basemodel','Refinement'])
 image_level()
-grid_level()
+#grid_level()

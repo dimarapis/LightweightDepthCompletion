@@ -1,6 +1,8 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+from features.decnet_sanity import torch_min_max
 #import MinkowskiEngine as ME
 
 class SELayer(nn.Module):
@@ -249,7 +251,7 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
                     nn.BatchNorm2d(expand_features // 2),
                     nn.ReLU(inplace=True))
 
-            comb_features = (expand_features // 2) * 3
+            comb_features = (expand_features // 2) * 2
 
         self.comb_conv = nn.Sequential(
             nn.Conv2d(comb_features, expand_features,
@@ -276,6 +278,17 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
     def forward(self, rgb_guide, sparse_guide, pred):
         x = self.feature_conv(pred)
 
+        pred_minmax = (torch.min(pred.float()).item(),torch.max(pred.float()).item(),torch.mean(pred.float()).item(),torch.median(pred.float()).item())
+        rgb_guide_minmax = (torch.min(rgb_guide.float()).item(),torch.max(rgb_guide.float()).item(),torch.mean(rgb_guide.float()).item(),torch.median(rgb_guide.float()).item())
+        sparse_guide_minmax = (torch.min(sparse_guide.float()).item(),torch.max(sparse_guide.float()).item(),torch.mean(sparse_guide.float()).item(),torch.median(sparse_guide.float()).item())
+
+
+        #print(f'pred{pred_minmax}')
+        #print(f'rgb_guide{rgb_guide_minmax}')
+        #print(f'sparse_guide{sparse_guide_minmax}')
+
+
+
         if self.guidance_type == 'full':
             rgb_guided = self.guide_conv(rgb_guide)
             sparse_guided = self.sparse_conv(sparse_guide)
@@ -283,8 +296,8 @@ class Decnet_Guided_Upsampling_Block(nn.Module):
             #print(rgb_guided.shape)
             #print(sparse_guided.shape)
 
-            all_channels = torch.cat([x, rgb_guided, sparse_guided], dim=1)
-            #all_channels = torch.cat([x, rgb_guided], dim=1)
+            #all_channels = torch.cat([x, rgb_guided, sparse_guided], dim=1)
+            all_channels = torch.cat([x, rgb_guided], dim=1)
             
             #print(all_channels.shape)
         if self.channel_attention:

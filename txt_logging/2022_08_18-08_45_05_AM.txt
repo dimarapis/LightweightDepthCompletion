@@ -1,0 +1,168 @@
+| network_model                | DecnetModule                      |
+| pretrained                   | False                             |
+| message                      | check overfit with sparse         |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | 4batch_overfit_nn_train.list      |
+| val_datalist                 | 4batch_overfit_nn_test.list       |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_1.pth 
+| d1       |    0.000270885 |
+| d2       |    0.00401775  |
+| d3       |    0.00746496  |
+| abs_rel  |   24.7005      |
+| sq_rel   | 1901.3         |
+| rmse     |   75.0067      |
+| rmse_log |    3.12212     |
+| log10    |    1.32359     |
+| silog    |    2.25909     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_19.pth 
+| d1       |    0.000270885 |
+| d2       |    0.00401775  |
+| d3       |    0.00746496  |
+| abs_rel  |   24.6698      |
+| sq_rel   | 1898.87        |
+| rmse     |   74.9635      |
+| rmse_log |    3.12054     |
+| log10    |    1.32261     |
+| silog    |    2.26033     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_20.pth 
+| d1       |    0.000270885 |
+| d2       |    0.00412335  |
+| d3       |    0.00755694  |
+| abs_rel  |   22.8224      |
+| sq_rel   | 1752.56        |
+| rmse     |   72.2262      |
+| rmse_log |    3.01306     |
+| log10    |    1.262       |
+| silog    |    2.31068     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_21.pth 
+| d1       |    0.000270885 |
+| d2       |    0.00669534  |
+| d3       |    0.0117662   |
+| abs_rel  |   18.3558      |
+| sq_rel   | 1398.8         |
+| rmse     |   64.9346      |
+| rmse_log |    2.76042     |
+| log10    |    1.12551     |
+| silog    |    2.38474     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_22.pth 
+| d1       |   0.000270885 |
+| d2       |   0.01381     |
+| d3       |   0.0300958   |
+| abs_rel  |  13.1391      |
+| sq_rel   | 985.64        |
+| rmse     |  54.747       |
+| rmse_log |   2.469       |
+| log10    |   0.981673    |
+| silog    |   2.33369     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_23.pth 
+| d1       |   0.000270885 |
+| d2       |   0.0183417   |
+| d3       |   0.041142    |
+| abs_rel  |   9.94211     |
+| sq_rel   | 732.437       |
+| rmse     |  46.8159      |
+| rmse_log |   2.29041     |
+| log10    |   0.901332    |
+| silog    |   2.22183     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_24.pth 
+| d1       |   0.000257341 |
+| d2       |   0.0193604   |
+| d3       |   0.0448587   |
+| abs_rel  |   8.23286     |
+| sq_rel   | 597.064       |
+| rmse     |  41.5257      |
+| rmse_log |   2.20097     |
+| log10    |   0.863135    |
+| silog    |   2.13454     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_25.pth 
+| d1       |   0.000243797 |
+| d2       |   0.019741    |
+| d3       |   0.046398    |
+| abs_rel  |   7.27954     |
+| sq_rel   | 521.561       |
+| rmse     |  38.1035      |
+| rmse_log |   2.15125     |
+| log10    |   0.842663    |
+| silog    |   2.07416     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_26.pth 
+| d1       |   0.000216708 |
+| d2       |   0.019587    |
+| d3       |   0.047234    |
+| abs_rel  |   6.77542     |
+| sq_rel   | 481.635       |
+| rmse     |  36.195       |
+| rmse_log |   2.12605     |
+| log10    |   0.832365    |
+| silog    |   2.04125     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_27.pth 
+| d1       |   0.000182848 |
+| d2       |   0.0193487   |
+| d3       |   0.0472416   |
+| abs_rel  |   6.58901     |
+| sq_rel   | 466.872       |
+| rmse     |  35.4545      |
+| rmse_log |   2.11955     |
+| log10    |   0.829411    |
+| silog    |   2.03475     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_28.pth 
+| d1       |   0.000182848 |
+| d2       |   0.0192948   |
+| d3       |   0.0472196   |
+| abs_rel  |   6.44786     |
+| sq_rel   | 455.692       |
+| rmse     |  35.0344      |
+| rmse_log |   2.11212     |
+| log10    |   0.825796    |
+| silog    |   2.02972     |
+
+New model saved: weights/2022_08_18-08_45_05_AM/DecnetModule_29.pth 
+| d1       |   0.000182848 |
+| d2       |   0.0192818   |
+| d3       |   0.0470347   |
+| abs_rel  |   6.38772     |
+| sq_rel   | 450.929       |
+| rmse     |  34.9438      |
+| rmse_log |   2.10956     |
+| log10    |   0.82402     |
+| silog    |   2.0324      |

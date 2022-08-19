@@ -1,0 +1,58 @@
+| network_model                | DecnetModule                              |
+| pretrained                   | False                                     |
+| message                      | check overfit with sparse                 |
+| mode                         | train                                     |
+| dataset                      | nn                                        |
+| workers                      | 4                                         |
+| epochs                       | 100                                       |
+| criterion                    | l2                                        |
+| batch_size                   | 8                                         |
+| learning_rate                | 0.0001                                    |
+| weight_decay                 | 0                                         |
+| print_freq                   | 10                                        |
+| resume                       |                                           |
+| data_folder                  | /datasets                                 |
+| convolutional_layer_encoding | xyz                                       |
+| dilation_rate                | 2                                         |
+| val_h                        | 352                                       |
+| val_w                        | 608                                       |
+| train_height                 | 352                                       |
+| train_width                  | 608                                       |
+| min_depth_eval               | 0.1                                       |
+| max_depth_eval               | 80.0                                      |
+| error_vis_min                | -5                                        |
+| error_vis_max                | 5                                         |
+| training_subset              | 0                                         |
+| show_sensor_error            | False                                     |
+| kitti_crop                   | eigen_crop                                |
+| train_datalist               | 4batch_dim_kitti.list                     |
+| val_datalist                 | 4batch_dim_kitti.list                     |
+| root_folder                  | data/kitti_dataset/val_selection_cropped/ |
+| torch_mode                   | pytorch                                   |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth         |
+| wandblogger                  | False                                     |
+| project                      | depthcompletionpaper                      |
+| entity                       | wandbdimar                                |
+| wandbrunname                 |                                           |
+
+New model saved: weights/2022_08_18-09_04_19_AM/DecnetModule_1.pth 
+| d1       |   0.0786526 |
+| d2       |   0.227553  |
+| d3       |   0.302643  |
+| abs_rel  |   1.86186   |
+| sq_rel   | 103.66      |
+| rmse     |  48.2673    |
+| rmse_log |   1.05375   |
+| log10    |   0.411647  |
+| silog    |   0.812987  |
+
+New model saved: weights/2022_08_18-09_04_19_AM/DecnetModule_24.pth 
+| d1       |  0        |
+| d2       |  0        |
+| d3       |  0        |
+| abs_rel  |  0.996423 |
+| sq_rel   | 34.5119   |
+| rmse     | 38.4155   |
+| rmse_log |  5.75512  |
+| log10    |  2.49144  |
+| silog    |  4.08243  |

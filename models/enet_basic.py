@@ -82,6 +82,18 @@ def deconvbn(in_channels, out_channels, kernel_size=4, stride=2, padding=1, outp
 		nn.BatchNorm2d(out_channels)
 	)
 
+def dilated_conv3x3bn(in_planes, out_planes, stride=1, groups=1, dilation=1, bias=False, padding=1):
+    """3x3 convolution with padding"""
+    if padding >= 1:
+        padding = dilation
+    return nn.Sequential(
+		nn.Conv2d(in_planes, out_planes, kernel_size=3, stride=stride,
+                     padding=padding, groups=groups, bias=bias, dilation=dilation),
+		nn.BatchNorm2d(out_planes),
+        nn.MaxPool2d(2,stride=2),
+		nn.ReLU(inplace=True)
+    )
+
 class BasicBlock(nn.Module):
     expansion = 1
     __constants__ = ['downsample']
