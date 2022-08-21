@@ -1,0 +1,48 @@
+| network_model                | DecnetModule                             |
+| pretrained                   | False                                    |
+| augment                      | False                                    |
+| message                      | Test of new module with sparse upsamplin |
+| mode                         | train                                    |
+| dataset                      | nn                                       |
+| workers                      | 4                                        |
+| epochs                       | 100                                      |
+| criterion                    | l2                                       |
+| batch_size                   | 8                                        |
+| learning_rate                | 1e-05                                    |
+| weight_decay                 | 0                                        |
+| print_freq                   | 10                                       |
+| resume                       |                                          |
+| data_folder                  | /datasets                                |
+| convolutional_layer_encoding | xyz                                      |
+| dilation_rate                | 2                                        |
+| val_h                        | 352                                      |
+| val_w                        | 608                                      |
+| train_height                 | 352                                      |
+| train_width                  | 608                                      |
+| min_depth_eval               | 0.1                                      |
+| max_depth_eval               | 80.0                                     |
+| error_vis_min                | -5                                       |
+| error_vis_max                | 5                                        |
+| training_subset              | 0                                        |
+| show_sensor_error            | False                                    |
+| kitti_crop                   | eigen_crop                               |
+| train_datalist               | datalist_train_nn.list                   |
+| val_datalist                 | datalist_test_nn.list                    |
+| root_folder                  | data/nn_dataset/                         |
+| torch_mode                   | pytorch                                  |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth        |
+| wandblogger                  | True                                     |
+| project                      | depthcompletionpaper                     |
+| entity                       | wandbdimar                               |
+| wandbrunname                 |                                          |
+
+New model saved: weights/2022_08_19-04_05_28_PM/DecnetModule_1.pth 
+| d1       | 0.538733 |
+| d2       | 0.763914 |
+| d3       | 0.849668 |
+| abs_rel  | 0.433262 |
+| sq_rel   | 0.683308 |
+| rmse     | 1.33634  |
+| rmse_log | 0.380725 |
+| log10    | 0.139993 |
+| silog    | 0.324871 |

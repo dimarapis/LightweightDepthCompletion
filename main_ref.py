@@ -281,7 +281,7 @@ def evaluation_block(epoch):
             #print(y.shape)
 
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
-            refined_pred = refinement_model(pred, sparse)
+            refined_pred = refinement_model(sparse, pred)
             
             
             #refined_pred = pred
@@ -502,7 +502,9 @@ def training_block(model):
             #refined_pred = refinement_model(pred,sparse)
 
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
-            refined_pred = refinement_model(pred, sparse)
+            refined_pred = refinement_model(sparse, pred)
+
+            #refined_pred = refinement_model(pred, sparse)
 
             refined_loss = depth_criterion(refined_pred,gt)
 
