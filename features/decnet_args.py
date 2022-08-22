@@ -159,6 +159,7 @@ def decnet_args_parser():
                         #default='4batch_overfit_nn_test.list',
                         #default='4batch_overfit_nn_train.list',
                         #default='nyu_train.list',
+                        #default='single_image_4batch_overfit.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
@@ -169,6 +170,8 @@ def decnet_args_parser():
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='nyu_test.list',
+                        #default='single_image_4batch_overfit.list',
+
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')

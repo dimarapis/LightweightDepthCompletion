@@ -277,7 +277,9 @@ class DecnetDataloader(Dataset):
             sparse = np.array(Image.open(self.files[index]['d']))
         elif self.dataset_type == 'nyuv2':
             sparse = np.array(Image.open(self.files[index]['gt']))
-            
+        elif self.dataset_type == 'kitti':
+            sparse = np.array(Image.open(self.files[index]['d']))
+
         file_id = self.files[index]['rgb']
         transformed_data_sample = self.nyuv2_transform(file_id, rgb, sparse, gt)
         return transformed_data_sample

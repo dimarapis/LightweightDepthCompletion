@@ -1,0 +1,169 @@
+| network_model                | DecnetModule                      |
+| pretrained                   | True                              |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 1e-06                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | single_image_4batch_overfit.list  |
+| val_datalist                 | single_image_4batch_overfit.list  |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_1.pth 
+| d1       | 0.392178 |
+| d2       | 0.765364 |
+| d3       | 0.955256 |
+| abs_rel  | 0.369138 |
+| sq_rel   | 0.640913 |
+| rmse     | 1.83693  |
+| rmse_log | 0.365556 |
+| log10    | 0.132576 |
+| silog    | 0.3252   |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_2.pth 
+| d1       | 0.392849 |
+| d2       | 0.765578 |
+| d3       | 0.954586 |
+| abs_rel  | 0.368967 |
+| sq_rel   | 0.638823 |
+| rmse     | 1.83097  |
+| rmse_log | 0.365004 |
+| log10    | 0.132422 |
+| silog    | 0.324156 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_3.pth 
+| d1       | 0.393546 |
+| d2       | 0.765686 |
+| d3       | 0.954076 |
+| abs_rel  | 0.368634 |
+| sq_rel   | 0.636928 |
+| rmse     | 1.82618  |
+| rmse_log | 0.364514 |
+| log10    | 0.132239 |
+| silog    | 0.323354 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_4.pth 
+| d1       | 0.395129 |
+| d2       | 0.766464 |
+| d3       | 0.954103 |
+| abs_rel  | 0.368231 |
+| sq_rel   | 0.635232 |
+| rmse     | 1.82229  |
+| rmse_log | 0.364078 |
+| log10    | 0.132047 |
+| silog    | 0.322704 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_5.pth 
+| d1       | 0.396926 |
+| d2       | 0.766705 |
+| d3       | 0.954022 |
+| abs_rel  | 0.367839 |
+| sq_rel   | 0.633775 |
+| rmse     | 1.81918  |
+| rmse_log | 0.363704 |
+| log10    | 0.131871 |
+| silog    | 0.322169 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_6.pth 
+| d1       | 0.398428 |
+| d2       | 0.766839 |
+| d3       | 0.953539 |
+| abs_rel  | 0.367516 |
+| sq_rel   | 0.632593 |
+| rmse     | 1.81663  |
+| rmse_log | 0.363399 |
+| log10    | 0.131727 |
+| silog    | 0.321732 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_7.pth 
+| d1       | 0.399984 |
+| d2       | 0.767483 |
+| d3       | 0.953486 |
+| abs_rel  | 0.367179 |
+| sq_rel   | 0.631391 |
+| rmse     | 1.81427  |
+| rmse_log | 0.363087 |
+| log10    | 0.131586 |
+| silog    | 0.321315 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_8.pth 
+| d1       | 0.401084 |
+| d2       | 0.768207 |
+| d3       | 0.953539 |
+| abs_rel  | 0.36685  |
+| sq_rel   | 0.630236 |
+| rmse     | 1.81208  |
+| rmse_log | 0.362787 |
+| log10    | 0.131452 |
+| silog    | 0.320922 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_9.pth 
+| d1       | 0.401996 |
+| d2       | 0.768878 |
+| d3       | 0.953486 |
+| abs_rel  | 0.366477 |
+| sq_rel   | 0.629024 |
+| rmse     | 1.80997  |
+| rmse_log | 0.362474 |
+| log10    | 0.131308 |
+| silog    | 0.320545 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_10.pth 
+| d1       | 0.404222 |
+| d2       | 0.769119 |
+| d3       | 0.953835 |
+| abs_rel  | 0.366093 |
+| sq_rel   | 0.62782  |
+| rmse     | 1.80803  |
+| rmse_log | 0.362167 |
+| log10    | 0.131165 |
+| silog    | 0.320193 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_11.pth 
+| d1       | 0.406019 |
+| d2       | 0.769522 |
+| d3       | 0.953835 |
+| abs_rel  | 0.36571  |
+| sq_rel   | 0.626654 |
+| rmse     | 1.80624  |
+| rmse_log | 0.361871 |
+| log10    | 0.131025 |
+| silog    | 0.319871 |
+
+New model saved: weights/2022_08_21-10_21_47_PM/DecnetModule_12.pth 
+| d1       | 0.408058 |
+| d2       | 0.770166 |
+| d3       | 0.953861 |
+| abs_rel  | 0.36531  |
+| sq_rel   | 0.62549  |
+| rmse     | 1.80454  |
+| rmse_log | 0.361575 |
+| log10    | 0.13088  |
+| silog    | 0.319562 |

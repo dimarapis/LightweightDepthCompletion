@@ -35,7 +35,7 @@ from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule
-from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule
+from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
 
 #Saving weights and log files locally
 grabtime = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
@@ -110,7 +110,9 @@ if decnet_args.network_model == "GuideDepth":
     model = GuideDepth(True)
 
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'))  
+        model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
+        #2022_08_21-10_23_53_PM
       
 elif decnet_args.network_model == "SparseGuidedDepth":
     model = SparseGuidedDepth(True)
@@ -124,9 +126,11 @@ elif decnet_args.network_model == "ENET2021":
     model = ENet(decnet_args)
 
 elif decnet_args.network_model == "DecnetModule":
-    model = DecnetModule(True)
-    #if decnet_args.pretrained == True:
-    #    model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
+    model = DecnetSparseIncorporated()
+        
+    if decnet_args.pretrained == True:
+        model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 
 elif decnet_args.network_model == "AuxSparseGuidedDepth":
     model = GuideDepth(True)
@@ -186,10 +190,6 @@ epoch = 0
 prev_loss = 0.0
 #print(f"Loaded model {converted_args_dict['network_model']}'# for {converted_args_dict['task']}")
 
-to_tensor_test = custom_transforms.ToTensor(test=True, maxDepth=80.0)
-to_tensor = custom_transforms.ToTensor(test=False, maxDepth=80.0)
-
-downscale_image = transforms.Resize((384,1280)) #To Model resolution
 
 
 def print_torch_min_max_rgbpredgt(rgb,pred,gt):
@@ -436,6 +436,7 @@ def training_block(model):
             loss.backward()
             optimizer.step()
             b = list(model.parameters())[0].clone()
+            #print(a == b)
             epoch_loss += loss.item()
             print(loss.item())
 

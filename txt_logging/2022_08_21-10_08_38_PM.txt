@@ -1,0 +1,92 @@
+| network_model                | GuideDepth                        |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 1e-05                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 10.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | single_image_4batch_overfit.list  |
+| val_datalist                 | single_image_4batch_overfit.list  |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_21-10_08_38_PM/GuideDepth_1.pth 
+| d1       | 0        |
+| d2       | 0        |
+| d3       | 0        |
+| abs_rel  | 0.972145 |
+| sq_rel   | 3.89527  |
+| rmse     | 4.29094  |
+| rmse_log | 3.66263  |
+| log10    | 1.58284  |
+| silog    | 2.60253  |
+
+New model saved: weights/2022_08_21-10_08_38_PM/GuideDepth_24.pth 
+| d1       | 0.00248126 |
+| d2       | 0.00277793 |
+| d3       | 0.00339824 |
+| abs_rel  | 0.977543   |
+| sq_rel   | 3.94871    |
+| rmse     | 4.28913    |
+| rmse_log | 3.64289    |
+| log10    | 1.56924    |
+| silog    | 2.60782    |
+
+New model saved: weights/2022_08_21-10_08_38_PM/GuideDepth_25.pth 
+| d1       | 0.00604132 |
+| d2       | 0.00660769 |
+| d3       | 0.00787529 |
+| abs_rel  | 0.981161   |
+| sq_rel   | 3.98453    |
+| rmse     | 4.27636    |
+| rmse_log | 3.61687    |
+| log10    | 1.55143    |
+| silog    | 2.61188    |
+
+New model saved: weights/2022_08_21-10_08_38_PM/GuideDepth_26.pth 
+| d1       | 0.00900804 |
+| d2       | 0.0103835  |
+| d3       | 0.0123793  |
+| abs_rel  | 0.987941   |
+| sq_rel   | 4.05165    |
+| rmse     | 4.27321    |
+| rmse_log | 3.58326    |
+| log10    | 1.52861    |
+| silog    | 2.61804    |
+
+New model saved: weights/2022_08_21-10_08_38_PM/GuideDepth_27.pth 
+| d1       | 0.0129996 |
+| d2       | 0.0152112 |
+| d3       | 0.0178273 |
+| abs_rel  | 0.995225  |
+| sq_rel   | 4.12376   |
+| rmse     | 4.26487   |
+| rmse_log | 3.54471   |
+| log10    | 1.5027    |
+| silog    | 2.62309   |

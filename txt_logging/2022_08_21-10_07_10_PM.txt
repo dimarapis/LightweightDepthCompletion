@@ -1,0 +1,81 @@
+| network_model                | GuideDepth                        |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 1e-05                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 10.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | single_image_4batch_overfit.list  |
+| val_datalist                 | single_image_4batch_overfit.list  |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_21-10_07_10_PM/GuideDepth_1.pth 
+| d1       | 0        |
+| d2       | 0        |
+| d3       | 0        |
+| abs_rel  | 0.972145 |
+| sq_rel   | 3.89527  |
+| rmse     | 4.29094  |
+| rmse_log | 3.66263  |
+| log10    | 1.58284  |
+| silog    | 2.60253  |
+
+New model saved: weights/2022_08_21-10_07_10_PM/GuideDepth_25.pth 
+| d1       | 0.00566374 |
+| d2       | 0.00617617 |
+| d3       | 0.00736286 |
+| abs_rel  | 0.980436   |
+| sq_rel   | 3.97735    |
+| rmse     | 4.27737    |
+| rmse_log | 3.61858    |
+| log10    | 1.55259    |
+| silog    | 2.61146    |
+
+New model saved: weights/2022_08_21-10_07_10_PM/GuideDepth_26.pth 
+| d1       | 0.00871137 |
+| d2       | 0.00987108 |
+| d3       | 0.0118129  |
+| abs_rel  | 0.98719    |
+| sq_rel   | 4.04421    |
+| rmse     | 4.27416    |
+| rmse_log | 3.58654    |
+| log10    | 1.53083    |
+| silog    | 2.61753    |
+
+New model saved: weights/2022_08_21-10_07_10_PM/GuideDepth_27.pth 
+| d1       | 0.0129187 |
+| d2       | 0.0149145 |
+| d3       | 0.0176115 |
+| abs_rel  | 0.995419  |
+| sq_rel   | 4.12568   |
+| rmse     | 4.26607   |
+| rmse_log | 3.54885   |
+| log10    | 1.50546   |
+| silog    | 2.623     |

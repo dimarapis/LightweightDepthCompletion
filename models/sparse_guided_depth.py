@@ -269,7 +269,7 @@ class RgbGuideDepth(nn.Module):
     def forward(self, rgb, sparse):
         y_eighth = self.feature_extractor(rgb)
         #print('y.shape', y_eighth.shape) # [B, 64, 44, 76]
-
+        #print(y_eighth,shape)
         rgb_half_for_cspn = F.interpolate(rgb, scale_factor=.5)
         rgb_quarter = F.interpolate(rgb, scale_factor=.25)
 
@@ -1509,3 +1509,140 @@ class DecnetDepthRefinement(nn.Module):
         y5 = self.up_3(basepred, y6)
 
         return y5
+
+
+class DecnetSparseIncorporated(nn.Module):
+    def __init__(self, 
+            pretrained=False,
+            up_features=[64, 32, 16], 
+            inner_features=[64, 32, 16]):
+        super(DecnetSparseIncorporated, self).__init__()
+        
+
+        self.feature_extractor = DualResNet_Backbone(
+                pretrained=True,
+                features_n = 3, 
+                features=up_features[0])
+        
+        self.sparse_feature_extractor = DualResNet_Backbone(                
+                pretrained=False,
+                features_n = 1, 
+                features=up_features[0])
+        
+        
+
+
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                   expand_features=inner_features[0],
+                                   out_features=up_features[1],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                   expand_features=inner_features[2],
+                                   out_features=1,
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.sparse_up_1 =  Guided_Upsampling_Block(in_features=up_features[0],
+                                   expand_features=inner_features[0],
+                                   out_features=up_features[1],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.sparse_up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        
+        self.fusion_up_half = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.fusion_up_final = Guided_Upsampling_Block(in_features=up_features[2],
+                                   expand_features=inner_features[2],
+                                   out_features=1,
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        
+        
+        
+    
+
+    def forward(self, rgb, sparse):
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        y = self.feature_extractor(rgb)
+        y2 = F.interpolate(y, scale_factor=2)
+        
+        x = self.sparse_feature_extractor(sparse)
+        x2 = F.interpolate(x,scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        rgb_half = F.interpolate(rgb, scale_factor=.5)
+        rgb_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        #sparse_half = F.interpolate(sparse, scale_factor=.5)
+        #sparse_quarter =  F.interpolate(sparse, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        
+        y3 = self.up_1(rgb_quarter, y2)
+        x3 = self.sparse_up_1(rgb_quarter, x2)
+        
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        y4 = F.interpolate(y3, scale_factor=2., mode='bilinear')
+        x4 = F.interpolate(x3, scale_factor=2., mode='bilinear')
+        
+        y5 = self.up_2(rgb_half, y4)
+        x5 = self.sparse_up_2(rgb_half,x4)
+        
+        xyhalf = self.fusion_up_half(rgb_half, torch.cat((y5,x5),dim=1))
+        xy = self.fusion_up_final(rgb, F.interpolate(xyhalf, scale_factor=2., mode='bilinear'))
+        
+        
+        #y6 = F.interpolate(y5, scale_factor=2., mode='bilinear')
+        #y5 = self.up_3(rgb, y6)
+
+        return xy

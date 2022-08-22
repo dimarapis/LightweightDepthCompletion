@@ -1,0 +1,92 @@
+| network_model                | GuideDepth                        |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | 4batch_overfit_nn_test.list       |
+| val_datalist                 | 4batch_overfit_nn_test.list       |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_21-09_46_06_PM/GuideDepth_1.pth 
+| d1       | 0         |
+| d2       | 0.0230741 |
+| d3       | 0.0615397 |
+| abs_rel  | 0.742995  |
+| sq_rel   | 3.86715   |
+| rmse     | 7.71694   |
+| rmse_log | 1.70357   |
+| log10    | 0.676411  |
+| silog    | 1.29866   |
+
+New model saved: weights/2022_08_21-09_46_06_PM/GuideDepth_41.pth 
+| d1       |  0.0763381 |
+| d2       |  0.154634  |
+| d3       |  0.222651  |
+| abs_rel  |  1.6958    |
+| sq_rel   | 13.9054    |
+| rmse     |  7.03773   |
+| rmse_log |  1.25387   |
+| log10    |  0.496867  |
+| silog    |  0.981583  |
+
+New model saved: weights/2022_08_21-09_46_06_PM/GuideDepth_42.pth 
+| d1       | 0.0814402 |
+| d2       | 0.160688  |
+| d3       | 0.230044  |
+| abs_rel  | 1.59815   |
+| sq_rel   | 9.50353   |
+| rmse     | 6.30627   |
+| rmse_log | 1.23351   |
+| log10    | 0.488774  |
+| silog    | 0.95509   |
+
+New model saved: weights/2022_08_21-09_46_06_PM/GuideDepth_98.pth 
+| d1       | 0.118637 |
+| d2       | 0.231214 |
+| d3       | 0.372976 |
+| abs_rel  | 1.51337  |
+| sq_rel   | 8.21057  |
+| rmse     | 6.29885  |
+| rmse_log | 0.938123 |
+| log10    | 0.364788 |
+| silog    | 0.791078 |
+
+New model saved: weights/2022_08_21-09_46_06_PM/GuideDepth_99.pth 
+| d1       | 0.123266 |
+| d2       | 0.244864 |
+| d3       | 0.385009 |
+| abs_rel  | 1.46122  |
+| sq_rel   | 7.68107  |
+| rmse     | 6.12794  |
+| rmse_log | 0.917585 |
+| log10    | 0.356446 |
+| silog    | 0.774105 |
