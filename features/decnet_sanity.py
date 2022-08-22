@@ -3,7 +3,7 @@ import numpy as np
 from torchvision import transforms
 
 def torch_min_max(data):
-    minmax = (torch.min(data.float()).item(),torch.max(data.float()).item(),torch.mean(data.float()).item(),torch.median(data.float()).item())
+    minmax = (torch.min(data.float()).item(),torch.mean(data.float()).item(),torch.median(data.float()).item(),torch.max(data.float()).item())
     #print(minmax)
     return minmax
 

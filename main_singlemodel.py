@@ -24,6 +24,8 @@ from matplotlib import pyplot as plt
 from thop import profile,clever_format
 from torch.utils.data import DataLoader
 from metrics import AverageMeter, Result
+from torch.utils.data.sampler import SubsetRandomSampler
+from torch.utils.data import Subset
 
 
 from models.enet_pro import ENet
@@ -78,6 +80,25 @@ print("\nSTEP 2. Loading datasets...")
 train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist),batch_size=decnet_args.batch_size)
 eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist),batch_size=1)
 
+subset = False
+if subset == True:
+    len_dataset = list(range(10))#len(train_dl.dataset)))
+    indices = random.sample(len_dataset,6)
+    #indices = list(range(129))
+    print(indices)
+    #indices = list(range(len(train_dl.dataset)))
+    #train_sampler = SubsetRandomSampler(indices)
+    #rint(train_sampler)
+    #random_index = random.randint(0,len(letters)-1)
+    #train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist),batch_size=decnet_args.batch_size, sampler = train_sampler)
+    #mini_batch_dl, valid_ds = torch.utils.data.random_split(train_dl.dataset, (129, len(train_dl.dataset)-129))
+    train_dataset = Subset(train_dl, indices)
+    print(train_dataset)
+    print(f'Loaded {len(train_dataset.dataset)} training files')
+    
+ 
+    
+
 print(f'Loaded {len(train_dl.dataset)} training files')
 print(f'Loaded {len(eval_dl.dataset)} val files')
 
@@ -110,8 +131,8 @@ if decnet_args.network_model == "GuideDepth":
     model = GuideDepth(True)
 
     if decnet_args.pretrained == True:
-        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'))  
-        model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
+        model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'))  
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
         #2022_08_21-10_23_53_PM
       
 elif decnet_args.network_model == "SparseGuidedDepth":
@@ -268,6 +289,14 @@ def evaluation_block(epoch):
             image_filename = data['file']
             #print(image_filename)
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
+            
+            if decnet_args.dataset == 'nyuv2':
+
+                #print(f'before {torch_min_max(sparse)}')
+                sparse = sparse/100.
+                #print(f'after {torch_min_max(sparse)}')
+                gt = gt/100.
+
             inv_pred = model(image,sparse)
             #inv_pred = model(image)
             #print(f'inv_pred {torch_min_max(inv_pred)}')
@@ -285,7 +314,7 @@ def evaluation_block(epoch):
             
             loss = depth_criterion(pred, gt)
             eval_loss += loss.item()
-
+            #print(loss)
             #0209refined_loss = depth_criterion(refined_pred,gt)
             #0209refined_eval_loss += refined_loss.item()
 
@@ -343,8 +372,8 @@ def evaluation_block(epoch):
             tabulator.append([key,result_metrics[key]]) 
             #0209refined_tabulator.append([key, refined_result_metrics[key]])
 
-        if epoch[1] == decnet_args.epochs:
-            print(f"Results on epoch: {epoch[1]}")
+        if epoch == decnet_args.epochs:
+            print(f"Results on epoch: {epoch}")
             print("Base model results")
             print(tabulate(tabulator, tablefmt='orgtbl'))
             print(f"\n\nFinished evaluation block")
@@ -355,7 +384,7 @@ def evaluation_block(epoch):
 
 
         else:
-            print(f"Results on epoch: {epoch[1]}")
+            print(f"Results on epoch: {epoch}")
             print("Base model results")
             print(tabulate(tabulator, tablefmt='orgtbl'))
             print(f"\n\nFinished evaluation block")
@@ -371,7 +400,7 @@ def evaluation_block(epoch):
                     os.remove(os.path.join((os.path.join('weights',grabtime)), f))
                 
 
-                path = f"weights/{grabtime}/{decnet_args.network_model}_{epoch[1]}.pth"
+                path = f"weights/{grabtime}/{decnet_args.network_model}_{epoch}.pth"
                 torch.save(model.state_dict(), path)
                 with open("txt_logging/"+grabtime+".txt", "a") as txt_log:
                 # Append 'hello' at the end of file
@@ -382,8 +411,8 @@ def evaluation_block(epoch):
             
         
     if decnet_args.wandblogger == True:
-        if epoch != 0:
-            epoch = epoch[1]
+        #if epoch != 0:
+            #epoch = epoch[1]
         wandb.log(result_metrics, step = epoch)
         #Wandb save sample image
         #0209wandb_image, wandb_depth_colorized, wandb_refined_depth_colorized = visualizer.wandb_image_prep(image, pred, refined_pred) 
@@ -402,7 +431,9 @@ def training_block(model):
     global best_rmse
     best_rmse = np.inf
 
-    for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
+    #for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
+    for epoch in range(1,int(decnet_args.epochs)+1):
+
         model.train()
         #0209refinement_model.train()
         #for param in model.feature_extractor.parameters():
@@ -410,7 +441,7 @@ def training_block(model):
 
         epoch_loss = 0.0
 
-        for i, data in enumerate(tqdm(train_dl)):
+        for data in train_dl:
                 
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
 
@@ -424,6 +455,7 @@ def training_block(model):
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
+            #print_torch_min_max_rgbpredgt(image,pred,gt)            
 
             #print_torch_min_max_rgbpredgt(image,pred,gt)            
             
@@ -439,6 +471,7 @@ def training_block(model):
             #print(a == b)
             epoch_loss += loss.item()
             print(loss.item())
+            
 
         average_loss = epoch_loss / (len(train_dl.dataset) + 1)
         print(f'Training Loss: {average_loss}')
@@ -449,6 +482,7 @@ if converted_args_dict['mode'] == 'eval':
     #pass
     evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
+    epoch = 0
     #evaluation_block(epoch)
     training_block(model)
     #evaluation_block()

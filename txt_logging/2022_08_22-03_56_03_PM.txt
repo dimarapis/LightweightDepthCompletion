@@ -1,0 +1,92 @@
+| network_model                | GuideDepth                        |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_2000_train.list               |
+| val_datalist                 | nyu_test.list                     |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | GuideDepthNYU                     |
+
+New model saved: weights/2022_08_22-03_56_03_PM/GuideDepth_1.pth 
+| d1       |  0.0374144 |
+| d2       |  0.102167  |
+| d3       |  0.213404  |
+| abs_rel  |  2.10499   |
+| sq_rel   | 10.3389    |
+| rmse     |  4.30473   |
+| rmse_log |  1.09652   |
+| log10    |  0.446808  |
+| silog    |  0.820805  |
+
+New model saved: weights/2022_08_22-03_56_03_PM/GuideDepth_2.pth 
+| d1       | 0.0336066 |
+| d2       | 0.0950547 |
+| d3       | 0.217421  |
+| abs_rel  | 1.94387   |
+| sq_rel   | 8.92379   |
+| rmse     | 4.06526   |
+| rmse_log | 1.04611   |
+| log10    | 0.42907   |
+| silog    | 0.778807  |
+
+New model saved: weights/2022_08_22-03_56_03_PM/GuideDepth_3.pth 
+| d1       | 0.0295666 |
+| d2       | 0.0876306 |
+| d3       | 0.217121  |
+| abs_rel  | 1.87124   |
+| sq_rel   | 8.29144   |
+| rmse     | 3.97597   |
+| rmse_log | 1.02348   |
+| log10    | 0.421699  |
+| silog    | 0.758943  |
+
+New model saved: weights/2022_08_22-03_56_03_PM/GuideDepth_4.pth 
+| d1       | 0.0303564 |
+| d2       | 0.0979789 |
+| d3       | 0.247232  |
+| abs_rel  | 1.75955   |
+| sq_rel   | 7.40589   |
+| rmse     | 3.78443   |
+| rmse_log | 0.986207  |
+| log10    | 0.406254  |
+| silog    | 0.731502  |
+
+New model saved: weights/2022_08_22-03_56_03_PM/GuideDepth_5.pth 
+| d1       | 0.0311224 |
+| d2       | 0.100702  |
+| d3       | 0.263165  |
+| abs_rel  | 1.70602   |
+| sq_rel   | 7.03519   |
+| rmse     | 3.69435   |
+| rmse_log | 0.967995  |
+| log10    | 0.398287  |
+| silog    | 0.71876   |

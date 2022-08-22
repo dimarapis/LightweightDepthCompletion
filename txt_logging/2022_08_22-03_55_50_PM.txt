@@ -1,0 +1,169 @@
+| network_model                | DecnetModule                      |
+| pretrained                   | False                             |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_2000_train.list               |
+| val_datalist                 | nyu_test.list                     |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | DecnetModuleNYUV2                 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_1.pth 
+| d1       | 0.218869 |
+| d2       | 0.435768 |
+| d3       | 0.646973 |
+| abs_rel  | 0.899106 |
+| sq_rel   | 2.10028  |
+| rmse     | 1.80709  |
+| rmse_log | 0.647351 |
+| log10    | 0.244922 |
+| silog    | 0.516309 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_2.pth 
+| d1       | 0.284549 |
+| d2       | 0.526409 |
+| d3       | 0.722381 |
+| abs_rel  | 0.747365 |
+| sq_rel   | 1.49899  |
+| rmse     | 1.49257  |
+| rmse_log | 0.572131 |
+| log10    | 0.211864 |
+| silog    | 0.46203  |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_3.pth 
+| d1       | 0.387922 |
+| d2       | 0.634454 |
+| d3       | 0.798917 |
+| abs_rel  | 0.585462 |
+| sq_rel   | 0.983956 |
+| rmse     | 1.18728  |
+| rmse_log | 0.485022 |
+| log10    | 0.173868 |
+| silog    | 0.401353 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_4.pth 
+| d1       | 0.467891 |
+| d2       | 0.706884 |
+| d3       | 0.847296 |
+| abs_rel  | 0.48283  |
+| sq_rel   | 0.700062 |
+| rmse     | 0.986778 |
+| rmse_log | 0.421962 |
+| log10    | 0.148429 |
+| silog    | 0.349761 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_5.pth 
+| d1       | 0.482226 |
+| d2       | 0.716005 |
+| d3       | 0.850274 |
+| abs_rel  | 0.473562 |
+| sq_rel   | 0.682158 |
+| rmse     | 0.967604 |
+| rmse_log | 0.414417 |
+| log10    | 0.145736 |
+| silog    | 0.34351  |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_7.pth 
+| d1       | 0.499154 |
+| d2       | 0.750824 |
+| d3       | 0.877152 |
+| abs_rel  | 0.430276 |
+| sq_rel   | 0.554882 |
+| rmse     | 0.891452 |
+| rmse_log | 0.383538 |
+| log10    | 0.136508 |
+| silog    | 0.315334 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_11.pth 
+| d1       | 0.460594 |
+| d2       | 0.792653 |
+| d3       | 0.90914  |
+| abs_rel  | 0.394023 |
+| sq_rel   | 0.449711 |
+| rmse     | 0.85747  |
+| rmse_log | 0.355314 |
+| log10    | 0.130217 |
+| silog    | 0.290573 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_12.pth 
+| d1       | 0.608799 |
+| d2       | 0.836766 |
+| d3       | 0.931025 |
+| abs_rel  | 0.315156 |
+| sq_rel   | 0.312872 |
+| rmse     | 0.698479 |
+| rmse_log | 0.30632  |
+| log10    | 0.106778 |
+| silog    | 0.261714 |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_22.pth 
+| d1       | 0.653334  |
+| d2       | 0.845774  |
+| d3       | 0.943194  |
+| abs_rel  | 0.268933  |
+| sq_rel   | 0.258062  |
+| rmse     | 0.641694  |
+| rmse_log | 0.289749  |
+| log10    | 0.0971782 |
+| silog    | 0.267896  |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_25.pth 
+| d1       | 0.635089  |
+| d2       | 0.849744  |
+| d3       | 0.955463  |
+| abs_rel  | 0.26027   |
+| sq_rel   | 0.232202  |
+| rmse     | 0.637803  |
+| rmse_log | 0.287164  |
+| log10    | 0.0981335 |
+| silog    | 0.267357  |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_26.pth 
+| d1       | 0.659141  |
+| d2       | 0.895237  |
+| d3       | 0.966048  |
+| abs_rel  | 0.195962  |
+| sq_rel   | 0.134324  |
+| rmse     | 0.580794  |
+| rmse_log | 0.269802  |
+| log10    | 0.0903277 |
+| silog    | 0.252251  |
+
+New model saved: weights/2022_08_22-03_55_50_PM/DecnetModule_27.pth 
+| d1       | 0.693357  |
+| d2       | 0.904254  |
+| d3       | 0.977711  |
+| abs_rel  | 0.2005    |
+| sq_rel   | 0.140912  |
+| rmse     | 0.565688  |
+| rmse_log | 0.2534    |
+| log10    | 0.0840203 |
+| silog    | 0.246579  |

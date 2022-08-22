@@ -1,0 +1,70 @@
+| network_model                | GuideDepth                                      |
+| pretrained                   | True                                            |
+| augment                      | False                                           |
+| message                      | Testing GuideDepth to compare with DecnetModule |
+| mode                         | train                                           |
+| dataset                      | nn                                              |
+| workers                      | 4                                               |
+| epochs                       | 100                                             |
+| criterion                    | l2                                              |
+| batch_size                   | 8                                               |
+| learning_rate                | 0.001                                           |
+| weight_decay                 | 0                                               |
+| print_freq                   | 10                                              |
+| resume                       |                                                 |
+| data_folder                  | /datasets                                       |
+| convolutional_layer_encoding | xyz                                             |
+| dilation_rate                | 2                                               |
+| val_h                        | 352                                             |
+| val_w                        | 608                                             |
+| train_height                 | 352                                             |
+| train_width                  | 608                                             |
+| min_depth_eval               | 0.1                                             |
+| max_depth_eval               | 80.0                                            |
+| error_vis_min                | -5                                              |
+| error_vis_max                | 5                                               |
+| training_subset              | 0                                               |
+| show_sensor_error            | False                                           |
+| kitti_crop                   | eigen_crop                                      |
+| train_datalist               | datalist_train_nn.list                          |
+| val_datalist                 | datalist_test_nn.list                           |
+| root_folder                  | data/nn_dataset/                                |
+| torch_mode                   | pytorch                                         |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth               |
+| wandblogger                  | True                                            |
+| project                      | depthcompletionpaper                            |
+| entity                       | wandbdimar                                      |
+| wandbrunname                 | GuideNetNN                                      |
+
+New model saved: weights/2022_08_22-08_33_10_AM/GuideDepth_1.pth 
+| d1       | 0.580278 |
+| d2       | 0.72412  |
+| d3       | 0.799707 |
+| abs_rel  | 0.505656 |
+| sq_rel   | 0.969458 |
+| rmse     | 1.40413  |
+| rmse_log | 0.401856 |
+| log10    | 0.146041 |
+| silog    | 0.339169 |
+
+New model saved: weights/2022_08_22-08_33_10_AM/GuideDepth_2.pth 
+| d1       | 0.61706  |
+| d2       | 0.741468 |
+| d3       | 0.820425 |
+| abs_rel  | 0.458675 |
+| sq_rel   | 0.827496 |
+| rmse     | 1.26274  |
+| rmse_log | 0.369449 |
+| log10    | 0.133153 |
+| silog    | 0.311155 |
+
+New model saved: weights/2022_08_22-08_33_10_AM/GuideDepth_3.pth 
+| d1       | 0.65709  |
+| d2       | 0.790408 |
+| d3       | 0.885475 |
+| abs_rel  | 0.342725 |
+| sq_rel   | 0.479087 |
+| rmse     | 1.16077  |
+| rmse_log | 0.314053 |
+| log10    | 0.110922 |
+| silog    | 0.271712 |

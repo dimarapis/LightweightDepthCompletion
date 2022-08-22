@@ -31,10 +31,14 @@ class DecnetDataloader(Dataset):
             self.crop_w = 'needtofixthis'
             self.crop_h = 'needtofixthis'
         elif self.dataset_type == 'nyuv2':
-            self.width = 320
-            self.height = 240
-            self.crop_w = 304
-            self.crop_h = 228
+            self.width = 640
+            #self.width = 320
+            self.height = 480
+            #self.height = 240
+            self.crop_w = 640
+            #self.crop_w = 304
+            self.crop_h = 480
+            #self.crop_h = 228
 
         
         with open(os.path.join(self.root, self.data_file), 'r') as f:
@@ -187,8 +191,8 @@ class DecnetDataloader(Dataset):
                 #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
             elif self.dataset_type == 'nyuv2':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = self.get_sparse_depth(pil_sparse, 500)
-                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/1000.#/256.# 100. #256.#/100.# / 256.
+                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor)/10., 500)
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/10.#/256.# 100. #256.#/100.# / 256.
                 print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))}')
                 print(f'transformed_gt transformed_gt transformed_gt {len(torch.nonzero(transformed_gt))}')
             
@@ -196,8 +200,6 @@ class DecnetDataloader(Dataset):
             transformed_gt = transformed_gt / _scale
 
         else: 
-            self.crop_h = 352
-            self.crop_w = 608
 
             t_rgb = transforms.Compose([
                 #transforms.ToPILImage(),
@@ -230,15 +232,16 @@ class DecnetDataloader(Dataset):
                 #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
             elif self.dataset_type == 'nyuv2':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = self.get_sparse_depth(pil_sparse, 500)
-                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/1000.#/256.# 100. #256.#/100.# / 256.
-                ##print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))}')
+                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor)/10., 500)
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/10.#/256.# 100. #256.#/100.# / 256.
+                #print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))}')
                 #print(f'transformed_gt transformed_gt transformed_gt {len(torch.nonzero(transformed_gt))}')
 
             #print(torch_min_max(transformed_rgb))
-            #print(torch_min_max(transformed_gt))
-            #print(torch_min_max(transformed_sparse))
-            #print(len(torch.nonzero(transformed_sparse)))
+            #print(f'tramsfpr,ed gt {torch_min_max(transformed_gt)}')
+            
+            #print(f'tramsformed_sparse {torch_min_max(transformed_sparse)}')
+            ##print(len(torch.nonzero(transformed_sparse)))
             
             #output = {'rgb': rgb, 'dep': dep_sp, 'gt': dep, 'K': K}
 
@@ -277,6 +280,7 @@ class DecnetDataloader(Dataset):
             sparse = np.array(Image.open(self.files[index]['d']))
         elif self.dataset_type == 'nyuv2':
             sparse = np.array(Image.open(self.files[index]['gt']))
+            #print(sparse.shape)
         elif self.dataset_type == 'kitti':
             sparse = np.array(Image.open(self.files[index]['d']))
 

@@ -268,6 +268,12 @@ def evaluation_block(epoch):
             image_filename = data['file']
             #print(image_filename)
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
+            print(f'before {torch_min_max(sparse)}')
+            sparse = sparse/100.
+            gt = gt/100.
+            print(f'after {torch_min_max(sparse)}')
+
+            #print(torch_min_max(sparse))
             #feat1, feat2, inv_pred = model(image, sparse)
             rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
 
