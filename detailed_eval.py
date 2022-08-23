@@ -39,6 +39,7 @@ from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
+from models.sparse_guided_depth import DecnetSparseIncorporated
 
 
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
@@ -80,9 +81,13 @@ print(f'Loaded {len(eval_dl.dataset)} val files')
 print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-model = RgbGuideDepth(True)
+model = GuideDepth(True)
 #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
-model.load_state_dict(torch.load('./weights/DecnetModule_19.pth', map_location=device))
+model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device))
+
+#model = DecnetSparseIncorporated()
+#model.load_state_dict(torch.load('./weights/DecnetModule_27.pth', map_location='cpu'))
+
 
 model.to(device)
 model.eval()
@@ -308,16 +313,32 @@ def image_level():
 
             image_filename = data['file'][0].split('/')[-1].rstrip('.png')
             image, gt, sparse = data['rgb'], data['gt'], data['d']
+            print(f'image: {torch_min_max(image)}')    
+            max_depth  = decnet_args.max_depth_eval
             
-            rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            if decnet_args.dataset == 'nyuv2':
+                #image = image * 255
+                #print(f'before {torch_min_max(sparse)}')
+                sparse = sparse/100.
+                #print(f'after {torch_min_max(sparse)}')
+                gt = gt/100.
+                max_depth = 10
 
-            pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            inv_pred = model(image)#,sparse)
+            print(inv_pred)
             
+            pred = inverse_depth_norm(max_depth,inv_pred)
+            
+                        
+            print(f'pred: {torch_min_max(pred)}')    
+            print(f'gt: {torch_min_max(gt)}')
+            print(f'sparse: {torch_min_max(sparse)}')    
             #gt_and_pred_info('basemodel', 'pred', pred)
             #visualize_results('basemodel',image,pred,sparse)
-            
-            refined_pred = refinement_model(pred,sparse)
+            refined_pred = pred
+            #refined_pred = refinement_model(pred,sparse)
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
 
             pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
@@ -560,6 +581,6 @@ def gpu_timings(models):
         
         print(f'{modelo} model timings calculation\nMean time to process {repetitions} frames: {mean_time}, with std_deviation of: {std_time}')
 
-gpu_timings(['Basemodel','Refinement'])
+#gpu_timings(['Basemodel','Refinement'])
 image_level()
 #grid_level()

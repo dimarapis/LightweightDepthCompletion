@@ -47,7 +47,7 @@ class GuideDepth(nn.Module):
 
     
 
-    def forward(self, x, sparse):
+    def forward(self, x):
         y = self.feature_extractor(x)
         #print('y.shape', y.shape)
 
