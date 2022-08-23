@@ -1,0 +1,1061 @@
+| network_model                | GuideDepth                        |
+| resolution                   | full                              |
+| pretrained                   | True                              |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 4                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_4_overfit.list                |
+| val_datalist                 | nyu_4_overfit.list                |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_1.pth 
+| d1       | 0.800598  |
+| d2       | 0.978747  |
+| d3       | 0.997785  |
+| abs_rel  | 0.156458  |
+| sq_rel   | 0.192802  |
+| rmse     | 0.962332  |
+| rmse_log | 0.181565  |
+| log10    | 0.0616549 |
+| silog    | 0.162994  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_2.pth 
+| d1       | 0.895733  |
+| d2       | 0.981014  |
+| d3       | 0.995036  |
+| abs_rel  | 0.102609  |
+| sq_rel   | 0.10729   |
+| rmse     | 0.720354  |
+| rmse_log | 0.199858  |
+| log10    | 0.0477028 |
+| silog    | 0.199298  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_6.pth 
+| d1       | 0.823527  |
+| d2       | 0.987402  |
+| d3       | 0.99988   |
+| abs_rel  | 0.137535  |
+| sq_rel   | 0.100599  |
+| rmse     | 0.69793   |
+| rmse_log | 0.168857  |
+| log10    | 0.0596345 |
+| silog    | 0.167909  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_7.pth 
+| d1       | 0.828449  |
+| d2       | 0.989806  |
+| d3       | 0.999932  |
+| abs_rel  | 0.137818  |
+| sq_rel   | 0.0901711 |
+| rmse     | 0.632466  |
+| rmse_log | 0.16459   |
+| log10    | 0.0584323 |
+| silog    | 0.161545  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_8.pth 
+| d1       | 0.848047  |
+| d2       | 0.992595  |
+| d3       | 0.999944  |
+| abs_rel  | 0.131778  |
+| sq_rel   | 0.0781899 |
+| rmse     | 0.573541  |
+| rmse_log | 0.15692   |
+| log10    | 0.055339  |
+| silog    | 0.152528  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_9.pth 
+| d1       | 0.878848  |
+| d2       | 0.995932  |
+| d3       | 0.999978  |
+| abs_rel  | 0.119599  |
+| sq_rel   | 0.065337  |
+| rmse     | 0.525447  |
+| rmse_log | 0.144525  |
+| log10    | 0.0503256 |
+| silog    | 0.140811  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_10.pth 
+| d1       | 0.898892  |
+| d2       | 0.993994  |
+| d3       | 0.999515  |
+| abs_rel  | 0.110081  |
+| sq_rel   | 0.0596716 |
+| rmse     | 0.512288  |
+| rmse_log | 0.139891  |
+| log10    | 0.0471543 |
+| silog    | 0.138294  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_14.pth 
+| d1       | 0.900203  |
+| d2       | 0.990652  |
+| d3       | 0.995189  |
+| abs_rel  | 0.101305  |
+| sq_rel   | 0.0576514 |
+| rmse     | 0.494929  |
+| rmse_log | 0.149659  |
+| log10    | 0.0461203 |
+| silog    | 0.14621   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_15.pth 
+| d1       | 0.910269  |
+| d2       | 0.991488  |
+| d3       | 0.9951    |
+| abs_rel  | 0.0967608 |
+| sq_rel   | 0.052251  |
+| rmse     | 0.459728  |
+| rmse_log | 0.144854  |
+| log10    | 0.0440487 |
+| silog    | 0.141661  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_16.pth 
+| d1       | 0.922117  |
+| d2       | 0.992275  |
+| d3       | 0.995221  |
+| abs_rel  | 0.0912891 |
+| sq_rel   | 0.0463882 |
+| rmse     | 0.424787  |
+| rmse_log | 0.137883  |
+| log10    | 0.0414422 |
+| silog    | 0.135217  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_17.pth 
+| d1       | 0.933164  |
+| d2       | 0.992825  |
+| d3       | 0.995548  |
+| abs_rel  | 0.0851059 |
+| sq_rel   | 0.0404638 |
+| rmse     | 0.391096  |
+| rmse_log | 0.129478  |
+| log10    | 0.0384902 |
+| silog    | 0.127277  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_18.pth 
+| d1       | 0.942697  |
+| d2       | 0.993327  |
+| d3       | 0.996077  |
+| abs_rel  | 0.0792936 |
+| sq_rel   | 0.0354371 |
+| rmse     | 0.364001  |
+| rmse_log | 0.120966  |
+| log10    | 0.0357107 |
+| silog    | 0.119054  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_19.pth 
+| d1       | 0.951908  |
+| d2       | 0.993915  |
+| d3       | 0.996745  |
+| abs_rel  | 0.0742909 |
+| sq_rel   | 0.0315489 |
+| rmse     | 0.344916  |
+| rmse_log | 0.113089  |
+| log10    | 0.0333011 |
+| silog    | 0.11141   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_20.pth 
+| d1       | 0.960061  |
+| d2       | 0.994635  |
+| d3       | 0.99755   |
+| abs_rel  | 0.0697759 |
+| sq_rel   | 0.0281415 |
+| rmse     | 0.326807  |
+| rmse_log | 0.105664  |
+| log10    | 0.0311101 |
+| silog    | 0.104317  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_21.pth 
+| d1       | 0.966544  |
+| d2       | 0.995486  |
+| d3       | 0.998516  |
+| abs_rel  | 0.0657175 |
+| sq_rel   | 0.0249125 |
+| rmse     | 0.306416  |
+| rmse_log | 0.0985803 |
+| log10    | 0.0291225 |
+| silog    | 0.0976596 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_22.pth 
+| d1       | 0.971839  |
+| d2       | 0.996604  |
+| d3       | 0.999427  |
+| abs_rel  | 0.0622706 |
+| sq_rel   | 0.0221842 |
+| rmse     | 0.287803  |
+| rmse_log | 0.09224   |
+| log10    | 0.0274195 |
+| silog    | 0.0917275 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_23.pth 
+| d1       | 0.975496  |
+| d2       | 0.997871  |
+| d3       | 0.999911  |
+| abs_rel  | 0.0596796 |
+| sq_rel   | 0.0203901 |
+| rmse     | 0.277234  |
+| rmse_log | 0.087091  |
+| log10    | 0.0261188 |
+| silog    | 0.0868519 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_24.pth 
+| d1       | 0.978747  |
+| d2       | 0.998785  |
+| d3       | 0.999984  |
+| abs_rel  | 0.0577187 |
+| sq_rel   | 0.0192576 |
+| rmse     | 0.271664  |
+| rmse_log | 0.0831981 |
+| log10    | 0.0251429 |
+| silog    | 0.0830789 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_25.pth 
+| d1       | 0.98085   |
+| d2       | 0.998958  |
+| d3       | 0.999983  |
+| abs_rel  | 0.0561302 |
+| sq_rel   | 0.0184225 |
+| rmse     | 0.26704   |
+| rmse_log | 0.080514  |
+| log10    | 0.0243992 |
+| silog    | 0.0804212 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_26.pth 
+| d1       | 0.981632  |
+| d2       | 0.999068  |
+| d3       | 0.999983  |
+| abs_rel  | 0.0551185 |
+| sq_rel   | 0.0178017 |
+| rmse     | 0.262658  |
+| rmse_log | 0.078979  |
+| log10    | 0.0239691 |
+| silog    | 0.078871  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_27.pth 
+| d1       | 0.982406  |
+| d2       | 0.999212  |
+| d3       | 0.999985  |
+| abs_rel  | 0.0544049 |
+| sq_rel   | 0.0171843 |
+| rmse     | 0.257044  |
+| rmse_log | 0.0779137 |
+| log10    | 0.023694  |
+| silog    | 0.0777503 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_28.pth 
+| d1       | 0.982947  |
+| d2       | 0.999342  |
+| d3       | 0.999989  |
+| abs_rel  | 0.0534565 |
+| sq_rel   | 0.0162916 |
+| rmse     | 0.248283  |
+| rmse_log | 0.0765853 |
+| log10    | 0.023336  |
+| silog    | 0.0763031 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_29.pth 
+| d1       | 0.983537  |
+| d2       | 0.999437  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0527012 |
+| sq_rel   | 0.0157328 |
+| rmse     | 0.242477  |
+| rmse_log | 0.0756112 |
+| log10    | 0.0230392 |
+| silog    | 0.0751891 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_30.pth 
+| d1       | 0.984382  |
+| d2       | 0.999524  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0524433 |
+| sq_rel   | 0.0155051 |
+| rmse     | 0.239855  |
+| rmse_log | 0.0750592 |
+| log10    | 0.0229324 |
+| silog    | 0.0745592 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_31.pth 
+| d1       | 0.984873  |
+| d2       | 0.999587  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0519588 |
+| sq_rel   | 0.0152859 |
+| rmse     | 0.237181  |
+| rmse_log | 0.0744731 |
+| log10    | 0.0227098 |
+| silog    | 0.0739775 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_32.pth 
+| d1       | 0.984939  |
+| d2       | 0.99966   |
+| d3       | 0.999991  |
+| abs_rel  | 0.051155  |
+| sq_rel   | 0.0149221 |
+| rmse     | 0.23307   |
+| rmse_log | 0.073562  |
+| log10    | 0.0223334 |
+| silog    | 0.0731174 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_33.pth 
+| d1       | 0.985157  |
+| d2       | 0.999719  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0500714 |
+| sq_rel   | 0.0143998 |
+| rmse     | 0.227603  |
+| rmse_log | 0.0722756 |
+| log10    | 0.02183   |
+| silog    | 0.0718919 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_34.pth 
+| d1       | 0.986007  |
+| d2       | 0.999787  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0487295 |
+| sq_rel   | 0.0137232 |
+| rmse     | 0.220889  |
+| rmse_log | 0.0706199 |
+| log10    | 0.0212181 |
+| silog    | 0.0702991 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_35.pth 
+| d1       | 0.987335  |
+| d2       | 0.999819  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0471826 |
+| sq_rel   | 0.0129324 |
+| rmse     | 0.213232  |
+| rmse_log | 0.0686682 |
+| log10    | 0.0205236 |
+| silog    | 0.0684175 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_36.pth 
+| d1       | 0.988953  |
+| d2       | 0.999832  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0455414 |
+| sq_rel   | 0.0121149 |
+| rmse     | 0.205305  |
+| rmse_log | 0.0665918 |
+| log10    | 0.0197925 |
+| silog    | 0.0664106 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_37.pth 
+| d1       | 0.989566  |
+| d2       | 0.999843  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0439109 |
+| sq_rel   | 0.0113716 |
+| rmse     | 0.198003  |
+| rmse_log | 0.0646017 |
+| log10    | 0.0190653 |
+| silog    | 0.0644843 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_38.pth 
+| d1       | 0.990049  |
+| d2       | 0.999847  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0424188 |
+| sq_rel   | 0.0107947 |
+| rmse     | 0.19235   |
+| rmse_log | 0.0629221 |
+| log10    | 0.0183951 |
+| silog    | 0.0628544 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_39.pth 
+| d1       | 0.990381  |
+| d2       | 0.999847  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0413754 |
+| sq_rel   | 0.0104549 |
+| rmse     | 0.189411  |
+| rmse_log | 0.0617185 |
+| log10    | 0.0179152 |
+| silog    | 0.0616752 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_40.pth 
+| d1       | 0.99066   |
+| d2       | 0.999849  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0407034 |
+| sq_rel   | 0.0103119 |
+| rmse     | 0.188763  |
+| rmse_log | 0.0609306 |
+| log10    | 0.0175921 |
+| silog    | 0.0608809 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_41.pth 
+| d1       | 0.990961  |
+| d2       | 0.999849  |
+| d3       | 0.999991  |
+| abs_rel  | 0.0401045 |
+| sq_rel   | 0.0101546 |
+| rmse     | 0.187548  |
+| rmse_log | 0.0602277 |
+| log10    | 0.0173092 |
+| silog    | 0.0601614 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_42.pth 
+| d1       | 0.991283   |
+| d2       | 0.999854   |
+| d3       | 0.999991   |
+| abs_rel  | 0.0393738  |
+| sq_rel   | 0.00981669 |
+| rmse     | 0.183586   |
+| rmse_log | 0.0593355  |
+| log10    | 0.0169869  |
+| silog    | 0.059272   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_43.pth 
+| d1       | 0.991594   |
+| d2       | 0.999858   |
+| d3       | 0.999991   |
+| abs_rel  | 0.0385831  |
+| sq_rel   | 0.00939753 |
+| rmse     | 0.17842    |
+| rmse_log | 0.058348   |
+| log10    | 0.0166518  |
+| silog    | 0.0583079  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_44.pth 
+| d1       | 0.991977   |
+| d2       | 0.999859   |
+| d3       | 0.999992   |
+| abs_rel  | 0.0379319  |
+| sq_rel   | 0.00906268 |
+| rmse     | 0.174621   |
+| rmse_log | 0.0574883  |
+| log10    | 0.0163804  |
+| silog    | 0.0574711  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_45.pth 
+| d1       | 0.992301   |
+| d2       | 0.999866   |
+| d3       | 0.999992   |
+| abs_rel  | 0.0374802  |
+| sq_rel   | 0.00884007 |
+| rmse     | 0.172562   |
+| rmse_log | 0.0568191  |
+| log10    | 0.0161918  |
+| silog    | 0.056812   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_46.pth 
+| d1       | 0.992674  |
+| d2       | 0.999869  |
+| d3       | 0.999992  |
+| abs_rel  | 0.0371606 |
+| sq_rel   | 0.0086668 |
+| rmse     | 0.171098  |
+| rmse_log | 0.0562569 |
+| log10    | 0.0160552 |
+| silog    | 0.0562494 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_47.pth 
+| d1       | 0.992964   |
+| d2       | 0.999873   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0368514  |
+| sq_rel   | 0.00849898 |
+| rmse     | 0.169541   |
+| rmse_log | 0.0557215  |
+| log10    | 0.015919   |
+| silog    | 0.0557084  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_48.pth 
+| d1       | 0.993316   |
+| d2       | 0.999879   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0365081  |
+| sq_rel   | 0.00832583 |
+| rmse     | 0.167873   |
+| rmse_log | 0.0551759  |
+| log10    | 0.015767   |
+| silog    | 0.0551557  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_49.pth 
+| d1       | 0.993585   |
+| d2       | 0.999883   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0361293  |
+| sq_rel   | 0.00814889 |
+| rmse     | 0.166165   |
+| rmse_log | 0.0546269  |
+| log10    | 0.0156018  |
+| silog    | 0.0546032  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_50.pth 
+| d1       | 0.993835   |
+| d2       | 0.999887   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0357726  |
+| sq_rel   | 0.00798316 |
+| rmse     | 0.164552   |
+| rmse_log | 0.054125   |
+| log10    | 0.0154495  |
+| silog    | 0.054104   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_51.pth 
+| d1       | 0.993991   |
+| d2       | 0.999888   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0355256  |
+| sq_rel   | 0.00786038 |
+| rmse     | 0.163424   |
+| rmse_log | 0.0537439  |
+| log10    | 0.0153445  |
+| silog    | 0.0537274  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_52.pth 
+| d1       | 0.994128   |
+| d2       | 0.999894   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0353461  |
+| sq_rel   | 0.00779751 |
+| rmse     | 0.162981   |
+| rmse_log | 0.0535055  |
+| log10    | 0.0152634  |
+| silog    | 0.0534894  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_53.pth 
+| d1       | 0.994236   |
+| d2       | 0.999898   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0351752  |
+| sq_rel   | 0.00777043 |
+| rmse     | 0.162805   |
+| rmse_log | 0.0533378  |
+| log10    | 0.0151778  |
+| silog    | 0.0533125  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_54.pth 
+| d1       | 0.994368   |
+| d2       | 0.9999     |
+| d3       | 0.999993   |
+| abs_rel  | 0.034957   |
+| sq_rel   | 0.00773029 |
+| rmse     | 0.162224   |
+| rmse_log | 0.0531265  |
+| log10    | 0.0150655  |
+| silog    | 0.0530765  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_55.pth 
+| d1       | 0.994512   |
+| d2       | 0.999904   |
+| d3       | 0.999993   |
+| abs_rel  | 0.034684   |
+| sq_rel   | 0.00764158 |
+| rmse     | 0.160912   |
+| rmse_log | 0.052798   |
+| log10    | 0.0149292  |
+| silog    | 0.0527069  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_56.pth 
+| d1       | 0.994735   |
+| d2       | 0.99991    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0343725  |
+| sq_rel   | 0.00750417 |
+| rmse     | 0.159018   |
+| rmse_log | 0.0523557  |
+| log10    | 0.0147813  |
+| silog    | 0.0522204  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_57.pth 
+| d1       | 0.994906   |
+| d2       | 0.999911   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0340294  |
+| sq_rel   | 0.00734047 |
+| rmse     | 0.156913   |
+| rmse_log | 0.0518448  |
+| log10    | 0.0146276  |
+| silog    | 0.0516833  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_58.pth 
+| d1       | 0.995017   |
+| d2       | 0.999911   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0336647  |
+| sq_rel   | 0.00717547 |
+| rmse     | 0.154932   |
+| rmse_log | 0.0513186  |
+| log10    | 0.014472   |
+| silog    | 0.0511584  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_59.pth 
+| d1       | 0.995124   |
+| d2       | 0.999917   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0332958  |
+| sq_rel   | 0.00702254 |
+| rmse     | 0.153174   |
+| rmse_log | 0.050813   |
+| log10    | 0.0143191  |
+| silog    | 0.0506725  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_60.pth 
+| d1       | 0.995243   |
+| d2       | 0.999923   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0329245  |
+| sq_rel   | 0.00687985 |
+| rmse     | 0.151468   |
+| rmse_log | 0.0503362  |
+| log10    | 0.0141662  |
+| silog    | 0.0502172  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_61.pth 
+| d1       | 0.99533    |
+| d2       | 0.999928   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0325544  |
+| sq_rel   | 0.00674492 |
+| rmse     | 0.149714   |
+| rmse_log | 0.0498889  |
+| log10    | 0.0140124  |
+| silog    | 0.049784   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_62.pth 
+| d1       | 0.995429   |
+| d2       | 0.999928   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0322055  |
+| sq_rel   | 0.00662475 |
+| rmse     | 0.148108   |
+| rmse_log | 0.0494805  |
+| log10    | 0.013866   |
+| silog    | 0.0493829  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_63.pth 
+| d1       | 0.995527   |
+| d2       | 0.99993    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0319003  |
+| sq_rel   | 0.00652558 |
+| rmse     | 0.14687    |
+| rmse_log | 0.0491198  |
+| log10    | 0.0137377  |
+| silog    | 0.0490283  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_64.pth 
+| d1       | 0.995602   |
+| d2       | 0.999932   |
+| d3       | 0.999993   |
+| abs_rel  | 0.031635   |
+| sq_rel   | 0.00644332 |
+| rmse     | 0.145951   |
+| rmse_log | 0.0488035  |
+| log10    | 0.0136269  |
+| silog    | 0.0487217  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_65.pth 
+| d1       | 0.995682   |
+| d2       | 0.999939   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0313993  |
+| sq_rel   | 0.00637374 |
+| rmse     | 0.145238   |
+| rmse_log | 0.0485282  |
+| log10    | 0.013529   |
+| silog    | 0.0484583  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_66.pth 
+| d1       | 0.995764   |
+| d2       | 0.999941   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0311908  |
+| sq_rel   | 0.00631646 |
+| rmse     | 0.144713   |
+| rmse_log | 0.0482871  |
+| log10    | 0.0134417  |
+| silog    | 0.0482256  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_67.pth 
+| d1       | 0.995837   |
+| d2       | 0.999943   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0309992  |
+| sq_rel   | 0.00626559 |
+| rmse     | 0.144269   |
+| rmse_log | 0.0480594  |
+| log10    | 0.0133594  |
+| silog    | 0.0479982  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_68.pth 
+| d1       | 0.995891   |
+| d2       | 0.999945   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0308069  |
+| sq_rel   | 0.00620851 |
+| rmse     | 0.143666   |
+| rmse_log | 0.0478168  |
+| log10    | 0.013274   |
+| silog    | 0.0477466  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_69.pth 
+| d1       | 0.99594   |
+| d2       | 0.999946  |
+| d3       | 0.999993  |
+| abs_rel  | 0.0306098 |
+| sq_rel   | 0.0061383 |
+| rmse     | 0.142793  |
+| rmse_log | 0.0475464 |
+| log10    | 0.0131853 |
+| silog    | 0.0474608 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_70.pth 
+| d1       | 0.995999   |
+| d2       | 0.999948   |
+| d3       | 0.999993   |
+| abs_rel  | 0.030413   |
+| sq_rel   | 0.00605748 |
+| rmse     | 0.14174    |
+| rmse_log | 0.0472543  |
+| log10    | 0.0130975  |
+| silog    | 0.0471533  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_71.pth 
+| d1       | 0.996033   |
+| d2       | 0.99995    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0302163  |
+| sq_rel   | 0.00597131 |
+| rmse     | 0.140649   |
+| rmse_log | 0.046953   |
+| log10    | 0.0130123  |
+| silog    | 0.0468443  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_72.pth 
+| d1       | 0.996078   |
+| d2       | 0.999954   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0300145  |
+| sq_rel   | 0.00588414 |
+| rmse     | 0.139611   |
+| rmse_log | 0.0466515  |
+| log10    | 0.0129278  |
+| silog    | 0.0465464  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_73.pth 
+| d1       | 0.996125   |
+| d2       | 0.999955   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0298077  |
+| sq_rel   | 0.00579944 |
+| rmse     | 0.138655   |
+| rmse_log | 0.0463576  |
+| log10    | 0.012843   |
+| silog    | 0.0462635  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_74.pth 
+| d1       | 0.996184   |
+| d2       | 0.999959   |
+| d3       | 0.999993   |
+| abs_rel  | 0.029598   |
+| sq_rel   | 0.00571876 |
+| rmse     | 0.137734   |
+| rmse_log | 0.0460763  |
+| log10    | 0.012757   |
+| silog    | 0.0459928  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_75.pth 
+| d1       | 0.996241   |
+| d2       | 0.99996    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0293859  |
+| sq_rel   | 0.00564247 |
+| rmse     | 0.136797   |
+| rmse_log | 0.045809   |
+| log10    | 0.0126685  |
+| silog    | 0.0457309  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_76.pth 
+| d1       | 0.996292  |
+| d2       | 0.99996   |
+| d3       | 0.999993  |
+| abs_rel  | 0.0291784 |
+| sq_rel   | 0.0055724 |
+| rmse     | 0.135879  |
+| rmse_log | 0.0455587 |
+| log10    | 0.0125801 |
+| silog    | 0.0454804 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_77.pth 
+| d1       | 0.996346   |
+| d2       | 0.999961   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0289837  |
+| sq_rel   | 0.00551089 |
+| rmse     | 0.135067   |
+| rmse_log | 0.0453289  |
+| log10    | 0.0124962  |
+| silog    | 0.0452478  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_78.pth 
+| d1       | 0.996389  |
+| d2       | 0.99996   |
+| d3       | 0.999993  |
+| abs_rel  | 0.0288038 |
+| sq_rel   | 0.0054579 |
+| rmse     | 0.134403  |
+| rmse_log | 0.045119  |
+| log10    | 0.0124186 |
+| silog    | 0.0450363 |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_79.pth 
+| d1       | 0.996445   |
+| d2       | 0.999961   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0286382  |
+| sq_rel   | 0.00541211 |
+| rmse     | 0.13388    |
+| rmse_log | 0.0449243  |
+| log10    | 0.0123475  |
+| silog    | 0.0448429  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_80.pth 
+| d1       | 0.996489   |
+| d2       | 0.999961   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0284831  |
+| sq_rel   | 0.00537033 |
+| rmse     | 0.133431   |
+| rmse_log | 0.0447361  |
+| log10    | 0.0122811  |
+| silog    | 0.0446575  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_81.pth 
+| d1       | 0.996552   |
+| d2       | 0.999963   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0283289  |
+| sq_rel   | 0.00532669 |
+| rmse     | 0.132916   |
+| rmse_log | 0.0445416  |
+| log10    | 0.0122148  |
+| silog    | 0.0444653  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_82.pth 
+| d1       | 0.996596   |
+| d2       | 0.999963   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0281661  |
+| sq_rel   | 0.00527624 |
+| rmse     | 0.132222   |
+| rmse_log | 0.0443318  |
+| log10    | 0.0121442  |
+| silog    | 0.0442563  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_83.pth 
+| d1       | 0.996652   |
+| d2       | 0.999964   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0279933  |
+| sq_rel   | 0.00521889 |
+| rmse     | 0.131363   |
+| rmse_log | 0.0441069  |
+| log10    | 0.0120692  |
+| silog    | 0.0440317  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_84.pth 
+| d1       | 0.996676   |
+| d2       | 0.999965   |
+| d3       | 0.999993   |
+| abs_rel  | 0.027816   |
+| sq_rel   | 0.00515833 |
+| rmse     | 0.130449   |
+| rmse_log | 0.043875   |
+| log10    | 0.0119932  |
+| silog    | 0.0438018  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_85.pth 
+| d1       | 0.996711   |
+| d2       | 0.999965   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0276412  |
+| sq_rel   | 0.00509818 |
+| rmse     | 0.129579   |
+| rmse_log | 0.0436451  |
+| log10    | 0.0119195  |
+| silog    | 0.0435772  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_86.pth 
+| d1       | 0.99674    |
+| d2       | 0.999967   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0274742  |
+| sq_rel   | 0.00504089 |
+| rmse     | 0.1288     |
+| rmse_log | 0.0434235  |
+| log10    | 0.0118502  |
+| silog    | 0.0433632  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_87.pth 
+| d1       | 0.996771   |
+| d2       | 0.999967   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0273173  |
+| sq_rel   | 0.00498766 |
+| rmse     | 0.128112   |
+| rmse_log | 0.0432135  |
+| log10    | 0.0117854  |
+| silog    | 0.0431601  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_88.pth 
+| d1       | 0.996798   |
+| d2       | 0.999967   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0271684  |
+| sq_rel   | 0.00493835 |
+| rmse     | 0.12748    |
+| rmse_log | 0.0430148  |
+| log10    | 0.0117234  |
+| silog    | 0.042965   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_89.pth 
+| d1       | 0.996827   |
+| d2       | 0.999968   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0270249  |
+| sq_rel   | 0.00489227 |
+| rmse     | 0.126877   |
+| rmse_log | 0.0428259  |
+| log10    | 0.0116627  |
+| silog    | 0.042776   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_90.pth 
+| d1       | 0.996854   |
+| d2       | 0.99997    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0268881  |
+| sq_rel   | 0.00484959 |
+| rmse     | 0.126312   |
+| rmse_log | 0.0426475  |
+| log10    | 0.0116038  |
+| silog    | 0.0425949  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_91.pth 
+| d1       | 0.996884   |
+| d2       | 0.99997    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0267597  |
+| sq_rel   | 0.00481028 |
+| rmse     | 0.125807   |
+| rmse_log | 0.0424791  |
+| log10    | 0.0115483  |
+| silog    | 0.0424235  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_92.pth 
+| d1       | 0.996908   |
+| d2       | 0.99997    |
+| d3       | 0.999993   |
+| abs_rel  | 0.0266389  |
+| sq_rel   | 0.00477355 |
+| rmse     | 0.12536    |
+| rmse_log | 0.0423183  |
+| log10    | 0.0114962  |
+| silog    | 0.042261   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_93.pth 
+| d1       | 0.996928   |
+| d2       | 0.999969   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0265215  |
+| sq_rel   | 0.00473741 |
+| rmse     | 0.124929   |
+| rmse_log | 0.0421596  |
+| log10    | 0.0114458  |
+| silog    | 0.042102   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_94.pth 
+| d1       | 0.996953   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0264009  |
+| sq_rel   | 0.00469904 |
+| rmse     | 0.124437   |
+| rmse_log | 0.041996   |
+| log10    | 0.011394   |
+| silog    | 0.0419387  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_95.pth 
+| d1       | 0.996975   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0262721  |
+| sq_rel   | 0.00465661 |
+| rmse     | 0.12383    |
+| rmse_log | 0.041823   |
+| log10    | 0.0113384  |
+| silog    | 0.0417659  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_96.pth 
+| d1       | 0.997008   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0261361  |
+| sq_rel   | 0.00461107 |
+| rmse     | 0.12313    |
+| rmse_log | 0.0416424  |
+| log10    | 0.0112795  |
+| silog    | 0.0415854  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_97.pth 
+| d1       | 0.997025   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0259986  |
+| sq_rel   | 0.00456516 |
+| rmse     | 0.122415   |
+| rmse_log | 0.0414602  |
+| log10    | 0.0112202  |
+| silog    | 0.041404   |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_98.pth 
+| d1       | 0.997052   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0258648  |
+| sq_rel   | 0.00452125 |
+| rmse     | 0.121753   |
+| rmse_log | 0.0412818  |
+| log10    | 0.011163   |
+| silog    | 0.0412281  |
+
+New model saved: weights/2022_08_23-06_00_26_PM/GuideDepth_99.pth 
+| d1       | 0.997072   |
+| d2       | 0.999971   |
+| d3       | 0.999993   |
+| abs_rel  | 0.0257369  |
+| sq_rel   | 0.00448029 |
+| rmse     | 0.121169   |
+| rmse_log | 0.04111    |
+| log10    | 0.0111089  |
+| silog    | 0.0410602  |

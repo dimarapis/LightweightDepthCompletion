@@ -15,6 +15,12 @@ def decnet_args_parser():
                         choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule"],
                         help='choose a model'
                         )
+    parser.add_argument('--resolution',
+                        type=str,
+                        default="full",
+                        choices=["full", "half", "mini"],
+                        help='choose a resolution for input images'
+                        )
     parser.add_argument('--pretrained',
                         type=bool,
                         default=False,
@@ -47,7 +53,7 @@ def decnet_args_parser():
                         metavar='N',
                         help='number of data loading workers (default: 4)')
     parser.add_argument('--epochs',
-                        default=100,
+                        default=30,
                         type=int,
                         metavar='N',
                         help='number of total epochs to run (default: 100)')
@@ -160,6 +166,8 @@ def decnet_args_parser():
                         #default='4batch_overfit_nn_train.list',
                         #default='nyu_train.list',
                         default='nyu_2000_train.list',
+                        #default='nyu_test.list',
+                        #default='nyu_4_overfit.list',
                         #default='single_image_4batch_overfit.list',
                         type=str,
                         #required=True,
@@ -170,6 +178,7 @@ def decnet_args_parser():
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
+                        #default='nyu_4_overfit.list',
                         default='nyu_test.list',
                         #default='single_image_4batch_overfit.list',
                         type=str,

@@ -77,8 +77,8 @@ random.seed(seed)
 
 #Loading datasets
 print("\nSTEP 2. Loading datasets...")
-train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist),batch_size=decnet_args.batch_size)
-eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist),batch_size=1)
+train_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.train_datalist, split='train'),batch_size=decnet_args.batch_size, shuffle=True)
+eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist, split='eval'),batch_size=1)
 
 subset = False
 if subset == True:
@@ -131,7 +131,7 @@ if decnet_args.network_model == "GuideDepth":
     model = GuideDepth(True)
 
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'))  
+        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device))  
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
         #2022_08_21-10_23_53_PM
       
@@ -150,7 +150,9 @@ elif decnet_args.network_model == "DecnetModule":
     model = DecnetSparseIncorporated()
         
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device), strict=False)
+
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 
 elif decnet_args.network_model == "AuxSparseGuidedDepth":
@@ -186,8 +188,8 @@ if decnet_args.torch_mode == 'tensorrt':
 '''
 
 
-optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate, eps=1e-3, amsgrad=True)#, momentum=0.9) 
-lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer,milestones=[30,50,75,90], gamma=0.1)
+optimizer = optim.Adam(model.parameters(), lr=decnet_args.learning_rate)#, eps=1e-3, amsgrad=True)#, momentum=0.9) 
+lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer,milestones=[15,20,25], gamma=0.1)
 #lr_scheduler = optim.lr_scheduler.StepLR(optimizer,20,gamma=0.1)
 
 tabulator_args = []
@@ -220,7 +222,14 @@ def print_torch_min_max_rgbpredgt(rgb,pred,gt):
     print(f'torch_min_max gt {torch_min_max(gt)}')
     print('\n')
     
-
+def print_torch_min_max_rgbsparsepredgt(rgb,sparse,pred,gt):
+    print('\n')
+    print(f'torch_min_max rgb {torch_min_max(rgb)}')
+    print(f'torch_min_max sparse {torch_min_max(sparse)}')
+    print(f'torch_min_max pred {torch_min_max(pred)}')
+    print(f'torch_min_max gt {torch_min_max(gt)}')
+    print('\n')
+    
 def unpack_and_move(data):
     if isinstance(data, (tuple, list)):
         #print('here1')
@@ -291,20 +300,41 @@ def evaluation_block(epoch):
             image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
             
             if decnet_args.dataset == 'nyuv2':
-
+                #image = image * 255
                 #print(f'before {torch_min_max(sparse)}')
-                sparse = sparse/100.
+                #sparse = sparse/100.
                 #print(f'after {torch_min_max(sparse)}')
-                gt = gt/100.
+                #gt = gt/100.
+               
+               
+                gt = gt * 0.001
+                sparse = sparse * 0.001
+                
+                #sparse = sparse /255.0 * 10.0 #From 8bit to range [0, 10] (meter)
+                #gt = gt /255.0 * 10.0
+                
+                max_depth = 10
 
-            inv_pred = model(image,sparse)
+            if decnet_args.network_model == 'GuideDepth':
+                inv_pred = model(image)
+            else:    
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                inv_pred = model(image, sparse)
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
             #inv_pred = model(image)
-            #print(f'inv_pred {torch_min_max(inv_pred)}')
-
-            #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
-            pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
-            #print(f'pred {torch_min_max(pred)}')
             
+            #print(inv_pred)
+            
+            pred = inverse_depth_norm(max_depth,inv_pred)
+            #print(f'pred {torch_min_max(pred)}')
+            print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+            #print(image_filename)         
+            #ipnut = input()
+
+            #print_torch_min_max_rgbpredgt(image,pred,gt)            
+            
+            loss = depth_criterion(pred, gt)
+            #print(loss.item())
             #print(torch_min_max(pred))
             #pred = 
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
@@ -312,7 +342,6 @@ def evaluation_block(epoch):
 
             #print_torch_min_max_rgbpredgt(image,pred,gt)            
             
-            loss = depth_criterion(pred, gt)
             eval_loss += loss.item()
             #print(loss)
             #0209refined_loss = depth_criterion(refined_pred,gt)
@@ -417,8 +446,8 @@ def evaluation_block(epoch):
         #Wandb save sample image
         #0209wandb_image, wandb_depth_colorized, wandb_refined_depth_colorized = visualizer.wandb_image_prep(image, pred, refined_pred) 
         #0209wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Colorized base prediction"), wandb.Image(wandb_refined_depth_colorized, caption="Colorized refined prediction")]},step = epoch)
-        wandb_image, wandb_depth_colorized = visualizer.wandb_image_prep(image, pred) 
-        wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Colorized base prediction")]},step = epoch)
+        wandb_image, wandb_depth_colorized, wandb_gt_colorized = visualizer.wandb_image_prep(image, pred, gt) 
+        wandb.log({"Samples": [wandb.Image(wandb_image,caption="RGB sample"), wandb.Image(wandb_depth_colorized, caption="Prediction"), wandb.Image(wandb_gt_colorized, caption="Groundtruth")]},step = epoch)
     
     #model.train()
 
@@ -433,7 +462,7 @@ def training_block(model):
 
     #for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
     for epoch in range(1,int(decnet_args.epochs)+1):
-
+        iteration = 0
         model.train()
         #0209refinement_model.train()
         #for param in model.feature_extractor.parameters():
@@ -442,12 +471,35 @@ def training_block(model):
         epoch_loss = 0.0
 
         for data in train_dl:
-                
-            image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
+            image_filename = data['file']
 
+            iteration += 1
+            image, gt, sparse = data['rgb'], data['gt'], data['d']#.permute(0,2,3,1), data['gt'], data['d']
+           
+            if decnet_args.dataset == 'nyuv2':
+                #image = image * 255
+                #print(f'before {torch_min_max(sparse)}')
+                #sparse = sparse/100.
+                #print(f'after {torch_min_max(sparse)}')
+                #gt = gt/100.
+                
+                sparse = sparse /255.0 * 10.0 #From 8bit to range [0, 10] (meter)
+                gt = gt /255.0 * 10.0
+
+                max_depth = 10
+
+            if decnet_args.network_model == 'GuideDepth':
+                inv_pred = model(image)
+            else:    
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                inv_pred = model(image, sparse)
             #inv_pred = model(image)
-            inv_pred = model(image,sparse)
-            pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)            
+            #print(inv_pred)
+            #print(pred.shape,image.shape)
+            pred = inverse_depth_norm(max_depth,inv_pred)
+            #print(pred.shape,image.shape)
+            
+            #inv_pred = model(image)        
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)            
             #print(f'inv_pred {torch_min_max(inv_pred)}')
@@ -455,12 +507,16 @@ def training_block(model):
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
-            #print_torch_min_max_rgbpredgt(image,pred,gt)            
-
+            #print_torch_min_max_rgbpredgt(image,  pred, gt)            
+            print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
+            #print(image_filename[0])
+            #ipnut = input()
+            
             #print_torch_min_max_rgbpredgt(image,pred,gt)            
             
             loss = depth_criterion(pred, gt)
-
+            #print(loss.item())
+            
             #0209refined_loss = depth_criterion(refined_pred,gt)
 
             a = list(model.parameters())[0].clone()
@@ -469,12 +525,13 @@ def training_block(model):
             optimizer.step()
             b = list(model.parameters())[0].clone()
             #print(a == b)
-            epoch_loss += loss.item()
-            print(loss.item())
+            epoch_loss += loss.item() 
+            #print(loss.item())
+            print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
             
 
-        average_loss = epoch_loss / (len(train_dl.dataset) + 1)
-        print(f'Training Loss: {average_loss}')
+        average_loss = epoch_loss / (len(train_dl.dataset) / decnet_args.batch_size)
+        print(f'Training Loss: {average_loss}. Epoch {epoch} of {decnet_args.epochs}')
 
         evaluation_block(epoch)
         

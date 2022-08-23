@@ -73,7 +73,7 @@ random.seed(seed)
 
 #Loading datasets
 print("\nSTEP 2. Loading datasets...")
-eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist),batch_size=1)
+eval_dl = DataLoader(DecnetDataloader(decnet_args,decnet_args.val_datalist,split='eval'),batch_size=1)
 
 print(f'Loaded {len(eval_dl.dataset)} val files')
 
@@ -83,10 +83,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = GuideDepth(True)
 #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
-model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device))
 
-#model = DecnetSparseIncorporated()
-#model.load_state_dict(torch.load('./weights/DecnetModule_27.pth', map_location='cpu'))
+
 
 
 model.to(device)
@@ -98,10 +96,12 @@ model.eval()
 #refinement_model.eval()
 
 
-refinement_model = DecnetDepthRefinement()
+#refinement_model = DecnetDepthRefinement()
 #refinement_model.load_state_dict(torch.load('./weights/2022_08_19-03_03_48_PM/DecnetModule_99_ref.pth', map_location=device))
-refinement_model.load_state_dict(torch.load('./weights/DecnetModule_19_ref.pth', map_location=device))
+#refinement_model.load_state_dict(torch.load('./weights/DecnetModule_19_ref.pth', map_location=device))
 
+refinement_model = DecnetSparseIncorporated()
+refinement_model.load_state_dict(torch.load('./weights/DecnetModule_27.pth', map_location='cpu'))
 refinement_model.to(device)
 refinement_model.eval()
 
@@ -337,8 +337,8 @@ def image_level():
             print(f'sparse: {torch_min_max(sparse)}')    
             #gt_and_pred_info('basemodel', 'pred', pred)
             #visualize_results('basemodel',image,pred,sparse)
-            refined_pred = pred
-            #refined_pred = refinement_model(pred,sparse)
+            #refined_pred = pred
+            refined_pred = refinement_model(image,sparse)
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
 
             pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0

@@ -1,0 +1,82 @@
+| network_model                | GuideDepth                        |
+| resolution                   | full                              |
+| pretrained                   | True                              |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 4                                 |
+| learning_rate                | 0.0001                            |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_4_overfit.list                |
+| val_datalist                 | nyu_4_overfit.list                |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+
+New model saved: weights/2022_08_23-05_31_39_PM/GuideDepth_1.pth 
+| d1       | 3.17383e-05 |
+| d2       | 0.00118652  |
+| d3       | 0.0220003   |
+| abs_rel  | 0.593405    |
+| sq_rel   | 2.81825     |
+| rmse     | 5.3614      |
+| rmse_log | 0.909763    |
+| log10    | 0.392976    |
+| silog    | 0.646749    |
+
+New model saved: weights/2022_08_23-05_31_39_PM/GuideDepth_2.pth 
+| d1       | 3.98763e-05 |
+| d2       | 0.00763428  |
+| d3       | 0.0705794   |
+| abs_rel  | 0.577131    |
+| sq_rel   | 2.59656     |
+| rmse     | 5.0655      |
+| rmse_log | 0.87843     |
+| log10    | 0.37754     |
+| silog    | 0.627514    |
+
+New model saved: weights/2022_08_23-05_31_39_PM/GuideDepth_3.pth 
+| d1       | 0.00215576 |
+| d2       | 0.0194995  |
+| d3       | 0.178207   |
+| abs_rel  | 0.557773   |
+| sq_rel   | 2.37067    |
+| rmse     | 4.76406    |
+| rmse_log | 0.844495   |
+| log10    | 0.36022    |
+| silog    | 0.607591   |
+
+New model saved: weights/2022_08_23-05_31_39_PM/GuideDepth_4.pth 
+| d1       | 0.00581462 |
+| d2       | 0.0356323  |
+| d3       | 0.255964   |
+| abs_rel  | 0.538244   |
+| sq_rel   | 2.18028    |
+| rmse     | 4.52819    |
+| rmse_log | 0.811028   |
+| log10    | 0.343227   |
+| silog    | 0.587744   |

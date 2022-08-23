@@ -1,0 +1,71 @@
+| network_model                | DecnetModule                      |
+| resolution                   | full                              |
+| pretrained                   | True                              |
+| augment                      | False                             |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 100                               |
+| criterion                    | l2                                |
+| batch_size                   | 4                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_4_overfit.list                |
+| val_datalist                 | nyu_4_overfit.list                |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | NYUFULLoverDecNetEncoTrained      |
+
+New model saved: weights/2022_08_23-06_41_39_PM/DecnetModule_1.pth 
+| d1       |  0.00235433 |
+| d2       |  0.0614632  |
+| d3       |  0.150143   |
+| abs_rel  |  2.23459    |
+| sq_rel   | 13.244      |
+| rmse     |  5.79124    |
+| rmse_log |  1.28045    |
+| log10    |  0.506974   |
+| silog    |  1.03227    |
+
+New model saved: weights/2022_08_23-06_41_39_PM/DecnetModule_2.pth 
+| d1       | 0.0124178 |
+| d2       | 0.0812459 |
+| d3       | 0.19599   |
+| abs_rel  | 1.66295   |
+| sq_rel   | 7.76407   |
+| rmse     | 4.63217   |
+| rmse_log | 0.984035  |
+| log10    | 0.40493   |
+| silog    | 0.731579  |
+
+New model saved: weights/2022_08_23-06_41_39_PM/DecnetModule_3.pth 
+| d1       | 0.0139836 |
+| d2       | 0.0955892 |
+| d3       | 0.274509  |
+| abs_rel  | 1.46806   |
+| sq_rel   | 6.26627   |
+| rmse     | 4.2115    |
+| rmse_log | 0.907998  |
+| log10    | 0.371065  |
+| silog    | 0.677766  |
