@@ -1,0 +1,181 @@
+| network_model                | GuideDepth                                                                 |
+| resolution                   | full                                                                       |
+| pretrained                   | False                                                                      |
+| augment                      | False                                                                      |
+| message                      | Training GuideDepth with 2k minibatch to see how close it goes to original |
+| mode                         | train                                                                      |
+| dataset                      | nyuv2                                                                      |
+| workers                      | 4                                                                          |
+| epochs                       | 30                                                                         |
+| criterion                    | l2                                                                         |
+| batch_size                   | 8                                                                          |
+| learning_rate                | 0.0001                                                                     |
+| weight_decay                 | 0                                                                          |
+| print_freq                   | 10                                                                         |
+| resume                       |                                                                            |
+| data_folder                  | /datasets                                                                  |
+| convolutional_layer_encoding | xyz                                                                        |
+| dilation_rate                | 2                                                                          |
+| val_h                        | 352                                                                        |
+| val_w                        | 608                                                                        |
+| train_height                 | 352                                                                        |
+| train_width                  | 608                                                                        |
+| min_depth_eval               | 0.1                                                                        |
+| max_depth_eval               | 80.0                                                                       |
+| error_vis_min                | -5                                                                         |
+| error_vis_max                | 5                                                                          |
+| training_subset              | 0                                                                          |
+| show_sensor_error            | False                                                                      |
+| kitti_crop                   | eigen_crop                                                                 |
+| train_datalist               | nyu_2000_train.list                                                        |
+| val_datalist                 | nyu_test.list                                                              |
+| root_folder                  | data/nyuv2_dataset/                                                        |
+| torch_mode                   | pytorch                                                                    |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                                          |
+| wandblogger                  | True                                                                       |
+| project                      | depthcompletionpaper                                                       |
+| entity                       | wandbdimar                                                                 |
+| wandbrunname                 | NYU_2000_GuideDepth                                                        |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_1.pth 
+| d1       | 0.479879 |
+| d2       | 0.754968 |
+| d3       | 0.881364 |
+| abs_rel  | 0.386704 |
+| sq_rel   | 0.615299 |
+| rmse     | 1.16612  |
+| rmse_log | 0.54867  |
+| log10    | 0.168177 |
+| silog    | 0.510187 |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_2.pth 
+| d1       | 0.550664 |
+| d2       | 0.8562   |
+| d3       | 0.960635 |
+| abs_rel  | 0.261392 |
+| sq_rel   | 0.265069 |
+| rmse     | 0.806015 |
+| rmse_log | 0.320376 |
+| log10    | 0.108246 |
+| silog    | 0.298373 |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_3.pth 
+| d1       | 0.600461  |
+| d2       | 0.881349  |
+| d3       | 0.969087  |
+| abs_rel  | 0.237991  |
+| sq_rel   | 0.228011  |
+| rmse     | 0.755696  |
+| rmse_log | 0.286201  |
+| log10    | 0.0976867 |
+| silog    | 0.266486  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_4.pth 
+| d1       | 0.612345  |
+| d2       | 0.888488  |
+| d3       | 0.970652  |
+| abs_rel  | 0.240053  |
+| sq_rel   | 0.235977  |
+| rmse     | 0.744542  |
+| rmse_log | 0.294579  |
+| log10    | 0.0968016 |
+| silog    | 0.275739  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_5.pth 
+| d1       | 0.633541  |
+| d2       | 0.901004  |
+| d3       | 0.977229  |
+| abs_rel  | 0.216681  |
+| sq_rel   | 0.191881  |
+| rmse     | 0.696813  |
+| rmse_log | 0.261242  |
+| log10    | 0.0902823 |
+| silog    | 0.243326  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_8.pth 
+| d1       | 0.660227 |
+| d2       | 0.913736 |
+| d3       | 0.980513 |
+| abs_rel  | 0.205699 |
+| sq_rel   | 0.180237 |
+| rmse     | 0.67229  |
+| rmse_log | 0.254824 |
+| log10    | 0.086054 |
+| silog    | 0.237557 |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_9.pth 
+| d1       | 0.674518  |
+| d2       | 0.916026  |
+| d3       | 0.978409  |
+| abs_rel  | 0.207302  |
+| sq_rel   | 0.178097  |
+| rmse     | 0.65888   |
+| rmse_log | 0.251495  |
+| log10    | 0.0841483 |
+| silog    | 0.234213  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_16.pth 
+| d1       | 0.69446   |
+| d2       | 0.923492  |
+| d3       | 0.979505  |
+| abs_rel  | 0.198949  |
+| sq_rel   | 0.167373  |
+| rmse     | 0.626518  |
+| rmse_log | 0.235766  |
+| log10    | 0.0803849 |
+| silog    | 0.218816  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_18.pth 
+| d1       | 0.701337  |
+| d2       | 0.925874  |
+| d3       | 0.980412  |
+| abs_rel  | 0.193003  |
+| sq_rel   | 0.158816  |
+| rmse     | 0.622792  |
+| rmse_log | 0.231065  |
+| log10    | 0.0791497 |
+| silog    | 0.21489   |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_19.pth 
+| d1       | 0.702393  |
+| d2       | 0.928529  |
+| d3       | 0.983084  |
+| abs_rel  | 0.188871  |
+| sq_rel   | 0.154056  |
+| rmse     | 0.619012  |
+| rmse_log | 0.228689  |
+| log10    | 0.0784964 |
+| silog    | 0.212996  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_20.pth 
+| d1       | 0.706091  |
+| d2       | 0.927659  |
+| d3       | 0.982264  |
+| abs_rel  | 0.191179  |
+| sq_rel   | 0.157003  |
+| rmse     | 0.614586  |
+| rmse_log | 0.22932   |
+| log10    | 0.0781071 |
+| silog    | 0.213157  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_21.pth 
+| d1       | 0.704427  |
+| d2       | 0.930643  |
+| d3       | 0.984315  |
+| abs_rel  | 0.186056  |
+| sq_rel   | 0.150678  |
+| rmse     | 0.611254  |
+| rmse_log | 0.225583  |
+| log10    | 0.0775328 |
+| silog    | 0.209957  |
+
+New model saved: weights/2022_08_24-04_08_57_AM/GuideDepth_28.pth 
+| d1       | 0.712068  |
+| d2       | 0.9317    |
+| d3       | 0.983318  |
+| abs_rel  | 0.186666  |
+| sq_rel   | 0.153481  |
+| rmse     | 0.606282  |
+| rmse_log | 0.224727  |
+| log10    | 0.0770428 |
+| silog    | 0.208661  |

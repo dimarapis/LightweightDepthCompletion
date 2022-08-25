@@ -41,7 +41,10 @@ from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule
 
 #Saving weights and log files locally
 grabtime = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
-os.mkdir(os.path.join('weights',grabtime))
+if not os.path.exists(os.path.join('weights',grabtime)):
+    os.makedirs(os.path.join('weights',grabtime))
+else:
+    os.mkdir(os.path.join('weights',grabtime+'_'+str(np.randint(0,10))))
 
 #Finding were gradients became nans - DONT USE IT IN TRAINING AS IT SLOWS IT DOWN
 #torch.autograd.set_detect_anomaly(True)

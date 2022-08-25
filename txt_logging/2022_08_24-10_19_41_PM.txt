@@ -1,0 +1,104 @@
+| network_model                | DecnetModule                                        |
+| resolution                   | full                                                |
+| pretrained                   | False                                               |
+| augment                      | False                                               |
+| message                      | Training DecnetModule with 50k nyuv2 and 500 sparse |
+| mode                         | train                                               |
+| dataset                      | nyuv2                                               |
+| workers                      | 4                                                   |
+| epochs                       | 30                                                  |
+| criterion                    | l2                                                  |
+| batch_size                   | 8                                                   |
+| learning_rate                | 0.0001                                              |
+| weight_decay                 | 0                                                   |
+| print_freq                   | 10                                                  |
+| resume                       |                                                     |
+| data_folder                  | /datasets                                           |
+| convolutional_layer_encoding | xyz                                                 |
+| dilation_rate                | 2                                                   |
+| val_h                        | 352                                                 |
+| val_w                        | 608                                                 |
+| train_height                 | 352                                                 |
+| train_width                  | 608                                                 |
+| min_depth_eval               | 0.1                                                 |
+| max_depth_eval               | 80.0                                                |
+| error_vis_min                | -5                                                  |
+| error_vis_max                | 5                                                   |
+| training_subset              | 0                                                   |
+| show_sensor_error            | False                                               |
+| kitti_crop                   | eigen_crop                                          |
+| train_datalist               | nyu_train.list                                      |
+| val_datalist                 | nyu_test.list                                       |
+| root_folder                  | data/nyuv2_dataset/                                 |
+| torch_mode                   | pytorch                                             |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                   |
+| wandblogger                  | True                                                |
+| project                      | depthcompletionpaper                                |
+| entity                       | wandbdimar                                          |
+| wandbrunname                 | NYU_50k_Decnet500                                   |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_1.pth 
+| d1       | 0.994486  |
+| d2       | 0.997896  |
+| d3       | 0.998103  |
+| abs_rel  | 0.0293067 |
+| sq_rel   | 0.0214811 |
+| rmse     | 0.198048  |
+| rmse_log | 0.0899345 |
+| log10    | 0.0155635 |
+| silog    | 0.0889081 |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_2.pth 
+| d1       | 0.997084  |
+| d2       | 0.998677  |
+| d3       | 0.998753  |
+| abs_rel  | 0.0256912 |
+| sq_rel   | 0.0149654 |
+| rmse     | 0.147354  |
+| rmse_log | 0.0626253 |
+| log10    | 0.0131753 |
+| silog    | 0.0607262 |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_3.pth 
+| d1       | 0.997587   |
+| d2       | 0.999581   |
+| d3       | 0.999646   |
+| abs_rel  | 0.0217134  |
+| sq_rel   | 0.00549658 |
+| rmse     | 0.112192   |
+| rmse_log | 0.0536736  |
+| log10    | 0.00991297 |
+| silog    | 0.0530317  |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_4.pth 
+| d1       | 0.998903   |
+| d2       | 0.999849   |
+| d3       | 0.999892   |
+| abs_rel  | 0.0242083  |
+| sq_rel   | 0.00339998 |
+| rmse     | 0.0886753  |
+| rmse_log | 0.0400907  |
+| log10    | 0.0104854  |
+| silog    | 0.037845   |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_7.pth 
+| d1       | 0.999432   |
+| d2       | 0.999897   |
+| d3       | 0.999916   |
+| abs_rel  | 0.0160722  |
+| sq_rel   | 0.00201852 |
+| rmse     | 0.0660263  |
+| rmse_log | 0.0309925  |
+| log10    | 0.00702152 |
+| silog    | 0.0301683  |
+
+New model saved: weights/2022_08_24-10_19_41_PM/DecnetModule_9.pth 
+| d1       | 0.999642   |
+| d2       | 0.999985   |
+| d3       | 0.999999   |
+| abs_rel  | 0.0151584  |
+| sq_rel   | 0.00126292 |
+| rmse     | 0.0601381  |
+| rmse_log | 0.0215186  |
+| log10    | 0.00659729 |
+| silog    | 0.0204308  |

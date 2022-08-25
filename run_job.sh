@@ -44,4 +44,11 @@ alias python="python3"
 
 #python main.py --network-model AuxSparseGuidedDepth -m "Testing PENETC2 efficacy on KITTI" --wandblogger WANDBLOGGER --wandbrunname "KITTI_dilatedCSPNRefinement" --pretrained PRETRAINED --dataset kitti
 #python main.py --network-model AuxSparseGuidedDepth -m "basemodel trained on kitti, finetuned on NN - initiallr 1-e5" --wandblogger WANDBLOGGER --wandbrunname NN_basemodel_finetune_lr1e-5 --pretrained PRETRAINED --dataset nn
-python main_ref.py --network-model AuxSparseGuidedDepth -m "basemodel finetuned alone, training only refinement lr 1-e6" --wandblogger WANDBLOGGER --wandbrunname kitti_encoder_finetuned_training_ref --pretrained PRETRAINED --dataset kitti
+#python main_ref.py --network-model AuxSparseGuidedDepth -m "basemodel finetuned alone, training only refinement lr 1-e6" --wandblogger WANDBLOGGER --wandbrunname kitti_encoder_finetuned_training_ref --pretrained PRETRAINED --dataset kitti
+
+
+#python main_singlemodel.py --dataset nyuv2 --network GuideDepth --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_GuideDepth --batch-size 8 --message "Training GuideDepth with 50k to see how close it goes to original"
+#python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_2000_Decnet500 --batch-size 8 --message "Training DecnetModule with 2k minibatch and 500 sparse"
+#python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_2000_DecnetFULLSPARSE --batch-size 4 --message "Training DecnetModule with 2k minibatch and full sparse"
+#python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_Decnet500 --batch-size 8 --message "Training DecnetModule with 50k nyuv2 and 500 sparse"
+python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_Decnet500 --batch-size 8 --message "Training DecnetModule with all 50k  and 500 sparse"
