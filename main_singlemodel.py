@@ -330,7 +330,7 @@ def evaluation_block(epoch):
             
             pred = inverse_depth_norm(max_depth,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
-            print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+            #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
             #print(image_filename)         
             #ipnut = input()
 
@@ -511,7 +511,7 @@ def training_block(model):
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
             #print_torch_min_max_rgbpredgt(image,  pred, gt)            
-            print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
+            #print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
             #print(image_filename[0])
             #ipnut = input()
             
