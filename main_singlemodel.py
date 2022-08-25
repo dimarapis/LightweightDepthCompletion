@@ -41,7 +41,10 @@ from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule
 
 #Saving weights and log files locally
 grabtime = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
-os.mkdir(os.path.join('weights',grabtime))
+if not os.path.exists(os.path.join('weights',grabtime)):
+    os.makedirs(os.path.join('weights',grabtime))
+else:
+    os.mkdir(os.path.join('weights',grabtime+'_'+str(np.randint(0,10))))
 
 #Finding were gradients became nans - DONT USE IT IN TRAINING AS IT SLOWS IT DOWN
 #torch.autograd.set_detect_anomaly(True)
@@ -327,7 +330,7 @@ def evaluation_block(epoch):
             
             pred = inverse_depth_norm(max_depth,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
-            #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+            print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
             #print(image_filename)         
             #ipnut = input()
 
@@ -508,7 +511,7 @@ def training_block(model):
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
             #print_torch_min_max_rgbpredgt(image,  pred, gt)            
-            #print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
+            print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
             #print(image_filename[0])
             #ipnut = input()
             
