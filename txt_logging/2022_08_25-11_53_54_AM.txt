@@ -36,3 +36,14 @@
 | project                      | depthcompletionpaper                                |
 | entity                       | wandbdimar                                          |
 | wandbrunname                 | NYU_50k_Decnet500                                   |
+
+New model saved: weights/2022_08_25-11_53_54_AM/DecnetModule_1.pth 
+| d1       | 0        |
+| d2       | 0        |
+| d3       | 0        |
+| abs_rel  | 0.954621 |
+| sq_rel   | 2.54427  |
+| rmse     | 2.83065  |
+| rmse_log | 3.2241   |
+| log10    | 1.39047  |
+| silog    | 2.29548  |

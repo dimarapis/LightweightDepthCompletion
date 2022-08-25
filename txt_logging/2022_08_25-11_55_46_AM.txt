@@ -36,3 +36,69 @@
 | project                      | depthcompletionpaper                               |
 | entity                       | wandbdimar                                         |
 | wandbrunname                 | NYU_50k_Decnet500                                  |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_1.pth 
+| d1       | 0.958647  |
+| d2       | 0.993692  |
+| d3       | 0.997204  |
+| abs_rel  | 0.0637931 |
+| sq_rel   | 0.0394084 |
+| rmse     | 0.291108  |
+| rmse_log | 0.132434  |
+| log10    | 0.0298406 |
+| silog    | 0.129716  |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_2.pth 
+| d1       | 0.97599   |
+| d2       | 0.995931  |
+| d3       | 0.998075  |
+| abs_rel  | 0.0523166 |
+| sq_rel   | 0.0284836 |
+| rmse     | 0.249517  |
+| rmse_log | 0.105544  |
+| log10    | 0.0246986 |
+| silog    | 0.10362   |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_3.pth 
+| d1       | 0.981984  |
+| d2       | 0.996559  |
+| d3       | 0.998434  |
+| abs_rel  | 0.0517524 |
+| sq_rel   | 0.0248207 |
+| rmse     | 0.245761  |
+| rmse_log | 0.104389  |
+| log10    | 0.0239942 |
+| silog    | 0.102772  |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_4.pth 
+| d1       | 0.986717  |
+| d2       | 0.998075  |
+| d3       | 0.999554  |
+| abs_rel  | 0.0377688 |
+| sq_rel   | 0.0113516 |
+| rmse     | 0.173184  |
+| rmse_log | 0.0663837 |
+| log10    | 0.0164614 |
+| silog    | 0.0654414 |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_7.pth 
+| d1       | 0.989248  |
+| d2       | 0.99826   |
+| d3       | 0.999502  |
+| abs_rel  | 0.0327117 |
+| sq_rel   | 0.0107032 |
+| rmse     | 0.167865  |
+| rmse_log | 0.0626538 |
+| log10    | 0.0145747 |
+| silog    | 0.0616322 |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_9.pth 
+| d1       | 0.988803  |
+| d2       | 0.998071  |
+| d3       | 0.999342  |
+| abs_rel  | 0.0325662 |
+| sq_rel   | 0.0117855 |
+| rmse     | 0.165019  |
+| rmse_log | 0.065966  |
+| log10    | 0.0143797 |
+| silog    | 0.0652541 |
