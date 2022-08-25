@@ -1595,6 +1595,8 @@ class DecnetSparseIncorporated(nn.Module):
     
 
     def forward(self, rgb, sparse):
+        #rgb = torch.zeros(1,3,480,640).to('cuda')
+        #sparse = torch.zeros(1,1,480,640).to('cuda')
         #print(f'basepred {basepred.shape}')
         #print(f'sparse {sparse.shape}')
         y = self.feature_extractor(rgb)

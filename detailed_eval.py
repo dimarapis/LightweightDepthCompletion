@@ -81,8 +81,8 @@ print(f'Loaded {len(eval_dl.dataset)} val files')
 print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-model = GuideDepth(True)
-#model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
+model = GuideDepth()
+model.load_state_dict(torch.load('./weights/GuideDepth_50k.pth', map_location=device))
 
 
 
@@ -101,7 +101,7 @@ model.eval()
 #refinement_model.load_state_dict(torch.load('./weights/DecnetModule_19_ref.pth', map_location=device))
 
 refinement_model = DecnetSparseIncorporated()
-refinement_model.load_state_dict(torch.load('./weights/DecnetModule_27.pth', map_location='cpu'))
+refinement_model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location='cpu'))
 refinement_model.to(device)
 refinement_model.eval()
 
@@ -317,17 +317,17 @@ def image_level():
             max_depth  = decnet_args.max_depth_eval
             
             if decnet_args.dataset == 'nyuv2':
-                #image = image * 255
-                #print(f'before {torch_min_max(sparse)}')
-                sparse = sparse/100.
-                #print(f'after {torch_min_max(sparse)}')
-                gt = gt/100.
+               
+                gt = gt * 0.001
+                sparse = sparse * 0.001
+                
                 max_depth = 10
+
 
             
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
-            inv_pred = model(image)#,sparse)
-            print(inv_pred)
+            inv_pred = model(image)
+            #print(inv_pred)
             
             pred = inverse_depth_norm(max_depth,inv_pred)
             
@@ -338,9 +338,12 @@ def image_level():
             #gt_and_pred_info('basemodel', 'pred', pred)
             #visualize_results('basemodel',image,pred,sparse)
             #refined_pred = pred
-            refined_pred = refinement_model(image,sparse)
+            refined_inv_pred = refinement_model(image,sparse)
             #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
-
+            refined_pred = inverse_depth_norm(max_depth,refined_inv_pred)
+            print(f'refined_pred: {torch_min_max(refined_pred)}')    
+            
+                
             pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
             pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
             computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
@@ -406,7 +409,15 @@ def grid_level():
             image_filename = data['file'][0].split('/')[-1].rstrip('.png')
             image, gt, sparse = data['rgb'], data['gt'], data['d']
             
-            rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            
+            if decnet_args.dataset == 'nyuv2':
+               
+                gt = gt * 0.001
+                sparse = sparse * 0.001
+                
+                max_depth = 10
+            
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
 
             pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             
@@ -581,6 +592,18 @@ def gpu_timings(models):
         
         print(f'{modelo} model timings calculation\nMean time to process {repetitions} frames: {mean_time}, with std_deviation of: {std_time}')
 
+
+def model_summary(model):
+    from pytorch_model_summary import summary
+    architecture = summary(model, torch.zeros((1, 1, 360, 480)), show_input=False, show_hierarchical=True)
+    print(architecture)
+    with open('architecture_summary.txt', 'w') as f:
+        f.write(architecture)
+
+    
+
 #gpu_timings(['Basemodel','Refinement'])
-image_level()
+#image_level()
 #grid_level()
+
+model_summary(refinement_model)

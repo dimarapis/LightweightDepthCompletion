@@ -9,6 +9,8 @@ from torch.utils.data import Dataset
 from features.decnet_sanity import torch_min_max
 import torchvision.transforms.functional as TF
 
+from features.decnet_transforms import RandomHorizontalFlip, RandomChannelSwap
+
 
 def max_depths():
     max_depths = {
@@ -141,95 +143,44 @@ class DecnetDataloader(Dataset):
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 
 
-    def decnet_transform(self, file_id, rgb, sparse, gt):
+    def decnet_transform(self, file_id, rgb, sparse, gt):        #HAVE NOT IMPLEMENTED RESOLUTION + AUGMENTATIONS
 
+        
+        
+        #HAVE NOT IMPLEMENTED RESOLUTION + AUGMENTATIONS
+        
+        
         toPILtransform = transforms.ToPILImage()#.to('cuda') / 255.
         pil_rgb = toPILtransform(rgb)
         pil_gt = toPILtransform(gt)
         pil_sparse = toPILtransform(sparse)
         
+
+        flip_probability = random.random()
+        print(flip_probability)
         
-        #if self.split == 'train':
+        if self.augment:
             
-        t_rgb = transforms.Compose([
-            #transforms.ToPILImage(),
-            transforms.Resize(self.resolution),
-            #transforms.CenterCrop((self.crop_h, self.crop_w)),
-            transforms.PILToTensor()
-        ])
-
-        t_dep = transforms.Compose([
-            transforms.Resize(self.resolution),
-            #transforms.CenterCrop((self.crop_h, self.crop_w)),
-            transforms.PILToTensor()
-        ])
-        
-            #transforms.ToTensor(),
-            #transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
-    
-    
-        if self.dataset_type == 'nn':
-            transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-            transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
-            transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
-            #print(f'transformed rgb shape {transformed_rgb.shape}')
-            #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
-        elif self.dataset_type == 'kitti':
-            transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-            transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
-            transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
-            #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
-        elif self.dataset_type == 'nyuv2':
-            transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-            transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
-            transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
-    #if self.dataset_type == 'nyuv2':
-
-        #print(len(torch.nonzero(transformed_sparse)))
-        
-        
-        return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
-
-        '''
-        if self.augment and self.mode == 'train':
-            #self.height = self.resolution[0]
-            _scale = np.random.uniform(1.0, 1.5)
-            scale = np.int(self.resolution * _scale)
-            degree = np.random.uniform(-5.0, 5.0)
-            flip = np.random.uniform(0.0, 1.0)
-
-            if flip > 0.5:
-                pil_rgb = TF.hflip(pil_rgb)
-                pil_gt = TF.hflip(pil_gt)
-                pil_sparse = TF.hflip(pil_sparse)
-
-
-            pil_rgb = TF.rotate(pil_rgb, angle=degree, resample=Image.NEAREST)
-            pil_gt = TF.rotate(pil_gt, angle=degree, resample=Image.NEAREST)
-            pil_sparse = TF.rotate(pil_sparse, angle=degree, resample=Image.NEAREST)
-
-
+            
+                        #if self.split == 'train':
+                
             t_rgb = transforms.Compose([
-                transforms.Resize(scale),
-                transforms.ColorJitter(brightness=0.4, contrast=0.4, saturation=0.4),
-                transforms.CenterCrop((self.crop_h, self.crop_w)),
+                transforms.Resize(self.resolution),
+                RandomHorizontalFlip(flip_probability),
                 transforms.PILToTensor()
             ])
 
             t_dep = transforms.Compose([
-                transforms.Resize(scale),
-                transforms.CenterCrop((self.crop_h, self.crop_w)),
+                transforms.Resize(self.resolution),
                 transforms.PILToTensor()
             ])
-
-                #transforms.ToTensor(),
-                #transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
         
-        
+            
             if self.dataset_type == 'nn':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
                 transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
                 transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
+                #print(f'transformed rgb shape {transformed_rgb.shape}')
                 #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
             elif self.dataset_type == 'kitti':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
@@ -238,14 +189,46 @@ class DecnetDataloader(Dataset):
                 #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
             elif self.dataset_type == 'nyuv2':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor)/10., 500)
-                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/10.#/256.# 100. #256.#/100.# / 256.
-                print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))}')
-                print(f'transformed_gt transformed_gt transformed_gt {len(torch.nonzero(transformed_gt))}')
+                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
             
-            transformed_sparse = transformed_sparse / _scale
-            transformed_gt = transformed_gt / _scale
-            '''
+            
+            
+        else:
+            
+                    
+            #if self.split == 'train':
+                
+            t_rgb = transforms.Compose([
+                transforms.Resize(self.resolution),
+                transforms.PILToTensor()
+            ])
+
+            t_dep = transforms.Compose([
+                transforms.Resize(self.resolution),
+                transforms.PILToTensor()
+            ])
+        
+            
+            if self.dataset_type == 'nn':
+                transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
+                transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
+                #print(f'transformed rgb shape {transformed_rgb.shape}')
+                #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
+            elif self.dataset_type == 'kitti':
+                transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
+                transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/256.#./256.#100. #/ 256.#/ 100.# / 256.
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/256.#/256.# 100. #256.#/100.# / 256.
+                #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
+            elif self.dataset_type == 'nyuv2':
+                transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
+                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
+                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
+            
+        return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
+
+            
         
 
     def get_sparse_depth(self, dep, num_sample):
