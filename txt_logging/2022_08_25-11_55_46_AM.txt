@@ -102,3 +102,36 @@ New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_9.pth
 | rmse_log | 0.065966  |
 | log10    | 0.0143797 |
 | silog    | 0.0652541 |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_14.pth 
+| d1       | 0.990826   |
+| d2       | 0.998513   |
+| d3       | 0.999616   |
+| abs_rel  | 0.0341307  |
+| sq_rel   | 0.00920996 |
+| rmse     | 0.158897   |
+| rmse_log | 0.0595545  |
+| log10    | 0.0151294  |
+| silog    | 0.0568672  |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_15.pth 
+| d1       | 0.990553   |
+| d2       | 0.998505   |
+| d3       | 0.999609   |
+| abs_rel  | 0.029314   |
+| sq_rel   | 0.00879691 |
+| rmse     | 0.14922    |
+| rmse_log | 0.0542057  |
+| log10    | 0.0128433  |
+| silog    | 0.0531997  |
+
+New model saved: weights/2022_08_25-11_55_46_AM/DecnetModule_25.pth 
+| d1       | 0.991257   |
+| d2       | 0.99845    |
+| d3       | 0.999562   |
+| abs_rel  | 0.0261195  |
+| sq_rel   | 0.00801507 |
+| rmse     | 0.142449   |
+| rmse_log | 0.0505627  |
+| log10    | 0.0114521  |
+| silog    | 0.0495268  |

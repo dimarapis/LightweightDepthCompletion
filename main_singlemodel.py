@@ -34,7 +34,7 @@ from models.guide_depth import GuideDepth
 from features.decnet_sanity import np_min_max, torch_min_max
 from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
-from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
+from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
@@ -134,7 +134,7 @@ if decnet_args.network_model == "GuideDepth":
     model = GuideDepth(True)
 
     if decnet_args.pretrained == True:
-        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device))  
+        model.load_state_dict(torch.load('./weights/GuideDepth_full_original.pth', map_location=device))  
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
         #2022_08_21-10_23_53_PM
       
@@ -154,7 +154,7 @@ elif decnet_args.network_model == "DecnetModule":
         
     if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-        model.load_state_dict(torch.load('./weights/NYU_Full_GuideDepthOriginal.pth', map_location=device), strict=False)
+        model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 
@@ -208,7 +208,7 @@ with open("txt_logging/"+grabtime+".txt", "a") as txt_log:
 
 #lr_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[30,80], gamma=0.1)
 
-depth_criterion = MaskedMSELoss()
+depth_criterion = MaskedL1Loss()
 #depth_criterion = SiLogLoss()
 
 #defining index (epoch)
@@ -282,15 +282,19 @@ def evaluation_block(epoch):
     model.eval()
     #0209refinement_model.eval()
     global best_rmse
+    if epoch == 0:
+        best_rmse = np.inf
 
     eval_loss = 0.0
     refined_eval_loss = 0.0
     average_meter = AverageMeter()
 
     result_metrics = {}
+    flipped_result_metrics = {}
     refined_result_metrics = {}
     for metric in metric_name:
         result_metrics[metric] = 0.0
+        flipped_result_metrics[metric] = 0.0
         refined_result_metrics[metric] = 0.0
 
     with torch.no_grad():
@@ -330,12 +334,15 @@ def evaluation_block(epoch):
             
             pred = inverse_depth_norm(max_depth,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
-            print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+            #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
             #print(image_filename)         
             #ipnut = input()
 
-            #print_torch_min_max_rgbpredgt(image,pred,gt)            
-            
+            #print_torch_min_max_rgbpredgt(image,pred,gt) 
+            #            
+
+
+
             loss = depth_criterion(pred, gt)
             #print(loss.item())
             #print(torch_min_max(pred))
@@ -358,14 +365,46 @@ def evaluation_block(epoch):
             pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
             computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
 
+            flipped_evaluation = True
+            if flipped_evaluation:
+                image_flip = torch.flip(image, [3])
+                gt_flip = torch.flip(gt, [3])
+                sparse_flip = torch.flip(sparse, [3])
+
+                if decnet_args.network_model == 'GuideDepth':
+                    flipped_inv_pred = model(image_flip)
+                else:    
+                    #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                    flipped_inv_pred = model(image_flip, sparse_flip)
+                    #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                    #inv_pred = model(image)
+            
+                #print(inv_pred)
+                
+                flipped_pred = inverse_depth_norm(max_depth,flipped_inv_pred)
+                #print(f'pred {torch_min_max(pred)}')
+                #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+                #print(image_filename)         
+                #ipnut = input()
+
+                flipped_pred_d, flipped_depth_gt, = flipped_pred.squeeze(), gt_flip.squeeze()#, data['d'].squeeze()# / 1000.0
+                flipped_pred_crop, flipped_gt_crop = custom_metrics.cropping_img(decnet_args, flipped_pred_d, flipped_depth_gt)    
+                flipped_computed_result = custom_metrics.eval_depth(flipped_pred_crop, flipped_gt_crop)
+
             #0209refined_pred_d, refined_depth_gt, = refined_pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
             #0209refined_pred_crop, refined_gt_crop = custom_metrics.cropping_img(decnet_args, refined_pred_d, refined_depth_gt)    
             #0209refined_computed_result = custom_metrics.eval_depth(refined_pred_crop, refined_gt_crop)
 
 
-            for metric in metric_name:
-                result_metrics[metric] += computed_result[metric]
-                #0209refined_result_metrics[metric] += refined_computed_result[metric]
+                for metric in metric_name:
+                    result_metrics[metric] += computed_result[metric]
+                    flipped_result_metrics[metric] += flipped_computed_result[metric]
+                    #0209refined_result_metrics[metric] += refined_computed_result[metric]
+
+            else:
+                for metric in metric_name:
+                    result_metrics[metric] += computed_result[metric]
+                    #0209refined_result_metrics[metric] += refined_computed_result[metric]
 
             #result = Result()
             #result.evaluate(pred_d.data, depth_gt.data)
@@ -395,23 +434,27 @@ def evaluation_block(epoch):
         #visualizer.plotter(pred_d,sparse_depth,depth_gt,pred,data['rgb'])
             
         #calculating total metrics by averaging  
+        print(i+1)
         for metric in metric_name:
             result_metrics[metric] = result_metrics[metric] / float((i+1))
-            #0209refined_result_metrics[metric] = refined_computed_result[metric] / float((i+1))
 
-        tabulator, refined_tabulator = [],[]
+            if flipped_evaluation:
+                flipped_result_metrics[metric] = flipped_result_metrics[metric] / float((i+1))
+
+
+        tabulator, flipped_tabulator = [],[]
         for key in result_metrics:
             tabulator.append([key,result_metrics[key]]) 
-            #0209refined_tabulator.append([key, refined_result_metrics[key]])
+            flipped_tabulator.append([key, flipped_result_metrics[key]])
 
         if epoch == decnet_args.epochs:
             print(f"Results on epoch: {epoch}")
             print("Base model results")
             print(tabulate(tabulator, tablefmt='orgtbl'))
             print(f"\n\nFinished evaluation block")
-            #0209print("Refined model results")
-            #0209print(tabulate(refined_tabulator, tablefmt='orgtbl'))
-            #0209print(f"\n\nFinished training..")
+            print("Flipped model results")
+            print(tabulate(flipped_tabulator, tablefmt='orgtbl'))
+            print(f"\n\nFinished training..")
             print(f"Average time for parsing images {time.time - t0}")
 
 
@@ -420,6 +463,8 @@ def evaluation_block(epoch):
             print("Base model results")
             print(tabulate(tabulator, tablefmt='orgtbl'))
             print(f"\n\nFinished evaluation block")
+            print("Flipped model results")
+            print(tabulate(flipped_tabulator, tablefmt='orgtbl'))
             #0209print("Refined model results")
             #0209print(tabulate(refined_tabulator, tablefmt='orgtbl'))
             #0209print(f"\n\nFinished training..")
@@ -511,7 +556,7 @@ def training_block(model):
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
             #print(f'pred {torch_min_max(pred)}')
             #print_torch_min_max_rgbpredgt(image,  pred, gt)            
-            print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
+            #print_torch_min_max_rgbsparsepredgt(image[0], sparse[0], pred[0], gt[0])            
             #print(image_filename[0])
             #ipnut = input()
             
@@ -530,7 +575,9 @@ def training_block(model):
             #print(a == b)
             epoch_loss += loss.item() 
             #print(loss.item())
-            print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
+            if iteration == 1 or iteration % 1000 == 0:
+
+                print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
             
 
         average_loss = epoch_loss / (len(train_dl.dataset) / decnet_args.batch_size)
@@ -540,6 +587,7 @@ def training_block(model):
         
 if converted_args_dict['mode'] == 'eval':
     #pass
+    epoch = 0
     evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
     epoch = 0

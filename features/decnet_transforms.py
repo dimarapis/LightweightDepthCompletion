@@ -36,7 +36,6 @@ class RandomHorizontalFlip(object):
             #depth = depth.transpose(Image.FLIP_LEFT_RIGHT)
         else:
             print('not flipped')
-
         return sample
     
     
@@ -47,12 +46,10 @@ class RandomChannelSwap(object):
         self.indices = list(permutations(range(3), 3))
 
     def __call__(self, sample):
-        image, depth = sample['image'], sample['depth']
-        if not _is_pil_image(image):
-            raise TypeError('img should be PIL Image. Got {}'.format(type(image)))
-        if not _is_pil_image(depth):
-            raise TypeError('img should be PIL Image. Got {}'.format(type(depth)))
+        #image, depth = sample['image'], sample['depth']
+        if not _is_pil_image(sample):
+            raise TypeError('img should be PIL Image. Got {}'.format(type(sample)))
         if random.random() < self.probability:
-            image = np.asarray(image)
-            image = Image.fromarray(image[...,list(self.indices[random.randint(0, len(self.indices) - 1)])])
-        return {'image': image, 'depth': depth}
+            sample = np.asarray(sample)
+            sample = Image.fromarray(sample[...,list(self.indices[random.randint(0, len(self.indices) - 1)])])
+        return sample

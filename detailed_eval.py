@@ -1,4 +1,5 @@
 import os
+from termios import TIOCSERGETMULTI
 import cv2
 import time
 import wandb
@@ -82,7 +83,7 @@ print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 model = GuideDepth()
-model.load_state_dict(torch.load('./weights/GuideDepth_50k.pth', map_location=device))
+model.load_state_dict(torch.load('./weights/GuideDepthOriginal.pth', map_location=device))
 
 
 
@@ -323,7 +324,11 @@ def image_level():
                 
                 max_depth = 10
 
-
+            flipped_evaluation = True
+            raise error
+            if flipped_evaluation:
+                image_flip = torch.flip(image, [3])
+                gt_flip = torch.flip(gt, [3])
             
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
             inv_pred = model(image)
@@ -603,7 +608,7 @@ def model_summary(model):
     
 
 #gpu_timings(['Basemodel','Refinement'])
-#image_level()
+image_level()
 #grid_level()
 
-model_summary(refinement_model)
+#model_summary(refinement_model)

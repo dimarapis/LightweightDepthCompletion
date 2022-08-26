@@ -1,0 +1,126 @@
+| network_model                | GuideDepth                                                      |
+| resolution                   | full                                                            |
+| pretrained                   | True                                                            |
+| augment                      | True                                                            |
+| message                      | Training GuideDepth with augmentation and evaluating with flips |
+| mode                         | train                                                           |
+| dataset                      | nyuv2                                                           |
+| workers                      | 4                                                               |
+| epochs                       | 30                                                              |
+| criterion                    | l2                                                              |
+| batch_size                   | 8                                                               |
+| learning_rate                | 0.0001                                                          |
+| weight_decay                 | 0                                                               |
+| print_freq                   | 10                                                              |
+| resume                       |                                                                 |
+| data_folder                  | /datasets                                                       |
+| convolutional_layer_encoding | xyz                                                             |
+| dilation_rate                | 2                                                               |
+| val_h                        | 352                                                             |
+| val_w                        | 608                                                             |
+| train_height                 | 352                                                             |
+| train_width                  | 608                                                             |
+| min_depth_eval               | 0.1                                                             |
+| max_depth_eval               | 80.0                                                            |
+| error_vis_min                | -5                                                              |
+| error_vis_max                | 5                                                               |
+| training_subset              | 0                                                               |
+| show_sensor_error            | False                                                           |
+| kitti_crop                   | eigen_crop                                                      |
+| train_datalist               | nyu_train.list                                                  |
+| val_datalist                 | nyu_test.list                                                   |
+| root_folder                  | data/nyuv2_dataset/                                             |
+| torch_mode                   | pytorch                                                         |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                               |
+| wandblogger                  | True                                                            |
+| project                      | depthcompletionpaper                                            |
+| entity                       | wandbdimar                                                      |
+| wandbrunname                 | NYU_50k_GuideDepthAugment                                       |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_1.pth 
+| d1       | 0.81829   |
+| d2       | 0.960327  |
+| d3       | 0.991704  |
+| abs_rel  | 0.136688  |
+| sq_rel   | 0.0962549 |
+| rmse     | 0.487437  |
+| rmse_log | 0.176179  |
+| log10    | 0.0592552 |
+| silog    | 0.162179  |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_2.pth 
+| d1       | 0.827606  |
+| d2       | 0.96311   |
+| d3       | 0.991542  |
+| abs_rel  | 0.135016  |
+| sq_rel   | 0.0936694 |
+| rmse     | 0.476818  |
+| rmse_log | 0.172394  |
+| log10    | 0.0576653 |
+| silog    | 0.15927   |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_4.pth 
+| d1       | 0.828961  |
+| d2       | 0.964055  |
+| d3       | 0.991841  |
+| abs_rel  | 0.134279  |
+| sq_rel   | 0.0925369 |
+| rmse     | 0.474807  |
+| rmse_log | 0.171473  |
+| log10    | 0.0571933 |
+| silog    | 0.158141  |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_5.pth 
+| d1       | 0.832887  |
+| d2       | 0.963048  |
+| d3       | 0.990925  |
+| abs_rel  | 0.132312  |
+| sq_rel   | 0.0915915 |
+| rmse     | 0.472247  |
+| rmse_log | 0.170144  |
+| log10    | 0.0563573 |
+| silog    | 0.157467  |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_8.pth 
+| d1       | 0.833256  |
+| d2       | 0.964878  |
+| d3       | 0.991088  |
+| abs_rel  | 0.133268  |
+| sq_rel   | 0.0928009 |
+| rmse     | 0.469691  |
+| rmse_log | 0.169524  |
+| log10    | 0.0561581 |
+| silog    | 0.156857  |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_14.pth 
+| d1       | 0.837799  |
+| d2       | 0.963809  |
+| d3       | 0.991471  |
+| abs_rel  | 0.133348  |
+| sq_rel   | 0.0918761 |
+| rmse     | 0.468638  |
+| rmse_log | 0.169086  |
+| log10    | 0.0560096 |
+| silog    | 0.15632   |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_18.pth 
+| d1       | 0.838259  |
+| d2       | 0.965775  |
+| d3       | 0.99133   |
+| abs_rel  | 0.132068  |
+| sq_rel   | 0.0919061 |
+| rmse     | 0.465104  |
+| rmse_log | 0.167041  |
+| log10    | 0.055453  |
+| silog    | 0.154487  |
+
+New model saved: weights/2022_08_25-08_29_19_PM/GuideDepth_21.pth 
+| d1       | 0.839865  |
+| d2       | 0.966091  |
+| d3       | 0.99132   |
+| abs_rel  | 0.130846  |
+| sq_rel   | 0.09055   |
+| rmse     | 0.46407   |
+| rmse_log | 0.166874  |
+| log10    | 0.0554117 |
+| silog    | 0.154357  |

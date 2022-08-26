@@ -157,9 +157,9 @@ class DecnetDataloader(Dataset):
         
 
         flip_probability = random.random()
-        print(flip_probability)
+        #print(flip_probability)
         
-        if self.augment:
+        if self.augment and self.split == 'train':
             
             
                         #if self.split == 'train':
@@ -167,11 +167,13 @@ class DecnetDataloader(Dataset):
             t_rgb = transforms.Compose([
                 transforms.Resize(self.resolution),
                 RandomHorizontalFlip(flip_probability),
+                RandomChannelSwap(0.5),
                 transforms.PILToTensor()
             ])
 
             t_dep = transforms.Compose([
                 transforms.Resize(self.resolution),
+                RandomHorizontalFlip(flip_probability),
                 transforms.PILToTensor()
             ])
         
@@ -225,7 +227,10 @@ class DecnetDataloader(Dataset):
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
                 transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
                 transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
-            
+
+
+        print(self.split,transformed_rgb.shape,transformed_sparse.shape,transformed_gt.shape)
+        
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 
             

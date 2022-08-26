@@ -88,7 +88,7 @@ def cropping_img(args, pred, gt_depth):
             else:
                 eval_mask = valid_mask
 
-    elif args.dataset == 'nyudepthv2':
+    elif args.dataset == 'nyuv2':
         eval_mask = torch.zeros(valid_mask.shape).to(device=valid_mask.device)
         eval_mask[45:471, 41:601] = 1
     else:
