@@ -1,0 +1,8 @@
+# ninja log v5
+1	4376	1661559731717542814	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cpu/deform_cpu.o	890b974f158413a8
+0	4384	1661559731725542787	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cpu/modulated_deform_cpu.o	f48213a07da91a93
+1	4425	1661559731765542648	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cpu/deform_psroi_pooling_cpu.o	b207adc92f3d263a
+1	13121	1661559740465512521	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cuda/modulated_deform_conv_cuda.o	d25d9742f40bbf63
+1	13235	1661559740577512133	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cuda/deform_conv_cuda.o	5473a5dc08153df1
+0	14447	1661559741785507948	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/vision.o	bab14a70f06c57a4
+6	10795	1661560009948566200	/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/build/temp.linux-x86_64-3.7/home/dim/Desktop/LightWeightDepthCompletion/models/deformconv/src/cuda/deform_conv_cuda.o	5473a5dc08153df1

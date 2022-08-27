@@ -15,6 +15,8 @@ import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
 import features.custom_transforms as custom_transforms
 import features.kitti_loader as guided_depth_kitti_loader
+from nlspnconfig import args
+from models.nlspnmodel import NLSPNModel
 
 from sympy import Gt
 from tqdm import tqdm
@@ -27,7 +29,7 @@ from matplotlib import pyplot as plt
 from thop import profile,clever_format
 from torch.utils.data import DataLoader
 from metrics import AverageMeter, Result
-
+from models.s2d import ResNet
 import torch.nn.parallel
 
 from models.enet_pro import ENet
@@ -102,7 +104,7 @@ model.eval()
 #refinement_model.load_state_dict(torch.load('./weights/DecnetModule_19_ref.pth', map_location=device))
 
 refinement_model = DecnetSparseIncorporated()
-refinement_model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location='cpu'))
+#refinement_model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location='cpu'))
 refinement_model.to(device)
 refinement_model.eval()
 
@@ -532,57 +534,80 @@ def grid_level():
 
 
 def gpu_timings(models):
-    model = RgbGuideDepth(True)
-    model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
-    model.to(device)
-    model.eval()
+    for modelo in models:              
+        if modelo == 's2d':
+            print(f'GPU timings for model {modelo}')
+            model = ResNet(layers=50, decoder='deconv2', output_size=(480,640),
+                in_channels=4, pretrained=False)
+            model.to(device)
+            model.eval()
+            
+        elif modelo == 'GuideDepth':
+            print(f'GPU timings for model {modelo}')
 
-    refinement_model = DecnetDepthRefinement()
-    #refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
-    refinement_model.to(device)
-    refinement_model.eval()
-    
-    for modelo in models:
-        print("Calculating inference for models...")
+            model = GuideDepth(True)
+            #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
+            model.to(device)
+            model.eval()
+            
+        elif modelo == 'DecnetModule':
+            print(f'GPU timings for model {modelo}')
+            model = DecnetSparseIncorporated()
+            model.to(device)
+            model.eval()
+            
+        elif model == 'nlspn':
+            model = NLSPNModel(args)
+            model.to(device)
+            model.to(eval)
+        
+        
+        print("Calculating inference for model...")
         starter, ender = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
         repetitions = 100
         timings = np.zeros((repetitions, 1))
 
         # GPU warm-up
         for _ in range(20):
-            test_data_rgb = torch.randint(0, 256, (1, 3, 352, 608)).to(device)
-            test_data_sparse = torch.randint(0, 256, (1, 1, 352, 608)).to(device)
+            test_data_rgb = torch.randint(0, 256, (1, 3, 480, 640)).to(device)
+            test_data_sparse = torch.randint(0, 256, (1, 1, 480, 640)).to(device)
             test_data_rgb = test_data_rgb.to(torch.float32)
             test_data_sparse = test_data_sparse.to(torch.float32)
+            
+            if modelo == 's2d':
+                parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))
+            elif modelo == 'GuideDepth':
+                parse = model(test_data_rgb)
+            elif modelo == 'DecnetModule':
+                parse = model(test_data_rgb,test_data_sparse)
+            elif model == 'nlspn':
+                sample = dict
+                sample['rgb'] = test_data_rgb
+                sample['dep'] = test_data_sparse
+                parse = model(sample)
+            
+                
+            #pred = inverse_depth_norm(80.0,inv_pred)
 
-            rgb_half, y_half, sparse_half, y, inv_pred = model(test_data_rgb,test_data_sparse)
-                
-            pred = inverse_depth_norm(80.0,inv_pred)
-                
-            if modelo == 'refinement':
-                    
-                #refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
-                refined_pred = refinement_model(pred,test_data_sparse)
 
         # Measure performance 
         with torch.no_grad():
             for rep in range(repetitions):
                 
-                test_data_rgb = torch.randint(0, 256, (1, 3, 352, 608)).to(device)
-                test_data_sparse = torch.randint(0, 256, (1, 1, 352, 608)).to(device)
+                test_data_rgb = torch.randint(0, 256, (4, 3, 480, 640)).to(device)
+                test_data_sparse = torch.randint(0, 256, (4, 1, 480, 640)).to(device)
                 test_data_rgb = test_data_rgb.to(torch.float32)
                 test_data_sparse = test_data_sparse.to(torch.float32)
                 
                 starter.record()
-                rgb_half, y_half, sparse_half, y, inv_pred = model(test_data_rgb,test_data_sparse)
-                
-                pred = inverse_depth_norm(80.0,inv_pred)
-                
-                if modelo == 'Refinement':
                     
-                    #refined_pred = refinement_model(rgb_half, test_data_rgb, y_half, y, sparse_half, test_data_sparse, pred)
-                    refined_pred = refinement_model(pred,test_data_sparse)
-
+                if modelo == 's2d':
+                    parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))                
+                elif modelo == 'GuideDepth':
+                    parse = model(test_data_rgb)
+                elif modelo == 'DecnetModule':
+                    parse = model(test_data_rgb,test_data_sparse)
+            
                 ender.record()
 
                 # Wait for GPU to sync
@@ -607,8 +632,8 @@ def model_summary(model):
 
     
 
-#gpu_timings(['Basemodel','Refinement'])
-image_level()
+gpu_timings(['GuideDepth','s2d','DecnetModule', 'nlspn'])
+#image_level()
 #grid_level()
 
 #model_summary(refinement_model)
