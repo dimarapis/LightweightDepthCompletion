@@ -31,11 +31,11 @@ class RandomHorizontalFlip(object):
                 'img should be PIL Image. Got {}'.format(type(sample)))
 
         if self.probability < 0.5:
-            print('flipped')
+            #print('flipped')
             sample = sample.transpose(Image.FLIP_LEFT_RIGHT)
             #depth = depth.transpose(Image.FLIP_LEFT_RIGHT)
-        else:
-            print('not flipped')
+        #else:
+            #print('not flipped')
         return sample
     
     

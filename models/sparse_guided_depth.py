@@ -1668,7 +1668,7 @@ class DecnetNLSPN(nn.Module):
                                       bn=False)
         
         self.feature_extractor = DualResNet_Backbone(
-                pretrained=True,
+                pretrained=False,
                 features_n = 48, 
                 features=up_features[0])
         
@@ -1748,14 +1748,16 @@ class DecnetNLSPN(nn.Module):
         #print(f'basepred {basepred.shape}')
         #print(f'sparse {sparse.shape}')
         
-
-        
-        y = self.feature_extractor(rgb)
-        print(f'y {y.shape}')
+        rgb_first_step = self.conv1_rgb(rgb)
+        sparse_first_step = self.conv1_dep(sparse)
+        #print(rgb_first_step.shape)
+        #print(sparse_first_step.shape)
+        y = self.feature_extractor(rgb_first_step)
+        #print(f'y {y.shape}')
         y2 = F.interpolate(y, scale_factor=2)
-        print(f'y2 {y2.shape}')
+        #print(f'y2 {y2.shape}')
         
-        x = self.sparse_feature_extractor(sparse)
+        x = self.sparse_feature_extractor(sparse_first_step)
         x2 = F.interpolate(x,scale_factor=2)
         # y1 = self.conv1(sparse)
         #print(f'y1 {y1.shape}')

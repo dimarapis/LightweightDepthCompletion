@@ -36,7 +36,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule
+from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule, DecnetNLSPN
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
 
 #Saving weights and log files locally
@@ -164,6 +164,14 @@ elif decnet_args.network_model == "AuxSparseGuidedDepth":
     if decnet_args.pretrained == True:
         model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
 
+elif decnet_args.network_model == "DecnetNLSPN":
+    model = DecnetNLSPN()
+        
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
+
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
 
@@ -575,9 +583,9 @@ def training_block(model):
             #print(a == b)
             epoch_loss += loss.item() 
             #print(loss.item())
-            if iteration == 1 or iteration % 1000 == 0:
+            #if iteration == 1 or iteration % 100 == 0:
 
-                print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
+            print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
             
 
         average_loss = epoch_loss / (len(train_dl.dataset) / decnet_args.batch_size)

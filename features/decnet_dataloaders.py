@@ -229,7 +229,7 @@ class DecnetDataloader(Dataset):
                 transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
 
 
-        print(self.split,transformed_rgb.shape,transformed_sparse.shape,transformed_gt.shape)
+        #print(self.split,transformed_rgb.shape,transformed_sparse.shape,transformed_gt.shape)
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 

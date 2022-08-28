@@ -12,12 +12,12 @@ def decnet_args_parser():
     parser.add_argument('--network-model',
                         type=str,
                         default="GuideDepth",
-                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule"],
+                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
                         help='choose a model'
                         )
     parser.add_argument('--resolution',
                         type=str,
-                        default="full",
+                        default="half",
                         choices=["full", "half", "mini"],
                         help='choose a resolution for input images'
                         )
@@ -164,8 +164,8 @@ def decnet_args_parser():
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='4batch_overfit_nn_train.list',
-                        default='nyu_train.list',
-                        #default='nyu_2000_train.list',
+                        #default='nyu_train.list',
+                        default='nyu_2000_train.list',
                         #default='nyu_test.list',
                         #default='nyu_4_overfit.list',
                         #default='single_image_4batch_overfit.list',
