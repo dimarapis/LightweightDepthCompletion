@@ -40,9 +40,11 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetDepthRefinement
+from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 from models.sparse_guided_depth import DecnetSparseIncorporated
+
+torch.cuda.empty_cache()
 
 
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
@@ -544,22 +546,37 @@ def gpu_timings(models):
             
         elif modelo == 'GuideDepth':
             print(f'GPU timings for model {modelo}')
-
-            model = GuideDepth(True)
+            model = GuideDepth()
             #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
             model.to(device)
             model.eval()
-            
+        elif modelo == 'GuideDepth-small':
+            print(f'GPU timings for model {modelo}')
+            model = GuideDepth(up_features=[32, 8, 4], inner_features=[32, 8, 4])
+            #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location=device))
+            model.to(device)
+            model.eval()
         elif modelo == 'DecnetModule':
             print(f'GPU timings for model {modelo}')
             model = DecnetSparseIncorporated()
             model.to(device)
             model.eval()
             
-        elif model == 'nlspn':
+        elif modelo == 'DecnetModule-small':
+            print(f'GPU timings for model {modelo}')
+            model = DecnetSparseIncorporated(up_features=[32, 8, 4], inner_features=[32, 8, 4])
+            model.to(device)
+            model.eval()
+            
+        elif modelo == 'nlspn':
             model = NLSPNModel(args)
             model.to(device)
-            model.to(eval)
+            model.eval()
+            
+        elif modelo == 'decnetnlspn':
+            model = DecnetNLSPN()
+            model.to(device)
+            model.eval()
         
         
         print("Calculating inference for model...")
@@ -576,12 +593,12 @@ def gpu_timings(models):
             
             if modelo == 's2d':
                 parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))
-            elif modelo == 'GuideDepth':
+            elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                 parse = model(test_data_rgb)
-            elif modelo == 'DecnetModule':
+            elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn':
                 parse = model(test_data_rgb,test_data_sparse)
-            elif model == 'nlspn':
-                sample = dict
+            elif modelo == 'nlspn':
+                sample = dict()
                 sample['rgb'] = test_data_rgb
                 sample['dep'] = test_data_sparse
                 parse = model(sample)
@@ -594,8 +611,8 @@ def gpu_timings(models):
         with torch.no_grad():
             for rep in range(repetitions):
                 
-                test_data_rgb = torch.randint(0, 256, (4, 3, 480, 640)).to(device)
-                test_data_sparse = torch.randint(0, 256, (4, 1, 480, 640)).to(device)
+                test_data_rgb = torch.randint(0, 256, (1, 3, 480, 640)).to(device)
+                test_data_sparse = torch.randint(0, 256, (1, 1, 480, 640)).to(device)
                 test_data_rgb = test_data_rgb.to(torch.float32)
                 test_data_sparse = test_data_sparse.to(torch.float32)
                 
@@ -603,11 +620,15 @@ def gpu_timings(models):
                     
                 if modelo == 's2d':
                     parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))                
-                elif modelo == 'GuideDepth':
+                elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                     parse = model(test_data_rgb)
-                elif modelo == 'DecnetModule':
+                elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn':
                     parse = model(test_data_rgb,test_data_sparse)
-            
+                elif modelo == 'nlspn':
+                    sample = dict()
+                    sample['rgb'] = test_data_rgb
+                    sample['dep'] = test_data_sparse
+                    parse = model(sample)
                 ender.record()
 
                 # Wait for GPU to sync
@@ -632,7 +653,7 @@ def model_summary(model):
 
     
 
-gpu_timings(['GuideDepth','s2d','DecnetModule', 'nlspn'])
+gpu_timings(['nlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small'])
 #image_level()
 #grid_level()
 

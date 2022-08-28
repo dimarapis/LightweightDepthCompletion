@@ -85,7 +85,7 @@ parser.add_argument('--model_name',
                     help='model name')
 parser.add_argument('--network',
                     type=str,
-                    default='resnet34',
+                    default='resnet18',
                     choices=('resnet18', 'resnet34'),
                     help='network name')
 parser.add_argument('--from_scratch',

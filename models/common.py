@@ -24,20 +24,22 @@ model_path = {
 }
 
 
-def get_resnet18(pretrained=True):
+def get_resnet18(pretrained=False):
     net = torchvision.models.resnet18(pretrained=False)
     if pretrained:
-        state_dict = torch.load(model_path['resnet18'])
-        net.load_state_dict(state_dict)
+        pass
+        #state_dict = torch.load(model_path['resnet18'])
+        #net.load_state_dict(state_dict)
 
     return net
 
 
-def get_resnet34(pretrained=True):
+def get_resnet34(pretrained=False):
     net = torchvision.models.resnet34(pretrained=False)
     if pretrained:
-        state_dict = torch.load(model_path['resnet34'])
-        net.load_state_dict(state_dict)
+        pass
+        #tate_dict = torch.load(model_path['resnet34'])
+        #net.load_state_dict(state_dict)
 
     return net
 

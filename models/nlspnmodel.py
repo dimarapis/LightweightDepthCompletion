@@ -327,28 +327,42 @@ class NLSPNModel(nn.Module):
 
         fe2 = self.conv2(fe1)
         fe3 = self.conv3(fe2)
-        fe4 = self.conv4(fe3)
-        fe5 = self.conv5(fe4)
-        fe6 = self.conv6(fe5)
+        #fe4 = self.conv4(fe3)
+        #fe5 = self.conv5(fe4)
+        #fe6 = self.conv6(fe5)
 
         # Shared Decoding
-        fd5 = self.dec5(fe6)
-        fd4 = self.dec4(self._concat(fd5, fe5))
-        fd3 = self.dec3(self._concat(fd4, fe4))
-        fd2 = self.dec2(self._concat(fd3, fe3))
-
+        #fd5 = self.dec5(fe6)
+        #fd4 = self.dec4(self._concat(fd5, fe5))
+        #fd3 = self.dec3(self._concat(torch.zeros(1,64+64,120,160).to('cuda'), fe4))
+        
+        #print(f'\n\nfe_shape: {fe2.shape}')
+        
+        fd2 = self.dec2(self._concat(torch.zeros(1,64,240,320).to('cuda'), fe3))
+        
+        print(f'\n\nfe3_shape: {fe3.shape}')
+        print(f'fd2_shape: {fd2.shape}')
+        
         # Init Depth Decoding
         id_fd1 = self.id_dec1(self._concat(fd2, fe2))
+        print(f'\nid_fd1_shape: {id_fd1.shape}')
         pred_init = self.id_dec0(self._concat(id_fd1, fe1))
+        print(f'pred_init_shape: {pred_init.shape}')
 
         # Guidance Decoding
         gd_fd1 = self.gd_dec1(self._concat(fd2, fe2))
+        print(f'\ngd_fd1_shape: {gd_fd1.shape}')
+        
         guide = self.gd_dec0(self._concat(gd_fd1, fe1))
+        print(f'guide_shape: {guide.shape}')
 
         if self.args.conf_prop:
             # Confidence Decoding
             cf_fd1 = self.cf_dec1(self._concat(fd2, fe2))
+            print(f'\ncf_fd1_shape: {cf_fd1.shape}')
             confidence = self.cf_dec0(self._concat(cf_fd1, fe1))
+            print(f'confidence_shape: {confidence.shape}')
+            
         else:
             confidence = None
 

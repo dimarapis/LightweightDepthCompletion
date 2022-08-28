@@ -9,6 +9,8 @@ from models.guide_modules import Decnet_Guided_Upsampling_Block, Guided_Upsampli
 from models.guide_modules import MinkoEncoder
 
 from models.enet_basic import *
+from .common import *
+
 
 from features.decnet_sanity import torch_min_max
 
@@ -1601,6 +1603,157 @@ class DecnetSparseIncorporated(nn.Module):
         #print(f'sparse {sparse.shape}')
         y = self.feature_extractor(rgb)
         y2 = F.interpolate(y, scale_factor=2)
+        
+        x = self.sparse_feature_extractor(sparse)
+        x2 = F.interpolate(x,scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        rgb_half = F.interpolate(rgb, scale_factor=.5)
+        rgb_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        #sparse_half = F.interpolate(sparse, scale_factor=.5)
+        #sparse_quarter =  F.interpolate(sparse, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        
+        y3 = self.up_1(rgb_quarter, y2)
+        x3 = self.sparse_up_1(rgb_quarter, x2)
+        
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        y4 = F.interpolate(y3, scale_factor=2., mode='bilinear')
+        x4 = F.interpolate(x3, scale_factor=2., mode='bilinear')
+        
+        y5 = self.up_2(rgb_half, y4)
+        x5 = self.sparse_up_2(rgb_half,x4)
+        
+        xyhalf = self.fusion_up_half(rgb_half, torch.cat((y5,x5),dim=1))
+        xy = self.fusion_up_final(rgb, F.interpolate(xyhalf, scale_factor=2., mode='bilinear'))
+        
+        
+        #y6 = F.interpolate(y5, scale_factor=2., mode='bilinear')
+        #y5 = self.up_3(rgb, y6)
+
+        return xy
+
+
+class DecnetNLSPN(nn.Module):
+    def __init__(self, 
+            pretrained=False,
+            up_features=[64, 32, 16], 
+            inner_features=[64, 32, 16]):
+        super(DecnetNLSPN, self).__init__()
+        
+
+        
+                
+        self.conv1_rgb = conv_bn_relu(3, 48, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv1_dep = conv_bn_relu(1, 16, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        
+        self.feature_extractor = DualResNet_Backbone(
+                pretrained=True,
+                features_n = 48, 
+                features=up_features[0])
+        
+        self.sparse_feature_extractor = DualResNet_Backbone(                
+                pretrained=False,
+                features_n = 16, 
+                features=up_features[0])
+        
+        
+
+
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                   expand_features=inner_features[0],
+                                   out_features=up_features[1],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                   expand_features=inner_features[2],
+                                   out_features=1,
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.sparse_up_1 =  Guided_Upsampling_Block(in_features=up_features[0],
+                                   expand_features=inner_features[0],
+                                   out_features=up_features[1],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.sparse_up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        
+        self.fusion_up_half = Guided_Upsampling_Block(in_features=up_features[1],
+                                   expand_features=inner_features[1],
+                                   out_features=up_features[2],
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        self.fusion_up_final = Guided_Upsampling_Block(in_features=up_features[2],
+                                   expand_features=inner_features[2],
+                                   out_features=1,
+                                   kernel_size=3,
+                                   channel_attention=True,
+                                   guide_features=3,
+                                   guidance_type="full")
+        
+        
+        
+        
+    
+
+    def forward(self, rgb, sparse):
+        #rgb = torch.zeros(1,3,480,640).to('cuda')
+        #sparse = torch.zeros(1,1,480,640).to('cuda')
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        
+
+        
+        y = self.feature_extractor(rgb)
+        print(f'y {y.shape}')
+        y2 = F.interpolate(y, scale_factor=2)
+        print(f'y2 {y2.shape}')
         
         x = self.sparse_feature_extractor(sparse)
         x2 = F.interpolate(x,scale_factor=2)
