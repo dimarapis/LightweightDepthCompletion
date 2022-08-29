@@ -34,7 +34,7 @@ def datasets_resolutions():
         },     
         'nn': {
             'full' : (360, 640),
-            'half' : (180, 320),
+            'half' : (240, 360),
             'mini' : (120, 160)
         }
     }
@@ -179,9 +179,23 @@ class DecnetDataloader(Dataset):
         
             
             if self.dataset_type == 'nn':
-                transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = t_dep(pil_sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
-                transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
+                t_rgb_nn = transforms.Compose([
+                    transforms.Resize(self.resolution),
+                    RandomHorizontalFlip(flip_probability),
+                    RandomChannelSwap(0.5),
+                    transforms.PILToTensor()
+                ])
+
+                t_dep_nn = transforms.Compose([
+                    transforms.Resize(self.resolution),
+                    RandomHorizontalFlip(flip_probability),
+                    transforms.PILToTensor()
+                ])
+                    
+                
+                transformed_rgb = t_rgb_nn(pil_rgb).to('cuda') / 255.
+                transformed_sparse = t_dep_nn(pil_sparse).type(torch.cuda.FloatTensor)/100.#./256.#100. #/ 256.#/ 100.# / 256.
+                transformed_gt = t_dep_nn(pil_gt).type(torch.cuda.FloatTensor)/100.#/256.# 100. #256.#/100.# / 256.
                 #print(f'transformed rgb shape {transformed_rgb.shape}')
                 #mpourda = input(print("SANITY CHECKER, DATASET IS NN"))
             elif self.dataset_type == 'kitti':

@@ -369,7 +369,7 @@ elif decnet_args.networkmodel == "DecnetNLSPN":
         
     if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-        model.load_state_dict(torch.load('./weights/2022_08_29-03_13_13_AM/DecnetNLSPN_5.pth', map_location=device))
+        model.load_state_dict(torch.load('./weights/2022_08_29-10_04_58_AM/DecnetNLSPN_2.pth', map_location=device),strict=False)
         
     #if decnet_args.pretrained == True:
     #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
@@ -508,6 +508,13 @@ def metric_block(pred,gt,metric_name,decnet_args):
     for key in result_metrics:
         print(key, ' = ', result_metrics[key])
 '''
+if decnet_args.dataset == 'nyuv2':
+    
+    upscale_to_full_resolution = torchvision.transforms.Resize((480,640))
+elif decnet_args.dataset == 'nn':
+
+    upscale_to_full_resolution = torchvision.transforms.Resize((360,640))
+
 
 def evaluation_block(epoch):
     print(f"\nSTEP. Testing block... Epoch no: {epoch}")
@@ -554,6 +561,11 @@ def evaluation_block(epoch):
                 #gt = gt /255.0 * 10.0
                 
                 max_depth = 10
+                
+            
+            elif decnet_args.dataset == 'nn':
+                max_depth = 80
+                
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
@@ -569,7 +581,10 @@ def evaluation_block(epoch):
             #print(inv_pred)
             #print(pred.shape,image.shape)
             pred = inverse_depth_norm(max_depth,inv_pred)
-            #print(pred.shape,image.shape)
+            print(f'pred {torch_min_max(pred)}')
+            print(f'gt {torch_min_max(gt)}')
+            #print(f'eval pred  {pred.shape} and image shapes {image.shape}')
+            
             #print(f'pred {torch_min_max(pred)}')
             #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
             #print(image_filename)         
@@ -598,8 +613,14 @@ def evaluation_block(epoch):
             #upscale_depth = transforms.Resize(gt.shape[-2:]) #To GT res
             #prediction = upscale_depth(pred)
 
-            pred_d, depth_gt, = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
-            pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
+            
+            
+            #print('half_reso',pred.shape,gt.shape)
+            pred_resized, gt_resized = upscale_to_full_resolution(pred).squeeze(), upscale_to_full_resolution(gt).squeeze()
+            #print('full_reso',pred_resized.shape,gt_resized.shape)
+
+            
+            pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_resized, gt_resized)    
             computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
 
             flipped_evaluation = True
@@ -774,6 +795,10 @@ def training_block(model):
                 gt = gt /255.0 * 10.0
 
                 max_depth = 10
+                
+            elif decnet_args.dataset == 'nn':
+                max_depth = 80
+                
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
@@ -789,12 +814,17 @@ def training_block(model):
             #print(inv_pred)
             #print(pred.shape,image.shape)
             pred = inverse_depth_norm(max_depth,inv_pred)
+            #print(f'train pred  {pred.shape} and image shapes {image.shape}')
+            
+        
             #print(pred.shape,image.shape)
             
             #inv_pred = model(image)        
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)            
-            #print(f'inv_pred {torch_min_max(inv_pred)}')
+            print(f'pred {torch_min_max(pred)}')
+            print(f'gt {torch_min_max(gt)}')
+            
 
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)
             #pred = inverse_depth_norm(decnet_args.max_depth_eval,inv_pred)
@@ -835,7 +865,7 @@ if converted_args_dict['mode'] == 'eval':
     evaluation_block(epoch)
 elif converted_args_dict['mode'] == 'train':
     epoch = 0
-    #evaluation_block(epoch)
+    evaluation_block(epoch)
     training_block(model)
     #evaluation_block()
     

@@ -89,8 +89,21 @@ def cropping_img(args, pred, gt_depth):
                 eval_mask = valid_mask
 
     elif args.dataset == 'nyuv2':
+        #
         eval_mask = torch.zeros(valid_mask.shape).to(device=valid_mask.device)
-        eval_mask[45:471, 41:601] = 1
+        #'nyuv2' : [20, 460, 24, 616],
+        #'nyuv2' : [20, 460, 24, 616],
+
+        eval_mask[20:460, 24:616] = 1
+        
+        
+    elif args.dataset == 'nn':
+        eval_mask = torch.zeros(valid_mask.shape).to(device=valid_mask.device)
+        #'nyuv2' : [20, 460, 24, 616],
+        #'nyuv2' : [20, 460, 24, 616],
+
+        eval_mask[20:340, 24:616] = 1
+        #[4, 356, 16, 624]}
     else:
         eval_mask = valid_mask
 

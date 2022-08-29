@@ -1,0 +1,59 @@
+| networkmodel                 | DecnetNLSPN                       |
+| resolution                   | half                              |
+| pretrained                   | True                              |
+| augment                      | True                              |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nn                                |
+| workers                      | 4                                 |
+| epochs                       | 30                                |
+| criterion                    | l2                                |
+| batch_size                   | 8                                 |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | datalist_train_nn.list            |
+| val_datalist                 | datalist_test_nn.list             |
+| root_folder                  | data/nn_dataset/                  |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+| model_name                   | NLSPN                             |
+| networknlspn                 | resnet18                          |
+| from_scratch                 | False                             |
+| prop_time                    | 18                                |
+| prop_kernel                  | 3                                 |
+| preserve_input               | False                             |
+| affinity                     | TGASS                             |
+| affinity_gamma               | 0.5                               |
+| conf_prop                    | True                              |
+| legacy                       | False                             |
+
+New model saved: weights/2022_08_29-06_53_38_PM/DecnetNLSPN_0.pth 
+| d1       |   0.00419825 |
+| d2       |   0.010179   |
+| d3       |   0.0197018  |
+| abs_rel  |  14.4803     |
+| sq_rel   | 188.468      |
+| rmse     |   9.78873    |
+| rmse_log |   2.36548    |
+| log10    |   0.943171   |
+| silog    |   1.80035    |
