@@ -48,6 +48,8 @@ class GuideDepth(nn.Module):
     
 
     def forward(self, x):
+        if len(x.shape) != 4:
+            x = x.unsqueeze(0)
         y = self.feature_extractor(x)
         #print('y.shape', y.shape)
 

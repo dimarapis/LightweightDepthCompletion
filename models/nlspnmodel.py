@@ -315,9 +315,9 @@ class NLSPNModel(nn.Module):
         #print(f'custom_concat methods {f.shape}')
         return f
 
-    def forward(self, sample):
-        rgb = sample['rgb']
-        dep = sample['dep']
+    def forward(self, rgb, dep):
+        #rgb = sample['rgb']
+        #dep = sample['dep']
 
         # Encoding
         fe1_rgb = self.conv1_rgb(rgb)

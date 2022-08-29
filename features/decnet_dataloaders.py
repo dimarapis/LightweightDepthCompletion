@@ -167,7 +167,7 @@ class DecnetDataloader(Dataset):
             t_rgb = transforms.Compose([
                 transforms.Resize(self.resolution),
                 RandomHorizontalFlip(flip_probability),
-                RandomChannelSwap(0.5),
+                RandomChannelSwap(0.25),
                 transforms.PILToTensor()
             ])
 

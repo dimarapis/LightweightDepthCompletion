@@ -204,6 +204,12 @@ class ResNet(nn.Module):
         self.conv3.apply(weights_init)
 
     def forward(self, x):
+        #print('x',x.shape)
+        #print('lenshape', len(x.shape))
+        #if len(x.shape)
+        if len(x.shape) != 4:
+            
+            x = x.unsqueeze(0)
         # resnet
         x = self.conv1(x)
         x = self.bn1(x)

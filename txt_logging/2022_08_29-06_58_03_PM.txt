@@ -123,3 +123,14 @@ New model saved: weights/2022_08_29-06_58_03_PM/DecnetNLSPN_13.pth
 | rmse_log | 1.02083  |
 | log10    | 0.323061 |
 | silog    | 0.965727 |
+
+New model saved: weights/2022_08_29-06_58_03_PM/DecnetNLSPN_16.pth 
+| d1       | 0.218398 |
+| d2       | 0.481114 |
+| d3       | 0.642792 |
+| abs_rel  | 1.90185  |
+| sq_rel   | 4.01451  |
+| rmse     | 1.3526   |
+| rmse_log | 1.00865  |
+| log10    | 0.322283 |
+| silog    | 0.960119 |
