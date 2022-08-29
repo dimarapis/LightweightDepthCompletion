@@ -221,9 +221,9 @@ class NLSPNModel(nn.Module):
         self.conv1_dep = conv_bn_relu(1, 16, kernel=3, stride=1, padding=1,
                                       bn=False)
 
-        if self.args.network == 'resnet18':
+        if self.args.networknlspn == 'resnet18':
             net = get_resnet18(not self.args.from_scratch)
-        elif self.args.network == 'resnet34':
+        elif self.args.networknlspn == 'resnet34':
             net = get_resnet34(not self.args.from_scratch)
         else:
             raise NotImplementedError
@@ -312,7 +312,7 @@ class NLSPNModel(nn.Module):
             fd = fd[:, :, :, :-w]
 
         f = torch.cat((fd, fe), dim=dim)
-
+        #print(f'custom_concat methods {f.shape}')
         return f
 
     def forward(self, sample):
@@ -340,28 +340,28 @@ class NLSPNModel(nn.Module):
         
         fd2 = self.dec2(self._concat(torch.zeros(1,64,240,320).to('cuda'), fe3))
         
-        print(f'\n\nfe3_shape: {fe3.shape}')
-        print(f'fd2_shape: {fd2.shape}')
+        #print(f'\n\nfe2_shape: {fe2.shape}')
+        #print(f'fd2_shape: {fd2.shape}')
         
         # Init Depth Decoding
         id_fd1 = self.id_dec1(self._concat(fd2, fe2))
-        print(f'\nid_fd1_shape: {id_fd1.shape}')
+        #print(f'\nid_fd1_shape: {id_fd1.shape}')
         pred_init = self.id_dec0(self._concat(id_fd1, fe1))
-        print(f'pred_init_shape: {pred_init.shape}')
+        #print(f'pred_init_shape: {pred_init.shape}')
 
         # Guidance Decoding
         gd_fd1 = self.gd_dec1(self._concat(fd2, fe2))
-        print(f'\ngd_fd1_shape: {gd_fd1.shape}')
+        #print(f'\ngd_fd1_shape: {gd_fd1.shape}')
         
         guide = self.gd_dec0(self._concat(gd_fd1, fe1))
-        print(f'guide_shape: {guide.shape}')
+        #print(f'guide_shape: {guide.shape}')
 
         if self.args.conf_prop:
             # Confidence Decoding
             cf_fd1 = self.cf_dec1(self._concat(fd2, fe2))
-            print(f'\ncf_fd1_shape: {cf_fd1.shape}')
+            #print(f'\ncf_fd1_shape: {cf_fd1.shape}')
             confidence = self.cf_dec0(self._concat(cf_fd1, fe1))
-            print(f'confidence_shape: {confidence.shape}')
+            #print(f'confidence_shape: {confidence.shape}')
             
         else:
             confidence = None

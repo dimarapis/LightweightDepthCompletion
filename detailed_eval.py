@@ -18,6 +18,8 @@ import features.kitti_loader as guided_depth_kitti_loader
 from nlspnconfig import args
 from models.nlspnmodel import NLSPNModel
 
+from features.decnet_args import decnet_args_parser
+
 from sympy import Gt
 from tqdm import tqdm
 from datetime import datetime
@@ -40,11 +42,12 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN, SparseGuidedDepth, DecnetDepthRefinement
+from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN, DecnetNLSPN_sharedDecoder, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 from models.sparse_guided_depth import DecnetSparseIncorporated
 
 torch.cuda.empty_cache()
+decnet_args = decnet_args_parser()
 
 
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
@@ -574,7 +577,12 @@ def gpu_timings(models):
             model.eval()
             
         elif modelo == 'decnetnlspn':
-            model = DecnetNLSPN()
+            model = DecnetNLSPN(decnet_args)
+            model.to(device)
+            model.eval()
+            
+        elif modelo == 'decnetnlspn_encoshared':
+            model = DecnetNLSPN_sharedDecoder(decnet_args)
             model.to(device)
             model.eval()
         
@@ -595,7 +603,7 @@ def gpu_timings(models):
                 parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))
             elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                 parse = model(test_data_rgb)
-            elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn':
+            elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared':
                 parse = model(test_data_rgb,test_data_sparse)
             elif modelo == 'nlspn':
                 sample = dict()
@@ -622,7 +630,7 @@ def gpu_timings(models):
                     parse = model(torch.cat((test_data_rgb,test_data_sparse),dim=1))                
                 elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                     parse = model(test_data_rgb)
-                elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn':
+                elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared':
                     parse = model(test_data_rgb,test_data_sparse)
                 elif modelo == 'nlspn':
                     sample = dict()
@@ -653,7 +661,7 @@ def model_summary(model):
 
     
 
-gpu_timings(['nlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small'])
+gpu_timings(['decnetnlspn_encoshared','decnetnlspn','nlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small'])
 #image_level()
 #grid_level()
 

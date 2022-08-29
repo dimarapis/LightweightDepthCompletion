@@ -9,10 +9,10 @@ def decnet_args_parser():
     #                    choices=["decnet-completion", "decnet-estimation"],
     #                    help='choose a task: decnet-completion or decnet-estimation'
     #                    )
-    parser.add_argument('--network-model',
+    parser.add_argument('--networkmodel',
                         type=str,
                         default="GuideDepth",
-                        choices=["GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
+                        choices=["DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
                         help='choose a model'
                         )
     parser.add_argument('--resolution',
@@ -70,7 +70,7 @@ def decnet_args_parser():
     parser.add_argument('--learning-rate',
                         default=1e-5,
                         type=float,
-                        metavar='LR',
+                        metavar='lr',
                         help='initial learning rate (default 1e-05 in PENET 1e-04 in guided)')
     parser.add_argument('--weight-decay',
                         default=0,
@@ -222,6 +222,60 @@ def decnet_args_parser():
                         type=str,
                         #required=True,
                         help='Run name when saving in wandb')
+    
+    #NLSPN
+    
+    # Network
+    parser.add_argument('--model_name',
+                        type=str,
+                        default='NLSPN',
+                        choices=('NLSPN',),
+                        help='model name')
+    parser.add_argument('--networknlspn',
+                        type=str,
+                        default='resnet18',
+                        choices=('resnet18', 'resnet34'),
+                        help='network name')
+    parser.add_argument('--from_scratch',
+                        action='store_true',
+                        default=False,
+                        help='train from scratch')
+    parser.add_argument('--prop_time',
+                        type=int,
+                        default=18,
+                        help='number of propagation')
+    parser.add_argument('--prop_kernel',
+                        type=int,
+                        default=3,
+                        help='propagation kernel size')
+    parser.add_argument('--preserve_input',
+                        action='store_true',
+                        default=False,
+                        help='preserve input points by replacement')
+    parser.add_argument('--affinity',
+                        type=str,
+                        default='TGASS',
+                        choices=('AS', 'ASS', 'TC', 'TGASS'),
+                        help='affinity type (dynamic pos-neg, dynamic pos, '
+                            'static pos-neg, static pos, none')
+    parser.add_argument('--affinity_gamma',
+                        type=float,
+                        default=0.5,
+                        help='affinity gamma initial multiplier '
+                            '(gamma = affinity_gamma * number of neighbors')
+    parser.add_argument('--conf_prop',
+                        action='store_true',
+                        default=True,
+                        help='confidence for propagation')
+    parser.add_argument('--no_conf',
+                        action='store_false',
+                        dest='conf_prop',
+                        help='no confidence for propagation')
+    parser.add_argument('--legacy',
+                        action='store_true',
+                        default=False,
+                        help='legacy code support for pre-trained models')
+
     
     
     #args parser

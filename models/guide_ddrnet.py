@@ -4,6 +4,7 @@ DDRNet_23_slim
 Adopted from:
 https://github.com/ydhongHIT/DDRNet/blob/main/segmentation/DDRNet_23_slim.py
 """
+from base64 import encode
 import math
 import torch
 import numpy as np
@@ -308,6 +309,7 @@ class DualResNet(nn.Module):
         layers = []
 
         x = self.conv1(x)
+        
         if self.skip_out:
             x1 = x
 
@@ -368,3 +370,143 @@ class Interpolate(nn.Module):
     def forward(self, x):
         return F.interpolate(x, self.scale_factor, mode=self.mode)
 
+class DualResNetModified(nn.Module):
+    def __init__(self, block, layers, in_features = 3, out_features=19, planes=64, spp_planes=128, head_planes=128, augment=False, skip_out=False):
+        super(DualResNetModified, self).__init__()
+
+        highres_planes = planes * 2
+        self.augment = augment
+        self.skip_out = skip_out
+
+        self.conv1 =  nn.Sequential(
+                          nn.Conv2d(in_features,planes,kernel_size=3, stride=2, padding=1),
+                          BatchNorm2d(planes, momentum=bn_mom),
+                          nn.ReLU(inplace=True),
+                          nn.Conv2d(planes,planes,kernel_size=3, stride=2, padding=1),
+                          BatchNorm2d(planes, momentum=bn_mom),
+                          nn.ReLU(inplace=True),
+                      )
+
+        self.relu = nn.ReLU(inplace=False)
+        self.layer1 = self._make_layer(block, planes, planes, layers[0])
+        self.layer2 = self._make_layer(block, planes, planes * 2, layers[1], stride=2)
+        self.layer3 = self._make_layer(block, planes * 2, planes * 4, layers[2], stride=2)
+        self.layer4 = self._make_layer(block, planes * 4, planes * 8, layers[3], stride=2)
+
+        self.compression3 = nn.Sequential(
+                                          nn.Conv2d(planes * 4, highres_planes, kernel_size=1, bias=False),
+                                          BatchNorm2d(highres_planes, momentum=bn_mom),
+                                          )
+
+        self.compression4 = nn.Sequential(
+                                          nn.Conv2d(planes * 8, highres_planes, kernel_size=1, bias=False),
+                                          BatchNorm2d(highres_planes, momentum=bn_mom),
+                                          )
+
+        self.down3 = nn.Sequential(
+                                   nn.Conv2d(highres_planes, planes * 4, kernel_size=3, stride=2, padding=1, bias=False),
+                                   BatchNorm2d(planes * 4, momentum=bn_mom),
+                                   )
+
+        self.down4 = nn.Sequential(
+                                   nn.Conv2d(highres_planes, planes * 4, kernel_size=3, stride=2, padding=1, bias=False),
+                                   BatchNorm2d(planes * 4, momentum=bn_mom),
+                                   nn.ReLU(inplace=True),
+                                   nn.Conv2d(planes * 4, planes * 8, kernel_size=3, stride=2, padding=1, bias=False),
+                                   BatchNorm2d(planes * 8, momentum=bn_mom),
+                                   )
+
+        self.layer3_ = self._make_layer(block, planes * 2, highres_planes, 2)
+
+        self.layer4_ = self._make_layer(block, highres_planes, highres_planes, 2)
+
+        self.layer5_ = self._make_layer(Bottleneck, highres_planes, highres_planes, 1)
+
+        self.layer5 =  self._make_layer(Bottleneck, planes * 8, planes * 8, 1, stride=2)
+        self.spp = DAPPM(planes * 16, spp_planes, planes * 4)
+
+        """
+        if self.augment:
+            self.seghead_extra = segmenthead(highres_planes, head_planes, out_features)
+        """
+        self.final_layer = segmenthead(planes * 4, head_planes, out_features)
+
+
+
+    def _make_layer(self, block, inplanes, planes, blocks, stride=1):
+        downsample = None
+        if stride != 1 or inplanes != planes * block.expansion:
+            downsample = nn.Sequential(
+                nn.Conv2d(inplanes, planes * block.expansion,
+                          kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(planes * block.expansion, momentum=bn_mom),
+            )
+
+        layers = []
+        layers.append(block(inplanes, planes, stride, downsample))
+        inplanes = planes * block.expansion
+        for i in range(1, blocks):
+            if i == (blocks-1):
+                layers.append(block(inplanes, planes, stride=1, no_relu=True))
+            else:
+                layers.append(block(inplanes, planes, stride=1, no_relu=False))
+
+        return nn.Sequential(*layers)
+
+
+    def forward(self, x):
+        width_output = x.shape[-1] // 8
+        height_output = x.shape[-2] // 8
+        layers = []
+
+        encoded_features = self.conv1(x)
+        #print(f'encoded_features {encoded_features.shape}')
+        if self.skip_out:
+            x1 = encoded_features
+
+        x = self.layer1(encoded_features)
+        layers.append(x)
+
+        x = self.layer2(self.relu(x))
+        layers.append(x)
+
+        x = self.layer3(self.relu(x))
+        layers.append(x)
+        x_ = self.layer3_(self.relu(layers[1]))
+
+        x = x + self.down3(self.relu(x_))
+        x_ = x_ + F.interpolate(
+                        self.compression3(self.relu(layers[2])),
+                        size=[height_output, width_output],
+                        mode='bilinear')
+
+        x = self.layer4(self.relu(x))
+        layers.append(x)
+        x_ = self.layer4_(self.relu(x_))
+
+        x = x + self.down4(self.relu(x_))
+        x_ = x_ + F.interpolate(
+                        self.compression4(self.relu(layers[3])),
+                        size=[height_output, width_output],
+                        mode='bilinear')
+
+        x_ = self.layer5_(self.relu(x_))
+        x = F.interpolate(
+                        self.spp(self.layer5(self.relu(x))),
+                        size=[height_output, width_output],
+                        mode='bilinear')
+
+        x_ = self.final_layer(x + x_)
+        return x_, encoded_features
+    
+    
+def DualResNet_Backbone_Modified(pretrained=False, features_n=3, features=64):
+    model = DualResNetModified(BasicBlock, [2, 2, 2, 2], in_features = features_n, out_features=features,
+                       planes=32, spp_planes=128, head_planes=64, augment=False)
+    if pretrained:
+        #print('pretrained')
+        checkpoint = torch.load('./weights/' + "DDRNet23s_imagenet.pth",
+                                map_location='cpu')
+
+        model.load_state_dict(checkpoint, strict = False)
+    return model

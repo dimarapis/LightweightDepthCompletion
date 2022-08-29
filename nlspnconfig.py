@@ -83,7 +83,7 @@ parser.add_argument('--model_name',
                     default='NLSPN',
                     choices=('NLSPN',),
                     help='model name')
-parser.add_argument('--network',
+parser.add_argument('--networknlspn',
                     type=str,
                     default='resnet18',
                     choices=('resnet18', 'resnet34'),

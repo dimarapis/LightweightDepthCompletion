@@ -9,6 +9,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 import features.CoordConv as CoordConv
 
+#from nlspnconfig import args
+
+
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
 import features.custom_transforms as custom_transforms
@@ -36,8 +39,205 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, SparseGuidedDepth, DecnetModule, DecnetNLSPN
+from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN_sharedDecoder, SparseGuidedDepth, DecnetModule, DecnetNLSPN
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
+
+
+from models.nlspnmodel import NLSPNModel
+
+from models.common import *
+from models.modulated_deform_conv_func import ModulatedDeformConvFunction
+import torch
+import torch.nn as nn
+
+
+class NLSPN(nn.Module):
+    def __init__(self, args, ch_g, ch_f, k_g, k_f):
+        super(NLSPN, self).__init__()
+
+        # Guidance : [B x ch_g x H x W]
+        # Feature : [B x ch_f x H x W]
+
+        # Currently only support ch_f == 1
+        assert ch_f == 1, 'only tested with ch_f == 1 but {}'.format(ch_f)
+
+        assert (k_g % 2) == 1, \
+            'only odd kernel is supported but k_g = {}'.format(k_g)
+        pad_g = int((k_g - 1) / 2)
+        assert (k_f % 2) == 1, \
+            'only odd kernel is supported but k_f = {}'.format(k_f)
+        pad_f = int((k_f - 1) / 2)
+
+        self.args = args
+        self.prop_time = self.args.prop_time
+        self.affinity = self.args.affinity
+
+        self.ch_g = ch_g
+        self.ch_f = ch_f
+        self.k_g = k_g
+        self.k_f = k_f
+        # Assume zero offset for center pixels
+        self.num = self.k_f * self.k_f - 1
+        self.idx_ref = self.num // 2
+
+        if self.affinity in ['AS', 'ASS', 'TC', 'TGASS']:
+            self.conv_offset_aff = nn.Conv2d(
+                self.ch_g, 3 * self.num, kernel_size=self.k_g, stride=1,
+                padding=pad_g, bias=True
+            )
+            self.conv_offset_aff.weight.data.zero_()
+            self.conv_offset_aff.bias.data.zero_()
+
+            if self.affinity == 'TC':
+                self.aff_scale_const = nn.Parameter(self.num * torch.ones(1))
+                self.aff_scale_const.requires_grad = False
+            elif self.affinity == 'TGASS':
+                self.aff_scale_const = nn.Parameter(
+                    self.args.affinity_gamma * self.num * torch.ones(1))
+            else:
+                self.aff_scale_const = nn.Parameter(torch.ones(1))
+                self.aff_scale_const.requires_grad = False
+        else:
+            raise NotImplementedError
+
+        # Dummy parameters for gathering
+        self.w = nn.Parameter(torch.ones((self.ch_f, 1, self.k_f, self.k_f)))
+        self.b = nn.Parameter(torch.zeros(self.ch_f))
+
+        self.w.requires_grad = False
+        self.b.requires_grad = False
+
+        self.w_conf = nn.Parameter(torch.ones((1, 1, 1, 1)))
+        self.w_conf.requires_grad = False
+
+        self.stride = 1
+        self.padding = pad_f
+        self.dilation = 1
+        self.groups = self.ch_f
+        self.deformable_groups = 1
+        self.im2col_step = 64
+
+    def _get_offset_affinity(self, guidance, confidence=None, rgb=None):
+        B, _, H, W = guidance.shape
+
+        if self.affinity in ['AS', 'ASS', 'TC', 'TGASS']:
+            offset_aff = self.conv_offset_aff(guidance)
+            o1, o2, aff = torch.chunk(offset_aff, 3, dim=1)
+
+            # Add zero reference offset
+            offset = torch.cat((o1, o2), dim=1).view(B, self.num, 2, H, W)
+            list_offset = list(torch.chunk(offset, self.num, dim=1))
+            list_offset.insert(self.idx_ref,
+                               torch.zeros((B, 1, 2, H, W)).type_as(offset))
+            offset = torch.cat(list_offset, dim=1).view(B, -1, H, W)
+
+            if self.affinity in ['AS', 'ASS']:
+                pass
+            elif self.affinity == 'TC':
+                aff = torch.tanh(aff) / self.aff_scale_const
+            elif self.affinity == 'TGASS':
+                aff = torch.tanh(aff) / (self.aff_scale_const + 1e-8)
+            else:
+                raise NotImplementedError
+        else:
+            raise NotImplementedError
+
+        # Apply confidence
+        # TODO : Need more efficient way
+        if self.args.conf_prop:
+            list_conf = []
+            offset_each = torch.chunk(offset, self.num + 1, dim=1)
+
+            modulation_dummy = torch.ones((B, 1, H, W)).type_as(offset).detach()
+
+            for idx_off in range(0, self.num + 1):
+                ww = idx_off % self.k_f
+                hh = idx_off // self.k_f
+
+                if ww == (self.k_f - 1) / 2 and hh == (self.k_f - 1) / 2:
+                    continue
+
+                offset_tmp = offset_each[idx_off].detach()
+
+                # NOTE : Use --legacy option ONLY for the pre-trained models
+                # for ECCV20 results.
+                if self.args.legacy:
+                    offset_tmp[:, 0, :, :] = \
+                        offset_tmp[:, 0, :, :] + hh - (self.k_f - 1) / 2
+                    offset_tmp[:, 1, :, :] = \
+                        offset_tmp[:, 1, :, :] + ww - (self.k_f - 1) / 2
+
+                conf_tmp = ModulatedDeformConvFunction.apply(
+                    confidence, offset_tmp, modulation_dummy, self.w_conf,
+                    self.b, self.stride, 0, self.dilation, self.groups,
+                    self.deformable_groups, self.im2col_step)
+                list_conf.append(conf_tmp)
+
+            conf_aff = torch.cat(list_conf, dim=1)
+            aff = aff * conf_aff.contiguous()
+
+        # Affinity normalization
+        aff_abs = torch.abs(aff)
+        aff_abs_sum = torch.sum(aff_abs, dim=1, keepdim=True) + 1e-4
+
+        if self.affinity in ['ASS', 'TGASS']:
+            aff_abs_sum[aff_abs_sum < 1.0] = 1.0
+
+        if self.affinity in ['AS', 'ASS', 'TGASS']:
+            aff = aff / aff_abs_sum
+
+        aff_sum = torch.sum(aff, dim=1, keepdim=True)
+        aff_ref = 1.0 - aff_sum
+
+        list_aff = list(torch.chunk(aff, self.num, dim=1))
+        list_aff.insert(self.idx_ref, aff_ref)
+        aff = torch.cat(list_aff, dim=1)
+
+        return offset, aff
+
+    def _propagate_once(self, feat, offset, aff):
+        feat = ModulatedDeformConvFunction.apply(
+            feat, offset, aff, self.w, self.b, self.stride, self.padding,
+            self.dilation, self.groups, self.deformable_groups, self.im2col_step
+        )
+
+        return feat
+
+    def forward(self, feat_init, guidance, confidence=None, feat_fix=None,
+                rgb=None):
+        assert self.ch_g == guidance.shape[1]
+        assert self.ch_f == feat_init.shape[1]
+
+        if self.args.conf_prop:
+            assert confidence is not None
+
+        if self.args.conf_prop:
+            offset, aff = self._get_offset_affinity(guidance, confidence, rgb)
+        else:
+            offset, aff = self._get_offset_affinity(guidance, None, rgb)
+
+        # Propagation
+        if self.args.preserve_input:
+            assert feat_init.shape == feat_fix.shape
+            mask_fix = torch.sum(feat_fix > 0.0, dim=1, keepdim=True).detach()
+            mask_fix = (mask_fix > 0.0).type_as(feat_fix)
+
+        feat_result = feat_init
+
+        list_feat = []
+
+        for k in range(1, self.prop_time + 1):
+            # Input preservation for each iteration
+            if self.args.preserve_input:
+                feat_result = (1.0 - mask_fix) * feat_result \
+                              + mask_fix * feat_fix
+
+            feat_result = self._propagate_once(feat_result, offset, aff)
+
+            list_feat.append(feat_result)
+
+        return feat_result, list_feat, offset, aff, self.aff_scale_const.data
+
 
 #Saving weights and log files locally
 grabtime = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
@@ -129,7 +329,7 @@ print("\nSTEP 3. Loading model and metrics...")
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-if decnet_args.network_model == "GuideDepth":
+if decnet_args.networkmodel == "GuideDepth":
     #print(decnet_args.pretrained)
     model = GuideDepth(True)
 
@@ -138,18 +338,18 @@ if decnet_args.network_model == "GuideDepth":
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_23_53_PM/GuideDepth_99.pth', map_location='cpu'))  
         #2022_08_21-10_23_53_PM
       
-elif decnet_args.network_model == "SparseGuidedDepth":
+elif decnet_args.networkmodel == "SparseGuidedDepth":
     model = SparseGuidedDepth(True)
     #if decnet_args.pretrained
         #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
-elif decnet_args.network_model == "SparseAndRGBGuidedDepth":
+elif decnet_args.networkmodel == "SparseAndRGBGuidedDepth":
     model = SparseAndRGBGuidedDepth(False)
     #if decnet_args.pretrained
         #model.load_state_dict(torch.load('./weights/guide.pth', map_location='cpu'))     
-elif decnet_args.network_model == "ENET2021":
+elif decnet_args.networkmodel == "ENET2021":
     model = ENet(decnet_args)
 
-elif decnet_args.network_model == "DecnetModule":
+elif decnet_args.networkmodel == "DecnetModule":
     model = DecnetSparseIncorporated()
         
     if decnet_args.pretrained == True:
@@ -158,20 +358,45 @@ elif decnet_args.network_model == "DecnetModule":
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 
-elif decnet_args.network_model == "AuxSparseGuidedDepth":
+elif decnet_args.networkmodel == "AuxSparseGuidedDepth":
     model = GuideDepth(True)
     #0209refinement_model = RefinementModule()
     if decnet_args.pretrained == True:
         model.load_state_dict(torch.load('./weights/KITTI_Full_GuideDepth.pth', map_location='cpu'))  
 
-elif decnet_args.network_model == "DecnetNLSPN":
-    model = DecnetNLSPN()
+elif decnet_args.networkmodel == "DecnetNLSPN":
+    model = DecnetNLSPN(decnet_args)
         
     if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-        model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_08_29-03_13_13_AM/DecnetNLSPN_5.pth', map_location=device))
+        
+    #if decnet_args.pretrained == True:
+    #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+    #    model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
+        
+elif decnet_args.networkmodel == "DecnetNLSPN_decoshared":
+    model = DecnetNLSPN_sharedDecoder(decnet_args)
+        
+    #if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+    #    model.load_state_dict(torch.load('./weights/2022_08_29-03_13_13_AM/DecnetNLSPN_5.pth', map_location=device))
+        
+    #if decnet_args.pretrained == True:
+    #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+    #    model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
+
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
+
+elif decnet_args.networkmodel == "nlspn":
+    model = NLSPNModel(decnet_args)
+        
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_08_28-10_27_56_PM/DecnetNLSPN_26.pth', map_location=device))
+
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
 
@@ -222,7 +447,7 @@ depth_criterion = MaskedL1Loss()
 #defining index (epoch)
 epoch = 0
 prev_loss = 0.0
-#print(f"Loaded model {converted_args_dict['network_model']}'# for {converted_args_dict['task']}")
+#print(f"Loaded model {converted_args_dict['networkmodel']}'# for {converted_args_dict['task']}")
 
 
 
@@ -330,17 +555,21 @@ def evaluation_block(epoch):
                 
                 max_depth = 10
 
-            if decnet_args.network_model == 'GuideDepth':
+            if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+                output = model(image, sparse)
+                inv_pred = output['pred']
             else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                 inv_pred = model(image, sparse)
-            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                
+
             #inv_pred = model(image)
-            
             #print(inv_pred)
-            
+            #print(pred.shape,image.shape)
             pred = inverse_depth_norm(max_depth,inv_pred)
+            #print(pred.shape,image.shape)
             #print(f'pred {torch_min_max(pred)}')
             #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
             #print(image_filename)         
@@ -379,15 +608,17 @@ def evaluation_block(epoch):
                 gt_flip = torch.flip(gt, [3])
                 sparse_flip = torch.flip(sparse, [3])
 
-                if decnet_args.network_model == 'GuideDepth':
+                if decnet_args.networkmodel == 'GuideDepth':
                     flipped_inv_pred = model(image_flip)
+                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+                    output = model(image_flip, sparse_flip)
+                    flipped_inv_pred = output['pred']
                 else:    
-                    #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                     flipped_inv_pred = model(image_flip, sparse_flip)
-                    #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
-                    #inv_pred = model(image)
-            
-                #print(inv_pred)
+                
+                
+               
                 
                 flipped_pred = inverse_depth_norm(max_depth,flipped_inv_pred)
                 #print(f'pred {torch_min_max(pred)}')
@@ -485,7 +716,7 @@ def evaluation_block(epoch):
                     os.remove(os.path.join((os.path.join('weights',grabtime)), f))
                 
 
-                path = f"weights/{grabtime}/{decnet_args.network_model}_{epoch}.pth"
+                path = f"weights/{grabtime}/{decnet_args.networkmodel}_{epoch}.pth"
                 torch.save(model.state_dict(), path)
                 with open("txt_logging/"+grabtime+".txt", "a") as txt_log:
                 # Append 'hello' at the end of file
@@ -544,11 +775,16 @@ def training_block(model):
 
                 max_depth = 10
 
-            if decnet_args.network_model == 'GuideDepth':
+            if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+                output = model(image, sparse)
+                inv_pred = output['pred']
             else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                 inv_pred = model(image, sparse)
+                
+
             #inv_pred = model(image)
             #print(inv_pred)
             #print(pred.shape,image.shape)
@@ -583,9 +819,9 @@ def training_block(model):
             #print(a == b)
             epoch_loss += loss.item() 
             #print(loss.item())
-            #if iteration == 1 or iteration % 100 == 0:
+            if iteration == 1 or iteration % 100 == 0:
 
-            print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
+                print(f'Iteration {iteration} out of {int(np.ceil(len(train_dl.dataset) / decnet_args.batch_size))}. Loss: {loss.item()}')
             
 
         average_loss = epoch_loss / (len(train_dl.dataset) / decnet_args.batch_size)
