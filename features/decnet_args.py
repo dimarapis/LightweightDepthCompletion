@@ -12,7 +12,7 @@ def decnet_args_parser():
     parser.add_argument('--networkmodel',
                         type=str,
                         default="GuideDepth",
-                        choices=["DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
+                        choices=["DecnetLateBase","DecnetEarlyBase","DecnetNLSPNSmall","DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
                         help='choose a model'
                         )
     parser.add_argument('--resolution',
@@ -158,13 +158,13 @@ def decnet_args_parser():
                         #metavar='N',
                         help='which crop to follow for validationmetrics')
     parser.add_argument('--train_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='datalist_train_nn.list',
+                        #default='datalist_train_nn.list',
                         #default='train_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='4batch_overfit_nn_train.list',
-                        #default='nyu_train.list',
+                        default='nyu_train.list',
                         #default='nyu_2000_train.list',
                         #default='nyu_test.list',
                         #default='nyu_4_overfit.list',
@@ -173,20 +173,20 @@ def decnet_args_parser():
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--val_datalist', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='datalist_test_nn.list',
+                        #default='datalist_test_nn.list',
                         #default='val_dim_kitti.list',
                         #default='4batch_dim_kitti.list',
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='nyu_4_overfit.list',
-                        #default='nyu_test.list',
+                        default='nyu_test.list',
                         #default='single_image_4batch_overfit.list',
                         type=str,
                         #required=True,
                         help='list file to use to load dataset')
     parser.add_argument('--root_folder', #SHOULD ALSO INCLUDE THE OTHER OPTINS HERE
-                        default='data/nn_dataset/',
-                        #default='data/nyuv2_dataset/',
+                        #default='data/nn_dataset/',
+                        default='data/nyuv2_dataset/',
                         #default='data/kitti_dataset/val_selection_cropped/',
                         type=str,
                         #required=True,
@@ -233,7 +233,7 @@ def decnet_args_parser():
                         help='model name')
     parser.add_argument('--networknlspn',
                         type=str,
-                        default='resnet18',
+                        default='resnet34',
                         choices=('resnet18', 'resnet34'),
                         help='network name')
     parser.add_argument('--from_scratch',

@@ -39,7 +39,7 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN_sharedDecoder, SparseGuidedDepth, DecnetModule, DecnetNLSPN
+from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetLateBase, DecnetNLSPN_sharedDecoder, DecnetNLSPNSmall, SparseGuidedDepth, DecnetModule, DecnetNLSPN, DecnetEarlyBase
 from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
 
 
@@ -376,7 +376,19 @@ elif decnet_args.networkmodel == "DecnetNLSPN":
     #    model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
+
+elif decnet_args.networkmodel == "DecnetNLSPNSmall":
+    model = DecnetNLSPNSmall(decnet_args)
         
+    #if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+    #    model.load_state_dict(torch.load('./weights/2022_08_29-10_04_58_AM/DecnetNLSPN_2.pth', map_location=device),strict=False)
+        
+    #if decnet_args.pretrained == True:
+    #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+    #    model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
+
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 elif decnet_args.networkmodel == "DecnetNLSPN_decoshared":
     model = DecnetNLSPN_sharedDecoder(decnet_args)
         
@@ -389,7 +401,13 @@ elif decnet_args.networkmodel == "DecnetNLSPN_decoshared":
     #    model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location=device), strict=False)
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
-
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
+elif decnet_args.networkmodel == "DecnetLateBase":
+    model = DecnetLateBase(decnet_args)
+    #model.load_state_dict(torch.load('./weights/2022_08_29-10_04_58_AM/DecnetNLSPN_2.pth', map_location=device),strict=False)
+elif decnet_args.networkmodel == "DecnetEarlyBase":
+    model = DecnetEarlyBase(decnet_args)   
+    
 elif decnet_args.networkmodel == "nlspn":
     model = NLSPNModel(decnet_args)
         
@@ -569,7 +587,7 @@ def evaluation_block(epoch):
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
-            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
                 output = model(image, sparse)
                 inv_pred = output['pred']
             else:    
@@ -581,8 +599,8 @@ def evaluation_block(epoch):
             #print(inv_pred)
             #print(pred.shape,image.shape)
             pred = inverse_depth_norm(max_depth,inv_pred)
-            print(f'pred {torch_min_max(pred)}')
-            print(f'gt {torch_min_max(gt)}')
+            #print(f'pred {torch_min_max(pred)}')
+            #print(f'gt {torch_min_max(gt)}')
             #print(f'eval pred  {pred.shape} and image shapes {image.shape}')
             
             #print(f'pred {torch_min_max(pred)}')
@@ -631,7 +649,7 @@ def evaluation_block(epoch):
 
                 if decnet_args.networkmodel == 'GuideDepth':
                     flipped_inv_pred = model(image_flip)
-                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
                     output = model(image_flip, sparse_flip)
                     flipped_inv_pred = output['pred']
                 else:    
@@ -802,7 +820,7 @@ def training_block(model):
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
-            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared':
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
                 output = model(image, sparse)
                 inv_pred = output['pred']
             else:    
@@ -822,8 +840,8 @@ def training_block(model):
             #inv_pred = model(image)        
             #0209refined_inv_pred = refinement_model(inv_pred,sparse)
             #0209refined_pred = inverse_depth_norm(decnet_args.max_depth_eval,refined_inv_pred)            
-            print(f'pred {torch_min_max(pred)}')
-            print(f'gt {torch_min_max(gt)}')
+            #print(f'pred {torch_min_max(pred)}')
+            #print(f'gt {torch_min_max(gt)}')
             
 
             #ALSO NEED TO BUILD EVALUATION ON FLIPPED IMAGE (LIKE  GUIDENDEPTH)

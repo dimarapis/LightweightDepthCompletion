@@ -1928,6 +1928,244 @@ class DecnetNLSPN_sharedDecoder(nn.Module):
         
         #return xy
 
+class DecnetEarlyBase(nn.Module):
+    def __init__(self, args, 
+            pretrained=False,
+            up_features=[64, 32, 16], 
+            inner_features=[64, 32, 16]):
+        super(DecnetEarlyBase, self).__init__()
+        
+
+        
+        self.args = args
+
+        self.num_neighbors = self.args.prop_kernel*self.args.prop_kernel - 1
+                
+        self.conv1_rgb = conv_bn_relu(3, 48, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv1_dep = conv_bn_relu(1, 16, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv_res = conv_bn_relu(64, 32, kernel=3, stride=1,padding=1,bn=False)
+        
+        self.feature_extractor = DualResNet_Backbone_Modified(
+                pretrained=False,
+                features_n = 48, 
+                features=up_features[0])
+        
+        self.sparse_feature_extractor = DualResNet_Backbone_Modified(                
+                pretrained=False,
+                features_n = 16, 
+                features=up_features[0])
+        
+        
+        self.id_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.id_dec0 = conv_bn_relu(96, 1, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=True)
+
+        # Guidance Branch
+        # 1/1
+        self.gd_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.gd_dec0 = conv_bn_relu(96, self.num_neighbors, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=False)
+
+
+        self.cf_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.cf_dec0 = nn.Sequential(
+            nn.Conv2d(96, 1, kernel_size=3, stride=1, padding=1),
+            nn.Sigmoid()
+        )
+
+        self.prop_layer = NLSPN(args, self.num_neighbors, 1, 3,
+                                self.args.prop_kernel)
+
+        # Set parameter groups
+        params = []
+        for param in self.named_parameters():
+            if param[1].requires_grad:
+                params.append(param[1])
+
+        params = nn.ParameterList(params)
+
+        self.param_groups = [
+            {'params': params, 'lr': self.args.learning_rate}
+        ]
+
+   
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_1 =  Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.early_fusion_1 = Guided_Upsampling_Block(in_features=128,
+                                    expand_features=128,
+                                    out_features=64,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.early_fusion_2 = Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        
+        self.early_fusion_3 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.fusion_up_final = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+    def _concat(self, fd, fe, dim=1):
+        # Decoder feature may have additional padding
+        _, _, Hd, Wd = fd.shape
+        _, _, He, We = fe.shape
+
+        # Remove additional padding
+        if Hd > He:
+            h = Hd - He
+            fd = fd[:, :, :-h, :]
+
+        if Wd > We:
+            w = Wd - We
+            fd = fd[:, :, :, :-w]
+
+        f = torch.cat((fd, fe), dim=dim)
+
+        return f
+
+    
+
+    def forward(self, rgb, sparse):
+        #rgb = torch.zeros(1,3,480,640).to('cuda')
+        #sparse = torch.zeros(1,1,480,640).to('cuda')
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        
+        rgb_first_step = self.conv1_rgb(rgb)
+        #print(rgb_first_step.shape)
+        sparse_first_step = self.conv1_dep(sparse)
+        
+        fe1 = torch.cat((rgb_first_step, sparse_first_step), dim=1)
+        #fe2 = self.early_fusion(rgb, torch.cat((rgb_first_step,sparse_first_step),dim=1))
+        #fe2 = torch.zeros(1,32,480,640).to('cuda')
+        fe2 = self.conv_res(fe1)
+        #print(f'fe2shape{fe2.shape}')
+        #print(sparse_first_step.shape)
+        y, rgb_encoded_features = self.feature_extractor(rgb_first_step)
+        
+        #print(y.shape)
+        #print(f'y {y.shape}')
+        #print(f'rgb_encoded_features {rgb_encoded_features.shape}')
+        
+        #print(type(y))
+        y2 = F.interpolate(y, scale_factor=2)
+        #print(f'y2 {y2.shape}')
+        
+        x, sparse_encoded_features = self.sparse_feature_extractor(sparse_first_step)
+        x2 = F.interpolate(x,scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        rgb_half = F.interpolate(rgb, scale_factor=.5)
+        rgb_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        #sparse_half = F.interpolate(sparse, scale_factor=.5)
+        #sparse_quarter =  F.interpolate(sparse, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        #print('been here1')
+        xy_1 = self.early_fusion_1(rgb_quarter,torch.cat((y2, x2), dim=1))
+        
+        #y3 = self.up_1(rgb_quarter, y2)
+        #x3 = self.sparse_up_1(rgb_quarter, x2)
+        #print('been_here_2')
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        xy_1 = F.interpolate(xy_1, scale_factor=2., mode='bilinear')
+        #x4 = F.interpolate(x3, scale_factor=2., mode='bilinear')
+        
+        xy_2 = self.early_fusion_2(rgb_half,xy_1)
+        xy_2 = F.interpolate(xy_2, scale_factor=2., mode='bilinear')
+        
+        xy_3 = self.early_fusion_3(rgb, xy_2)
+        
+        #y5 = self.up_2(rgb_half, y4)
+        #x5 = self.sparse_up_2(rgb_half,x4)
+        
+        #xyhalf = self.fusion_up_half(rgb_half, torch.cat((y5,x5),dim=1))
+        #xy = F.interpolate(xyhalf, scale_factor=2., mode='bilinear')
+        xy = self.fusion_up_final(rgb, xy_3)
+        #print(f'xy.shape {xy.shape}')
+        # Init Depth Decoding
+
+        
+        return xy
 
 class DecnetNLSPN(nn.Module):
     def __init__(self, args, 
@@ -2175,3 +2413,469 @@ class DecnetNLSPN(nn.Module):
                   'gamma': aff_const, 'confidence': confidence}
 
         return output
+    
+    
+
+
+class DecnetNLSPNSmall(nn.Module):
+    def __init__(self, args, 
+            pretrained=False,
+            up_features=[32, 16, 8], 
+            inner_features=[32, 16, 8]):
+        super(DecnetNLSPNSmall, self).__init__()
+        
+
+        
+        self.args = args
+
+        self.num_neighbors = self.args.prop_kernel*self.args.prop_kernel - 1
+                
+        self.conv1_rgb = conv_bn_relu(3, 12, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv1_dep = conv_bn_relu(1, 4, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv_res = conv_bn_relu(16, 8, kernel=3, stride=1,padding=1,bn=False)
+        
+        self.feature_extractor = DualResNet_Backbone_Modified(
+                pretrained=False,
+                features_n = 12, 
+                features=up_features[0])
+        
+        self.sparse_feature_extractor = DualResNet_Backbone_Modified(                
+                pretrained=False,
+                features_n = 4, 
+                features=up_features[0])
+        
+        
+        self.id_dec1 = conv_bn_relu(16, 8, kernel=3, stride=1,
+                                    padding=1)
+        self.id_dec0 = conv_bn_relu(24, 1, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=True)
+
+        # Guidance Branch
+        # 1/1
+        self.gd_dec1 = conv_bn_relu(16, 8, kernel=3, stride=1,
+                                    padding=1)
+        self.gd_dec0 = conv_bn_relu(24, self.num_neighbors, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=False)
+
+
+        self.cf_dec1 = conv_bn_relu(16, 8, kernel=3, stride=1,
+                                    padding=1)
+        self.cf_dec0 = nn.Sequential(
+            nn.Conv2d(24, 1, kernel_size=3, stride=1, padding=1),
+            nn.Sigmoid()
+        )
+
+        self.prop_layer = NLSPN(args, self.num_neighbors, 1, 3,
+                                self.args.prop_kernel)
+
+        # Set parameter groups
+        params = []
+        for param in self.named_parameters():
+            if param[1].requires_grad:
+                params.append(param[1])
+
+        params = nn.ParameterList(params)
+
+        self.param_groups = [
+            {'params': params, 'lr': self.args.learning_rate}
+        ]
+
+   
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_1 =  Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")   
+        self.fusion_up_half = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.fusion_up_final = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+    def _concat(self, fd, fe, dim=1):
+        # Decoder feature may have additional padding
+        _, _, Hd, Wd = fd.shape
+        _, _, He, We = fe.shape
+
+        # Remove additional padding
+        if Hd > He:
+            h = Hd - He
+            fd = fd[:, :, :-h, :]
+
+        if Wd > We:
+            w = Wd - We
+            fd = fd[:, :, :, :-w]
+
+        f = torch.cat((fd, fe), dim=dim)
+
+        return f
+
+    
+
+    def forward(self, rgb, sparse):
+        #rgb = torch.zeros(1,3,480,640).to('cuda')
+        #sparse = torch.zeros(1,1,480,640).to('cuda')
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        
+        rgb_first_step = self.conv1_rgb(rgb)
+        #print(rgb_first_step.shape)
+        sparse_first_step = self.conv1_dep(sparse)
+        
+        fe1 = torch.cat((rgb_first_step, sparse_first_step), dim=1)
+        #fe2 = self.early_fusion(rgb, torch.cat((rgb_first_step,sparse_first_step),dim=1))
+        #fe2 = torch.zeros(1,32,480,640).to('cuda')
+        fe2 = self.conv_res(fe1)
+        #print(f'fe2shape{fe2.shape}')
+        #print(sparse_first_step.shape)
+        y, rgb_encoded_features = self.feature_extractor(rgb_first_step)
+        
+        #print(y.shape)
+        #print(f'y {y.shape}')
+        #print(f'rgb_encoded_features {rgb_encoded_features.shape}')
+        
+        #print(type(y))
+        y2 = F.interpolate(y, scale_factor=2)
+        #print(f'y2 {y2.shape}')
+        
+        x, sparse_encoded_features = self.sparse_feature_extractor(sparse_first_step)
+        x2 = F.interpolate(x,scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        rgb_half = F.interpolate(rgb, scale_factor=.5)
+        rgb_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        #sparse_half = F.interpolate(sparse, scale_factor=.5)
+        #sparse_quarter =  F.interpolate(sparse, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        
+        y3 = self.up_1(rgb_quarter, y2)
+        x3 = self.sparse_up_1(rgb_quarter, x2)
+        
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        y4 = F.interpolate(y3, scale_factor=2., mode='bilinear')
+        x4 = F.interpolate(x3, scale_factor=2., mode='bilinear')
+        
+        y5 = self.up_2(rgb_half, y4)
+        x5 = self.sparse_up_2(rgb_half,x4)
+        
+        xyhalf = self.fusion_up_half(rgb_half, torch.cat((y5,x5),dim=1))
+        xy = F.interpolate(xyhalf, scale_factor=2., mode='bilinear')
+        #xy = self.fusion_up_final(rgb, F.interpolate(xyhalf, scale_factor=2., mode='bilinear'))
+        #print(f'xy.shape {xy.shape}')
+        # Init Depth Decoding
+        
+        id_fd1 = self.id_dec1(self._concat(xy, fe2))
+        #print(f'\nid_fd1_shape: {id_fd1.shape}')
+        pred_init = self.id_dec0(self._concat(id_fd1, fe1))
+        #print(f'pred_init_shape: {pred_init.shape}')
+        #y6 = F.interpolate(y5, scale_factor=2., mode='bilinear')
+        #y5 = self.up_3(rgb, y6)
+
+
+        # Guidance Decoding
+        gd_fd1 = self.gd_dec1(self._concat(xy, fe2))
+        #print(f'\ngd_fd1_shape: {gd_fd1.shape}')
+        
+        guide = self.gd_dec0(self._concat(gd_fd1, fe1))
+        #print(f'guide_shape: {guide.shape}')
+
+
+        # Confidence Decoding
+        cf_fd1 = self.cf_dec1(self._concat(xy, fe2))
+        #print(f'\ncf_fd1_shape: {cf_fd1.shape}')
+        confidence = self.cf_dec0(self._concat(cf_fd1, fe1))
+        #print(f'confidence_shape: {confidence.shape}')
+
+
+        # Diffusion
+        y, y_inter, offset, aff, aff_const = \
+            self.prop_layer(pred_init, guide, confidence, sparse, rgb)
+
+        # Remove negative depth
+        #y = torch.clamp(y, min=0)
+
+        output = {'pred': y, 'pred_init': pred_init, 'pred_inter': y_inter,
+                  'guidance': guide, 'offset': offset, 'aff': aff,
+                  'gamma': aff_const, 'confidence': confidence}
+
+        return output
+    
+    
+    
+class DecnetLateBase(nn.Module):
+    def __init__(self, args, 
+            pretrained=False,
+            up_features=[64, 32, 16], 
+            inner_features=[64, 32, 16]):
+        super(DecnetLateBase, self).__init__()
+        
+
+        
+        self.args = args
+
+        self.num_neighbors = self.args.prop_kernel*self.args.prop_kernel - 1
+                
+        self.conv1_rgb = conv_bn_relu(3, 48, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv1_dep = conv_bn_relu(1, 16, kernel=3, stride=1, padding=1,
+                                      bn=False)
+        self.conv_res = conv_bn_relu(64, 32, kernel=3, stride=1,padding=1,bn=False)
+        
+        self.feature_extractor = DualResNet_Backbone_Modified(
+                pretrained=False,
+                features_n = 48, 
+                features=up_features[0])
+        
+        self.sparse_feature_extractor = DualResNet_Backbone_Modified(                
+                pretrained=False,
+                features_n = 16, 
+                features=up_features[0])
+        
+        
+        self.id_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.id_dec0 = conv_bn_relu(96, 1, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=True)
+
+        # Guidance Branch
+        # 1/1
+        self.gd_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.gd_dec0 = conv_bn_relu(96, self.num_neighbors, kernel=3, stride=1,
+                                    padding=1, bn=False, relu=False)
+
+
+        self.cf_dec1 = conv_bn_relu(48, 32, kernel=3, stride=1,
+                                    padding=1)
+        self.cf_dec0 = nn.Sequential(
+            nn.Conv2d(96, 1, kernel_size=3, stride=1, padding=1),
+            nn.Sigmoid()
+        )
+
+        self.prop_layer = NLSPN(args, self.num_neighbors, 1, 3,
+                                self.args.prop_kernel)
+
+        # Set parameter groups
+        params = []
+        for param in self.named_parameters():
+            if param[1].requires_grad:
+                params.append(param[1])
+
+        params = nn.ParameterList(params)
+
+        self.param_groups = [
+            {'params': params, 'lr': self.args.learning_rate}
+        ]
+
+   
+
+        self.up_1 = Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        self.up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.up_3 = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_1 =  Guided_Upsampling_Block(in_features=up_features[0],
+                                    expand_features=inner_features[0],
+                                    out_features=up_features[1],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.sparse_up_2 = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")   
+        self.fusion_up_half = Guided_Upsampling_Block(in_features=up_features[1],
+                                    expand_features=inner_features[1],
+                                    out_features=up_features[2],
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+        self.fusion_up_final = Guided_Upsampling_Block(in_features=up_features[2],
+                                    expand_features=inner_features[2],
+                                    out_features=1,
+                                    kernel_size=3,
+                                    channel_attention=True,
+                                    guide_features=3,
+                                    guidance_type="full")
+        
+    def _concat(self, fd, fe, dim=1):
+        # Decoder feature may have additional padding
+        _, _, Hd, Wd = fd.shape
+        _, _, He, We = fe.shape
+
+        # Remove additional padding
+        if Hd > He:
+            h = Hd - He
+            fd = fd[:, :, :-h, :]
+
+        if Wd > We:
+            w = Wd - We
+            fd = fd[:, :, :, :-w]
+
+        f = torch.cat((fd, fe), dim=dim)
+
+        return f
+
+    
+
+    def forward(self, rgb, sparse):
+        #rgb = torch.zeros(1,3,480,640).to('cuda')
+        #sparse = torch.zeros(1,1,480,640).to('cuda')
+        #print(f'basepred {basepred.shape}')
+        #print(f'sparse {sparse.shape}')
+        
+        rgb_first_step = self.conv1_rgb(rgb)
+        #print(rgb_first_step.shape)
+        sparse_first_step = self.conv1_dep(sparse)
+        
+        fe1 = torch.cat((rgb_first_step, sparse_first_step), dim=1)
+        #fe2 = self.early_fusion(rgb, torch.cat((rgb_first_step,sparse_first_step),dim=1))
+        #fe2 = torch.zeros(1,32,480,640).to('cuda')
+        fe2 = self.conv_res(fe1)
+        #print(f'fe2shape{fe2.shape}')
+        #print(sparse_first_step.shape)
+        y, rgb_encoded_features = self.feature_extractor(rgb_first_step)
+        
+        #print(y.shape)
+        #print(f'y {y.shape}')
+        #print(f'rgb_encoded_features {rgb_encoded_features.shape}')
+        
+        #print(type(y))
+        y2 = F.interpolate(y, scale_factor=2)
+        #print(f'y2 {y2.shape}')
+        
+        x, sparse_encoded_features = self.sparse_feature_extractor(sparse_first_step)
+        x2 = F.interpolate(x,scale_factor=2)
+        # y1 = self.conv1(sparse)
+        #print(f'y1 {y1.shape}')
+                
+        #y2 = self.conv2(y1)
+        #print(f'y2 {y2.shape}')
+        
+        #y2 = self.conv3(y2)
+
+        
+        
+        #print(y2.shape)
+        
+        
+        rgb_half = F.interpolate(rgb, scale_factor=.5)
+        rgb_quarter = F.interpolate(rgb, scale_factor=.25)
+        
+        #sparse_half = F.interpolate(sparse, scale_factor=.5)
+        #sparse_quarter =  F.interpolate(sparse, scale_factor=.25)
+
+        #y3 = F.interpolate(y2, scale_factor=2., mode='bilinear')
+        #print('y3', y3.shape)
+        
+        y3 = self.up_1(rgb_quarter, y2)
+        x3 = self.sparse_up_1(rgb_quarter, x2)
+        
+        #print('y4', y3.shape)
+        
+        #print('self.up_1.shape', y.shape)
+
+
+        y4 = F.interpolate(y3, scale_factor=2., mode='bilinear')
+        x4 = F.interpolate(x3, scale_factor=2., mode='bilinear')
+        
+        y5 = self.up_2(rgb_half, y4)
+        x5 = self.sparse_up_2(rgb_half,x4)
+        
+        xyhalf = self.fusion_up_half(rgb_half, torch.cat((y5,x5),dim=1))
+        xy = F.interpolate(xyhalf, scale_factor=2., mode='bilinear')
+        xy = self.fusion_up_final(rgb, F.interpolate(xyhalf, scale_factor=2., mode='bilinear'))
+        #print(f'xy.shape {xy.shape}')
+        # Init Depth Decoding
+        
+
+        return xy
