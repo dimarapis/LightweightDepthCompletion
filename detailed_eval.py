@@ -10,6 +10,7 @@ import numpy as np
 import torch.optim as optim
 import torch.nn.functional as F
 import features.CoordConv as CoordConv
+import torchvision
 
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
@@ -45,6 +46,9 @@ from features.decnet_dataloaders import DecnetDataloader
 from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetNLSPN, DecnetNLSPN_sharedDecoder, SparseGuidedDepth, DecnetDepthRefinement
 from models.sparse_guided_depth import RgbGuideDepth, SparseAndRGBGuidedDepth, RefinementModule, DepthRefinement, Scaler
 from models.sparse_guided_depth import DecnetSparseIncorporated
+from models.sparse_guided_depth import DecnetLateBase, DecnetEarlyBase,DecnetNLSPNSmall
+
+import models.torch_resnet_cspn_nyu as model
 
 torch.cuda.empty_cache()
 decnet_args = decnet_args_parser()
@@ -89,14 +93,18 @@ print(f'Loaded {len(eval_dl.dataset)} val files')
 print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-model = GuideDepth()
-model.load_state_dict(torch.load('./weights/GuideDepthOriginal.pth', map_location=device))
+#model = DecnetNLSPNSmall(decnet_args)
+#model.load_state_dict(torch.load('./weights/2022_08_30-11_49_09_AM/DecnetNLSPNSmall_3.pth', map_location=device))
 
 
+if decnet_args.dataset == 'nyuv2':
+    
+    upscale_to_full_resolution = torchvision.transforms.Resize((480,640))
+elif decnet_args.dataset == 'nn':
+
+    upscale_to_full_resolution = torchvision.transforms.Resize((360,640))
 
 
-model.to(device)
-model.eval()
 
 #refinement_model = DepthRefinement()
 #refinement_model.load_state_dict(torch.load('./weights/nn_final_ref.pth', map_location=device))
@@ -108,20 +116,16 @@ model.eval()
 #refinement_model.load_state_dict(torch.load('./weights/2022_08_19-03_03_48_PM/DecnetModule_99_ref.pth', map_location=device))
 #refinement_model.load_state_dict(torch.load('./weights/DecnetModule_19_ref.pth', map_location=device))
 
-refinement_model = DecnetSparseIncorporated()
-#refinement_model.load_state_dict(torch.load('./weights/DecnetModule_50k_500.pth', map_location='cpu'))
-refinement_model.to(device)
-refinement_model.eval()
-
-
 eval_loss = 0.0
 refined_eval_loss = 0.0
 average_meter = AverageMeter()
 
 result_metrics = {}
+flipped_result_metrics = {}
 refined_result_metrics = {}
 for metric in metric_name:
     result_metrics[metric] = 0.0
+    flipped_result_metrics[metric] = 0.0
     refined_result_metrics[metric] = 0.0
 
 print("\nSTEP 4. Test time...\n")
@@ -309,6 +313,7 @@ def visualize_results(image, rgb, pred, refined_pred, sparse, gt):
 
 
 
+
 def image_level():
     with torch.no_grad():
         t0 = time.time()
@@ -321,8 +326,8 @@ def image_level():
 
             image_filename = data['file'][0].split('/')[-1].rstrip('.png')
             image, gt, sparse = data['rgb'], data['gt'], data['d']
-            print(f'image: {torch_min_max(image)}')    
-            max_depth  = decnet_args.max_depth_eval
+            #print(f'image: {torch_min_max(image)}')    
+            #max_depth  = decnet_args.max_depth_eval
             
             if decnet_args.dataset == 'nyuv2':
                
@@ -332,58 +337,95 @@ def image_level():
                 max_depth = 10
 
             flipped_evaluation = True
-            raise error
+            
             if flipped_evaluation:
                 image_flip = torch.flip(image, [3])
                 gt_flip = torch.flip(gt, [3])
             
+            
+            if decnet_args.networkmodel == 'GuideDepth':
+                inv_pred = model(image)
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
+                output = model(image, sparse)
+                inv_pred = output['pred']
+            else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
-            inv_pred = model(image)
+                inv_pred = model(image, sparse)
+            
+            #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+            #inv_pred = model(image)
             #print(inv_pred)
             
             pred = inverse_depth_norm(max_depth,inv_pred)
             
                         
-            print(f'pred: {torch_min_max(pred)}')    
-            print(f'gt: {torch_min_max(gt)}')
-            print(f'sparse: {torch_min_max(sparse)}')    
-            #gt_and_pred_info('basemodel', 'pred', pred)
-            #visualize_results('basemodel',image,pred,sparse)
-            #refined_pred = pred
-            refined_inv_pred = refinement_model(image,sparse)
-            #refined_pred = refinement_model(rgb_half, image, y_half, y, sparse_half, sparse, pred)
-            refined_pred = inverse_depth_norm(max_depth,refined_inv_pred)
-            print(f'refined_pred: {torch_min_max(refined_pred)}')    
+            pred_resized, gt_resized = upscale_to_full_resolution(pred).squeeze(), upscale_to_full_resolution(gt).squeeze()
+            #print('full_reso',pred_resized.shape,gt_resized.shape)
+
             
-                
-            pred_d, depth_gt = pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
-            pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_d, depth_gt)    
+            pred_crop, gt_crop = custom_metrics.cropping_img(decnet_args, pred_resized, gt_resized)    
             computed_result = custom_metrics.eval_depth(pred_crop, gt_crop)
 
+            flipped_evaluation = True
+            if flipped_evaluation:
+                image_flip = torch.flip(image, [3])
+                gt_flip = torch.flip(gt, [3])
+                sparse_flip = torch.flip(sparse, [3])
 
-            refined_pred_d, refined_depth_gt = refined_pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
-            refined_pred_crop, refined_gt_crop = custom_metrics.cropping_img(decnet_args, refined_pred_d, refined_depth_gt)    
-            refined_computed_result = custom_metrics.eval_depth(refined_pred_crop, refined_gt_crop)
-
-            for metric in metric_name:
-                result_metrics[metric] += computed_result[metric]
-                refined_result_metrics[metric] += refined_computed_result[metric]
+                if decnet_args.networkmodel == 'GuideDepth':
+                    flipped_inv_pred = model(image_flip)
+                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
+                    output = model(image_flip, sparse_flip)
+                    flipped_inv_pred = output['pred']
+                else:    
+                #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
+                    flipped_inv_pred = model(image_flip, sparse_flip)
                 
-            sanity_dict = gt_and_pred_info(gt, pred, sparse, refined_pred)
-            visualize_results(image_filename,image,pred,refined_pred,sparse,gt)
+                
+               
+                
+                flipped_pred = inverse_depth_norm(max_depth,flipped_inv_pred)
+                #print(f'pred {torch_min_max(pred)}')
+                #print_torch_min_max_rgbsparsepredgt(image, sparse, pred, gt)   
+                #print(image_filename)         
+                #ipnut = input()
+                flipped_pred_resized, flipped_gt_resized = upscale_to_full_resolution(flipped_pred).squeeze(), upscale_to_full_resolution(gt_flip).squeeze()
+                
+
+                #flipped_pred_d, flipped_depth_gt, = flipped_pred.squeeze(), gt_flip.squeeze()#, data['d'].squeeze()# / 1000.0
+                flipped_pred_crop, flipped_gt_crop = custom_metrics.cropping_img(decnet_args, flipped_pred_resized, flipped_gt_resized)    
+                flipped_computed_result = custom_metrics.eval_depth(flipped_pred_crop, flipped_gt_crop)
+
+            #0209refined_pred_d, refined_depth_gt, = refined_pred.squeeze(), gt.squeeze()#, data['d'].squeeze()# / 1000.0
+            #0209refined_pred_crop, refined_gt_crop = custom_metrics.cropping_img(decnet_args, refined_pred_d, refined_depth_gt)    
+            #0209refined_computed_result = custom_metrics.eval_depth(refined_pred_crop, refined_gt_crop)
+
+
+                for metric in metric_name:
+                    result_metrics[metric] += computed_result[metric]
+                    flipped_result_metrics[metric] += flipped_computed_result[metric]
+                    #0209refined_result_metrics[metric] += refined_computed_result[metric]
+
+            else:
+                for metric in metric_name:
+                    result_metrics[metric] += computed_result[metric]
+                    #0209refined_result_metrics[metric] += refined_computed_result
+                
+            sanity_dict = gt_and_pred_info(gt, pred, sparse, flipped_pred)
+            visualize_results(image_filename,image,pred,flipped_pred,sparse,gt)
 
 
                 
             d = sanity_dict
             d['---------'] = ['------------','------------','------------','------------']
             d[f'split_{i-1}'] = [image_filename]
-            d['rmse'] = ['-', computed_result['rmse'], '-', refined_computed_result['rmse']]
-            d['d1'] = ['-', computed_result['d1'], '-', refined_computed_result['d1']]
+            d['rmse'] = ['-', computed_result['rmse'], '-', flipped_computed_result['rmse']]
+            d['d1'] = ['-', computed_result['d1'], '-', flipped_computed_result['d1']]
             d['----------'] = ['------------','------------','------------','------------']
-            d['Improvement'] = ['RMSE', computed_result['rmse']-refined_computed_result['rmse'], 'D1', refined_computed_result['d1']-computed_result['d1']]
+            d['Improvement'] = ['RMSE', computed_result['rmse']-flipped_computed_result['rmse'], 'D1', flipped_computed_result['d1']-computed_result['d1']]
             
-            rmse_list_sing.append(refined_computed_result['rmse']-computed_result['rmse'])
-            d1_list_sing.append(refined_computed_result['d1']-computed_result['d1'])
+            rmse_list_sing.append(flipped_computed_result['rmse']-computed_result['rmse'])
+            d1_list_sing.append(flipped_computed_result['d1']-computed_result['d1'])
             sparse_pts_list_sing.append(sanity_dict['total_valid'][2])
             
             print('\n\n')
@@ -543,7 +585,7 @@ def gpu_timings(models):
     
     test_data_rgb = torch.rand(1, 3, 240, 320).to(device)
     test_data_sparse = torch.rand(1, 1, 240, 320).to(device)
-    test_data_rgbd = torch.randn(1, 4, 240, 320).to(device)
+    test_data_rgbd = torch.randn(1, 4, 228, 304).to(device)
     test_data_rgb = test_data_rgb.to(torch.float32)
     test_data_sparse = test_data_sparse.to(torch.float32)
     test_data_rgbd = test_data_rgbd.to(torch.float32)
@@ -568,6 +610,22 @@ def gpu_timings(models):
             macs, params = profile(model, inputs=test_data_rgbd,)#[None,input])
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
+            
+        elif modelo == 'cspn':
+            print(f'GPU timings for model {modelo}')
+            import models.torch_resnet_cspn_nyu as model_cspn
+            cspn_config = {'step': 24, 'norm_type': '8sum'}
+            net = model_cspn.resnet50(pretrained = False,
+                                    cspn_config=cspn_config)
+            net.to(device)
+            net.eval()
+            print("Calculating params and macs")
+            # Calculating macs and parameters of model to assess how heavy the model is
+       
+            macs, params = profile(net, inputs=test_data_rgbd,)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n')    
+            
        
         elif modelo == 'GuideDepth':
             print(f'GPU timings for model {modelo}')
@@ -613,6 +671,32 @@ def gpu_timings(models):
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
             
+        elif modelo == "DecnetLateBase":
+            model = DecnetLateBase(decnet_args)
+            model.to(device)
+            model.eval()
+            input = (test_data_rgb,test_data_sparse)
+            macs, params = profile(model, inputs=input,)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n') 
+               
+        elif modelo == "DecnetEarlyBase":
+            model = DecnetEarlyBase(decnet_args)   
+            model.to(device)
+            model.eval()
+            input = (test_data_rgb,test_data_sparse)
+            macs, params = profile(model, inputs=input,)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n')    
+            
+        elif modelo == "DecnetNLSPNSmall":
+            model = DecnetNLSPNSmall(decnet_args)
+            model.to(device)
+            model.eval()
+            input = (test_data_rgb,test_data_sparse)
+            macs, params = profile(model, inputs=input,)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n')    
             
         elif modelo == 'nlspn':
             model = NLSPNModel(args)
@@ -655,11 +739,12 @@ def gpu_timings(models):
         # GPU warm-up
         for _ in range(20):
             #print("warming")
-            if modelo == 's2d':
+            if modelo == 's2d' or modelo == 'cspn':
                 parse = model(test_data_rgbd)
             elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                 parse = model(input)
-            elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn':
+            elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn' \
+            or modelo == 'DecnetNLSPNSmall' or modelo == 'DecnetEarlyBase' or modelo == 'DecnetLateBase':
                 parse = model(input[0],input[1])
                 
             #pred = inverse_depth_norm(80.0,inv_pred)
@@ -672,11 +757,12 @@ def gpu_timings(models):
                 
                 starter.record()
                     
-                if modelo == 's2d':
+                if modelo == 's2d' or modelo == 'cspn':
                     parse = model(test_data_rgbd)
                 elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                     parse = model(input)
-                elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn':
+                elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn' \
+                or modelo == 'DecnetNLSPNSmall' or modelo == 'DecnetEarlyBase' or modelo == 'DecnetLateBase':
                     parse = model(input[0],input[1])
                 
                 ender.record()
@@ -703,7 +789,7 @@ def model_summary(model):
 
     
 
-gpu_timings(['decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
+gpu_timings(['cspn','DecnetNLSPNSmall','DecnetEarlyBase','DecnetLateBase','decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
 #image_level()
 #grid_level()
 

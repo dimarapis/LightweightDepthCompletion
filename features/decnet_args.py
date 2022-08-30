@@ -43,7 +43,7 @@ def decnet_args_parser():
                         )
     parser.add_argument('--dataset',
                         type=str,
-                        default="nn",
+                        default="nyuv2",
                         choices=["nn", "nyuv2", "kitti", "isaacsim"],
                         help='choose a dataset: nn, nyuv2, kitti, isaacsim'
                         )

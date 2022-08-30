@@ -380,9 +380,9 @@ elif decnet_args.networkmodel == "DecnetNLSPN":
 elif decnet_args.networkmodel == "DecnetNLSPNSmall":
     model = DecnetNLSPNSmall(decnet_args)
         
-    #if decnet_args.pretrained == True:
+    if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-    #    model.load_state_dict(torch.load('./weights/2022_08_29-10_04_58_AM/DecnetNLSPN_2.pth', map_location=device),strict=False)
+        model.load_state_dict(torch.load('./weights/2022_08_30-02_53_53_AM/DecnetNLSPNSmall_8.pth', map_location=device))
         
     #if decnet_args.pretrained == True:
     #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
@@ -392,9 +392,9 @@ elif decnet_args.networkmodel == "DecnetNLSPNSmall":
 elif decnet_args.networkmodel == "DecnetNLSPN_decoshared":
     model = DecnetNLSPN_sharedDecoder(decnet_args)
         
-    #if decnet_args.pretrained == True:
+    if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-    #    model.load_state_dict(torch.load('./weights/2022_08_29-03_13_13_AM/DecnetNLSPN_5.pth', map_location=device))
+        model.load_state_dict(torch.load('./weights/2022_08_29-07_15_25_PM/DecnetNLSPN_decoshared_6.pth', map_location=device))
         
     #if decnet_args.pretrained == True:
     #    #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
@@ -413,7 +413,7 @@ elif decnet_args.networkmodel == "nlspn":
         
     if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-        model.load_state_dict(torch.load('./weights/2022_08_28-10_27_56_PM/DecnetNLSPN_26.pth', map_location=device))
+        model.load_state_dict(torch.load('./weights/2022_08_29-07_15_25_PM/DecnetNLSPN_decoshared_6.pth', map_location=device))
 
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
