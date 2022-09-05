@@ -358,6 +358,15 @@ elif decnet_args.networkmodel == "DecnetModule":
 
         #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
 
+elif decnet_args.networkmodel == "DecnetModuleSmall":
+    #model = DecnetSparseIncorporated()
+    model = DecnetSparseIncorporated(up_features=[32, 8, 4], inner_features=[32, 8, 4])    
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_09_01-05_42_36_PM/DecnetModuleSmall_1.pth', map_location=device), strict=False)
+
+        #model.load_state_dict(torch.load('./weights/2022_08_21-10_10_22_PM/DecnetModule_99.pth', map_location='cpu'))#, strict=False)
+
 elif decnet_args.networkmodel == "AuxSparseGuidedDepth":
     model = GuideDepth(True)
     #0209refinement_model = RefinementModule()

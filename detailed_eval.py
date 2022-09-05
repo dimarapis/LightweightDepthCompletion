@@ -16,10 +16,15 @@ import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
 import features.custom_transforms as custom_transforms
 import features.kitti_loader as guided_depth_kitti_loader
-from nlspnconfig import args
+#from nlspnconfig import args
 from models.nlspnmodel import NLSPNModel
 
+from models.KernelNet import UNet
+from models.KernelNet import KernelNet
+
+
 from features.decnet_args import decnet_args_parser
+#from models.ACMNet.models import create_model
 
 from sympy import Gt
 from tqdm import tqdm
@@ -51,7 +56,7 @@ from models.sparse_guided_depth import DecnetLateBase, DecnetEarlyBase,DecnetNLS
 import models.torch_resnet_cspn_nyu as model
 
 torch.cuda.empty_cache()
-decnet_args = decnet_args_parser()
+#decnet_args = decnet_args_parser()
 
 
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
@@ -64,7 +69,7 @@ decnet_args = decnet_args_parser()
 #Print arguments and model options
 converted_args_dict = vars(decnet_args)
 print('\nParameters list: (Some may be redundant depending on the task, dataset and model chosen)')
-
+print(converted_args_dict)
 #Defining metrics and loggers
 metric_name = ['d1', 'd2', 'd3', 'abs_rel', 'sq_rel', 'rmse', 'rmse_log', 'log10', 'silog']
 
@@ -93,7 +98,8 @@ print(f'Loaded {len(eval_dl.dataset)} val files')
 print("\nSTEP 3. Loading model and metrics...")
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-#model = DecnetNLSPNSmall(decnet_args)
+model = DecnetNLSPNSmall(decnet_args).to(device)
+model.eval()
 #model.load_state_dict(torch.load('./weights/2022_08_30-11_49_09_AM/DecnetNLSPNSmall_3.pth', map_location=device))
 
 
@@ -585,7 +591,9 @@ def gpu_timings(models):
     
     test_data_rgb = torch.rand(1, 3, 240, 320).to(device)
     test_data_sparse = torch.rand(1, 1, 240, 320).to(device)
-    test_data_rgbd = torch.randn(1, 4, 228, 304).to(device)
+    test_data_mask = torch.rand(1, 1, 240, 320).to(device)
+    test_data_rgbd = torch.randn(1, 4, 240, 320).to(device)
+    test_data_rgbd_228_304 = torch.randn(1, 4, 228, 304).to(device)
     test_data_rgb = test_data_rgb.to(torch.float32)
     test_data_sparse = test_data_sparse.to(torch.float32)
     test_data_rgbd = test_data_rgbd.to(torch.float32)
@@ -595,7 +603,22 @@ def gpu_timings(models):
     for modelo in models:  
         
         print(f"\n\n\nCalculating inference for model {modelo}")
-                    
+        
+        
+        if modelo == 'kernelnet':
+            print(f'GPU timings for model {modelo}')
+            model = KernelNet(n_channels=3, n_classes=3)
+            model.to(device)
+            model.eval()
+            #input = torch.cat((test_data_rgb,test_data_sparse),dim=1)
+            #print(input.shape)
+            print("Calculating params and macs")
+            # Calculating macs and parameters of model to assess how heavy the model is
+       
+            macs, params = profile(model, inputs=test_data_rgbd,)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n')    
+        
         if modelo == 's2d':
             print(f'GPU timings for model {modelo}')
             model = ResNet(layers=50, decoder='deconv2', output_size=(480,640),
@@ -611,22 +634,38 @@ def gpu_timings(models):
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
             
-        elif modelo == 'cspn':
+        elif modelo == 'deeplidar':
             print(f'GPU timings for model {modelo}')
-            import models.torch_resnet_cspn_nyu as model_cspn
-            cspn_config = {'step': 24, 'norm_type': '8sum'}
-            net = model_cspn.resnet50(pretrained = False,
-                                    cspn_config=cspn_config)
-            net.to(device)
-            net.eval()
+
+            from models.deeplidar import depthCompleNew
+            model = depthCompleNew.depthCompletionNew(1)
+            #model = torch.nn.DataParallel(model, device_ids=[0])
+            #model.cuda()
+            
+            model.to(device)
+            model.eval()
             print("Calculating params and macs")
             # Calculating macs and parameters of model to assess how heavy the model is
        
-            macs, params = profile(net, inputs=test_data_rgbd,)#[None,input])
+            macs, params = profile(model, inputs=(test_data_rgb,test_data_sparse,test_data_mask))#[None,input])
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
             
+        elif modelo == 'cspn':
+            print(f'GPU timings for model {modelo}')
+
+            import models.torch_resnet_cspn_nyu as model_cspn
+            cspn_config = {'step': 24, 'norm_type': '8sum'}
+            model = model_cspn.resnet50(pretrained = False, cspn_config=cspn_config)
+            model.to(device)
+            model.eval()
+            print("Calculating params and macs")
+            # Calculating macs and parameters of model to assess how heavy the model is
        
+            macs, params = profile(model, inputs=test_data_rgbd_228_304)#[None,input])
+            macs, params = clever_format([macs, params], "%.3f")
+            print(f'model macs: {macs} and params: {params}\n')    
+            
         elif modelo == 'GuideDepth':
             print(f'GPU timings for model {modelo}')
             model = GuideDepth()
@@ -788,9 +827,10 @@ def model_summary(model):
         f.write(architecture)
 
     
+#gpu_timings(['deeplidar','DecnetNLSPNSmall','decnetnlspn','s2d', 'nlspn'])
 
-gpu_timings(['cspn','DecnetNLSPNSmall','DecnetEarlyBase','DecnetLateBase','decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
-#image_level()
+#gpu_timings(['acmnet','deeplidar','DecnetNLSPNSmall','DecnetEarlyBase','DecnetLateBase','decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
+image_level()
 #grid_level()
 
 #model_summary(refinement_model)

@@ -61,6 +61,7 @@ class DecnetDataloader(Dataset):
         print(self.resolution_dict[self.dataset_type])
         self.resolution = self.resolution_dict[self.dataset_type][args.resolution]
         print(self.resolution)
+        self.varying_sparsities = args.sparsities
 
         self.augment = args.augment
         self.mode = args.mode
@@ -75,17 +76,19 @@ class DecnetDataloader(Dataset):
                 
                 data_columns = data_row.split(' ')
             
-                if len(data_columns) == 3:
+                if self.dataset_type == 'nn':
                     self.files.append({
                         "rgb": data_columns[0],
                         "d": data_columns[1],
                         "gt": data_columns[2]
                         })
 
-                elif len(data_columns) == 2:
+                elif self.dataset_type == 'nyuv2':
                     self.files.append({
                         "rgb": data_columns[0],
-                        "gt": data_columns[1]
+                        #"d": data_columns[2],
+                        "gt": data_columns[1],
+                        "random_sampling" : data_columns[2]
                     })
                     
     def __len__(self):
@@ -143,7 +146,7 @@ class DecnetDataloader(Dataset):
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 
 
-    def decnet_transform(self, file_id, rgb, sparse, gt):        #HAVE NOT IMPLEMENTED RESOLUTION + AUGMENTATIONS
+    def decnet_transform(self, file_id, rgb, sparse, gt, random_sample_no):        #HAVE NOT IMPLEMENTED RESOLUTION + AUGMENTATIONS
 
         
         
@@ -205,9 +208,12 @@ class DecnetDataloader(Dataset):
                 #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
             elif self.dataset_type == 'nyuv2':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
+                #transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
                 transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
-            
+                if self.varying_sparsities:
+                    transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), int(random_sample_no))
+                else:
+                    transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
             
             
         else:
@@ -239,11 +245,15 @@ class DecnetDataloader(Dataset):
                 #mpourda = input(print("SANITY CHECKER, DATASET IS KITTI"))
             elif self.dataset_type == 'nyuv2':
                 transformed_rgb = t_rgb(pil_rgb).to('cuda') / 255.
-                transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
                 transformed_gt = t_dep(pil_gt).type(torch.cuda.FloatTensor)#/256.# 100. #256.#/100.# / 256.
 
+                if self.varying_sparsities:
+                    transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), int(random_sample_no))
+                else:
+                    transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
 
         #print(self.split,transformed_rgb.shape,transformed_sparse.shape,transformed_gt.shape)
+        print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))} for file {file_id}')
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 
@@ -284,7 +294,8 @@ class DecnetDataloader(Dataset):
             sparse = np.array(Image.open(self.files[index]['d']))
 
         file_id = self.files[index]['rgb']
-        transformed_data_sample = self.decnet_transform(file_id, rgb, sparse, gt)
+        random_sample_no = self.files[index]['random_sampling']
+        transformed_data_sample = self.decnet_transform(file_id, rgb, sparse, gt, random_sample_no)
         return transformed_data_sample
     
     

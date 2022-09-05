@@ -11,8 +11,8 @@ def decnet_args_parser():
     #                    )
     parser.add_argument('--networkmodel',
                         type=str,
-                        default="GuideDepth",
-                        choices=["DecnetLateBase","DecnetEarlyBase","DecnetNLSPNSmall","DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
+                        default="DecnetNLSPN",
+                        choices=["DecnetModuleSmall","DecnetLateBase","DecnetEarlyBase","DecnetNLSPNSmall","DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
                         help='choose a model'
                         )
     parser.add_argument('--resolution',
@@ -25,6 +25,11 @@ def decnet_args_parser():
                         type=bool,
                         default=False,
                         help='Choose between loading a pretrained model or training from scratch'
+                        )
+    parser.add_argument('--sparsities',
+                        type=bool,
+                        default=False,
+                        help='Choose between varying sparsities or original (500 pts)'
                         )
     parser.add_argument('--augment',
                         type=bool,
@@ -164,7 +169,7 @@ def decnet_args_parser():
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='4batch_overfit_nn_train.list',
-                        default='nyu_train.list',
+                        default='nyu_train_random_pts_half_reso.list',
                         #default='nyu_2000_train.list',
                         #default='nyu_test.list',
                         #default='nyu_4_overfit.list',
@@ -179,7 +184,8 @@ def decnet_args_parser():
                         #default='8batch_overfit_nn.list',
                         #default='4batch_overfit_nn_test.list',
                         #default='nyu_4_overfit.list',
-                        default='nyu_test.list',
+                        default='nyu_test_random_pts_half_reso.list',
+                        #default='nyu_test.list',
                         #default='single_image_4batch_overfit.list',
                         type=str,
                         #required=True,
