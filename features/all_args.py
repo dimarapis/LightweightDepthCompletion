@@ -1,8 +1,8 @@
 import argparse
 
-def decnet_args_parser():
+def all_args_parser():
     #parser adapted from Sparse-to-Dense: Depth Prediction from Sparse Depth Samples and a Single Image (https://github.com/fangchangma/sparse-to-dense)
-    parser = argparse.ArgumentParser(description='Decnet-argument-parser')
+    parser = argparse.ArgumentParser(description='Argument-parser')
     #parser.add_argument('--task',
     #                    type=str,
     #                    default="depth-estimation",
@@ -283,7 +283,61 @@ def decnet_args_parser():
                         help='legacy code support for pre-trained models')
 
     
-    
+    parser.add_argument('--dir_data',
+                         type=str,
+                         default='/HDD/dataset/NYUDepthV2_HDF5',
+                         # default='/HDD/dataset/KITTIDepthCompletion',
+                         help='path to dataset')
+    parser.add_argument('--data_name',
+                         type=str,
+                         default='NYU',
+                         # default='KITTIDC',
+                         choices=('NYU', 'KITTIDC'),
+                         help='dataset name')
+    parser.add_argument('--split_json',
+                        type=str,
+                        default='../data_json/nyu.json',
+                        # default='../data_json/kitti_dc.json',
+                        help='path to json file')
+    parser.add_argument('--patch_height',
+                        type=int,
+                        default=228,
+                        # default=240,
+                        help='height of a patch to crop')
+    parser.add_argument('--patch_width',
+                        type=int,
+                        default=304,
+                        # default=1216,
+                        help='width of a patch to crop')
+    parser.add_argument('--top_crop',
+                        type=int,
+                        default=0,
+                        # default=100,
+                        help='top crop size for KITTI dataset')
+
+
+    # Hardware
+    parser.add_argument('--seed',
+                        type=int,
+                        default=7240,
+                        help='random seed point')
+    parser.add_argument('--gpus',
+                        type=str,
+                        default="0,1,2,3",
+                        help='visible GPUs')
+    parser.add_argument('--port',
+                        type=str,
+                        default='29500',
+                        help='multiprocessing port')
+    parser.add_argument('--num_threads',
+                        type=int,
+                        default=1,
+                        help='number of threads')
+    parser.add_argument('--no_multiprocessing',
+                        action='store_true',
+                        default=False,
+                        help='do not use multiprocessing')
+
     #args parser
     args = parser.parse_args()
     

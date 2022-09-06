@@ -294,7 +294,7 @@ class NLSPNModel(nn.Module):
         params = nn.ParameterList(params)
 
         self.param_groups = [
-            {'params': params, 'lr': self.args.lr}
+            {'params': params, 'lr': self.args.learning_rate}
         ]
 
     def _concat(self, fd, fe, dim=1):
@@ -363,4 +363,4 @@ class NLSPNModel(nn.Module):
                   'guidance': guide, 'offset': offset, 'aff': aff,
                   'gamma': aff_const, 'confidence': confidence}
 
-        return 
+        return output

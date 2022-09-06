@@ -255,10 +255,10 @@ warnings.filterwarnings("ignore")
 #Loading arguments and model options
 print("\nSTEP 1. Loading arguments and parameters...")
 decnet_args = decnet_args_parser()
-
 #Print arguments and model options
 converted_args_dict = vars(decnet_args)
 print('\nParameters list: (Some may be redundant depending on the task, dataset and model chosen)')
+print(converted_args_dict)
 
 #Defining metrics and loggers
 metric_name = ['d1', 'd2', 'd3', 'abs_rel', 'sq_rel', 'rmse', 'rmse_log', 'log10', 'silog']
@@ -418,11 +418,25 @@ elif decnet_args.networkmodel == "DecnetEarlyBase":
     model = DecnetEarlyBase(decnet_args)   
     
 elif decnet_args.networkmodel == "nlspn":
-    model = NLSPNModel(decnet_args)
+    print("here")
+    from features.all_args import all_args_parser
+    all_args = all_args_parser()
+
+    #from nlspnconfig import args
+    print("here")
+    
+    converted_args_dict_nlspn = vars(all_args)
+    print('\nParameters list: (Some may be redundant depending on the task, dataset and model chosen)')
+    print(converted_args_dict_nlspn)
+    
+    model = NLSPNModel(all_args)
+    #Print arguments and model options
+
+    #model = NLSPNModel(decnet_args)
         
-    if decnet_args.pretrained == True:
+    #if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
-        model.load_state_dict(torch.load('./weights/2022_08_29-07_15_25_PM/DecnetNLSPN_decoshared_6.pth', map_location=device))
+    #    model.load_state_dict(torch.load('./weights/2022_08_29-07_15_25_PM/DecnetNLSPN_decoshared_6.pth', map_location=device))
 
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
@@ -596,9 +610,13 @@ def evaluation_block(epoch):
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
-            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' \
+                or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
+                
                 output = model(image, sparse)
+                print(output)
                 inv_pred = output['pred']
+                
             else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                 inv_pred = model(image, sparse)
@@ -658,7 +676,8 @@ def evaluation_block(epoch):
 
                 if decnet_args.networkmodel == 'GuideDepth':
                     flipped_inv_pred = model(image_flip)
-                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
+                elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared'\
+                    or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
                     output = model(image_flip, sparse_flip)
                     flipped_inv_pred = output['pred']
                 else:    
