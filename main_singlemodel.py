@@ -614,7 +614,7 @@ def evaluation_block(epoch):
                 or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
                 
                 output = model(image, sparse)
-                print(output)
+                #print(output)
                 inv_pred = output['pred']
                 
             else:    
@@ -848,7 +848,8 @@ def training_block(model):
 
             if decnet_args.networkmodel == 'GuideDepth':
                 inv_pred = model(image)
-            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' or decnet_args.networkmodel == 'DecnetNLSPNSmall':
+            elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' \
+                or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
                 output = model(image, sparse)
                 inv_pred = output['pred']
             else:    
