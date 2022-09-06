@@ -12,7 +12,7 @@ def decnet_args_parser():
     parser.add_argument('--networkmodel',
                         type=str,
                         default="DecnetNLSPN",
-                        choices=["s2d","nlspn","DecnetModuleSmall","DecnetLateBase","DecnetEarlyBase","DecnetNLSPNSmall","DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
+                        choices=["twise","cspn","s2d","nlspn","DecnetModuleSmall","DecnetLateBase","DecnetEarlyBase","DecnetNLSPNSmall","DecnetNLSPN_decoshared","GuideDepth", "SparseGuidedDepth", "SparseAndRGBGuidedDepth", "AuxGuideDepth", "ENET2021","AuxSparseGuidedDepth", "DecnetModule", "DecnetNLSPN"],
                         help='choose a model'
                         )
     parser.add_argument('--resolution',

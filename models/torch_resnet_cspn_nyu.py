@@ -11,7 +11,7 @@ import torch.backends.cudnn as cudnn
 import torch.utils.model_zoo as model_zoo
 import models.cspn as post_process
 from torch.autograd import Variable
-import models.update_model
+import models.update_model as update_model
 import torch.nn.functional as F
 
 # memory analyze
@@ -348,6 +348,7 @@ class ResNet(nn.Module):
 
     def forward(self, x):
         if len(x.shape) != 4:
+            
             x = x.unsqueeze(0)
         [batch_size, channel, height, width] = x.size()
         sparse_depth = x.narrow(1,3,1).clone()

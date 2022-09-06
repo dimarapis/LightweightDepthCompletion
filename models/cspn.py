@@ -37,19 +37,18 @@ class Affinity_Propagate(nn.Module):
 
         self.in_feature = 1
         self.out_feature = 1
-
-
-    def forward(self, guidance, blur_depth, sparse_depth=None):
-
         self.sum_conv = nn.Conv3d(in_channels=8,
                                   out_channels=1,
-                                  kernel_size=(1, 1, 1),
+                                  kernel_size=1,
                                   stride=1,
                                   padding=0,
                                   bias=False)
-        
+       
+
+    def forward(self, guidance, blur_depth, sparse_depth=None):
         weight = torch.ones(1, 8, 1, 1, 1).cuda()
         self.sum_conv.weight = nn.Parameter(weight)
+        
         for param in self.sum_conv.parameters():
             param.requires_grad = False
 

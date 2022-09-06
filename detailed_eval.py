@@ -1,5 +1,6 @@
 import os
 from termios import TIOCSERGETMULTI
+from turtle import resizemode
 import cv2
 import time
 import wandb
@@ -18,6 +19,7 @@ import features.custom_transforms as custom_transforms
 import features.kitti_loader as guided_depth_kitti_loader
 #from nlspnconfig import args
 from models.nlspnmodel import NLSPNModel
+from features.decnet_dataloaders import cspn_nyu_input_crop
 
 from models.KernelNet import UNet
 from models.KernelNet import KernelNet
@@ -58,7 +60,8 @@ import models.torch_resnet_cspn_nyu as model
 torch.cuda.empty_cache()
 #decnet_args = decnet_args_parser()
 
-
+from features.all_args import all_args_parser
+all_args = all_args_parser()
 #Remove warning for visualization purposes (mostly due to behaviour of upsample block)
 warnings.filterwarnings("ignore")
 
@@ -605,17 +608,20 @@ def gpu_timings(models):
         print(f"\n\n\nCalculating inference for model {modelo}")
         
         
-        if modelo == 'kernelnet':
+        if modelo == 'cspn':
             print(f'GPU timings for model {modelo}')
-            model = KernelNet(n_channels=3, n_classes=3)
+            import models.torch_resnet_cspn_nyu as cspn_model
+            cspn_config = {'step': 24, 'norm_type': '8sum'}
+            model = cspn_model.resnet18(pretrained = False,
+                cspn_config=cspn_config)
             model.to(device)
             model.eval()
             #input = torch.cat((test_data_rgb,test_data_sparse),dim=1)
             #print(input.shape)
             print("Calculating params and macs")
             # Calculating macs and parameters of model to assess how heavy the model is
-       
-            macs, params = profile(model, inputs=test_data_rgbd,)#[None,input])
+            resized_input = cspn_nyu_input_crop(test_data_rgbd)
+            macs, params = profile(model, inputs=resized_input,)#[None,input])
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
         
@@ -648,21 +654,6 @@ def gpu_timings(models):
             # Calculating macs and parameters of model to assess how heavy the model is
        
             macs, params = profile(model, inputs=(test_data_rgb,test_data_sparse,test_data_mask))#[None,input])
-            macs, params = clever_format([macs, params], "%.3f")
-            print(f'model macs: {macs} and params: {params}\n')    
-            
-        elif modelo == 'cspn':
-            print(f'GPU timings for model {modelo}')
-
-            import models.torch_resnet_cspn_nyu as model_cspn
-            cspn_config = {'step': 24, 'norm_type': '8sum'}
-            model = model_cspn.resnet50(pretrained = False, cspn_config=cspn_config)
-            model.to(device)
-            model.eval()
-            print("Calculating params and macs")
-            # Calculating macs and parameters of model to assess how heavy the model is
-       
-            macs, params = profile(model, inputs=test_data_rgbd_228_304)#[None,input])
             macs, params = clever_format([macs, params], "%.3f")
             print(f'model macs: {macs} and params: {params}\n')    
             
@@ -738,7 +729,7 @@ def gpu_timings(models):
             print(f'model macs: {macs} and params: {params}\n')    
             
         elif modelo == 'nlspn':
-            model = NLSPNModel(args)
+            model = NLSPNModel(all_args)
             model.to(device)
             model.eval()
             input = (test_data_rgb,test_data_sparse)
@@ -778,8 +769,11 @@ def gpu_timings(models):
         # GPU warm-up
         for _ in range(20):
             #print("warming")
-            if modelo == 's2d' or modelo == 'cspn':
+            if modelo == 's2d':
                 parse = model(test_data_rgbd)
+            elif modelo == 'cspn':
+                resized_input = cspn_nyu_input_crop(test_data_rgbd)
+                parse = model(resized_input)
             elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                 parse = model(input)
             elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn' \
@@ -796,8 +790,11 @@ def gpu_timings(models):
                 
                 starter.record()
                     
-                if modelo == 's2d' or modelo == 'cspn':
+                if modelo == 's2d':
                     parse = model(test_data_rgbd)
+                elif modelo == 'cspn':
+                    resized_input = cspn_nyu_input_crop(test_data_rgbd)
+                    parse = model(resized_input)
                 elif modelo == 'GuideDepth' or modelo == 'GuideDepth-small':
                     parse = model(input)
                 elif modelo == 'DecnetModule' or modelo == 'DecnetModule-small' or modelo == 'decnetnlspn' or modelo == 'decnetnlspn_encoshared' or modelo =='nlspn' \
@@ -829,8 +826,10 @@ def model_summary(model):
     
 #gpu_timings(['deeplidar','DecnetNLSPNSmall','decnetnlspn','s2d', 'nlspn'])
 
-#gpu_timings(['acmnet','deeplidar','DecnetNLSPNSmall','DecnetEarlyBase','DecnetLateBase','decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
-image_level()
+#gpu_timings(['cspn','DecnetNLSPNSmall','DecnetEarlyBase','DecnetLateBase','decnetnlspn_encoshared','decnetnlspn','s2d', 'GuideDepth', 'GuideDepth-small', 'DecnetModule', 'DecnetModule-small','nlspn'])
+gpu_timings(['nlspn'])
+
+#image_level()
 #grid_level()
 
 #model_summary(refinement_model)

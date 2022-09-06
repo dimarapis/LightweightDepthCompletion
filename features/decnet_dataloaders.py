@@ -47,6 +47,12 @@ def crops():
         'nn' : [4, 356, 16, 624]}
 
 
+def cspn_nyu_input_crop(rgbd):
+    nyu_input_crop_transform = transforms.CenterCrop((228,304))
+    resized_rgbd = nyu_input_crop_transform(rgbd)
+    #print(resized_rgbd.shape)
+    return resized_rgbd    
+
 class DecnetDataloader(Dataset):
     def __init__(self, args, datalist, split):
         

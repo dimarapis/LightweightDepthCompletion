@@ -1,0 +1,60 @@
+| networkmodel                 | cspn                                |
+| resolution                   | half                                |
+| pretrained                   | False                               |
+| sparsities                   | False                               |
+| augment                      | True                                |
+| message                      |                                     |
+| mode                         | train                               |
+| dataset                      | nyuv2                               |
+| workers                      | 4                                   |
+| epochs                       | 30                                  |
+| criterion                    | l2                                  |
+| batch_size                   | 2                                   |
+| learning_rate                | 0.001                               |
+| weight_decay                 | 0                                   |
+| print_freq                   | 10                                  |
+| resume                       |                                     |
+| data_folder                  | /datasets                           |
+| convolutional_layer_encoding | xyz                                 |
+| dilation_rate                | 2                                   |
+| val_h                        | 352                                 |
+| val_w                        | 608                                 |
+| train_height                 | 352                                 |
+| train_width                  | 608                                 |
+| min_depth_eval               | 0.1                                 |
+| max_depth_eval               | 80.0                                |
+| error_vis_min                | -5                                  |
+| error_vis_max                | 5                                   |
+| training_subset              | 0                                   |
+| show_sensor_error            | False                               |
+| kitti_crop                   | eigen_crop                          |
+| train_datalist               | nyu_train_random_pts_half_reso.list |
+| val_datalist                 | nyu_test_random_pts_half_reso.list  |
+| root_folder                  | data/nyuv2_dataset/                 |
+| torch_mode                   | pytorch                             |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth   |
+| wandblogger                  | False                               |
+| project                      | depthcompletionpaper                |
+| entity                       | wandbdimar                          |
+| wandbrunname                 |                                     |
+| model_name                   | NLSPN                               |
+| networknlspn                 | resnet34                            |
+| from_scratch                 | False                               |
+| prop_time                    | 18                                  |
+| prop_kernel                  | 3                                   |
+| preserve_input               | False                               |
+| affinity                     | TGASS                               |
+| affinity_gamma               | 0.5                                 |
+| conf_prop                    | True                                |
+| legacy                       | False                               |
+
+New model saved: weights/2022_09_06-11_55_37_AM/cspn_0.pth 
+| d1       | 0.136004 |
+| d2       | 0.273895 |
+| d3       | 0.412293 |
+| abs_rel  | 1.15631  |
+| sq_rel   | 4.8907   |
+| rmse     | 3.21565  |
+| rmse_log | 1.24848  |
+| log10    | 0.426288 |
+| silog    | 1.2335   |
