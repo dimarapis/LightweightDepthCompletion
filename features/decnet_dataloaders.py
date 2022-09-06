@@ -108,7 +108,7 @@ class DecnetDataloader(Dataset):
     #    tranf_data = sparse_data / 80.
     #    transformed_data = torch.clamp(tranf_data, 0.0, 1.0)
     #    return transformed_data
-    
+    '''
     def data_transform(self, file_id, rgb, sparse, gt):
         transform = transforms.Compose([
         transforms.ToPILImage(),
@@ -144,7 +144,7 @@ class DecnetDataloader(Dataset):
 
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
-
+    '''
 
     def decnet_transform(self, file_id, rgb, sparse, gt, random_sample_no):        #HAVE NOT IMPLEMENTED RESOLUTION + AUGMENTATIONS
 
@@ -253,7 +253,7 @@ class DecnetDataloader(Dataset):
                     transformed_sparse = self.get_sparse_depth(t_dep(pil_gt).type(torch.cuda.FloatTensor), 500)
 
         #print(self.split,transformed_rgb.shape,transformed_sparse.shape,transformed_gt.shape)
-        print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))} for file {file_id}')
+        #print(f'torchnonzero transformed sparse {len(torch.nonzero(transformed_sparse))} for file {file_id}')
         
         return self.data_sample(file_id, transformed_rgb, transformed_sparse, transformed_gt)
 

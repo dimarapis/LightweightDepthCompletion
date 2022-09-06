@@ -11,6 +11,7 @@ import features.CoordConv as CoordConv
 
 #from nlspnconfig import args
 
+from models.s2d import ResNet
 
 import visualizers.visualizer as visualizer
 import features.deprecated_metrics as custom_metrics
@@ -437,7 +438,10 @@ elif decnet_args.networkmodel == "nlspn":
     #if decnet_args.pretrained == True:
         #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
     #    model.load_state_dict(torch.load('./weights/2022_08_29-07_15_25_PM/DecnetNLSPN_decoshared_6.pth', map_location=device))
-
+elif decnet_args.networkmodel == 's2d':
+    model = ResNet(layers=50, decoder='deconv2', output_size=(240,320),
+    in_channels=4, pretrained=False)
+    
 else:
     print("Can't seem to find the model configuration. Make sure you choose a model by --network-model argument. Integrated options are: [GuideDepth,SparseGuidedDepth,SparseAndRGBGuidedDepth,ENET2021]") 
 
@@ -612,10 +616,16 @@ def evaluation_block(epoch):
                 inv_pred = model(image)
             elif decnet_args.networkmodel == 'DecnetNLSPN' or decnet_args.networkmodel == 'DecnetNLSPN_decoshared' \
                 or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
-                
+            
                 output = model(image, sparse)
                 #print(output)
                 inv_pred = output['pred']
+                
+            elif decnet_args.networkmodel == 's2d':
+                input = torch.cat((image,sparse),dim=1)
+                #print(input.shape)
+                inv_pred = model(input) 
+                #print()   
                 
             else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
@@ -680,6 +690,11 @@ def evaluation_block(epoch):
                     or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
                     output = model(image_flip, sparse_flip)
                     flipped_inv_pred = output['pred']
+                elif decnet_args.networkmodel == 's2d':
+                    flipped_input = torch.cat((image_flip,sparse_flip),dim=1)
+                    flipped_inv_pred = model(flipped_input)
+                    
+                
                 else:    
                 #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                     flipped_inv_pred = model(image_flip, sparse_flip)
@@ -852,6 +867,14 @@ def training_block(model):
                 or decnet_args.networkmodel == 'DecnetNLSPNSmall' or decnet_args.networkmodel == 'nlspn':
                 output = model(image, sparse)
                 inv_pred = output['pred']
+                
+                            
+            elif decnet_args.networkmodel == 's2d':
+                input = torch.cat((image,sparse),dim=1)
+                #print(input.shape)
+                inv_pred = model(input) 
+                #print()
+                
             else:    
             #rgb_half, y_half, sparse_half, y, inv_pred = model(image,sparse)
                 inv_pred = model(image, sparse)
