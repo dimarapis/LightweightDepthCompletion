@@ -53,4 +53,5 @@ alias python="python3"
 #python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_Decnet500 --batch-size 8 --message "Training DecnetModule with 50k nyuv2 and 500 sparse"
 #python main_singlemodel.py --dataset nyuv2 --network DecnetModule --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_2k_Decnet500 --batch-size 8 --message "Training DecnetModule with all 2k  and 500 sparse"
 
-python main_singlemodel.py --dataset nyuv2 --network GuideDepth --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_GuideDepthAugmentL1 --batch-size 8 --message "MaskedL1error" --augment TRUE --pretrained TRUE
+#python main_singlemodel.py --dataset nyuv2 --network GuideDepth --learning-rate 0.0001 --wandblogger TRUE --wandbrunname NYU_50k_GuideDepthAugmentL1 --batch-size 8 --message "MaskedL1error" --augment TRUE --pretrained TRUE
+python main_singlemodel.py --dataset nyuv2 --networkmodel s2d --learning-rate 0.00001 --wandblogger TRUE --wandbrunname NYU_50k_s2d_sparsities_finetunelr05 --batch-size 16 --message "50k_s2d_sparsities_finetunewith lr 0.00001" --augment TRUE --sparsities TRUE --pretrained TRUE

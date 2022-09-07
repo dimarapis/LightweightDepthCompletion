@@ -40,14 +40,14 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
-from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetLateBase, DecnetNLSPN_sharedDecoder, DecnetNLSPNSmall, SparseGuidedDepth, DecnetModule, DecnetNLSPN, DecnetEarlyBase
-from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
+#from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetLateBase, DecnetNLSPN_sharedDecoder, DecnetNLSPNSmall, SparseGuidedDepth, DecnetModule, DecnetNLSPN, DecnetEarlyBase
+#from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
 from features.decnet_dataloaders import cspn_nyu_input_crop
 
-from models.nlspnmodel import NLSPNModel
+#from models.nlspnmodel import NLSPNModel
 from models.twise_model import MultiRes_network_avgpool_diffspatialsizes
 from models.common import *
-from models.modulated_deform_conv_func import ModulatedDeformConvFunction
+#from models.modulated_deform_conv_func import ModulatedDeformConvFunction
 import torch
 import torch.nn as nn
 
@@ -251,12 +251,18 @@ elif decnet_args.networkmodel == "nlspn":
 elif decnet_args.networkmodel == 's2d':
     model = ResNet(layers=50, decoder='deconv2', output_size=(240,320),
     in_channels=4, pretrained=False)
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_09_07-02_25_40_AM/s2d_9.pth', map_location=device))
     
 elif decnet_args.networkmodel == 'cspn':
     import models.torch_resnet_cspn_nyu as cspn_model
     cspn_config = {'step': 24, 'norm_type': '8sum'}
     model = cspn_model.resnet50(pretrained = True,
                 cspn_config=cspn_config)
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_09_07-01_22_09_AM/cspn_1.pth', map_location=device))
     
 elif decnet_args.networkmodel == 'twise':
     model = MultiRes_network_avgpool_diffspatialsizes()

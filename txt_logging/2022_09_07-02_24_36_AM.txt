@@ -1,0 +1,126 @@
+| networkmodel                 | cspn                                |
+| resolution                   | half                                |
+| pretrained                   | True                                |
+| sparsities                   | True                                |
+| augment                      | True                                |
+| message                      | 50k_cspn_sparsities_finetune        |
+| mode                         | train                               |
+| dataset                      | nyuv2                               |
+| workers                      | 4                                   |
+| epochs                       | 30                                  |
+| criterion                    | l2                                  |
+| batch_size                   | 16                                  |
+| learning_rate                | 0.0001                              |
+| weight_decay                 | 0                                   |
+| print_freq                   | 10                                  |
+| resume                       |                                     |
+| data_folder                  | /datasets                           |
+| convolutional_layer_encoding | xyz                                 |
+| dilation_rate                | 2                                   |
+| val_h                        | 352                                 |
+| val_w                        | 608                                 |
+| train_height                 | 352                                 |
+| train_width                  | 608                                 |
+| min_depth_eval               | 0.1                                 |
+| max_depth_eval               | 80.0                                |
+| error_vis_min                | -5                                  |
+| error_vis_max                | 5                                   |
+| training_subset              | 0                                   |
+| show_sensor_error            | False                               |
+| kitti_crop                   | eigen_crop                          |
+| train_datalist               | nyu_train_random_pts_half_reso.list |
+| val_datalist                 | nyu_test_random_pts_half_reso.list  |
+| root_folder                  | data/nyuv2_dataset/                 |
+| torch_mode                   | pytorch                             |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth   |
+| wandblogger                  | True                                |
+| project                      | depthcompletionpaper                |
+| entity                       | wandbdimar                          |
+| wandbrunname                 | NYU_50k_cspn_sparsities_finetune    |
+| model_name                   | NLSPN                               |
+| networknlspn                 | resnet34                            |
+| from_scratch                 | False                               |
+| prop_time                    | 18                                  |
+| prop_kernel                  | 3                                   |
+| preserve_input               | False                               |
+| affinity                     | TGASS                               |
+| affinity_gamma               | 0.5                                 |
+| conf_prop                    | True                                |
+| legacy                       | False                               |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_0.pth 
+| d1       | 0.982099  |
+| d2       | 0.997171  |
+| d3       | 0.9992    |
+| abs_rel  | 0.0586334 |
+| sq_rel   | 0.0206768 |
+| rmse     | 0.242537  |
+| rmse_log | 0.076251  |
+| log10    | 0.0255349 |
+| silog    | 0.0717802 |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_1.pth 
+| d1       | 0.988101  |
+| d2       | 0.99795   |
+| d3       | 0.999442  |
+| abs_rel  | 0.0402977 |
+| sq_rel   | 0.0115596 |
+| rmse     | 0.164461  |
+| rmse_log | 0.0568438 |
+| log10    | 0.0175423 |
+| silog    | 0.0544506 |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_4.pth 
+| d1       | 0.987137  |
+| d2       | 0.997492  |
+| d3       | 0.999347  |
+| abs_rel  | 0.0363908 |
+| sq_rel   | 0.0102531 |
+| rmse     | 0.151195  |
+| rmse_log | 0.0548004 |
+| log10    | 0.0160257 |
+| silog    | 0.0523589 |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_7.pth 
+| d1       | 0.990885   |
+| d2       | 0.998182   |
+| d3       | 0.999389   |
+| abs_rel  | 0.0300229  |
+| sq_rel   | 0.00834833 |
+| rmse     | 0.131527   |
+| rmse_log | 0.0466026  |
+| log10    | 0.0130259  |
+| silog    | 0.0453984  |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_8.pth 
+| d1       | 0.989384   |
+| d2       | 0.997972   |
+| d3       | 0.999418   |
+| abs_rel  | 0.029894   |
+| sq_rel   | 0.00782932 |
+| rmse     | 0.1267     |
+| rmse_log | 0.0482455  |
+| log10    | 0.013183   |
+| silog    | 0.0466475  |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_9.pth 
+| d1       | 0.990978  |
+| d2       | 0.998074  |
+| d3       | 0.999342  |
+| abs_rel  | 0.0255543 |
+| sq_rel   | 0.0076545 |
+| rmse     | 0.120776  |
+| rmse_log | 0.0427634 |
+| log10    | 0.0111697 |
+| silog    | 0.0421347 |
+
+New model saved: weights/2022_09_07-02_24_36_AM/cspn_13.pth 
+| d1       | 0.990789   |
+| d2       | 0.998061   |
+| d3       | 0.999426   |
+| abs_rel  | 0.0265129  |
+| sq_rel   | 0.00747635 |
+| rmse     | 0.118598   |
+| rmse_log | 0.0428097  |
+| log10    | 0.0114476  |
+| silog    | 0.0417863  |

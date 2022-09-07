@@ -1,0 +1,136 @@
+| networkmodel                 | DecnetEarlyBase                   |
+| resolution                   | half                              |
+| pretrained                   | False                             |
+| augment                      | True                              |
+| message                      | 50k_DecnetEarlyBase               |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 30                                |
+| criterion                    | l2                                |
+| batch_size                   | 16                                |
+| learning_rate                | 0.001                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_train.list                    |
+| val_datalist                 | nyu_test.list                     |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | True                              |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 | NYU_50k_DecnetEarlyBase           |
+| model_name                   | NLSPN                             |
+| networknlspn                 | resnet18                          |
+| from_scratch                 | False                             |
+| prop_time                    | 18                                |
+| prop_kernel                  | 3                                 |
+| preserve_input               | False                             |
+| affinity                     | TGASS                             |
+| affinity_gamma               | 0.5                               |
+| conf_prop                    | True                              |
+| legacy                       | False                             |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_0.pth 
+| d1       | 0       |
+| d2       | 0       |
+| d3       | 0       |
+| abs_rel  | 0.95543 |
+| sq_rel   | 2.58828 |
+| rmse     | 2.87166 |
+| rmse_log | 3.24041 |
+| log10    | 1.39788 |
+| silog    | 2.30649 |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_1.pth 
+| d1       | 0.977523  |
+| d2       | 0.996109  |
+| d3       | 0.999185  |
+| abs_rel  | 0.045988  |
+| sq_rel   | 0.0169954 |
+| rmse     | 0.213683  |
+| rmse_log | 0.0726775 |
+| log10    | 0.0198239 |
+| silog    | 0.0718941 |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_3.pth 
+| d1       | 0.983861  |
+| d2       | 0.997635  |
+| d3       | 0.999525  |
+| abs_rel  | 0.0435894 |
+| sq_rel   | 0.0124611 |
+| rmse     | 0.178593  |
+| rmse_log | 0.0649565 |
+| log10    | 0.0186891 |
+| silog    | 0.063278  |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_4.pth 
+| d1       | 0.953671  |
+| d2       | 0.99732   |
+| d3       | 0.999436  |
+| abs_rel  | 0.046803  |
+| sq_rel   | 0.0138171 |
+| rmse     | 0.175285  |
+| rmse_log | 0.080407  |
+| log10    | 0.021251  |
+| silog    | 0.0771405 |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_5.pth 
+| d1       | 0.989427   |
+| d2       | 0.998078   |
+| d3       | 0.999547   |
+| abs_rel  | 0.0289894  |
+| sq_rel   | 0.00818649 |
+| rmse     | 0.142567   |
+| rmse_log | 0.0513931  |
+| log10    | 0.0125839  |
+| silog    | 0.0506987  |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_7.pth 
+| d1       | 0.990144   |
+| d2       | 0.998214   |
+| d3       | 0.999602   |
+| abs_rel  | 0.0258967  |
+| sq_rel   | 0.00761052 |
+| rmse     | 0.133536   |
+| rmse_log | 0.0483291  |
+| log10    | 0.01108    |
+| silog    | 0.0478711  |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_11.pth 
+| d1       | 0.991629   |
+| d2       | 0.998423   |
+| d3       | 0.999641   |
+| abs_rel  | 0.0231469  |
+| sq_rel   | 0.00661134 |
+| rmse     | 0.126789   |
+| rmse_log | 0.0454626  |
+| log10    | 0.0101101  |
+| silog    | 0.0447993  |
+
+New model saved: weights/2022_08_30-03_18_33_AM/DecnetEarlyBase_17.pth 
+| d1       | 0.992423   |
+| d2       | 0.99869    |
+| d3       | 0.999732   |
+| abs_rel  | 0.0192542  |
+| sq_rel   | 0.00562144 |
+| rmse     | 0.117521   |
+| rmse_log | 0.0404404  |
+| log10    | 0.00837153 |
+| silog    | 0.0401943  |
