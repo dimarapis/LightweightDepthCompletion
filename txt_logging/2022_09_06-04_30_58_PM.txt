@@ -1,0 +1,170 @@
+| networkmodel                 | nlspn                               |
+| resolution                   | half                                |
+| pretrained                   | True                                |
+| sparsities                   | True                                |
+| augment                      | True                                |
+| message                      | 50k, NLSPN sparsity_finetune_lr05   |
+| mode                         | train                               |
+| dataset                      | nyuv2                               |
+| workers                      | 4                                   |
+| epochs                       | 30                                  |
+| criterion                    | l2                                  |
+| batch_size                   | 16                                  |
+| learning_rate                | 0.0001                              |
+| weight_decay                 | 0                                   |
+| print_freq                   | 10                                  |
+| resume                       |                                     |
+| data_folder                  | /datasets                           |
+| convolutional_layer_encoding | xyz                                 |
+| dilation_rate                | 2                                   |
+| val_h                        | 352                                 |
+| val_w                        | 608                                 |
+| train_height                 | 352                                 |
+| train_width                  | 608                                 |
+| min_depth_eval               | 0.1                                 |
+| max_depth_eval               | 80.0                                |
+| error_vis_min                | -5                                  |
+| error_vis_max                | 5                                   |
+| training_subset              | 0                                   |
+| show_sensor_error            | False                               |
+| kitti_crop                   | eigen_crop                          |
+| train_datalist               | nyu_train_random_pts_half_reso.list |
+| val_datalist                 | nyu_test_random_pts_half_reso.list  |
+| root_folder                  | data/nyuv2_dataset/                 |
+| torch_mode                   | pytorch                             |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth   |
+| wandblogger                  | True                                |
+| project                      | depthcompletionpaper                |
+| entity                       | wandbdimar                          |
+| wandbrunname                 | NYU_50k_NLSPN_sparsities_finetune   |
+| model_name                   | NLSPN                               |
+| networknlspn                 | resnet34                            |
+| from_scratch                 | False                               |
+| prop_time                    | 18                                  |
+| prop_kernel                  | 3                                   |
+| preserve_input               | False                               |
+| affinity                     | TGASS                               |
+| affinity_gamma               | 0.5                                 |
+| conf_prop                    | True                                |
+| legacy                       | False                               |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_0.pth 
+| d1       | 0.99412    |
+| d2       | 0.998596   |
+| d3       | 0.999547   |
+| abs_rel  | 0.0225099  |
+| sq_rel   | 0.00623556 |
+| rmse     | 0.114548   |
+| rmse_log | 0.036648   |
+| log10    | 0.00977208 |
+| silog    | 0.03571    |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_1.pth 
+| d1       | 0.995646   |
+| d2       | 0.998971   |
+| d3       | 0.999687   |
+| abs_rel  | 0.0154508  |
+| sq_rel   | 0.00402151 |
+| rmse     | 0.084253   |
+| rmse_log | 0.0284908  |
+| log10    | 0.00672801 |
+| silog    | 0.0282138  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_2.pth 
+| d1       | 0.995565   |
+| d2       | 0.998609   |
+| d3       | 0.999515   |
+| abs_rel  | 0.0161248  |
+| sq_rel   | 0.00510503 |
+| rmse     | 0.0824078  |
+| rmse_log | 0.0277724  |
+| log10    | 0.00687097 |
+| silog    | 0.0271947  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_3.pth 
+| d1       | 0.996273   |
+| d2       | 0.999089   |
+| d3       | 0.999603   |
+| abs_rel  | 0.0136481  |
+| sq_rel   | 0.00367776 |
+| rmse     | 0.0772184  |
+| rmse_log | 0.0260234  |
+| log10    | 0.00596798 |
+| silog    | 0.0257194  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_4.pth 
+| d1       | 0.99596    |
+| d2       | 0.998985   |
+| d3       | 0.999595   |
+| abs_rel  | 0.0145203  |
+| sq_rel   | 0.0036822  |
+| rmse     | 0.0770056  |
+| rmse_log | 0.0259182  |
+| log10    | 0.00630899 |
+| silog    | 0.0254453  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_5.pth 
+| d1       | 0.995854   |
+| d2       | 0.998874   |
+| d3       | 0.99965    |
+| abs_rel  | 0.0138603  |
+| sq_rel   | 0.00401875 |
+| rmse     | 0.0757332  |
+| rmse_log | 0.0255874  |
+| log10    | 0.00597854 |
+| silog    | 0.0252018  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_8.pth 
+| d1       | 0.996579   |
+| d2       | 0.999015   |
+| d3       | 0.999634   |
+| abs_rel  | 0.0123241  |
+| sq_rel   | 0.00329274 |
+| rmse     | 0.0706274  |
+| rmse_log | 0.023601   |
+| log10    | 0.00541431 |
+| silog    | 0.0230957  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_11.pth 
+| d1       | 0.996651   |
+| d2       | 0.999205   |
+| d3       | 0.999678   |
+| abs_rel  | 0.0114298  |
+| sq_rel   | 0.00305043 |
+| rmse     | 0.0679428  |
+| rmse_log | 0.0223431  |
+| log10    | 0.00497719 |
+| silog    | 0.0221193  |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_14.pth 
+| d1       | 0.996899   |
+| d2       | 0.999129   |
+| d3       | 0.999687   |
+| abs_rel  | 0.0115672  |
+| sq_rel   | 0.00293351 |
+| rmse     | 0.0658887  |
+| rmse_log | 0.0218905  |
+| log10    | 0.00502254 |
+| silog    | 0.021475   |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_15.pth 
+| d1       | 0.996644   |
+| d2       | 0.999036   |
+| d3       | 0.999595   |
+| abs_rel  | 0.010822   |
+| sq_rel   | 0.00323791 |
+| rmse     | 0.06391    |
+| rmse_log | 0.0216115  |
+| log10    | 0.00463624 |
+| silog    | 0.021423   |
+
+New model saved: weights/2022_09_06-04_30_58_PM/nlspn_24.pth 
+| d1       | 0.996892  |
+| d2       | 0.999147  |
+| d3       | 0.999601  |
+| abs_rel  | 0.0104664 |
+| sq_rel   | 0.0029371 |
+| rmse     | 0.0617306 |
+| rmse_log | 0.0204251 |
+| log10    | 0.0045812 |
+| silog    | 0.0200807 |

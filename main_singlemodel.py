@@ -40,11 +40,11 @@ from features.decnet_args import decnet_args_parser
 from features.decnet_sanity import inverse_depth_norm
 from features.decnet_losscriteria import MaskedMSELoss, SiLogLoss, MaskedL1Loss
 from features.decnet_dataloaders import DecnetDataloader
-#from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetLateBase, DecnetNLSPN_sharedDecoder, DecnetNLSPNSmall, SparseGuidedDepth, DecnetModule, DecnetNLSPN, DecnetEarlyBase
-#from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
+from models.sparse_guided_depth import AuxSparseGuidedDepth, DecnetLateBase, DecnetNLSPN_sharedDecoder, DecnetNLSPNSmall, SparseGuidedDepth, DecnetModule, DecnetNLSPN, DecnetEarlyBase
+from models.sparse_guided_depth import SparseAndRGBGuidedDepth, RefinementModule, DecnetSparseIncorporated
 from features.decnet_dataloaders import cspn_nyu_input_crop
 
-#from models.nlspnmodel import NLSPNModel
+from models.nlspnmodel import NLSPNModel
 from models.twise_model import MultiRes_network_avgpool_diffspatialsizes
 from models.common import *
 #from models.modulated_deform_conv_func import ModulatedDeformConvFunction
@@ -247,6 +247,10 @@ elif decnet_args.networkmodel == "nlspn":
     from features.all_args import all_args_parser
     all_args = all_args_parser()
     model = NLSPNModel(all_args)
+    if decnet_args.pretrained == True:
+        #model.load_state_dict(torch.load('./weights/nn_final_base.pth', map_location='cpu'), strict=False)
+        model.load_state_dict(torch.load('./weights/2022_09_06-04_30_58_PM/nlspn_24.pth', map_location=device))
+    
 
 elif decnet_args.networkmodel == 's2d':
     model = ResNet(layers=50, decoder='deconv2', output_size=(240,320),

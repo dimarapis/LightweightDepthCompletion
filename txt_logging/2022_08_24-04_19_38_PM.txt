@@ -1,0 +1,71 @@
+| network_model                | DecnetModule                                            |
+| resolution                   | full                                                    |
+| pretrained                   | False                                                   |
+| augment                      | False                                                   |
+| message                      | Training GuideDepth with 50k, 500 sparse points on each |
+| mode                         | train                                                   |
+| dataset                      | nyuv2                                                   |
+| workers                      | 4                                                       |
+| epochs                       | 30                                                      |
+| criterion                    | l2                                                      |
+| batch_size                   | 8                                                       |
+| learning_rate                | 0.0001                                                  |
+| weight_decay                 | 0                                                       |
+| print_freq                   | 10                                                      |
+| resume                       |                                                         |
+| data_folder                  | /datasets                                               |
+| convolutional_layer_encoding | xyz                                                     |
+| dilation_rate                | 2                                                       |
+| val_h                        | 352                                                     |
+| val_w                        | 608                                                     |
+| train_height                 | 352                                                     |
+| train_width                  | 608                                                     |
+| min_depth_eval               | 0.1                                                     |
+| max_depth_eval               | 80.0                                                    |
+| error_vis_min                | -5                                                      |
+| error_vis_max                | 5                                                       |
+| training_subset              | 0                                                       |
+| show_sensor_error            | False                                                   |
+| kitti_crop                   | eigen_crop                                              |
+| train_datalist               | nyu_train.list                                          |
+| val_datalist                 | nyu_test.list                                           |
+| root_folder                  | data/nyuv2_dataset/                                     |
+| torch_mode                   | pytorch                                                 |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth                       |
+| wandblogger                  | True                                                    |
+| project                      | depthcompletionpaper                                    |
+| entity                       | wandbdimar                                              |
+| wandbrunname                 | NYU_50k_Decnet500                                       |
+
+New model saved: weights/2022_08_24-04_19_38_PM/DecnetModule_1.pth 
+| d1       | 0.969759  |
+| d2       | 0.994335  |
+| d3       | 0.9976    |
+| abs_rel  | 0.0555424 |
+| sq_rel   | 0.0340993 |
+| rmse     | 0.273529  |
+| rmse_log | 0.118504  |
+| log10    | 0.0259988 |
+| silog    | 0.11708   |
+
+New model saved: weights/2022_08_24-04_19_38_PM/DecnetModule_2.pth 
+| d1       | 0.980793  |
+| d2       | 0.996565  |
+| d3       | 0.998506  |
+| abs_rel  | 0.0478975 |
+| sq_rel   | 0.0236865 |
+| rmse     | 0.237597  |
+| rmse_log | 0.0970276 |
+| log10    | 0.0223176 |
+| silog    | 0.0952291 |
+
+New model saved: weights/2022_08_24-04_19_38_PM/DecnetModule_3.pth 
+| d1       | 0.975268  |
+| d2       | 0.996689  |
+| d3       | 0.998854  |
+| abs_rel  | 0.0449932 |
+| sq_rel   | 0.0192191 |
+| rmse     | 0.217729  |
+| rmse_log | 0.0952509 |
+| log10    | 0.0209287 |
+| silog    | 0.0938452 |
