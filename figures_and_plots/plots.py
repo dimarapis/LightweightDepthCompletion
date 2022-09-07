@@ -37,15 +37,17 @@ def dual_plot():
 
 def single_plot():
     d_half_reso = dict()
-    d_half_reso['DeepLidar'] = (0.115, 276.0)
+    d_half_reso['CSPN'] = (0.117, 130.9)
+    d_half_reso['TWISE'] = (0.097, 24.1)
     d_half_reso['S2D'] = (0.230, 9.3)
-    d_half_reso['NLSPN'] = (0.092, 76.1)
+    d_half_reso['NLSPN'] = (0.092, 121.5)
     d_half_reso['Our'] =(0.099, 10.7)
     d_half_reso['Our_small'] = (0.111, 4.0)
     #print(d_half_reso)
     lists = d_half_reso.values()
     #print(lists)
-    y_deeplidar,x_deeplidar = d_half_reso['DeepLidar']
+    y_cspn, x_cspn, = d_half_reso['CSPN']
+    y_twise,x_twise = d_half_reso['TWISE']
     y_s2d,x_s2d  = d_half_reso['S2D']
     y_nlspn,x_nlspn  = d_half_reso['NLSPN']
     y_our, x_our = d_half_reso['Our']
@@ -78,9 +80,11 @@ def single_plot():
     #plt.rcParams["font.family"] = "Times New Roman"
 
     fig,ax = plt.subplots()
-    #ax.scatter(x_deeplidar, y_deeplidar, color="gray", marker="s", s=150, label="DeepLidar")
-    ax.scatter(x_s2d, y_s2d, color="indianred", marker="o", s=300, label="S2D")
-    ax.scatter(x_nlspn, y_nlspn, color="olivedrab", marker="D", s=240, label="NLPSN") 
+    ax.scatter(x_cspn, y_cspn, color="darkred", marker="^", s=300, label="CSPN")
+
+    ax.scatter(x_twise, y_twise, color="tomato", marker="o", s=300, label="TWISE")
+    ax.scatter(x_s2d, y_s2d, color="indianred", marker="s", s=300, label="S2D")
+    ax.scatter(x_nlspn, y_nlspn, color="lightsalmon", marker="D", s=240, label="NLPSN") 
     ax.scatter(x_our, y_our, color="steelblue", marker="X", s=300, label="Our") 
     ax.scatter(x_oursmall, y_oursmall, color="skyblue", marker="P", s=300, label="Our_small") 
     #ax.scatter(x_ful_deeplidar, y_ful_deeplidar, color="gray", marker="s", s=150, label="DeepLidar")
@@ -92,8 +96,8 @@ def single_plot():
     #ax.scatter(rmse_list_sing, sparse_pts_list_sing, color="red", marker="*")
     ax.set_ylabel("RMSE: Root mean squared error (meters)")
     ax.set_xlabel("MACs: Multiply-accumulate operations (G)")
-    ax.set_xlim([0, 120])
-    ax.set_ylim([0, 0.37])
+    ax.set_xlim([0, 160])
+    ax.set_ylim([0.05, 0.30])
     ax.grid()
     ax.legend(loc="upper right")
     #ax.scatter(rmse_list, trendline, marker="*")
