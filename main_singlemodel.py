@@ -609,7 +609,8 @@ def evaluation_block(epoch):
 
             
         average_loss = eval_loss / (len(eval_dl.dataset) + 1)
-        print(f'Evaluation Loss: {average_loss}')    
+        print(f'Evaluation Loss: {average_loss}')  
+        print(f'Learning rate: {optimizer}')  
         #VISUALIZE BLOCK
         #Saving depth prediciton data along with original image
         #visualizer.save_depth_prediction(prediction,data['rgb']*255)
@@ -694,6 +695,7 @@ def training_block(model):
 
     #for epoch in enumerate(tqdm(range(1,int(decnet_args.epochs)+1))):
     for epoch in range(1,int(decnet_args.epochs)+1):
+        
         iteration = 0
         model.train()
         #0209refinement_model.train()
@@ -809,6 +811,7 @@ def training_block(model):
 
         average_loss = epoch_loss / (len(train_dl.dataset) / decnet_args.batch_size)
         print(f'Training Loss: {average_loss}. Epoch {epoch} of {decnet_args.epochs}')
+        lr_scheduler.step()
 
         evaluation_block(epoch)
         

@@ -1,0 +1,324 @@
+| networkmodel                 | s2d                               |
+| resolution                   | half                              |
+| pretrained                   | False                             |
+| sparsities                   | False                             |
+| augment                      | True                              |
+| message                      |                                   |
+| mode                         | train                             |
+| dataset                      | nyuv2                             |
+| workers                      | 4                                 |
+| epochs                       | 30                                |
+| criterion                    | l2                                |
+| batch_size                   | 2                                 |
+| learning_rate                | 1e-06                             |
+| weight_decay                 | 0                                 |
+| print_freq                   | 10                                |
+| resume                       |                                   |
+| data_folder                  | /datasets                         |
+| convolutional_layer_encoding | xyz                               |
+| dilation_rate                | 2                                 |
+| val_h                        | 352                               |
+| val_w                        | 608                               |
+| train_height                 | 352                               |
+| train_width                  | 608                               |
+| min_depth_eval               | 0.1                               |
+| max_depth_eval               | 80.0                              |
+| error_vis_min                | -5                                |
+| error_vis_max                | 5                                 |
+| training_subset              | 0                                 |
+| show_sensor_error            | False                             |
+| kitti_crop                   | eigen_crop                        |
+| train_datalist               | nyu_4_overfit.list                |
+| val_datalist                 | nyu_4_overfit.list                |
+| root_folder                  | data/nyuv2_dataset/               |
+| torch_mode                   | pytorch                           |
+| saved_weights                | weights/KITTI_Full_GuideDepth.pth |
+| wandblogger                  | False                             |
+| project                      | depthcompletionpaper              |
+| entity                       | wandbdimar                        |
+| wandbrunname                 |                                   |
+| model_name                   | NLSPN                             |
+| networknlspn                 | resnet34                          |
+| from_scratch                 | False                             |
+| prop_time                    | 18                                |
+| prop_kernel                  | 3                                 |
+| preserve_input               | False                             |
+| affinity                     | TGASS                             |
+| affinity_gamma               | 0.5                               |
+| conf_prop                    | True                              |
+| legacy                       | False                             |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_0.pth 
+| d1       |  0.068785 |
+| d2       |  0.129899 |
+| d3       |  0.210168 |
+| abs_rel  | 13.5206   |
+| sq_rel   | 51.7137   |
+| rmse     |  2.67174  |
+| rmse_log |  2.42095  |
+| log10    |  0.923178 |
+| silog    |  1.97532  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_1.pth 
+| d1       |   0.070128 |
+| d2       |   0.136219 |
+| d3       |   0.214706 |
+| abs_rel  |  37.7315   |
+| sq_rel   | 311.954    |
+| rmse     |   6.55773  |
+| rmse_log |   3.3218   |
+| log10    |   1.27777  |
+| silog    |   2.6749   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_2.pth 
+| d1       |   0.0717956 |
+| d2       |   0.138414  |
+| d3       |   0.217095  |
+| abs_rel  |  37.2045    |
+| sq_rel   | 305.852     |
+| rmse     |   6.49738   |
+| rmse_log |   3.30627   |
+| log10    |   1.2699    |
+| silog    |   2.66512   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_3.pth 
+| d1       |   0.0818936 |
+| d2       |   0.159144  |
+| d3       |   0.246579  |
+| abs_rel  |  34.9691    |
+| sq_rel   | 284.318     |
+| rmse     |   6.26689   |
+| rmse_log |   3.21875   |
+| log10    |   1.21616   |
+| silog    |   2.63085   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_4.pth 
+| d1       |   0.0926655 |
+| d2       |   0.179913  |
+| d3       |   0.282067  |
+| abs_rel  |  32.0608    |
+| sq_rel   | 255.517     |
+| rmse     |   5.93846   |
+| rmse_log |   3.10295   |
+| log10    |   1.14899   |
+| silog    |   2.57826   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_5.pth 
+| d1       |   0.105025 |
+| d2       |   0.200766 |
+| d3       |   0.315812 |
+| abs_rel  |  29.1492   |
+| sq_rel   | 226.158    |
+| rmse     |   5.58867  |
+| rmse_log |   2.98474  |
+| log10    |   1.08323  |
+| silog    |   2.51791  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_6.pth 
+| d1       |   0.116331 |
+| d2       |   0.220641 |
+| d3       |   0.345722 |
+| abs_rel  |  26.5649   |
+| sq_rel   | 199.746    |
+| rmse     |   5.25583  |
+| rmse_log |   2.87672  |
+| log10    |   1.02539  |
+| silog    |   2.45844  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_7.pth 
+| d1       |   0.12457  |
+| d2       |   0.237249 |
+| d3       |   0.372622 |
+| abs_rel  |  24.3538   |
+| sq_rel   | 177.495    |
+| rmse     |   4.94894  |
+| rmse_log |   2.77811  |
+| log10    |   0.974067 |
+| silog    |   2.40184  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_8.pth 
+| d1       |   0.1321   |
+| d2       |   0.253766 |
+| d3       |   0.400497 |
+| abs_rel  |  22.4379   |
+| sq_rel   | 158.921    |
+| rmse     |   4.67841  |
+| rmse_log |   2.68649  |
+| log10    |   0.926263 |
+| silog    |   2.34936  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_9.pth 
+| d1       |   0.140817 |
+| d2       |   0.266593 |
+| d3       |   0.422981 |
+| abs_rel  |  20.8835   |
+| sq_rel   | 143.865    |
+| rmse     |   4.45198  |
+| rmse_log |   2.61063  |
+| log10    |   0.887608 |
+| silog    |   2.30372  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_10.pth 
+| d1       |   0.144888 |
+| d2       |   0.272929 |
+| d3       |   0.432129 |
+| abs_rel  |  19.8557   |
+| sq_rel   | 132.559    |
+| rmse     |   4.27181  |
+| rmse_log |   2.56524  |
+| log10    |   0.867146 |
+| silog    |   2.27198  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_11.pth 
+| d1       |   0.147893 |
+| d2       |   0.274978 |
+| d3       |   0.440839 |
+| abs_rel  |  19.0531   |
+| sq_rel   | 124.302    |
+| rmse     |   4.1346   |
+| rmse_log |   2.52739  |
+| log10    |   0.850488 |
+| silog    |   2.24583  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_12.pth 
+| d1       |   0.148578 |
+| d2       |   0.275594 |
+| d3       |   0.439107 |
+| abs_rel  |  18.6597   |
+| sq_rel   | 119.111    |
+| rmse     |   4.04833  |
+| rmse_log |   2.51526  |
+| log10    |   0.847445 |
+| silog    |   2.23403  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_13.pth 
+| d1       |   0.147705 |
+| d2       |   0.27947  |
+| d3       |   0.440812 |
+| abs_rel  |  18.1077   |
+| sq_rel   | 112.959    |
+| rmse     |   3.94468  |
+| rmse_log |   2.49195  |
+| log10    |   0.838739 |
+| silog    |   2.21493  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_14.pth 
+| d1       |   0.144149 |
+| d2       |   0.281438 |
+| d3       |   0.44333  |
+| abs_rel  |  17.6636   |
+| sq_rel   | 108.345    |
+| rmse     |   3.85333  |
+| rmse_log |   2.46984  |
+| log10    |   0.830111 |
+| silog    |   2.1989   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_15.pth 
+| d1       |   0.148163 |
+| d2       |   0.278456 |
+| d3       |   0.439735 |
+| abs_rel  |  17.5041   |
+| sq_rel   | 105.888    |
+| rmse     |   3.8185   |
+| rmse_log |   2.46871  |
+| log10    |   0.831485 |
+| silog    |   2.19547  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_16.pth 
+| d1       |   0.150688 |
+| d2       |   0.283513 |
+| d3       |   0.446335 |
+| abs_rel  |  16.9693   |
+| sq_rel   | 101.286    |
+| rmse     |   3.73396  |
+| rmse_log |   2.43959  |
+| log10    |   0.818372 |
+| silog    |   2.1752   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_17.pth 
+| d1       |   0.15015  |
+| d2       |   0.278538 |
+| d3       |   0.441723 |
+| abs_rel  |  17.0086   |
+| sq_rel   | 100.932    |
+| rmse     |   3.72749  |
+| rmse_log |   2.44575  |
+| log10    |   0.82276  |
+| silog    |   2.17632  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_18.pth 
+| d1       |  0.148365 |
+| d2       |  0.279003 |
+| d3       |  0.441005 |
+| abs_rel  | 16.7698   |
+| sq_rel   | 97.9558   |
+| rmse     |  3.67593  |
+| rmse_log |  2.43826  |
+| log10    |  0.821    |
+| silog    |  2.1695   |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_19.pth 
+| d1       |  0.150778 |
+| d2       |  0.277739 |
+| d3       |  0.442404 |
+| abs_rel  | 16.4881   |
+| sq_rel   | 95.3708   |
+| rmse     |  3.62154  |
+| rmse_log |  2.42276  |
+| log10    |  0.814731 |
+| silog    |  2.15836  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_20.pth 
+| d1       |  0.15187  |
+| d2       |  0.284663 |
+| d3       |  0.446787 |
+| abs_rel  | 16.2174   |
+| sq_rel   | 93.3188   |
+| rmse     |  3.58523  |
+| rmse_log |  2.4066   |
+| log10    |  0.80667  |
+| silog    |  2.14711  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_23.pth 
+| d1       |  0.152881 |
+| d2       |  0.281678 |
+| d3       |  0.443748 |
+| abs_rel  | 16.0597   |
+| sq_rel   | 91.2367   |
+| rmse     |  3.55167  |
+| rmse_log |  2.40346  |
+| log10    |  0.807674 |
+| silog    |  2.14171  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_25.pth 
+| d1       |  0.148947 |
+| d2       |  0.282374 |
+| d3       |  0.447888 |
+| abs_rel  | 15.9157   |
+| sq_rel   | 89.8098   |
+| rmse     |  3.5149   |
+| rmse_log |  2.39431  |
+| log10    |  0.803273 |
+| silog    |  2.13704  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_27.pth 
+| d1       |  0.148997 |
+| d2       |  0.278372 |
+| d3       |  0.440843 |
+| abs_rel  | 15.9432   |
+| sq_rel   | 89.367    |
+| rmse     |  3.50426  |
+| rmse_log |  2.40079  |
+| log10    |  0.808547 |
+| silog    |  2.13784  |
+
+New model saved: weights/2022_09_07-12_59_34_PM/s2d_28.pth 
+| d1       |  0.147153 |
+| d2       |  0.277854 |
+| d3       |  0.440328 |
+| abs_rel  | 15.902    |
+| sq_rel   | 88.7634   |
+| rmse     |  3.50175  |
+| rmse_log |  2.40125  |
+| log10    |  0.809267 |
+| silog    |  2.13735  |
