@@ -4,5 +4,7 @@
 
 ## Some results found here 
 
-https://drive.google.com/file/d/1IFipvroxD3ezhziDe5c3FvJWFbT9u2r0/view?usp=sharing
-https://drive.google.com/file/d/1FHbJ0Cs2Yg67BHzN9vh-XzM9QSsdHGyz/view?usp=sharing
+![Alt text](/network_architecture.png?raw=true "Final network architecture")
+
+![Alt text](/visual_results_nyuv2.png?raw=true "Visual results on NYUv2 Dataset")
+
